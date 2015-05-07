@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.geocraft.geomath.feature"
+      label="GeoMath"
+      version="1.0.0"
+      provider-name="ConocoPhillips">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.help" version="3.3.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi.services"/>
+      <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.forms" version="3.3.100" match="greaterOrEqual"/>
+      <import plugin="org.geocraft.geomath.algorithm.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.help.base" version="3.3.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.databinding" version="1.1.0" match="greaterOrEqual"/>
+      <import plugin="org.geocraft.math" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.collections" version="3.2.1" match="greaterOrEqual"/>
+      <import plugin="org.geocraft.ui.common" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jface.databinding" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.beanutils" version="1.7.0" match="greaterOrEqual"/>
+      <import plugin="org.geocraft.io.util" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jface" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.geocraft.geomath.algorithm.util" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.geocraft.core"/>
+   </requires>
+
+   <plugin
+         id="org.geocraft.geomath"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.geocraft.geomath.algorithm.calculator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.geocraft.geomath.algorithm.example"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.geocraft.geomath.algorithm.horizon"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.geocraft.geomath.algorithm.iconviewer"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.geocraft.geomath.algorithm.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.geocraft.geomath.algorithm.velocity"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.geocraft.geomath.algorithm.volume"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.geocraft.geomath.help"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.geocraft.geomath.algorithm.curvature"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.geocraft.geomath.algorithm.texture"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.geocraft.geomath.algorithm.utilities"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.geocraft.gnuplot"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

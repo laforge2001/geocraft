@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Before You Use ABAVO</title>
+<meta name="Keywords" content="Before You Use ABAVO, Important ABAVO Concepts, ABAVO, prerequisites for using ABAVO,
+preparing to use ABAVO, preparing ABAVO to run jobs, retaining ABAVO data, ABAVO data loss, Active Series feature in ABAVO,
+plotting data series, crossplot, anomalies in ABAVO" />
+</head>
+<body>
+<h1>Before You Use ABAVO</h1>
+	<p>This topic contains brief descriptions of important ABAVO features and functionality that you should understand 
+	before you use the program.</p>
+		<table border="1">
+				<tr>
+				<td><strong>Feature or Function</strong></td>
+				<td><strong>Explanation and Further Details</strong></td>
+				</tr>
+				<tr>
+				<td>ABAVO Polygon Regions Model Features</td>
+				<td>See <a href="av_crossplot_intro.htm">ABAVO Crossplot</a> for information about using the tools in the ABAVO Crossplot, 
+				and how to use the features of Crossplot to create, manipulate, and analyze polygon region models.</td>
+				</tr>
+				<tr>
+				<td>ABAVO Ellipse Regions Model</td>
+				<td>See <a href="av_crossplot_intro.htm">ABAVO Crossplot</a> for information about using the tools in the ABAVO Crossplot, 
+				and how to use the features of Crossplot to create, manipulate, and analyze ellipse region models.</td>
+				</tr>
+				<tr>
+				<td>Class (Background) Colors in ABAVO Crossplot</td>
+				<td>The class (or background) color displays reflections in a color volume to depict seismic data. ABAVO shades the area between 
+				the background and maximum ellipses from light to dark with the class color. Darker shades on a crossplot indicate anomalies. 
+				The darker a background color is shaded, the stronger the anomaly.</td>
+				</tr>
+				<tr>
+				<td>Preparing for Each ABAVO Calculation</td>
+				<td><p>Before you run any ABAVO calculations, you must:</p>
+			<ul>
+				<li>load either 2D or 3D seismic data into GeoCraft</li>
+				<li>load horizon data into GeoCraft (<em>optional; only load this data if 
+				you need to use it</em>)</li>
+				<li>load Area of Interest (AOI) data into GeoCraft (<em>optional; only load this data if 
+				you need to use it</em>)</li>
+				<li>load wavelet data into GeoCraft (<em>optional; only load this data if you need to use it</em>)</li>
+				<li>select the input data for your calculation</li>
+				<li>select the pre-processing parameters for the job</li>
+			</ul>
+			<p><strong>Note</strong>: If you want to load an existing crossplot or ellipse model, you do not need to 
+			select input data or pre-processing parameters.</p></td>
+				</tr>
+				<tr>
+				<td>Retaining Data in ABAVO via the Active Series Feature in ABAVO Crossplot</td>
+				<td><p>It is important to understand this feature before you use ABAVO. Active Series is a drop-down field 
+				in the Crossplot window. The drop-down list contains values of 1 through 10 in the field. Active 
+				Series holds up to 10 data sets at a time for ABAVO. If you want to retain the data set from a calculation
+				that you ran, you must select a new Active Series value from the drop-down list in the Crossplot before 
+				you run your next calculation.</p>
+			<p>If you do not need to retain the data set from a calculation that you ran, you can leave 
+			the Active Series field set to the same value. Before plotting points for the new calculation, 
+			ABAVO will display a warning dialog to let you know that you are about to overwrite existing data. You 
+			can either acknowledge that you want to overwrite the existing data, or cancel the operation and select a 
+			new data series.</p>
+			<p><strong>Caution</strong>: If you do not change the Active Series number <em>before</em> ABAVO plots the data points,
+			you will lose existing data.</p></td>
+				</tr>
+				<tr>
+				<td>Plotting Data Sets in the ABAVO Crossplot</td>
+				<td><p>The ABAVO Crossplot does not allow you to specify which data set (the background or the event) plots on top. 
+				The first data set always gets plotted first, and the last data set is always plotted on top of all other data sets.</p> 
+				<p>The background data set may have a large number of points, which means it could obscure an anomaly on any data sets 
+				that are behind it. Therefore, you may want to select the background data set <em>first</em> when you are selecting 
+				input data and parameters for an ABAVO job.</p></td>
+				</tr>
+				<tr>
+				<td>Viewing Plot Statistics and Processing Information</td>
+				<td>ABAVO computes regression statistics as each data set is created. ABAVO reports the regression statistics and 
+				processing information in the GeoCraft <strong>System Messages</strong> window.</td>
+				</tr>
+		</table>
+	<p></p>
+	<p></p>
+		<h3>Related Topics</h3>
+			<ul>
+				<li><a href="abavo_intro.htm">Introduction to ABAVO</a></li>
+				<li><a href="abavo_tasklist.htm">Performing ABAVO Tasks</a></li>
+				<li><a href="abavo_performance.htm">Improving ABAVO Performance</a></li>
+				<li><a href="abavo_trouble.htm">Troubleshooting ABAVO Problems</a></li>
+			</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.tigris.subversion.subclipse.core.svnnature">
+<project reference="0.9.3,https://wush.net/svn/geocraft/algorithm/trunk/org.geocraft.geomath.algorithm.calculator,org.geocraft.geomath.algorithm.calculator"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/algorithm/trunk/org.geocraft.geomath.algorithm.curvature,org.geocraft.geomath.algorithm.curvature"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/algorithm/trunk/org.geocraft.geomath.algorithm.horizon,org.geocraft.geomath.algorithm.horizon"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/algorithm/trunk/org.geocraft.geomath.algorithm.velocity,org.geocraft.geomath.algorithm.velocity"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/algorithm/trunk/org.geocraft.geomath.algorithm.volume,org.geocraft.geomath.algorithm.volume"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/algorithm/trunk/org.geocraft.geomath.algorithm.iconviewer,org.geocraft.geomath.algorithm.iconviewer"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/algorithm/trunk/org.geocraft.geomath.algorithm.example,org.geocraft.geomath.algorithm.example"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/algorithm/trunk/org.geocraft.geomath.algorithm.util,org.geocraft.geomath.algorithm.util"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/algorithm/trunk/org.geocraft.geomath.algorithm.utilities,org.geocraft.geomath.algorithm.utilities"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/algorithm/trunk/org.geocraft.geomath.algorithm.texture,org.geocraft.geomath.algorithm.texture"/>
+<!--project reference="0.9.3,https://wush.net/svn/geocraft/algorithm/trunk/org.geocraft.geomath.algorithm.lineament,org.geocraft.geomath.algorithm.lineament"/-->
+<!--project reference="0.9.3,https://wush.net/svn/geocraft/algorithm/trunk/org.geocraft.geomath.algorithm.algorithmtemplates,org.geocraft.geomath.algorithm.algorithmtemplates"/-->
+<!--project reference="0.9.3,https://wush.net/svn/geocraft/algorithm/trunk/org.geocraft.geomath.algorithm.som,org.geocraft.geomath.algorithm.som"/-->
+</provider>
+</psf>

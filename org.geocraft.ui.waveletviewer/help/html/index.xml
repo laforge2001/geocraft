@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<index version="1.0">
+	<entry keyword="GeoCraft Wavelet Viewer">
+		<topic href="help/html/gc_vwr_wv_vwng.htm" />
+	</entry>
+	<entry keyword="Before You Use the GeoCraft Wavelet Viewer">
+		<topic href="help/html/gc_vwr_wv_before.htm" />
+	</entry>
+	<entry keyword="Viewing Multiple Wavelets in a Single Plot">
+		<topic href="help/html/gc_vwr_wv_mult.htm" />
+	</entry>
+</index>

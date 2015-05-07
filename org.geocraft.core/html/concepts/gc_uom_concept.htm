@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Unit Preference Settings and How GeoCraft Performs Data Unit Conversions</title>
+<meta name="Keywords" content="units, data, data units, warnings, GeoCraft warnings, 
+data unit, how GeoCraft performs data unit conversions" />
+</head>
+<body>
+<h1>Unit Preference Settings and How GeoCraft Performs Data Unit Conversions</h1>
+	<p>When you start GeoCraft, you must define the default unit of measure preferences for X,Y, and depth. 
+	See <a href="PLUGINS_ROOT/org.geocraft.core/html/tasks/UserPreferences/unit_prefs.htm"> Setting Unit Preferences</a> for instructions.</p>
+	
+	<p><strong>Note:</strong> GeoCraft <strong>does not</strong> convert X,Ys or Latitude and Longitudes to different projection 
+	coordinate systems. All data <em>must</em> be in the same geographic coordinate system.</p>
+
+	<p><strong>Warning:</strong> GeoCraft <strong>always</strong> converts X,Y and depth units to the unit 
+	preference of the current workspace. GeoCraft performs this conversion for all wells, horizons, and the X,Y coordinates 
+	of volumes. However GeoCraft <strong>never</strong> converts data units, such as velocities. Input velocities in m/sec 
+	are not converted to ft/sec.</p>
+	<h2>GeoCraft Warning When X,Y Units Do Not Match</h2>
+	<p><img src="unitwarn.gif" alt="GeoCraft warning that units are mismatched" /></p>
+	<p>GeoCraft displays this warning message when you are about to import data that does not match your session units.</p>
+	<h2>How GeoCraft Converts Units</h2>
+	<p>If you import data measured in units that do not match the unit system that you set up for the session in which 
+	you are working, GeoCraft displays a warning message. When you click OK to import the data, GeoCraft automatically converts the data 
+	to the units of	measure that you have set as your default.</p>
+				<table border="1">
+					<tr>
+					<td><strong>Data Type</strong></td>
+					<td><strong>Conversion Details</strong></td>
+					</tr>
+					<tr>
+					<td>Horizon</td>
+					<td>GeoCraft converts X, Y coordinates and depth or time index values</td>
+					</tr>
+					<tr>
+					<td>X, Y coordinates of a volume</td>
+					<td>GeoCraft converts the X, Y, coordinates of the volume from one data 
+					format to another so that they match your default preference (for example, 
+					data may be converted from meters to feet)</td>
+					</tr>
+					<tr>
+					<td>Depth or Time of Volume</td>
+					<td>GeoCraft converts the depth or time index units for volumes if the data you are about to import 
+					does not match your default settings. For example, if your unit preference is set to feet, and you are going to 
+					import a volume with its depth measured in meters, GeoCraft converts the depth measurement to feet before the volume is imported.</td>
+					</tr>
+			</table>
+
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/tasks/UserPreferences/unit_prefs.htm">Setting Unit Preferences</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gc_beforeusing.htm">Before You Use GeoCraft</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

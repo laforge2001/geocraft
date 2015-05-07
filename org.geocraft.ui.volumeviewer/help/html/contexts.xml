@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="3Dview" title="Introduction to the GeoCraft 3D Viewer">
+      <description>Plot and view geophysical data in 3D.</description>
+      <topic href="../org.geocraft.ui.volumeviewer/help/3dv_intro.htm" label="Introduction to the GeoCraft 3D Viewer"/>
+   </context>
+</contexts>

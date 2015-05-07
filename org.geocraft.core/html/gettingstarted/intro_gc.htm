@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Introduction to GeoCraft</title>
+<meta name="Keywords" content="geocraft, introduction, about geocraft, getting started with GeoCraft" />
+</head>
+<body>
+<h1>Introduction to GeoCraft</h1>
+	<p>GeoCraft is a software framework that runs geoscience algorithms.</p>
+	
+	<p><strong>GeoCraft uses both <em>workspace</em> and <em>session</em> files.</strong> A workspace is an area where 
+	preferences are stored. No seismic or grid data are stored in the workspace. Hence, your workspace 
+	can be located in your home area. Session files may be stored in the workspace or they may be located 
+	anywhere. Session files may be used at a later date to restore the current GeoCraft setup. This includes 
+	reloading all data, reopening displays and modules along with their parameters.</p>
+	
+	<p><strong>GeoCraft sessions have a fixed unit system preference which cannot be changed.</strong> 
+	When GeoCraft starts, users must specify a workspace, either new or existing. If new, then a unit system 
+	preference (metric or imperial) <em>for the session</em> is also selected. To help maintain data integrity, 
+	once the session unit system is set, it cannot be changed. <em>If a saved session file is restored, any 
+	existing data in the Repository are discarded, and data for the session are restored. The unit system is 
+	always reset to match that of the restored data.</em></p> 
+	
+	<p><strong>GeoCraft never converts data units, such as velocities. Input velocities in m/sec are 
+	<em>not</em> converted to ft/sec!</strong></p>
+	
+	<p><strong>GeoCraft does not change projection coordinate systems. However, GeoCraft will convert 
+	X,Ys and depths (these 3 only) to match the session unit system</strong>. Even so, it is good 
+	practice to not mix metric and imperial data in the same session.</p>
+	
+	<p>It may be helpful to familiarize yourself with the information below before using GeoCraft:</p>
+		<ul>
+			<li><a href="gc_beforeusing.htm">Before You Use GeoCraft</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/workspace.htm"> 
+			Specifying a Workspace Location for GeoCraft Sessions and Project Data</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/tasks/UserPreferences/unit_prefs.htm">Setting GeoCraft Unit Preferences</a></li>
+		</ul>
+	<h3>Related Topics</h3>
+				<ul>
+					<li><a href="PLUGINS_ROOT/org.geocraft.core/html/tasks/gc_tasks.htm">Performing GeoCraft Tasks</a></li>
+					<li><a href="PLUGINS_ROOT/org.geocraft.core/html/reference/gc_performance.htm">Improving GeoCraft Performance</a></li>
+					<li><a href="PLUGINS_ROOT/org.geocraft.core/html/reference/gc_tshoot.htm">Troubleshooting GeoCraft Problems</a></li>
+				</ul>
+
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

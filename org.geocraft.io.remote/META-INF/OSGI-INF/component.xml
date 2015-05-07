@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<component immediate="true" name="RemoteIO">
+	<implementation class="org.geocraft.io.remote.RemoteDataService"/>
+	<service>
+		<provide interface="org.geocraft.io.remote.IRemoteDataService"/>
+	</service>
+</component>

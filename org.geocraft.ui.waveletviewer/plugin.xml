@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="org.geocraft.ui.waveletviewer.renderer" name="Wavelet Viewer Renderers" schema="schema/org.geocraft.ui.waveletviewer.renderer.exsd"/>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            category="org.geocraft.ui.viewer.category"
+            class="org.geocraft.ui.waveletviewer.WaveletViewPart"
+            icon="icons/waveletview-16.png"
+            id="org.geocraft.ui.waveletviewer.WaveletViewPart"
+            name="Wavelet Viewer"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="org.geocraft.ui.waveletviewer.actionSet1"
+            label="Wavelet View"
+            visible="true">
+         <action
+               class="org.geocraft.internal.ui.waveletviewer.WaveletPlotAction"
+               icon="icons/waveletview-16.png"
+               id="org.geocraft.ui.waveletviewer.WaveletPlot"
+               label="Wavelet Plot"
+               menubarPath="plotview/additions"
+               style="push">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="org.geocraft.ui.waveletviewer.WaveletViewerContribution"
+            objectClass="org.geocraft.ui.repository.PropertiesProviderTreeObject">
+         <filter
+               name="entityTypes"
+               value="org.geocraft.core.model.seismic.Wavelet">
+         </filter>
+         <action
+               class="org.geocraft.internal.ui.waveletviewer.WaveletPlotAction"
+               enablesFor="+"
+               helpContextId="WaveletPlot"
+               icon="icons/waveletview-16.png"
+               id="org.geocraft.ui.waveletviewer.WaveletPlot"
+               label="Wavelet Plot"
+               menubarPath="org.geocraft.ui.repository.plotview/additions">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.geocraft.ui.viewer.dataviewer.preferences"
+            class="org.geocraft.ui.waveletviewer.PreferencePage"
+            id="org.geocraft.ui.waveletviewer.preferences"
+            name="Wavelet Viewer">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="help/html/contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.geocraft.ui.waveletviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.waveletviewer.renderer.WaveletRenderer"
+            name="Wavelet Renderer"
+            subplot="Wavelet">
+         <object
+               type="Wavelet">
+         </object>
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.waveletviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.waveletviewer.renderer.AmplitudeSpectrumRenderer"
+            name="Amplitude Spectrum Renderer"
+            subplot="Amplitude Spectrum">
+         <object
+               type="Wavelet">
+         </object>
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.waveletviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.waveletviewer.renderer.PhaseSpectrumRenderer"
+            name="Phase Spectrum Renderer"
+            subplot="Phase Spectrum">
+         <object
+               type="Wavelet">
+         </object>
+      </renderer>
+   </extension>
+   <extension
+         point="org.eclipse.help.index">
+      <index
+            file="help/html/index.xml">
+      </index>
+   </extension>
+
+</plugin>

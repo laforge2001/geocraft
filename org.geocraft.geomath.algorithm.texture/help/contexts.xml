@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="glcm" title="Horizon Texture (GLCM)">
+      <description>Compute horizon texture attributes using a Gray Level Co-occurrence Matrix (GLCM) algorithm.</description>
+      <topic href="help/glcm.htm" label="Horizon Texture (GLCM)"/>
+   </context>
+</contexts>

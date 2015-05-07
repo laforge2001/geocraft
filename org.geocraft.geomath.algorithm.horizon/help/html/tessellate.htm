@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Interpolate Tessellate</title>
+<meta name="Keywords" content="tessellate, interpolate tessellate, interpolating a horizon with triangular tessellation, filling 
+in null values in a horizon" />
+</head>
+<body>
+<h1>Interpolate Tessellate</h1>
+		<p>The Interpolate Tessellate aglorithm fills in null values on a horizon.</p>
+	<h2>Overview of the Interpolate Tessellate Algorithm</h2>
+		<p>Interpolate Tessellate differs from other interpolation algorithms because it uses triangular tessellation to fill 
+		in null values within a horizon.</p>
+	<h2>Using Interpolate Tessellate to Fill in Null Values in a Horizon</h2>
+		<ol>
+			<li>Load horizon (grid) data into GeoCraft.</li>
+			<li><em>Optional;</em> Load Area of Interest data into GeoCraft.</li>
+			<li>Select a <strong>Horizon</strong>.</li>
+			<li><em>Optional; only perform this step if you want to limit the size of the horizon by using an area of interest 
+			in the calculation</em> Select the <strong>Use Area of Interest?</strong> check box.</li>
+			<li><em>Optional;</em> Select an <strong>Area of Interest</strong>.</li>
+			<li>Accept the <strong>Name</strong>, or type in a new one. Make sure that the name complies 
+			with <a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> GeoCraft file-naming requirements</a>.</li>
+			<li><em>Optional;</em> Type additional information in the <strong>Comments</strong> field. Text from this field displays
+			in the <strong>Properties</strong> view when an entity is selected in the repository.</li>
+			<li>Click <strong>Run</strong>.</li>
+			<p>GeoCraft runs the algorithm and stores the new horizon in the Repository, under the <strong>Grids</strong> folder.</p>
+			<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+		</ol>
+	<p></p>
+	<h3>Related Topics</h3>
+		<li><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Editing Grid Values in a Spreadsheet View</a></li>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

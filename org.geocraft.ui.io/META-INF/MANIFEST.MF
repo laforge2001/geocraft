@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: I/O UI Plug-in
+Bundle-SymbolicName: org.geocraft.ui.io;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: ConocoPhillips
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
+ org.eclipse.ui;bundle-version="3.4.0",
+ org.eclipse.ui.forms;bundle-version="3.3.100",
+ org.eclipse.core.databinding;bundle-version="1.1.0",
+ org.geocraft.core;bundle-version="1.0.0",
+ org.geocraft.core.session;bundle-version="1.0.0",
+ org.geocraft.ui.model;bundle-version="1.0.0",
+ org.geocraft.ui.common;bundle-version="1.0.0",
+ org.geocraft.algorithm;bundle-version="1.0.0",
+ org.geocraft.ui.form2;bundle-version="1.0.0"
+Export-Package: org.geocraft.internal.ui.io;x-internal:=true,
+ org.geocraft.ui.io;
+  uses:="org.eclipse.swt.events,
+   org.geocraft.internal.ui.io,
+   org.geocraft.core.model.validation,
+   org.geocraft.core.io,
+   org.geocraft.core.model.datatypes,
+   org.eclipse.ui.forms,
+   org.geocraft.core.common.preferences,
+   org.geocraft.core.model.mapper,
+   org.eclipse.swt.widgets,
+   org.geocraft.ui.form2",
+ org.geocraft.ui.io.actions;uses:="org.eclipse.jface.action,org.eclipse.ui,org.eclipse.jface.viewers"
+Service-Component: META-INF/OSGI-INF/component.xml, META-INF/OSGI-INF/component2.xml
+Bundle-ActivationPolicy: lazy

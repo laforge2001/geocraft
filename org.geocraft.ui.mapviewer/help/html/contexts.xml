@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="MapPlot" title="Completing Tasks in the GeoCraft Map Plot Viewer">
+      <description>The GeoCraft Map Plot View produces a 2D visual representation of visual data in the X and Y space.</description>
+      <topic href="help/html/gc_mapvwr_tasks.htm" label="Completing Tasks in the GeoCraft Map Plot Viewer"/>
+   </context>
+</contexts>

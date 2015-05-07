@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.tigris.subversion.subclipse.core.svnnature">
+<project reference="0.9.3,https://wush.net/svn/geocraft/geocraft.builder,org.geocraft.builder"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/core/trunk/org.geocraft.core,org.geocraft.core"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/core/trunk/org.geocraft.core.session,org.geocraft.core.session"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/target,org.geocraft.target"/>
+</provider>
+</psf>

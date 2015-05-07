@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Median Smooth</title>
+<meta name="Keywords" content="smoothing, median average, horizon, interpolation, median filters" />
+</head>
+<body>
+<h1>Median Smooth</h1>
+	<p>The Median Smooth algorithm uses a median filter to smooth a horizon. A median filter is a non-linear filtering technique that preserves 
+	the edges in maps while smoothing the data by removing highly varying values.</p>
+	<h2>Overview of Median Smooth Algorithm</h2>
+		<p>The Median Smooth algorithm uses a window specified by a number of inlines and a number of xlines. Values in the window are 
+		sorted into numerical order and the center value, or the <em>median</em> value, is selected for output.</p>
+		<p><strong>Note</strong>: If you do not want to filter all data points in the horizon, you can use a <em>mask horizon</em> during 
+		the calculation. A mask is a horizon where processing is performed on the points that are <em>not</em> null. When Median Smooth 
+		finds nulls in the mask horizon, the algorithm copies values from the input horizon through to the output.</p>
+	<h2>Smoothing a Horizon with the Median Smooth Algorithm</h2>
+		<ol>
+			<li>Load horizon data into GeoCraft.</li>
+			<li>Select a <strong>Horizon</strong>.</li>
+			<li><em>Optional; only perform this step if you want to use a mask horizon in the smoothing calculation.</em> Select the 
+			<strong>Don't Filter Entire Horizon?</strong> checkbox.</li>
+			<li><em>Optional</em> Select a <strong>Mask</strong> horizon.</li>
+			<li>Select a <strong>Filter Option</strong>:</li>
+				<ul>
+					<li><strong>Filter based on columns/rows</strong>: creates a rectangle-shaped filter in the X and Y directions 
+					specified to the number of inlines and xlines you set. If you select this option, type values in the 
+					<strong>Filter Width in Columns</strong> and <strong>Filter Width in Rows</strong> fields.</li>
+					<li><strong>Square filter based on number of points</strong>: creates a square filter (for example, <em>9 inlines by 9 xlines</em>). 
+					If you select this option, type a value in the <strong>Filter Size</strong> field. When this length is reached, GeoCraft stops filtering 
+					and calculates the median value.</li>
+				</ul>
+			<li>Select an <strong>Interpolation Option</strong>:</li>
+				<ul>
+					<li><strong>Only values that are not null</strong>: uses only non-null values during interpolation and ignores null values</li>
+					<li><strong>Only null values</strong>: uses only null values during interpolation and ignores non-null values.</li>
+					<p><strong>Warning!</strong> This option will extend the edges of the horizon by half the filter length.</p>
+					<li><strong>All values</strong>: uses null and non-null values during interpolation.</li>
+					<p><strong>Warning!</strong> This option will extend the edges of the horizon by half the filter length.</p>
+				</ul>
+			<li>Accept the <strong>Name</strong>, or type in a new one. Make sure that the name 
+			complies with <a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> GeoCraft file-naming requirements</a>.</li>
+			<li><em>Optional</em> Type text in the <strong>Comments</strong> field. This text is displayed in the <strong>Properties</strong> view 
+			for the entity.</li>
+			<li>Click <strong>Run</strong>.</li>
+			<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+		</ol>
+	<p></p>
+	<h3>Related Topics</h3>
+		<li><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Editing Grid Values in a Spreadsheet View</a></li>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="GeoCraft 3D Viewer Help" link_to="../org.geocraft.core/html/toc.xml#GCViewers">
+   <topic href="../org.geocraft.ui.volumeviewer/help/html/3dv_intro.htm" label="Introduction to the GeoCraft 3D Viewer">
+      <topic href="help/3dv_beforeusing.htm" label="Before You Use the GeoCraft 3D Viewer">
+      </topic>
+      <topic href="help/3dv_tasklist.htm" label="Performing Tasks in the GeoCraft 3D Viewer">
+         <topic href="help/3dv_task_viewobj.htm" label="Viewing an Object in the 3D Viewer">
+         </topic>
+         <topic href="help/3dv_task_zmspd.htm" label="Changing the rate at which you zoom towards or away from objects in the 3D viewer">
+         </topic>
+         <topic href="help/3dv_task_compvols.htm" label="Comparing two volumes a single 3D plot">
+         </topic>
+         <topic href="help/3dvtask_azimuth.htm" label="Changing the azimuth (sunlight orientation) settings within the 3D viewer">
+         </topic>
+         <topic href="help/3dv_task_colormap.htm" label="Changing the Colormap for a 3D View Plot">
+         </topic>
+         <topic href="help/3dv_task_cmapspecifc.htm" label="Applying a Specific Colormap File to Data in the 3D View">
+         </topic>
+      </topic>
+      <topic href="help/3dv_trouble.htm" label="Troubleshooting GeoCraft 3D Viewer Problems">
+      </topic>
+      <topic href="help/3dv_performance.htm" label="GeoCraft 3D Viewer: Tips for Using the Viewer and Improving Its Performance">
+      </topic>
+   </topic>
+</toc>

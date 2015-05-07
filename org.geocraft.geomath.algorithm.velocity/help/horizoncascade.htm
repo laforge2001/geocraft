@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Horizon Cascade (d->t->d)</title>
+<meta name="Keywords" content="horizon cascading, cascading one horizon depth-&gt;time 
+and a second horizon time-&gt;depth, cascading horizons depth to time to depth, horizon cascade (d->t->d)" />
+</head>
+<body>
+<h1>Horizon Cascade (d->t->d)</h1>
+<p>Horizon Cascade converts horizons from depth to time using one velocity, then converts 
+them back to depth using a second velocity.</p>
+<h2>Overview of the Horizon Cascade Algorithm</h2>
+<p>The Horizon Cascade (d->t->d) algorithm uses velocity volumes to perform depth-to-time followed by 
+time-to-depth conversions on horizons. You may convert several horizons at once, and 
+can use an Area of Interest in the calculation to limit the processing area.</p>
+<h2>Cascading a Horizon from Depth to Time followed by Time to Depth</h2>
+<ol>
+<li>Load ModSpec grid and volume data into GeoCraft.</li>
+<li>In the <strong>Depth Horizons</strong> field, click <strong>Add</strong>.</li>
+<li>In the Selection Dialog, highlight the depth horizons you want to use in the calculation and click <strong>OK</strong>.</li>
+<li>In the <strong>Depth Horizons</strong> field, select individual horizons and click <strong>Up</strong> and <strong>Down</strong> to sort the horizons in the calculation order. GeoCraft gives preferential treatment to the top-most horizon in the list during the calculations. If you selected a horizon you do not want, highlight the horizon and click <strong>Remove</strong>.</li>
+<li>Select an <strong>Interval Velocity Volume (V1)</strong> , the volume that will convert horizons from depth to time.</li>
+<li>Select an <strong>Interval Velocity Volume (V2)</strong>, the volume that will convert horizons from time to depth.</li>
+<li><em>Optional; only perform this step if you want to use an Area of Interest in the calculation</em>. Select the <strong>Use Area of Interest?</strong> check box.</li>
+<li><em>Optional</em> Select an <strong>Area of Interest</strong>.</li>
+<li>Select a <strong>Conversion Method</strong>:</li>
+<ul>
+<li><strong>Cell-based</strong> - vertical velocities are held constant between input values</li>
+<li><strong>Knee-based</strong> - vertical velocities are linearly interpolated between input values</li>
+</ul>
+<li>Accept the default in the <strong>Output Depth to Time Suffix</strong> field, or type in a new value.</li>
+<li>Accept the default in the <strong>Output Time to Depth Suffix</strong> field, or type in a new value.</li>
+<li>Click <strong>Run</strong>.</li>
+</ol>
+<p>A progress bar is displayed while the conversions run. When the job completes, output horizons are in the <strong>Repository</strong> window.</p>
+<p>You may now plot and view the data in one of the GeoCraft viewers.</p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

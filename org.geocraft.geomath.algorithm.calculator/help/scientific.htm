@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GeoCraft Scientific Calculator</title>
+<meta name="Keywords" content="calculator, scientific calculations, scientific, science, GeoCraft, science functions" />
+</head>
+<body>
+<h1>GeoCraft Scientific Calculator</h1>
+	<p>The GeoCraft scientific calculator performs scientific calculations (such as finding the cosine, 
+	arc tangent, or square root) on	horizons loaded into GeoCraft.</p>
+	<h2>GeoCraft Scientific Calculator: an Overview</h2>
+	<p>The GeoCraft Scientific Calculator performs the selected calculation on the data 
+	selected for the b variable, and then writes the results of the calculation out as a new output variable.</p>
+	<h2>Best Practices for Mathematical Operations in GeoCraft</h2>
+	<p>When you perform a calculator function on two horizons, the two geometries must be identical. 
+	This means that each grid must contain an identical number of rows and columns, and the x and y 
+	locations of each node must be identical.</p>
+	
+	<p><strong>Note:</strong> The Basic Math, Boolean Algebra, Scientific, and Wavelet Math calculators 
+	now use the Free Form Horizon and Wavelet Calculators. Therefore, when you click the <strong>Open: Free Form 3D Equation Calculator (Horizon)</strong> 
+	button, the Free Form Calculator pops up with the equation already inserted in 
+	the Editor. This allows you to modify the equation before pressing <strong>Run</strong> in the Free 
+	Form calculator.</p>
+
+	<h2>Using the GeoCraft Scientific Calculator</h2>
+	<p>The following procedure provides a basic overview of how to use the GeoCraft Scientific Calculator. 
+	See each of the Scientific Calculator related topics to learn how each function works.</p>
+		<ol>
+			<li>Load horizon (grid) data into GeoCraft.</li>
+			<li>Select a <strong>b</strong> variable.</li>
+			<li>Select a <strong>c</strong> variable (the c variable is only necessary for the atan2 operation).</li>
+			<p><strong>Note</strong>: Variable <strong>c</strong> may be a number (for example, 2.5) instead of a horizon.</p>
+			<li>Select the operation to perform:</li>
+				<ul>
+					<li><strong>atan2(b,c)</strong>: Arc Tangent</li>
+					<li><strong>cos(b)</strong>: Cosine</li>
+					<li><strong>sin(b)</strong>: Sine</li>
+					<li><strong>log10(b)</strong>: Base 10 Logarithm</li>
+					<li><strong>logn(b)</strong>: Base e Logarithm</li>
+					<li><strong>sqrt(b)</strong>: Square Root</li>
+					<li><strong>gmean(b)</strong>: Grid Mean</li>
+					<li><strong>gstdv(b)</strong>: Grid Standard Deviation</li>
+					<li><strong>gnorm(b)</strong>: Grid Normalization</li>
+				</ul>
+			<li>Accept the default output name of <strong>a1</strong>, or type a new value in the field.</li>
+			<li>Click <strong>Run the current algorithm</strong>.</li>
+		</ol>
+		<p>When you click the <strong>Run the current algorithm</strong> button, GeoCraft runs the calculation in the background. The 
+		answer to your calculation is put in the GeoCraft <a href="PLUGINS_ROOT/org.geocraft.core.help/html/concepts/repository.htm"> Repository </a>.</p>
+	<p></p>
+	<p></p>
+	<h3>Related Topics</h3>
+		<li><a href="basicmath.htm">Basic Math Calculator</a></li>
+		<li><a href="booleanalgebra.htm">Boolean Algebra Calculator</a></li>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

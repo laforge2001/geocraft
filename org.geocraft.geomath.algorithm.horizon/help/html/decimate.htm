@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Decimate Algorithm</title>
+<meta name="Keywords" content="decimate a horizon, eliminate data points from a horizon, produce a coarser horizon, 
+replace eliminated values in a horizon with nulls" />
+</head>
+<body>
+<h1>Decimate a Horizon</h1>
+	<p>The Decimate algorithm extracts points in a grid to produce a sparse version of the original horizon. 
+	Decimated points in rows or columns are set to null. Decimate is similar to the Grid Lines algorithm except that it uses 
+	an AND operation instead of an OR operation to pass node values.</p>
+<h2>Overview of Decimate Horizon</h2>
+	<p>Decimate generates a new grid from an existing horizon by selecting every <em>nth</em> 
+	row and every <em>nth</em> column node. If you set row spacing to 10 and column spacing to 5, 
+	the Decimate algorithm will output every 5th column value in every 10th row. All other node values will be set 
+	to null. An increment of 1 will output all points in that direction (that is, a row 
+	decimation of 1 and a column decimation of 5 will output all rows in every 5th column).</p>
+	<p><strong>Note</strong>: The algorithm maintains the same number of nodes, and therefore the 
+	same number of rows and columns, as in the original horizon.</p>
+	<h3>Example</h3>
+	<p>For example purposes, set <strong>Row Spacing</strong> to <strong>10</strong> and <strong>Column Spacing</strong> 
+	to <strong>5</strong>. If the current row number is evenly divisible by 10, then every column node that 
+	is divisible by 4 is passed through. All other node values are set null.</p> 
+<h2>Decimating a Horizon</h2>
+<ol>
+	<li>Load horizon data into GeoCraft.</li>
+	<li>Select a horizon to decimate in the <strong>Input Grid</strong> field.</li>
+	<li>In the <strong>Row Decimation</strong> box, set a row increment.</li>
+	<li>In the <strong>Column Decimation</strong> box, set a column increment.</li>
+	<li>Accept the <strong>Output Grid Name</strong>, or type in a new one. Make sure that the name complies with 
+	<a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> GeoCraft file-naming requirements</a>.</li>
+	<li><em>Optional</em> Type text in the <strong>Output Comments</strong> field. This text will be displayed in the 
+	<strong>Properties</strong> view for the entity when the entity is selected.</li>
+	<li>Click <strong>Run</strong>.</li>
+	<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+</ol>
+	<p><strong>Note:</strong> The Decimate algorithm discards row and column lines, and outputs row and column points, unless one increment 
+	is set to 1.</p>
+	<p><strong>Tip</strong>: Use the <strong>Table Viewer</strong> for quality control, to ensure that decimation was performed properly.</p>
+<h3>Example of a Decimated Horizon</h3>
+	<p>Use the following steps to produce an image similar to this one:</p>
+		<ol>
+			<li>Select a <strong>Horizon</strong>.</li>
+			<li>Set the <strong>X</strong> and <strong>Y</strong> decimations to <code>5</code>.</li>
+			<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+		</ol>
+<p><img src="decimate.gif" alt="Decimation of a Horizon" height="243" width="466" /></p>
+	<p></p>
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="PLUGINS_ROOT/org.geocraft.geomath.algorithm.horizon/help/html/gridlines.htm">GridLines</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Editing Grid Values in a Spreadsheet View</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+</body>
+</html>

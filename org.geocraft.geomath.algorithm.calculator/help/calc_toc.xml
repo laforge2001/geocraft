@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Calculator Algorithms" link_to="../org.geocraft.geomath.help/toc.xml#calculatorAlgorithms">
+   <topic href="help/basicmath.htm" label="Basic Math">
+   </topic>
+   <topic href="help/booleanalgebra.htm" label="Boolean Algebra">
+   </topic>
+   <topic href="help/scientific.htm" label="Scientific Calculations">
+   </topic>
+</toc>

@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GeoCraft Sessions</title>
+<meta name="Keywords" content="GeoCraft Sessions, session files, workspaces, creating session files" />
+</head>
+<body>
+<h1>GeoCraft Sessions</h1>
+	<p>When you launch GeoCraft using a particular workspace, that GeoCraft instance is referred to as a GeoCraft <em>session</em>. You can
+	save the session's state at any time and restore it later. A session can contain any of the following items. Session files retain 
+	the state of your current GeoCraft environment, including:</p>
+			<ul>
+				<li> <a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/repository.htm"> Repository </a> contents </li>
+				<li> data that was displayed in the <a href="PLUGINS_ROOT/org.geocraft.core/html/UI_Elements/gc_ui_viewers.htm">GeoCraft Viewers</a>, 
+				and the settings at which that data was displayed </li>
+				<li>GeoCraft algorithms that were open and in use</li>
+				<li>user preferences, including the unit system</li>
+				<li>the following views:</li>
+					<ul>
+						<li>ABAVO</li>
+						<li>3D View</li>
+						<li>Map View</li>
+						<li>Section View</li>
+						<li>Wavelet View</li>
+						<li>Well Log View</li>
+					</ul>
+			</ul>
+		<p>Currently, session files do not restore Histogram and Scatter Plot views. <strong>Caution</strong>: 
+		If you share your session with others, they <em>must</em> have file system permissions to access files 
+		in that data store.</p>
+	<h2>Quitting a GeoCraft Session</h2>
+		<p><strong>Caution</strong> If you click the <strong>X</strong> in the top right corner of the GeoCraft window to quit the session, this closes 
+		all separate plot windows immediately, and any plots that you were viewing in a separate window cannot be saved as part 
+		of your session state when you exit GeoCraft. Always use <strong>File => Exit</strong> on the main menu to quit GeoCraft.</p>
+
+		<p>When you select <strong>File => Exit</strong> to quit GeoCraft, you are prompted to save the last active session in which you worked. 
+		If you are working in an existing session, the filename and path are populated with the existing session information.</p>
+		<p><img src="savsess.png" alt="Save Session Dialog" /></p>
+		
+	<h2>Handling Units of Measure within a Session</h2>
+		<p>When you launch GeoCraft, you will be prompted to specify the path of a workspace. If you specify a workspace
+		that does not exist, it will be created, and you must also specify the unit system preference for your session. 
+		When you load new data, GeoCraft will convert X,Y and Depth (only) units to the unit system of the session.</p>
+		
+		<p>You will specify unit of measure parameters in the <strong>Geocraft Workspace Chooser</strong> dialog:</p>
+		
+		<p><img src="workspace.gif" alt="GeoCraft Workspace Chooser" /></p>
+		
+		<p>See the following topics for a detailed explanation about how GeoCraft handles units, and unit mismatches when data are loaded:</p>
+			<ul>
+				<li><a href="workspace_datamismatch.htm">Loading Data that Does Not Match Unit Preferences</a></li>
+				<li><a href="gc_uom_concept.htm">Unit Preference Settings and How GeoCraft Performs Data Unit Conversions</a></li>
+			</ul>
+	
+	<h2>Advantages to Using GeoCraft Sessions</h2>
+		<p>GeoCraft sessions offer several advantages; because of the GeoCraft session functionality, you can easily:</p>
+			<ul>
+				<li>pick up where you left off in your work. GeoCraft saves your session in its current state; therefore, if you need to 
+				leave a project	or a geophysical problem on which you are working for awhile, GeoCraft saves all of your data and the related tools 
+				(algorithms, viewers, calculators, etc.) you were using to resolve your problem in their current state. When you are ready to 
+				return to work, everything is waiting for you, just as you left it.</li>
+				<li> share your work with others. The GeoCraft session file is a portable XML file; you can let other users point to your 
+				session file and they will be able to work in the exact session environment that you set up.</li>
+				<li>return to a starting point in your work. For example, if you save your session file at a certain point and then 
+				perform several calculations or lay out several plots and realize that the more recent work you have done is not what 
+				you wanted to do, you can always restore your prior saved session, and return to a "clean slate" within your work.</li>
+			</ul>
+		
+		<h3>Related Topics</h3>
+		<ul>
+			<li><a href="gc_sessions.htm">GeoCraft Sessions</a></li>
+			<li><a href="gc_svsessions.htm">Saving a GeoCraft Session</a></li>
+			<li><a href="gc_svsessionsbatch.htm">Saving a GeoCraft Session in Batch Mode</a></li>
+			<li><a href="gc_sessionslaunch.htm">How Session Files Behave When Launching and Closing GeoCraft</a></li>
+			<li><a href="gc_restsessions.htm">Switching GeoCraft Sessions</a></li>
+			<li><a href="gc_files_sessions.htm">GeoCraft Session Files</a></li>
+			<li><a href="workspace_datamismatch.htm">Loading Data that Does Not Match Unit Preferences</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

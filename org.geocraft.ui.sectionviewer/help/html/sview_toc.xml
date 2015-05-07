@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Section Viewer" link_to="../org.geocraft.core/html/toc.xml#GCViewers" topic="help/html/gc_vwr_section.htm">
+   <topic href="help/html/gc_vwr_sv_before.htm" label="Before You Use the Section View">
+   </topic>
+   <topic href="help/html/gc_sview_vwplot.htm" label="Plotting a Section View">
+   </topic>
+   <topic href="help/html/gc_sview_tasks.htm" label="Completing Tasks in the Section View">
+   </topic>
+   <topic href="help/html/gc_sview_nav.htm" label="Setting Data Navigation Along the Inline or Xline Axis in the Section View">
+   </topic>
+   <topic href="help/html/gc_sview_mapevent.htm" label="Viewing an Event Selected in Map View as a Data Slice within the Section View">
+   </topic>
+   <topic href="help/html/gc_vwr_section.htm" label="Unique Toolbar Buttons in the GeoCraft Section View">
+   </topic>
+   <topic href="help/html/zrange.htm" label="Setting Z Range Values in the Section View">
+   </topic>
+   <topic href="help/html/gc_sview_2dseis.htm" label="Viewing 2D Seismic Data in the Section View">
+   </topic>
+   <topic href="help/html/sview_settings.htm" label="Changing Plot Settings in the Section View">
+      <topic href="help/html/sview_settings_render.htm" label="Setting the Rendering Parameters for the Section View">
+      </topic>
+      <topic href="help/html/sview_settings_colorbar.htm" label="Setting the Color Bar Parameters for the Section View">
+      </topic>
+      <topic href="help/html/sview_settings_agc.htm" label="Setting the AGC and Geometric Gain Parameters for the Section View">
+      </topic>
+   </topic>
+   <topic href="help/html/gc_sview_grp.htm" label="Toggling the Group Entities Display On and Off">
+   </topic>
+   <topic href="help/html/gc_sview_redraw.htm" label="Manually Refreshing Data within the Section View">
+   </topic>
+   <topic href="help/html/gc_sview_mapevent.htm" label="Viewing Lines Selected in the Map View within the Section View">
+   </topic>
+</toc>

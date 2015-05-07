@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Calculator Boolean Algebra Functions</title>
+<meta name="Keywords" content="calculator, Boolean algebra functions, Boolean, algebra, GeoCraft, Boolean algebra" />
+</head>
+<body>
+<h1>Calculator Boolean Algebra Functions</h1>
+	<p>The GeoCraft Boolean Algebra calculator applies logical or Boolean operations to horizons.</p> 
+	<p>These Boolean operations can be used to merge horizons.  However, only two horizons can be merged at a 
+	time. If you need to merge several horizons, consider using the <strong>Horizon Merge</strong> algorithm, 
+	which is part of the <strong>Horizon Utilities</strong> group.</p>
+<h2>GeoCraft Boolean Algebra Calculator: an Overview</h2>
+	<p>The GeoCraft Boolean Algebra Calculator performs the selected operation 
+	on the data selected for the <strong>b</strong> and <strong>c</strong> variables, and then 
+	writes the results of the calculation out as a new output variable. The <strong>c</strong> variable 
+	may be a numeric constant. If the result of the operation is true, the result is set to the appropriate 
+	input variable. If the operation is false, the result can be set to Null.</p>
+	<p><strong>Example</strong>: In this example, input <strong>b</strong> is top salt and input <strong>c</strong> is 1000. 
+	If the operation is <strong>b &gt; c</strong>, then the result is true when top salt time exceeds 1000 and 
+	the top salt time is output. But when the top salt is less than or equal to 1000, the output will be Null.</p>
+	
+	<p><strong>Note:</strong> The Basic Math, Boolean Algebra, Scientific, and Wavelet Math calculators 
+	now use the Free Form Horizon and Wavelet Calculators. Therefore, when you click the <strong>Open: Free Form 3D Equation Calculator (Horizon)</strong> 
+	button, the Free Form Calculator pops up with the equation already inserted in 
+	the Editor. This allows you to modify the equation before pressing <strong>Run</strong> in the Free 
+	Form calculator.</p>
+	 
+<h2>Best Practices for Mathematical Operations in GeoCraft</h2>
+	<p>When you perform a calculator function on two horizons, the two geometries must be identical. 
+	This means that each grid must contain an identical number of rows and columns, and the x and y 
+	locations of each node must be identical.</p>
+<h2>Using the GeoCraft Boolean Algebra Calculator</h2>
+	<p>The following procedure provides a basic overview of how to use the GeoCraft Boolean Algebra 
+	Calculator. See each of the Boolean Algebra Calculator related topics to learn how each function works.</p>
+	<p><strong>Note</strong>: Operations are performed on <em>non-null</em> values, unless otherwise 
+	noted in the Boolean Algebra Calculator help topics.</p>
+		<ol>
+			<li>Load horizon (grid) data into GeoCraft.</li>
+			<li>Select a <strong>b</strong> variable.</li>
+			<li>Select a <strong>c</strong> variable.</li>
+			<p><strong>Note</strong>: Variable <strong>c</strong> may be a number (for example, 2500) instead of a horizon.</p>
+			<li>Select <strong>The Operation to Perform</strong>:</li>
+				<ul>
+					<li><strong>b == c</strong>: Equal Values</li>
+					<li><strong>b != c</strong>: Unequal Values</li>
+					<li><strong>b and c</strong>: Intersecting Values</li>
+					<li><strong>b &gt; c</strong>: Greater Than</li>
+					<li><strong>b &gt;= c</strong>: Greater Than or Equal to</li>
+					<li><strong>b or c</strong>: Or</li>
+					<li><strong>b &lt; c</strong>: Less Than</li>
+					<li><strong>b &lt;= c</strong>: Less Than or Equal to</li>
+					<li><strong>xor(b,c)</strong>: Excluded Elements</li>
+				</ul>
+			<li>Accept the default <strong>output name</strong>, or type a new name in the field.</li>
+			<li>Click <strong>Run the current algorithm</strong>.</li>
+		</ol>
+		<p>When you click the <strong>Run the current algorithm</strong> button, GeoCraft runs the calculation in the background. The 
+		answer to your calculation is put in the GeoCraft <a href="PLUGINS_ROOT/org.geocraft.core.help/html/concepts/repository.htm"> Repository </a>.</p>
+	<p></p>
+	<p></p>
+	<h3>Related Topics</h3>
+		<li><a href="basicmath.htm">Basic Math Calculator</a></li>
+		<li><a href="scientific.htm">Scientific Calculator</a></li>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

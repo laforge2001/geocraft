@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Define the properties for a data file entity and their categories. -->
+<entity-properties entity="PolylineSet">
+	<!-- There are no properties at the top of the property tree -->
+    <category name="" />
+	
+    <category name="File">
+        <property id="ProjectName" display="Project"/>
+        <property id="LastModifiedDate" display="Modification date"/>
+        <property id="isDirty" display="Dirty?"/>
+    </category>
+	
+	<category name="Features">
+		<property id="EarthModel" display="Earth model"/>
+		<property id="GeologicFeature" display="Geological feature"/>
+	</category>
+    
+    <category name="Data">
+		<property id="DatumElevation" display="Elevation"/>
+        <property id="DataSource" display="Source"/>
+        <property id="NumPolylines" display="# of polylines"/>
+		<property id="ZProperty" display="Z property"/>
+    </category>
+    
+    <category name="General">
+        <property id="Comment" display="Comments"/>
+		<property id="Interpreter" display="Interpreter"/>
+    </category>
+	
+	<!-- Excluded displayable properties -->
+	<exclude>
+		<property id="EntityType" display="Entity type" />
+		<property id="DisplayName" display="Display name" />
+	</exclude>
+
+</entity-properties>

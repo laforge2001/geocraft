@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Horizon Algorithms" link_to="../org.geocraft.geomath.help/toc.xml#horizonAlgorithms">
+ <topic label="Calculator Algorithms">
+    <anchor id="horizonCalculatorAlgorithms"/>
+ </topic>
+ <topic label="Horizon Filters Algorithms">
+    <anchor id="horizonFilterAlgorithms"/>
+ </topic>
+ <topic label="Horizon Interpolation Algorithms">
+    <anchor id="horizonInterpolationAlgorithms"/>
+ </topic>
+ <topic label="Horizon Tracking Algorithms">
+    <anchor id="horizonTrackingAlgorithms"/>
+ </topic>
+ <topic label="Horizon Utility Algorithms">
+    <anchor id="horizonUtilityAlgorithms"/>
+ </topic>
+</toc>

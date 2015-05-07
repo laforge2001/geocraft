@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.tigris.subversion.subclipse.core.svnnature">
+<project reference="0.9.3,https://wush.net/svn/geocraft/releng/unit.tests/trunk/org.geocraft.geomath.test.feature,org.geocraft.geomath.test.feature"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/releng/unit.tests/trunk/org.geocraft.abavo.test.feature,org.geocraft.abavo.test.feature"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/app.test/trunk/org.geocraft.abavo.test,org.geocraft.abavo.test"/>
+</provider>
+</psf>

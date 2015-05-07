@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="help/html/contexts.xml">
+      </contexts>
+   </extension>
+    
+    <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/html/horizon_toc.xml"
+            primary="true">
+      </toc>
+      <toc
+            file="help/html/filter_toc.xml"
+            primary="false">
+      </toc>
+      <toc
+            file="help/html/utility_toc.xml"
+            primary="false">
+      </toc>
+      <toc
+            file="help/html/interp_toc.xml"
+            primary="false">
+      </toc>
+   </extension>
+
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Utility"
+             class="org.geocraft.geomath.algorithm.horizon.clip.GridClip"
+             helpId="org.geocraft.geomath.algorithm.horizon.clip"
+             icon="icons/autopilot-16.png"
+             name="Clip 3D"
+             tooltip="Clips a 3D grid"
+             usageName="GRID CLIP 3D"
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Filter"
+             class="org.geocraft.geomath.algorithm.horizon.kuwahara.KuwaharaFilter"
+             helpId="org.geocraft.geomath.algorithm.horizon.KuwaharaFilter"
+             icon="icons/autopilot-16.png"
+             name="Kuwahara"
+             tooltip="Applies the Kuwahara filter to a grid"
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Utility"
+             class="org.geocraft.geomath.algorithm.horizon.decimate.Decimate"
+             helpId="org.geocraft.geomath.algorithm.horizon.decimate"
+             name="Decimate"
+             tooltip="Extract points from a grid"
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Utility"
+             class="org.geocraft.geomath.algorithm.horizon.gridlines.GridLines"
+             helpId="org.geocraft.geomath.algorithm.horizon.gridlines"
+             name="Grid Lines"
+             tooltip="Extract lines from a grid"
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Utility"
+             class="org.geocraft.geomath.algorithm.horizon.erasearea.EraseArea"
+             helpId="org.geocraft.geomath.algorithm.horizon.EraseArea"
+             name="Erase Area"
+             tooltip="Erases part of a grid defined by an AOI"
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Utility"
+             class="org.geocraft.geomath.algorithm.horizon.extractarea.ExtractArea"
+             helpId="org.geocraft.geomath.algorithm.horizon.ExtractArea"
+             name="Extract Area"
+             tooltip="Extracts an area of a grid defined by an AOI"
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Interpolation"
+             class="org.geocraft.geomath.algorithm.horizon.interpolate.LinearInterpolation"
+             helpId="org.geocraft.geomath.algorithm.horizon.InterpolateLinear"
+             name="Linear Interpolation"
+             tooltip="Linear interpolation of holes in a grid."
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Filter"
+             class="org.geocraft.geomath.algorithm.horizon.weightedsmooth.WeightedSmooth"
+             helpId="org.geocraft.geomath.algorithm.horizon.weightedsmooth"
+             name="Weighted Smooth"
+             tooltip="Smoothes a grid using a weighted average"
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Filter"
+             class="org.geocraft.geomath.algorithm.horizon.mediansmooth.MedianSmooth3d"
+             helpId="org.geocraft.geomath.algorithm.horizon.mediansmooth"
+             name="Median Smooth (3D)"
+             tooltip="Smoothes a 3D grid using a median average"
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Filter"
+             class="org.geocraft.geomath.algorithm.horizon.mediansmooth.MedianSmooth2d"
+             helpId="org.geocraft.geomath.algorithm.horizon.mediansmooth"
+             name="Median Smooth (2D)"
+             tooltip="Smoothes a 2D grid using a median average"
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Velocity"
+             class="org.geocraft.geomath.algorithm.horizon.velocitymodelchecker.VelocityModelChecker"
+             helpId="org.geocraft.geomath.algorithm.horizon.velocitymodelchecker"
+             name="Velocity Model Checker"
+             tooltip="Locates where grids are inconsistent for flooding (ie. holes, base above the top grid, etc.)"
+             version="beta"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Utility"
+             class="org.geocraft.geomath.algorithm.horizon.merge.Merge"
+             helpId="org.geocraft.geomath.algorithm.horizon.HorizonMerge"
+             name="Merge"
+             tooltip="Merge 3D grids using Min,Max,Or operations"
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.eclipse.help.index">
+       <index
+             file="help/html/index.xml">
+       </index>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Utility"
+             class="org.geocraft.geomath.algorithm.horizon.convert.ConvertHorizon"
+             helpId="org.geocraft.geomath.algorithm.horizon.convert"
+             name="Convert Grid"
+             tooltip="Convert a grid to a new geometry"
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Utility"
+             class="org.geocraft.geomath.algorithm.horizon.extrapolate.Extrapolate"
+             helpId="org.geocraft.geomath.algorithm.horizon.extrapolate"
+             name="Extrapolate"
+             tooltip="Extrapolate a grid"
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Filter"
+             class="org.geocraft.geomath.algorithm.horizon.snn.SymmetricNearestNeighbor"
+             helpId="org.geocraft.geomath.algorithm.horizon.snn"
+             name="Symmetric Nearest Neighbor"
+             tooltip="Symmetric nearest neighbor (SNN) filter on a grid"
+             version="beta"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Interpolation"
+             class="org.geocraft.geomath.algorithm.horizon.tessellate.InterpolateTessellate"
+             helpId="org.geocraft.geomath.algorithm.horizon.tessellate"
+             name="Interpolate using Tessellation"
+             tooltip="Interpolate (Tesselate) a horizon"
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+    <extension
+          point="org.geocraft.algorithm">
+       <algorithm
+             category="Horizon/Filter"
+             class="org.geocraft.geomath.algorithm.horizon.filter.LinearFilters"
+             helpId="org.geocraft.geomath.algorithm.horizon.filter"
+             name="Convolution"
+             tooltip="Linear filters on a horizon"
+             version="production"
+             visible="true">
+       </algorithm>
+    </extension>
+</plugin>

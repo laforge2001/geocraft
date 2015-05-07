@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component immediate="true" name="org.geocraft.algorithm">
+   <implementation class="org.geocraft.algorithm.AlgorithmsService"/>
+   <service>
+      <provide interface="org.geocraft.core.service.algorithm.IAlgorithmsService"/>
+   </service>
+</component>

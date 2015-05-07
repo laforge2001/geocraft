@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<index version="1.0">
+	<entry keyword="Trace Integration">
+		<topic href="help/html/traceintegration.htm" />
+	</entry>
+	<entry keyword="Volume Calc">
+		<topic href="help/html/volumecalc.htm" />
+	</entry>
+	<entry keyword="MVXP Algorithm">
+		<topic href="help/html/mvxp.htm" />
+	</entry>
+	<entry keyword="Using a Scale Factor to Rescale Seismic Data for Conversion in the MVXP Algorithm">
+		<topic href="help/html/mvxp_scalefactor.htm" />
+	</entry>	
+</index>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Define the properties for a data file entity and their categories. -->
+<entity-properties entity="PostStack2dLine">
+	<!-- There are no properties at the top of the property tree -->
+    <category name="" />
+    
+    <category name="General">
+        <property id="Datastore" display="Datastore"/>
+        <property id="ProjectName" display="Project"/>
+        <property id="Survey" display="Seismic Survey"/>
+		<property id="PostStack" display="PostStack"/>
+        <property id="Comment" display="Comments"/>
+        <property id="LastModifiedDate" display="Modification Date"/>
+        <property id="isDirty" display="Dirty?"/>
+    </category>
+    
+    <category name="Line">
+		<property id="LineName" display="Line Name"/>
+		<property id="LineNumber" display="Line #"/>
+    </category>
+    
+    <category name="CDP">
+        <property id="NumCdps" display="CDP Count"/>
+        <property id="CdpRange" display="CDP Range"/>
+    </category>
+    
+    <category name="Shotpoint">
+        <property id="ShotpointStart" display="Shotpoint Start"/>
+        <property id="ShotpointEnd" display="Shotpoint End"/>
+    </category>
+    
+    <category name="Z">
+        <property id="NumSamplesPerTrace" display="Sample Count"/>
+        <property id="ZRange" display="Z Range"/>
+        <property id="ZUnit" display="Z Unit"/>
+        <property id="ZDomain" display="Z Domain"/>
+    </category>
+    
+    <category name="Data">
+        <property id="DataUnit" display="Data Unit"/>
+        <property id="DataDomain" display="Data Domain"/>
+	</category>
+	
+	<category name="Elevation">
+        <property id="ElevationDatum" display="Elev. Datum"/>
+        <property id="ElevationReference" display="Elev. Reference"/>
+    </category>
+	
+	<!-- Excluded displayable properties -->
+	<exclude>
+		<property id="EntityType" display="Entity Type" />
+		<property id="DisplayName" display="Display Name" />
+	</exclude>
+	
+</entity-properties>

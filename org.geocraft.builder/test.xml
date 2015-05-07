@@ -1,0 +1,108 @@
+<project name="Automated Eclipse Testing" default="runAllOfTheUnitTests" basedir=".">
+	<property file="build.properties"/>
+	<property file="test.properties"/>
+
+	<path id="instrument.classpath">
+		<fileset dir="${eclipse-home}/plugins">
+			<include name="org.geocraft.*.jar"/>
+		</fileset> 
+	</path>
+	
+	<target name="runAllOfTheUnitTests">
+		<antcall target ="setupTestDirStructure"/>
+		<antcall target ="all"/>
+		<antcall target ="generateReport"/>
+	</target>
+	
+	<target name="setupTestDirStructure">
+		<!-- 
+		Unzip the product created above and overlay the Eclipse Testing Framework onto it 
+		-->
+
+		<unzip src="${buildDirectory}/${buildLabel}/org.geocraft.feature-${buildId}-${baseos}.${basews}.${basearch}.zip" dest="${testDirectory}"/>
+		<unzip src="${buildDirectory}/${buildLabel}/org.geocraft.test.feature-${buildId}-${baseos}.${basews}.${basearch}.zip" dest="${testDirectory}"/>
+		
+		<unzip src="${buildDirectory}/${buildLabel}/org.geocraft.geomath.feature-${buildId}-${baseos}.${basews}.${basearch}.zip" dest="${testDirectory}"/>
+		<unzip src="${buildDirectory}/${buildLabel}/org.geocraft.geomath.test.feature-${buildId}-${baseos}.${basews}.${basearch}.zip" dest="${testDirectory}"/>
+		
+		<unzip src="${buildDirectory}/${buildLabel}/org.geocraft.abavo.feature-${buildId}-${baseos}.${basews}.${basearch}.zip" dest="${testDirectory}"/>
+		<unzip src="${buildDirectory}/${buildLabel}/org.geocraft.abavo.test.feature-${buildId}-${baseos}.${basews}.${basearch}.zip" dest="${testDirectory}"/>
+		
+		<!-- 
+			Copy over a complete Eclipse installation. Testing framework requires complete install to run.
+		-->
+		
+		<untar src="${testEclipseInstall}" dest="${testDirectory}" compression="gzip"/>
+		<unzip src="${testEclipseFrameworkInstall}" dest="${testDirectory}"/>
+		
+	</target>
+
+	<macrodef name="runTests">
+		<attribute name="testPlugin" />
+		<attribute name="testPluginsRequired" default="**/${@{testPlugin}}/* ${@{testPlugin}.prerequisite.testplugins}" />
+
+		<sequential>
+		
+			<!--override the value of this property with performance if the tests run on performance machine-->
+			<property name="test.target" value="junit" />
+			<property name="report" value="@{testPlugin}" />
+
+			<antcall target="${test.target}">
+				<!--<param name="testPlugin" value="${@{testPlugin}}" />-->
+				<param name="testPlugin" value="@{testPlugin}" />
+				<param name="testPluginsRequired" value="@{testPluginsRequired}" />
+				<param name="output-file" value="@{testPlugin}.xml" />
+			</antcall>
+		</sequential>
+	</macrodef>
+	
+	<target name="junit">
+		<ant antfile="${buildDirectory}/plugins/${testPlugin}/test.xml" dir="${eclipse-home}" />
+	</target>
+
+	<target name="generateReport">
+		
+		<!-- 
+			Collect all test results into single file and move to results directory.
+		-->
+		<ant target="collect" antfile="${library-file}" dir="${eclipse-home}">
+			<property name="includes" value="org*.xml" />
+			<property name="output-file" value="test-results.xml" />
+		</ant>
+		<copy file="${eclipse-home}/test-results.xml" todir="${testResultsDirectory}" />
+		
+		<!-- 
+			Produce coverage analysis docs using EMMA 
+		-->
+		<!--
+		<emma enabled="true">
+			<report sourcepath="${instrument.classpath}">
+				<fileset dir="${coverageDirectory}">
+					<include name="*.emma" />
+				</fileset>
+
+				<txt outfile="${coverageDirectory}/coverage.txt" />
+				<html outfile="${coverageDirectory}/coverage.html" />
+			</report>
+		</emma>
+		-->
+
+	</target>	
+	
+	<target name="all">
+		
+		<!-- 
+			Instrument the code using EMMA 
+		-->
+		<!--
+		<emma enabled="true">
+			<instr instrpathref="instrument.classpath" mode="overwrite" metadatafile="${coverageDirectory}/metadata.emma" >
+				<filter file="emma-filters.txt" />
+			</instr>
+		</emma>
+		-->
+		
+		<runTests testPlugin= "org.geocraft.unittest.suite" />
+	</target>
+
+</project>

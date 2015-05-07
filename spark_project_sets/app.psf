@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.tigris.subversion.subclipse.core.svnnature">
+<project reference="0.9.3,http://svn.conocophillips.net/cop/spark/app/trunk/com.cop.spark.feature,com.cop.spark.feature"/>
+<project reference="0.9.3,http://svn.conocophillips.net/cop/spark/app/trunk/com.cop.landmark.seisspace.feature,com.cop.landmark.seisspace.feature"/>
+<project reference="0.9.3,http://svn.conocophillips.net/cop/spark/app/trunk/com.cop.spark.landmark32.feature,com.cop.spark.landmark32.feature"/>
+<project reference="0.9.3,http://svn.conocophillips.net/cop/spark/app/trunk/com.cop.spark.landmark64.feature,com.cop.spark.landmark64.feature"/>
+<project reference="0.9.3,http://svn.conocophillips.net/cop/spark/app/trunk/com.cop.spark.ui.viewer.feature,com.cop.spark.ui.viewer.feature"/>
+<project reference="0.9.3,http://svn.conocophillips.net/cop/spark/app/trunk/com.cop.spark.product,com.cop.spark.product"/>
+<project reference="0.9.3,http://svn.conocophillips.net/cop/spark/app/trunk/com.cop.spark.batch.product,com.cop.spark.batch.product"/>
+<project reference="0.9.3,http://svn.conocophillips.net/cop/spark/app/trunk/com.cop.spark.gcbatch.product,com.cop.spark.gcbatch.product"/>
+</provider>
+</psf>

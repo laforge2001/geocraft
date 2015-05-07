@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+ 	<component name="datastoreAccessorUIService" immediate="true">
+ 	        <implementation class="org.geocraft.internal.ui.io.DatastoreAccessorUIService"/>
+ 	        <service>
+                  <provide interface="org.geocraft.ui.form2.IDatastoreAccessorUIService"/>
+ 	        </service>
+ 	</component>

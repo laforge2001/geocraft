@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Flooding with a Gradient Flood Type</title>
+<meta name="Keywords" content="flooding salt velocity with a gradient flood type, salt flooding, flooding salt above a horizon, flooding salt below a horizon, flooding salt between horizons, velocity flood, salt velocity flood, flooding salt with gradient values" />
+</head>
+<body>
+<h1>Flooding Intervals with a Gradient Flood Type</h1>
+	<p>Interval velocity flooding using a gradient applies an equation of the form V0 + G*(z-Z0), where Z0 is 
+	the reference depth corresponding to initial velocity V0. Hence the input volume must be a depth velocity volume. 
+	The V0 and G parameters may be constants or horizons (grids) that vary laterally.</p>
+	<p><strong>Note</strong>: Data units for each constant or horizon <em>must</em> 
+	match the data unit of the input velocity volume. If units for the input volume and a horizon 
+	do not match, GeoCraft displays an error and does not run the calculation.</p>
+	<ol>
+		<li>Select the <strong>Constant(s) or Horizon(s)</strong> option:</li>
+			<ul>
+				<li><strong>Use a constant</strong> - Set a constant velocity V0 value to flood 
+				the depth interval in the <strong>Flood Velocity(V0)</strong> field and set 
+				a constant value in the <strong>Flood Gradient(G)</strong> field.</li>
+		<li><strong>Use a horizon</strong> - Select a <strong>Velocity(V0) Grid</strong> and 
+		a <strong>Gradient(G) Grid</strong>.</li>
+			</ul>
+
+		<li>Select a Reference Depth or Horizon:</li>
+		A reference depth specifies the depth (Z0) at which V0 applies in V0+G*(z-Z0). 
+		For example, suppose a V0 value of 9300 f/s was derived over an interval from 10,000 to 12,000 ft, then in 
+		order to make V0 be 9300 at the top of the interval, the reference depth must be 10000 (i.e. V = 9300 + G*(z-10000)).
+			<ul>
+				<li><strong>Use a constant</strong> - GeoCraft uses a constant value to calculate the reference depth. Type a value 
+				in the <strong>Reference(Z0) Depth</strong> field.</li>
+				<li><strong>Use a grid</strong> - GeoCraft varies the reference depth with a depth horizon. If you use a horizon to vary 
+				reference depth, select a <strong>Reference(Z0) Grid</strong>.</li>
+			</ul>
+		<li>In the <strong>Output Volume Name</strong> field accept the default value or clear the field and type in a new name.</li>
+		<li>Click <strong>Run</strong>.</li>
+	</ol>
+	<p>GeoCraft creates a new volume that is flooded with the velocity parameters set during this task. You can use a 
+	GeoCraft viewer to review the results of the calculation.</p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

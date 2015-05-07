@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Using a Scale Factor to Rescale Seismic Data for Conversion in the MVXP Algorithm</title>
+<meta name="Keywords" content="scale factor, MVXP, data conversion" />
+</head>
+<body>
+<h1>Using a Scale Factor to Rescale Seismic Data for Conversion in the MVXP Algorithm</h1>
+	
+	<p>MVXP reduces seismic traces to an average median value of 1, so the 
+	algorithm could be used to rescale seismic data from 32-bit to 8- or 16-bit data,
+	which would save disk space yet maintain true amplitudes.</p>
+	
+	<p>You must set the Scale Factor larger than <strong>1</strong> to rescale 
+	the MVXP output. If the Scale Factor is less than <strong>1</strong>, integer data will get clipped. 
+	Use the following Scale Factor values for data conversion:</p>
+			<ul>
+				<li>To <strong>convert 32-bit float data into 8-bit data</strong>, enter <strong>5.08</strong> in the <strong>Scale Factor</strong> field. 
+					This clips the data at 25 times the median (5.08 is 127/25) so that the output ranges from -127 to 128.</li>
+				<li>To convert <strong>32-bit float data into 16-bit data</strong>,	enter <strong>1310.68</strong> in the <strong>Scale Factor</strong> field. 
+					This clips the data at 25 times the median (1310.68 is 32767/25).</li>
+			</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

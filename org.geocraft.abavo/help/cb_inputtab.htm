@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Loading ABAVO Input Data</title>
+<meta name="Keywords" content="Class Volume, ABAVO, ABAVO class volume, ABAVO class background, data input, input data, data input tab, 
+input data tab, pre-processing data" />
+</head>
+<body>
+<h1>Loading ABAVO Input Data</h1>
+		<p>You must select the 2D or 3D input data and pre-processing elements before you can calculate an ABAVO 
+		output series. Intercept/gradient data is required if you want to run an amplitude with variation offset 
+		(AVO) analysis. You can create intercept/gradient data, from input near and far stacks.</p>
+	<ol>
+		<li>Load volume data into GeoCraft.</li> 
+		<li><em>Optional</em> Load wavelet and horizon data into GeoCraft, if you want to use wavelets and horizons 
+		in your processing options.</li> 
+		<li>From the main menu, click <strong>Perspectives</strong> and select either <strong>ABAVO 2D</strong> or 
+		<strong>ABAVO 3D</strong></li>
+		<li>In the <em>Input Data</em> section, select a <strong>Data Mode</strong>:</li>
+			<ul>
+				<li><strong>All Data</strong>: runs the calculation based on all data in the data set.</li>
+				<li><strong>Peaks and Troughs</strong>: runs the calculation based on only the peaks and 
+				troughs in the data set.</li>
+			</ul>
+		<li>Select <strong>Volume A</strong>.</li>
+		<li>Select <strong>Volume B</strong></li>
+		<li><em>Optional; only select if you want to convert near/far data into an intercept/gradient data 
+		format.</em> Select the <strong>Calculate Pseudo Intercept and Gradient from Near/Far</strong> check 
+		box if your input is a near offset and a far-offset stacked section.</li>
+		<li>Type a value in the <strong>Volume A Scalar</strong> field, or accept the value in the field.</li>
+		<li>Type a value in the <strong>Intercept Scalar</strong> field, or accept the value in the field. You 
+		can type a value in this field if you are converting near/far data into intercept/gradient data.</li>
+		<li><em>Optional; if you want to use a wavelet to filter Volume A data in your calculation,</em> then 
+		Select the <strong>Apply Wavelet Filter?</strong> check box.</li>
+		<li><em>Optional</em> Select a <strong>Wavelet Filter</strong> for Volume A.</li>
+		<li>Type a value in the <strong>Volume B Scalar</strong> field, or accept the value in the field.</li>
+		<li>Type a value in the <strong>Gradient Scalar</strong> field, or accept the value in the field. You 
+		can type a value in this field if you are converting near/far data into intercept/gradient data.</li>
+		<li><em>Optional; if you want to use a wavelet to filter Volume B data in your calculation,</em> then 
+		Select the <strong>Apply Wavelet Filter?</strong> check box.</li>
+		<li><em>Optional</em> Select a <strong>Wavelet Filter</strong> for Volume B.</li>
+		<li>In the <strong>A/B Alignment Options</strong> area, you select pre-processing options. To change 
+		any of the values in the <strong>Auto-Align B to A</strong> field, select the <strong>Auto-Align B to 
+		A</strong> check box and type a new value in the following fields:</li>
+			<ul>
+				<li><strong>Correlation Window</strong>-size of the correlation window to use for alignment; 
+				units are in milliseconds</li>
+				<li><strong>Maximum Shift</strong>-maximum trace shift; units are in milliseconds</li>
+				<li><strong>Correlation Threshold</strong>-minimum required correlation to use for alignment; 
+				the threshold limits are from 0 to 1</li>
+				<li><strong>Smoothing Filter Length</strong>-size of the smoothing filter to use for alignment; 
+				units are in milliseconds</li>
+				<li><strong>Near Amplitude (Ampl.) Threshold</strong>-near amplitude threshold to use for 
+				alignment; this unit is a percentage</li>
+				<li><strong>Amplitude (Ampl.) Threshold Window</strong>-amplitude threshold limit to use 
+				for alignment; units are in milliseconds</li>
+			</ul>
+	</ol>
+		<p>Next you must <a href="cb_procbounds.htm">enter parameters in the <strong>Processing Bounds</strong> 
+		panel</a>.</p>
+		<h3>Related Topics</h3>
+			<ul>
+				<li><a href="abavo_tasklist.htm">Performing ABAVO Tasks</a></li>
+				<li><a href="abavo_trouble.htm">Troubleshooting ABAVO Problems</a></li>
+				<li><a href="abavo_intro.htm">Introduction to ABAVO</a></li>
+			</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/' debug='true'>
+  <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+    <layout class="org.apache.log4j.PatternLayout">
+
+      <!-- this version is faster and should be used when we deploy -->
+      <!--param name="ConversionPattern" value="%d %-5p [%c] %m%n"/-->
+
+      <!-- this version is slower because it logs the class name etc. -->
+      <param name="ConversionPattern" value="%d %-5p [%c] %m [%l]%n"/>
+
+    </layout>
+  </appender>
+
+  <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+    <param name="File" value="${user.home}/geocraft/geocraft.log"/>
+    <param name="Append" value="true"/>
+    <param name="MaxFileSize" value="5MB"/>
+    <param name="MaxBackupIndex" value="10"/>
+    <param name="Threshold" value="all"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value=" %d{dd-MM-yyyy HH:mm:ss} %-5p [%c] %m%n"/>
+    </layout>
+  </appender>
+  
+  <appender name="ECLIPSE" class="org.geocraft.core.service.logging.log4j.EclipseLogAppender">
+    <param name="Threshold" value="all"/>
+  </appender>
+
+  <!--appender name="LF5" class="org.apache.log4j.lf5.LF5Appender">
+     <param name="MaxNumberOfRecords" value="1000"/>
+     <param name="DefaultMonitorWidth" value="700"/>
+     <param name="DefaultMonitorHeight" value="400"/>
+  </appender-->
+
+  <root>
+    <priority value="all" />
+<!--    <appender-ref ref="CONSOLE" />-->
+    <appender-ref ref="FILE" />
+    <appender-ref ref="ECLIPSE" />
+    <!--appender-ref ref="LF5"/-->
+  </root>
+</log4j:configuration>
+

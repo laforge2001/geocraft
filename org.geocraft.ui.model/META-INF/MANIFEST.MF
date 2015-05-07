@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Model UI Plug-in
+Bundle-SymbolicName: org.geocraft.ui.model; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.geocraft.core;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: ConocoPhillips
+Export-Package: org.geocraft.internal.ui.model;x-internal:=true,
+ org.geocraft.ui.model,
+ org.geocraft.ui.model.preferences

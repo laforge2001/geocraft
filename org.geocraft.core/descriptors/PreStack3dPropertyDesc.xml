@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Define the properties for a data file entity and their categories. -->
+<entity-properties entity="PreStack3d">
+	<!-- There are no properties at the top of the property tree -->
+    <category name="" />
+	
+    <category name="General">
+        <property id="ProjectName" display="Project"/>
+        <property id="Survey" display="Seismic Survey"/>
+        <property id="Comment" display="Comments"/>
+        <property id="LastModifiedDate" display="Modification Date"/>
+        <property id="isDirty" display="Dirty?"/>
+    </category>
+    
+    <category name="Inline">
+	    <property id="NumInlines" display="Inline Count"/>
+        <property id="InlineRange" display="Inline Range"/>
+    </category>
+    
+    <category name="Crossline">
+	    <property id="NumXlines" display="Xline Count"/>
+        <property id="XlineRange" display="Xline Range"/>
+    </category>
+    
+    <category name="Offsets">
+	    <property id="NumOffsets" display="Offset Count"/>
+		<property id="OffsetRange" display="Offset Range"/>
+    </category>
+    
+    <category name="Z">
+        <property id="NumSamplesPerTrace" display="Sample Count"/>
+        <property id="ZRange" display="Z Range"/>
+        <property id="ZUnit" display="Z Unit"/>
+        <property id="ZDomain" display="Z Domain"/>
+    </category>
+    
+    <category name="Data">
+        <property id="DataUnit" display="Data Unit"/>
+        <property id="DataDomain" display="Data domain"/>
+    </category>
+    
+    <category name="Elevation">
+        <property id="ElevationDatum" display="Elev. Datum"/>
+        <property id="ElevationReference" display="Elev. Reference"/>
+    </category>
+	
+	<!-- Excluded displayable properties -->
+	<exclude>
+		<property id="EntityType" display="Entity Type" />
+		<property id="DisplayName" display="Display Name" />
+	</exclude>
+	
+</entity-properties>

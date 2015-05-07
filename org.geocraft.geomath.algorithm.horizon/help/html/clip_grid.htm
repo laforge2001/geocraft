@@ -1,0 +1,57 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy for Linux (vers 1 September 2005), see www.w3.org" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Clip Horizon</title>
+<meta name="Keywords" content="clip to minimum and maximum, horizon clipping, clipping a horizon, clipping a horizon
+to a specific value, clipping to a threshold, replacing values with nulls" />
+</head>
+<body>
+<h1>Clip Horizon</h1>
+	<p>The Clip Horizon algorithm can be used to limit the data (ie. usually time or depth) range of a horizon.</p>
+<h2>Overview: Clip a Horizon Algorithm</h2>
+	<p>When you use this algorithm, you create a new horizon by clipping values that are within the 
+	range of an existing horizon. Any values in the original horizon that are <em>outside</em> 
+	the range of values for the clipped horizon are changed to either nulls, the threshold values, 
+	or a user specified value.</p>
+	<p>This algorithm performs the clip function on 2D and 3D horizons.</p>
+	<p>The following rules apply with the <strong>Clip to Threshold</strong> option:</p>
+		<ul>
+			<li>If a value is <em>less than the minimum</em>, the value is reset to the specified 
+			minimum threshold, to another value, or set to null.</li>
+			<li>If a value is <em>greater than the maximum</em>, the value is reset to the specified 
+			maximum threshold, to another value, or set to null.</li>
+		</ul>
+	<p>If the <strong>Clip to a value</strong> option is selected, these rules also apply but values are 
+	reset to the user specified <strong>Set Value</strong> instead of the min or max threshold.</p> 
+<h2>Clipping a Horizon</h2>
+		<ol>
+			<li>Load <a href="PLUGINS_ROOT/org.geocraft.core/html/tasks/WorkingWData/data_loading.htm"> 2D or 3D horizon data</a> into GeoCraft.</li>
+			<li>Select the <strong>Type of Horizon</strong> (2D or 3D) that you want to clip.</li>
+			<li>Select a <strong>2D/3D horizon</strong>.</li>
+			<li>(<em>Optional</em>) Select the <strong>Use Area of Interest?</strong> check box.</li>
+			<li>(<em>Optional; only perform this step if you selected the check box in the prior step.</em>) Select an <strong>Area of Interest</strong>.</li>
+			<li>Type the minimum value to which the horizon should be clipped in the <strong>Clip Min</strong> field.</li>
+			<li>Type the maximum value to which the horizon should be clipped in the <strong>Clip Max</strong> field.</li>
+			<li>Select a <strong>Clip Type</strong>:</li>
+				<ul>
+					<li><strong>Clip to threshold</strong> forces out-of-range data to the Clip Min and Clip Max values</li>
+					<li><strong>Clip to a value</strong> forces out-of-range (high and low) data to a value that you set</li>
+					<li><strong>Replace with nulls</strong> applies null values to out-of-range data</li>
+				</ul>
+			<li><em>Optional; you will only perform this step if you selected the <strong>Clip to a value</strong> clip type.</em> 
+			Type in the <strong>Set Value</strong>.</li>
+			<li>Accept the <strong>Output Grid Name</strong>, or type in a new one. Make sure that 
+			the name complies with <a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> GeoCraft file-naming requirements</a>.</li>
+			<li>Click <strong>Run</strong>.</li>
+			<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+		</ol>
+	<p></p>
+	<h3>Related Topics</h3>
+		<li><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Editing Grid Values in a Spreadsheet View</a></li>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

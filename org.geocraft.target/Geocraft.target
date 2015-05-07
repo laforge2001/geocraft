@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="Eclipse Platform SDK 3.5.1" sequenceNumber="1">
+<locations>
+<location path="${workspace_loc}/org.geocraft.target/org.apache.commons.jexl" type="Directory"/>
+<location path="${workspace_loc}/org.geocraft.target/org.apache.commons.discovery" type="Directory"/>
+<location path="${workspace_loc}/org.geocraft.target/org.apache.commons.collections" type="Directory"/>
+<location path="${workspace_loc}/org.geocraft.target/org.apache.commons.beanutils" type="Directory"/>
+<location path="${workspace_loc}/org.geocraft.target/com.rcpquickstart.bundletestcollector" type="Directory"/>
+<location path="${workspace_loc}/org.geocraft.target/jtk.edu.mines.boole" type="Directory"/>
+<location path="${workspace_loc}/org.geocraft.target/EclipseSDK3.5.1" type="Directory"/>
+</locations>
+<environment>
+<os>linux</os>
+<ws>gtk</ws>
+<arch>x86_64</arch>
+<nl>en_US</nl>
+</environment>
+</target>

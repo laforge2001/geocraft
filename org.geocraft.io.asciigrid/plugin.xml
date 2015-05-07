@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.geocraft.core.io.datastoreAccessor">
+      <datastoreAccessor
+            category="Grids"
+            name="Ascii Horizon"
+            utilClass="org.geocraft.io.asciigrid.AsciiHorizonAccessorUtil">
+         <mapper
+               class="org.geocraft.io.asciigrid.AsciiHorizonMapper"
+               supportedEntityClassName="Grid3d">
+         </mapper>
+         <input
+               mapperModel="org.geocraft.io.asciigrid.AsciiHorizonMapperModel"
+               selector="org.geocraft.io.asciigrid.AsciiFileSelector"
+               task="org.geocraft.io.asciigrid.AsciiHorizonLoadTask">
+         </input>
+         <output
+               mapperModel="org.geocraft.io.asciigrid.AsciiHorizonMapperModel"
+               selector="org.geocraft.io.asciigrid.AsciiHorizonLocationSelector"
+               task="org.geocraft.io.asciigrid.AsciiHorizonExportTask">
+         </output>
+      </datastoreAccessor>
+   </extension>
+   <extension
+         point="org.geocraft.ui.io.datastoreAccessorUI">
+      <datastoreAccessorUI
+            datastoreAccessorId="Ascii Horizon"
+            inputModelView="org.geocraft.io.asciigrid.AsciiHorizonLoadView"
+            outputModelView="org.geocraft.io.asciigrid.AsciiHorizonExportView">
+      </datastoreAccessorUI>
+   </extension>
+
+</plugin>

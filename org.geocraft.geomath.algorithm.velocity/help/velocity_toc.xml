@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Velocity Algorithms" link_to="../org.geocraft.geomath.help/toc.xml#velocityAlgorithms">
+   <link toc="help/previewalgs_toc.xml"/>
+   <topic href="help/horizoncascade.htm" label="Horizon Cascade (d-&gt;t-&gt;d)">
+   </topic>
+   <topic href="help/horizonstretch.html" label="Horizon Stretch">
+   </topic>
+   <topic href="help/velocityflood.html" label="Flooding Salt Velocity Process Overview">
+      <topic href="help/vf_datareq.htm" label="Velocity Flooding Data Requirements">
+      </topic>
+      <topic href="help/velocityflood_1ststeps.html" label="Flooding Salt Velocity in GeoCraft: Starting the Procedure">
+      </topic>
+      <topic href="help/velflood_constant.htm" label="Flooding Salt Velocity with a Constant Flood Type">
+      </topic>
+      <topic href="help/velflood_gradient.htm" label="Flooding Salt Velocity with a Gradient Flood Type">
+      </topic>
+      <topic href="help/velflood_dataset.htm" label="Flooding Salt Velocity with a Dataset Flood Type">
+      </topic>
+   </topic>
+   <topic href="help/floodpreview.htm" label="Flooding Salt Velocity Preview Algorithms">
+      <topic href="help/velocityfloodprev.htm" label="Velocity Flood Preview">
+      </topic>
+      <topic href="help/multivelocityfloodingprev.htm" label="Multi-Flooding Velocity Preview">
+      </topic>
+   </topic>
+   <topic href="../org.geocraft.geomath.algorithm.horizon/help/html/velocitymodelchecker.htm" label="Velocity Model Checker">
+   </topic>
+   <topic href="help/velocitysmoothing.htm" label="Velocity Smoothing">
+   </topic>
+   <topic href="help/volumecascade.htm" label="Volume Cascade (d-&gt;t-&gt;d)">
+   </topic>
+   <topic href="help/volumestretch.html" label="Volume Stretch">
+   </topic>
+</toc>

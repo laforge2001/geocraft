@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="help/html/contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/html/volume_toc.xml"
+            primary="false">
+      </toc>
+      <toc
+            file="help/html/interpret_toc.xml"
+            primary="false">
+      </toc>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Interpretation"
+            class="org.geocraft.geomath.algorithm.volume.integration.TraceIntegration3D"
+            helpId="org.geocraft.geomath.algorithm.volume.traceint"
+            name="Trace Integration 3D"
+            tooltip="Performs a detrended running sum on a 3D volume to render a &apos;more geological&apos; appearance"
+            usageName="TRACEINT"
+            version="production"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Interpretation"
+            class="org.geocraft.geomath.algorithm.volume.integration.TraceIntegration2D"
+            helpId="org.geocraft.geomath.algorithm.volume.traceint"
+            name="Trace Integration 2D"
+            tooltip="Performs a detrended running sum on a 2D volume to render a &apos;more geological&apos; appearance"
+            usageName="TRACEINT"
+            version="production"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Volume"
+            class="org.geocraft.geomath.algorithm.volume.mvxp.MVXP3D"
+            helpId="org.geocraft.geomath.algorithm.volume.mvxp"
+            name="MVXP 3D"
+            tooltip="MVXP median value trace normalization for 3D volumes"
+            usageName="MVXP3D"
+            version="production"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Volume"
+            class="org.geocraft.geomath.algorithm.volume.mvxp.MVXP2D"
+            helpId="org.geocraft.geomath.algorithm.volume.mvxp"
+            name="MVXP 2D"
+            tooltip="MVXP median value trace normalization for 2D volumes"
+            usageName="MVXP2D"
+            version="production"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.eclipse.help.index">
+      <index
+            file="help/html/index.xml">
+      </index>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Volume"
+            class="org.geocraft.geomath.algorithm.volume.volumecalc.VolumeCalc"
+            helpId="org.geocraft.geomath.algorithm.volume.volumecalc"
+            name="Volume Calc"
+            tooltip="Apply linear transform (Vout = b1 * Vin + b2)"
+            version="production"
+            visible="true">
+      </algorithm>
+   </extension>
+
+</plugin>

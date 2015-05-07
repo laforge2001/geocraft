@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.geocraft.core.io.datastoreAccessor">
+      <datastoreAccessor
+            category="Seismic"
+            name="SEG-Y 3D Volume"
+            utilClass="org.geocraft.io.segy.VolumeAccessorUtil">
+         <mapper
+               class="org.geocraft.io.segy.PostStack3dMapper"
+               supportedEntityClassName="PostStack3d">
+         </mapper>
+         <mapper
+               class="org.geocraft.io.segy.PreStack3dMapper"
+               supportedEntityClassName="PreStack3d">
+         </mapper>
+         <input
+               mapperModel="org.geocraft.io.segy.Volume3dMapperModel"
+               selector="org.geocraft.io.segy.Volume3dFileSelector"
+               task="org.geocraft.io.segy.LoadVolume3dTask">
+         </input>
+         <output
+               mapperModel="org.geocraft.io.segy.Volume3dMapperModel"
+               selector="org.geocraft.io.segy.VolumeLocationSelector"
+               task="org.geocraft.io.segy.ExportVolume3dTask">
+         </output>
+      </datastoreAccessor>
+   </extension>
+   <extension
+         point="org.geocraft.ui.io.datastoreAccessorUI">
+      <datastoreAccessorUI
+            datastoreAccessorId="SEG-Y 3D Volume"
+            inputModelView="org.geocraft.io.segy.LoadVolume3dView"
+            outputModelView="org.geocraft.io.segy.ExportVolume3dView">
+      </datastoreAccessorUI>
+   </extension>
+   <extension
+         point="org.geocraft.core.io.datastoreAccessor">
+      <datastoreAccessor
+            category="Seismic"
+            name="SEG-Y 2D Volume"
+            utilClass="org.geocraft.io.segy.VolumeAccessorUtil">
+         <mapper
+               class="org.geocraft.io.segy.PostStack2dLineMapper"
+               supportedEntityClassName="PostStack2dLine">
+         </mapper>
+         <input
+               mapperModel="org.geocraft.io.segy.Volume2dMapperModel"
+               selector="org.geocraft.io.segy.Volume2dFileSelector"
+               task="org.geocraft.io.segy.LoadVolume2dTask">
+         </input>
+      </datastoreAccessor>
+   </extension>
+   <extension
+         point="org.geocraft.ui.io.datastoreAccessorUI">
+      <datastoreAccessorUI
+            datastoreAccessorId="SEG-Y 2D Volume"
+            inputModelView="org.geocraft.io.segy.LoadVolume2dView">
+      </datastoreAccessorUI>
+   </extension>
+
+</plugin>

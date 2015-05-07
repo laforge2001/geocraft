@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<index version="1.0">
+	<entry keyword="Create a 3D Area of Interest">
+		<topic href="help/areaofinterest.htm" />
+	</entry>
+	<entry keyword="Horizon to Area of Interest">
+		<topic href="help/horizon2aoi.htm" />
+	</entry>
+	<entry keyword="Create a 2D Area of Interest">
+		<topic href="help/aoi_2.htm" />
+	</entry>
+	<entry keyword="ASCII Horizon Import">
+		<topic href="help/asciihorizonimport.htm" />
+	</entry>
+</index>

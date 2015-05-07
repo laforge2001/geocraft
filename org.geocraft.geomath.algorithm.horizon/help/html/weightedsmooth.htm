@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Weighted Smooth</title>
+<meta name="Keywords" content="weighted smooth, weighted average smoothing, smoothing an interpolated horizon, filter higher frequencies out of 
+a grid's values, straightening a shallow reflection, removing variations from data" />
+</head>
+<body>
+<h1>Weighted Smooth</h1>
+	<p>Use this algorithm to smooth a horizon.</p>
+	<h2>Overview of the Weighted Smoothing Algorithm</h2>
+		<p>Typically, Weighted Smoothing is used to smooth interpolated horizons. Smoothing averages adjacent values
+		in the horizon according to a mathematical formula, filtering out high frequencies in the data set. Nulls 
+		within the horizon are not smoothed. With the Weighted Smooth algorithm a second horizon may be used as a 
+		mask, so that GeoCraft smoothes only the masked area.</p>
+
+		<p>GeoCraft <em>only</em> applies the <strong>Edge Weight</strong> and <strong>Blending Horizon</strong> 
+		fields to the mask horizon if the mask horizon contains a depopulated grid. Use <strong>Edge Weight</strong> 
+		and <strong>Apply blending horizon</strong> fields as follows:</p>
+			<ul>
+				<li><strong>Edge Weight</strong> should be in the 0-1 range but it has a very minor effect</li>
+				<li>leave the <strong>Apply blending horizon</strong> check box blank to preserve grid lines in the mask horizon</li>
+				<li>select the <strong>Apply blending horizon</strong> check box to smooth the grid lines in the mask horizon</li>
+			</ul>
+	<h2>Smoothing a Horizon</h2>
+		<ol>
+			<li>Load horizon data into GeoCraft.</li>
+			<li>Select a <strong>Horizon</strong>.</li>
+			<li><em>Optional; only perform this step if you are using a mask horizon in the calculation.</em> Select the <strong>Don't Filter 
+			Entire Horizon?</strong> check box.</li>
+			<li><em>Optional</em> Select a <strong>Mask</strong> horizon.</li>
+			<li><em>Optional</em> Type in an <strong>Edge Weight</strong> value. The central value of the filter is 1, and the end points of the 
+			filter are the edge weight value. GeoCraft uses the Edge Weight as a taper so that the points further away from the point being smoothed
+			are given less weight in the calculation.</li>
+			<li><em>Optional</em> Select the <strong>Apply blending horizon</strong> check box. <em>Only</em> select this check box if you applied
+			a mask horizon in the calculation, and the mask has a depopulated grid.</li>
+			<li>Type in a value for the <strong>Filter width in columns</strong> field.</li>
+			<li>Type in a value for the <strong>Filter width in rows</strong> field.</li>
+			<li>Accept the <strong>Name</strong>, or type in a new one. Make sure that the name complies 
+			with <a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> GeoCraft file-naming requirements</a>.</li>
+			<li><em>Optional</em> Type in additional <strong>Comments</strong>. This text displays in the Properties view for the entity
+			when the entity is selected in the repository.</li>
+			<li>Click <strong>Run</strong>.</li>
+			<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+		</ol>
+	<p></p>
+	<h3>Related Topics</h3>
+		<li><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Editing Grid Values in a Spreadsheet View</a></li>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

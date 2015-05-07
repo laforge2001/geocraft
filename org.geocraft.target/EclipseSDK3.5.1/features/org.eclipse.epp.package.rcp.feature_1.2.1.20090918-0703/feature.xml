@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- contextQualifierLength=13 -->
+<feature
+      id="org.eclipse.epp.package.rcp.feature"
+      label="EPP RCP Feature"
+      version="1.2.1.20090918-0703"
+      provider-name="Eclipse.org - EPP"
+      plugin="org.eclipse.epp.package.rcp">
+
+   <description>
+      A complete set of tools for developers who want to create Eclipse plug-ins or Rich Client Applications. It includes a complete SDK, developer tools and source code, plus Mylyn, an XML editor and the Eclipse Communication Framework.
+   </description>
+
+   <license url="license.html">
+      %license
+   </license>
+
+   <url>
+      <discovery label="Galileo" url="http://download.eclipse.org/releases/galileo/"/>
+      <discovery label="Eclipse Platform 3.5" url="http://download.eclipse.org/eclipse/updates/3.5"/>
+   </url>
+
+   <includes
+         id="org.eclipse.platform"
+         version="3.5.1.R35x_v20090910-9gEeG1_FthkNDSP2odXdThaOu9GFDPn83DGB7"
+         search-location="both"/>
+
+   <requires>
+      <import feature="org.eclipse.cvs" version="1.1.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.equinox.p2.user.ui" version="1.1.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.help" version="1.1.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.jdt" version="3.5.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.pde" version="3.5.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.platform" version="3.5.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.rcp" version="3.5.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.wst.xml_ui.feature"/>
+      <import feature="org.eclipse.mylyn.ide_feature"/>
+      <import feature="org.eclipse.mylyn.java_feature"/>
+      <import feature="org.eclipse.mylyn.pde_feature"/>
+      <import feature="org.eclipse.mylyn.bugzilla_feature"/>
+      <import feature="org.eclipse.mylyn.context_feature"/>
+      <import feature="org.eclipse.mylyn_feature"/>
+      <import feature="org.eclipse.mylyn.wikitext_feature"/>
+      <import feature="org.eclipse.mylyn.sdk_feature"/>
+      <import feature="org.eclipse.epp.usagedata.feature"/>
+      <import feature="org.eclipse.platform.source"/>
+      <import feature="org.eclipse.cvs.source"/>
+      <import feature="org.eclipse.jdt.source"/>
+      <import feature="org.eclipse.pde.source"/>
+      <import feature="org.eclipse.help.source"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.epp.package.rcp"
+         download-size="0"
+         install-size="0"
+         version="1.2.1.20090812-1036"/>
+
+</feature>

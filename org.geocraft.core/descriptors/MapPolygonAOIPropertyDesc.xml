@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Define the properties for a data file entity and their categories. -->
+<entity-properties entity="MapPolygonAOI">
+	<!-- There are no properties at the top of the property tree -->
+    <category name="" />
+	
+    <category name="General">
+        <property id="Datastore" display="Datastore"/>
+        <property id="ProjectName" display="Project"/>
+        <property id="StorageDirectory" display="Storage Directory"/>
+        <property id="Comment" display="Comments"/>
+        <property id="LastModifiedDate" display="Modification date"/>
+        <property id="isDirty" display="Dirty?"/>
+        <property id="ZRange" display="Z Range"/>
+    </category>
+	
+	<!-- Excluded displayable properties -->
+	<exclude>
+		<property id="EntityType" display="Entity type" />
+		<property id="DisplayName" display="Display name" />
+	</exclude>
+
+</entity-properties>

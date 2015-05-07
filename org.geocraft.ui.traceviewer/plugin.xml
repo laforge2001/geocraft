@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            category="org.geocraft.ui.viewer.category"
+            class="org.geocraft.ui.traceviewer.TraceViewPart"
+            icon="icons/sectionview-16.png"
+            id="org.geocraft.ui.traceviewer.TraceViewPart"
+            name="Trace View"
+            restorable="true">
+      </view>
+   </extension>
+
+</plugin>

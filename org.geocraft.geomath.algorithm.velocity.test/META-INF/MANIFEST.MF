@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test Fragment
+Bundle-SymbolicName: org.geocraft.geomath.algorithm.velocity.test
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: org.geocraft.geomath.algorithm.velocity;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit,
+ org.geocraft.geomath.algorithm.util;bundle-version="1.0.0"
+Export-Package: org.geocraft.geomath.algorithm.velocity,
+ org.geocraft.geomath.algorithm.velocity.horizonstretch

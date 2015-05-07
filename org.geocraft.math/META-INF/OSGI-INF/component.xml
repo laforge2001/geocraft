@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<component name="regressionMethodService" immediate="true">
+	<implementation class="org.geocraft.internal.math.regression.RegressionMethodService"/>
+ <service>
+    <provide interface="org.geocraft.math.regression.IRegressionMethodService"/>
+ </service>
+</component>

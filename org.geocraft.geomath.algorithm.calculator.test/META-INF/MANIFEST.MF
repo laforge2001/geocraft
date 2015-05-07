@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Calculator Algorithm Unit Test
+Bundle-SymbolicName: org.geocraft.geomath.algorithm.calculator.test
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: org.geocraft.geomath.algorithm.calculator;bundle-version="1.0.0"
+Require-Bundle: org.junit;bundle-version="3.8.2"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.geocraft.geomath.algorithm.calculator

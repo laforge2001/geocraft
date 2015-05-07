@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="GeoCraft" topic="html/gettingstarted/intro_gc.htm">
+   <topic href="html/gettingstarted/intro_gc.htm" label="Introduction to GeoCraft">
+   </topic>
+   <topic href="html/gettingstarted/gc_beforeusing.htm" label="Before You Use GeoCraft">
+   </topic>
+   <topic href="html/concepts/gc_concepts.htm" label="GeoCraft Concepts - Sessions">
+      <topic href="html/concepts/gc_sessions.htm" label="GeoCraft Sessions">
+         <topic href="html/concepts/gc_svsessions.htm" label="Saving a GeoCraft Session">
+         </topic>
+         <topic href="html/concepts/gc_svsessionsbatch.htm" label="Saving a GeoCraft Session in Batch Mode">
+         </topic>
+         <topic href="html/concepts/gc_restsessions.htm" label="Switching GeoCraft Sessions">
+         </topic>
+         <topic href="html/concepts/gc_files_sessions.htm" label="GeoCraft Session Files">
+         </topic>
+         <topic href="html/concepts/workspace.htm" label="The GeoCraft Workspace">
+         </topic>
+         <topic href="html/concepts/workspace_multi.htm" label="Creating Multiple GeoCraft Sessions">
+         </topic>
+         <topic href="html/concepts/workspace_datamismatch.htm" label="GeoCraft Sessions: Loading Data that Does Not Match Unit Preferences">
+         </topic>
+      </topic>
+      <topic href="html/concepts/gcfund_datapersist_arch.htm" label="Fundamentals of the GeoCraft Data Store Architecture">
+      </topic>
+      <topic href="html/concepts/repository.htm" label="GeoCraft Data Repository">
+      </topic>
+      <topic href="html/concepts/gcfund_multi_inst_gc.htm" label="Running Multiple Instances of GeoCraft at Once">
+      </topic>
+      <topic href="html/concepts/gcfund_ed_3rdptysw.htm" label="Editing Data Sets in Third-party Software While GeoCraft is Processing the Data">
+      </topic>
+      <topic href="html/concepts/gc_uom_concept.htm" label="Specifying Unit Preferences">
+      </topic>
+   </topic>
+   <topic href="html/reference/gc_tshoot.htm" label="GeoCraft Troubleshooting">
+   </topic>
+   <topic href="html/UI_Elements/gc_ui_elements.htm" label="User Interface Elements">
+      <topic href="html/UI_Elements/gc_ui_algorithms.htm" label="Algorithms">
+      </topic>
+      <topic href="html/UI_Elements/errorlog/gc_ui_errlog.htm" label="Error Log">
+         <topic href="html/UI_Elements/errorlog/gc_ui_erlg_grp.htm" label="Grouping Events by Type in the GeoCraft Error Log">
+         </topic>
+         <topic href="html/UI_Elements/errorlog/gc_ui_erlg_filt.htm" label="Filtering Events in the GeoCraft Error Log View">
+         </topic>
+      </topic>
+      <topic href="html/UI_Elements/gc_perspectives.htm" label="Perspectives">
+      </topic>
+      <topic href="html/UI_Elements/gc_ui_properties.htm" label="Properties View">
+      </topic>
+      <topic href="html/concepts/repository.htm" label="Repository View">
+      </topic>
+   </topic>
+   <topic label="GeoCraft Viewers">
+      <topic href="../org.geocraft.ui.volumeviewer/help/3dv_intro.htm" label="3D Viewer">
+      </topic>
+      <topic href="../org.geocraft.ui.chartviewer/help/histogram.htm" label="Histogram Viewer">
+      </topic>
+      <topic href="../org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm" label="Map Viewer">
+      </topic>
+      <topic href="../org.geocraft.ui.chartviewer/help/scatter.htm" label="Scatter Plot Viewer">
+      </topic>
+      <topic href="../org.geocraft.ui.sectionviewer/help/html/gc_vwr_section.htm" label="Section Viewer">
+      </topic>
+      <topic href="../org.geocraft.ui.tableviewer/help/tableplot.htm" label="Table Viewer">
+      </topic>
+      <topic href="../org.geocraft.ui.waveletviewer/help/html/gc_vwr_wv_vwng.htm" label="Wavelet Viewer">
+      </topic>
+      <anchor id="GCProprietaryViewer"/>
+   </topic>
+   <topic href="html/tasks/gc_tasks.htm" label="Performing Tasks in GeoCraft">
+      <topic href="html/tasks/UserPreferences/gc_setprefs.htm" label="Setting User Preferences">
+         <topic href="html/tasks/UserPreferences/gc_setprefs_scope.htm" label="Setting the Scope of GeoCraft Preferences">
+         </topic>
+         <topic href="html/tasks/UserPreferences/3dv_preferences.htm" label="Setting 3D Viewer Preferences">
+            <topic href="html/tasks/UserPreferences/3dv_preferences_horiz.htm" label="Setting Horizon Preferences">
+            </topic>
+            <topic href="html/tasks/UserPreferences/3dv_preferences_horiz_int.htm" label="Setting Horizon Intersection Preferences">
+            </topic>
+            <topic href="html/tasks/UserPreferences/3dv_preferences_well.htm" label="Setting Well Preferences">
+            </topic>
+         </topic>
+         <topic href="html/tasks/UserPreferences/gcpref_default.htm" label="Restoring Default GeoCraft Preferences">
+         </topic>
+         <topic href="html/tasks/UserPreferences/crossplotpreferences.htm" label="Setting ABAVO Crossplot Preferences">
+            <topic href="html/tasks/UserPreferences/gc_setprefs_abdata.htm" label="Setting Data Series Preferences">
+            </topic>
+            <topic href="html/tasks/UserPreferences/gc_setprefs_abellipse.htm" label="Setting Ellipses Preferences">
+            </topic>
+         </topic>
+         <topic href="html/tasks/UserPreferences/persp_pref.htm" label="Setting Perspectives Preferences">
+         </topic>
+         <topic href="html/tasks/UserPreferences/plot_prefs.htm" label="Setting Plot Layout Preferences">
+         </topic>
+         <topic href="html/tasks/UserPreferences/unit_prefs.htm" label="Viewing Unit Preference">
+         </topic>
+         <topic href="html/tasks/UserPreferences/waveletplotprefs.htm" label="Setting Wavelet Plot Preferences">
+         </topic>
+      </topic>
+      <topic href="html/tasks/WorkingWData/data_intro.htm" label="Working with Data">
+         <topic href="html/tasks/WorkingWData/data_formats.htm" label="GeoCraft Data Formats">
+         </topic>
+         <topic href="html/tasks/WorkingWData/data_loading.htm" label="Loading Data into GeoCraft">
+         </topic>
+         <topic href="html/tasks/WorkingWData/data_unloading.htm" label="Unloading a Single Data Entity from GeoCraft">
+         </topic>
+         <topic href="html/tasks/WorkingWData/data_resetting.htm" label="Removing All Data from the GeoCraft Repository">
+         </topic>
+         <topic href="html/tasks/WorkingWData/data_export.htm" label="Exporting Data from GeoCraft">
+         </topic>
+         <anchor id="gcdata"/>
+      </topic>
+      <topic href="html/tasks/gc_feedback.html" label="Providing Feedback to the GeoCraft Development Team">
+      </topic>
+      <topic href="html/tasks/gc_savesession.htm" label="Saving a GeoCraft Session">
+      </topic>
+   </topic>
+   <anchor id="GCProprietary"/>
+</toc>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<index version="1.0">
+	<entry keyword="Clip algorithm">
+		<topic href="help/clip_grid.htm" />
+	</entry>
+	<entry keyword="Erase Area">
+		<topic href="help/erase_area.htm" />
+	</entry>
+	<entry keyword="Group Multiples">
+		<topic href="help/groupmultiples.htm" />
+	</entry>
+	<entry keyword="Median Smooth">
+		<topic href="help/mediansmooth.htm" />
+	</entry>
+	<entry keyword="Decimate">
+		<topic href="help/decimate.htm" />
+	</entry>
+	<entry keyword="Linear Interpolation">
+		<topic href="help/InterpolateLinear.htm" />
+	</entry>
+	<entry keyword="Horizon Merge">
+		<topic href="help/HorizonMerge.htm" />
+	</entry>
+	<entry keyword="Extract Area">
+		<topic href="help/ExtractArea.htm" />
+	</entry>
+	<entry keyword="Velocity Model Checker">
+		<topic href="help/velocitymodelchecker.htm" />
+	</entry>
+	<entry keyword="Convert Horizon">
+		<topic href="help/horizon_convert.htm" />
+	</entry>
+	<entry keyword="Extrapolate">
+		<topic href="help/extrapolate.htm" />
+	</entry>
+	<entry keyword="Grid Lines">
+		<topic href="help/gridlines.htm" />
+	</entry>
+	<entry keyword="Weighted Smooth">
+		<topic href="help/weightedsmooth.htm" />
+	</entry>
+	<entry keyword="Tessellate">
+		<topic href="help/tessellate.htm" />
+	</entry>
+	<entry keyword="Kuwahara Filter Algorithm">
+		<topic href="help/hor_filter_kuwahara.htm" />
+	</entry>
+	<entry keyword="Symmetric Nearest Neighbor Algorithm">
+		<topic href="help/hor_filter_snn.htm" />
+	</entry>
+	<entry keyword="Linear Filters Algorithm">
+		<topic href="help/hor_linear_filter.htm" />
+	</entry>
+</index>

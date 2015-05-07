@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Horizon Curvature</title>
+<meta name="Keywords" content="horizon curvature analysis, curvature analysis, structural analysis, stratigraphic analysis, 
+aperture, Gaussian curvature, mean curvature, dip angle, azimuth, maximum curvature, minimum curvature, positive curvature, 
+negative curvature, shape index, dip curvature, strike curvature, contour curvature, curvedness, surface attributes" />
+</head>
+<body>
+<h1>Horizon Curvature</h1>
+	<p>The Horizon Curvature algorithm computes various horizon-based curvature attributes.</p>
+<h2>Overview of the Horizon Curvature Algorithm</h2>
+	<p>Curvature analysis is a set of related - but different - <a href="curv_attrib.htm">surface attributes</a> 
+	that you can compute for a horizon. These attributes are sensitive to subtle morphology changes, and can be useful 
+	interpretation aids. Some interpreters refer to them as "second order derivatives."</p>
+	
+	<p>First order derivatives (such as Dip, Azimuth, and Edge-detect) can return faulty data at extreme 
+	(very high or low) dip points. Azimuth,	for example, is unstable at low dips, and Dip becomes saturated 
+	at high dips. When a surface is steeply dipping, all parts of the surface have high dips and subtle local
+	features are not apparent on dip maps. The "second order" derivatives do not suffer from these types of problems.
+	Thus, second order derivatives often reveal small-scale subtleties more objectively than first order derivatives.</p>
+	
+	When calculated from a surface, such as a seismic horizon, the curvature value depends on the direction in which 
+	the curvature is measured. Positive curvature is associated with concave-down features, and negative curvature is
+	associated with concave-up features. <p>See <a href="curv_attrib.htm">Horizon Curvature Attributes</a> for 
+	details about the attributes offered in GeoCraft.</p>
+	
+	<p>Another important aspect of curvature analysis is aperture. Aperture is the window that determines how much surface data is 
+	used in the calculations. Aperture is often	referred to as <em>wavelength</em>.	Short-wavelength (small aperture) curvature 
+	displays can be contaminated by noise. Longer wavelength (larger aperture) curvature displays tend to be smoother. Different
+	scales of features may be superimposed on an image, so calculating curvature with different apertures may be useful in your analysis.</p>
+	
+<h2>Performing Horizon Curvature Analysis on Data in GeoCraft</h2>
+	<ol>
+		<li>Load horizon (grid) data into GeoCraft.</li>
+		<li>Select a <strong>Horizon</strong>.</li>
+		<li>Assign an <strong><a href="curv_attrib.htm">Attribute</a></strong> parameter.</li>
+		<li>Type in an <strong>Aperture</strong> value.</li>
+		<li>Accept the <strong>Name</strong>, or type in a new one.</li>
+		<li><em>Optional</em> Type text in the <strong>Comments</strong> field. You will see this text in the 
+		<strong>Properties</strong> view when you select the new horizon in the <strong>Repository</strong>.</li>
+		<li>Click <strong>Run</strong>.</li>
+	</ol>
+	<p>GeoCraft runs the calculation, and the resulting horizon populates in the <strong>Repository</strong> under 
+	the <strong>Grids</strong> folder. You may now use the GeoCraft viewing tools to view the results 
+	of the curvature analysis algorithm.</p>
+	
+<h3>Curvature Analysis Example</h3>
+	<p>The image on the left is the original horizon. The image on the right is the maximum curvature 
+	attribute computed with an aperture of 5.</p>
+	<p><img src="curvature.gif" alt="Horizon Before (Left) and After (Right) Curvature Analysis is Performed" /></p>
+	
+<h2>References</h2>
+	<p>The following resources provide more information about curvature analysis:</p>
+		<ul>
+			<li>Hart, B.S. "3-D Seismic Interpretation: a Primer for Geologists" <u>Society for Sedimentery
+			Geology (SEPM) Short Course Notes</u> (2000): 48.</li>
+			<li>Roberts, A. "Curvature Analysis: 'New' Attributes for the Delineation of Faults, 
+			Map Lineaments and Surface Shape." <u>1998 American Association of Petroleum Geologists (AAPG) Annual 
+			Convention Program with Abstracts (CD-ROM)</u> Salt Lake City, UT, May 1998. (1998): 17-28.</li>
+			<li>Roberts, A. . "Curvature Attributes and Their Application to 3D Interpreted 
+			Horizons." <u>First Break</u> 19 (2001): 85-99.</li>
+			<li>Sagan, J.A., and Hart, B.S. "3-D Seismic and Structural Investigation of a 
+			Hydrothermal Dolomite Reservoir in the Trenton-Black River, Saybrook, Ohio." <u>AAPG Bulletin</u> 
+			90 (2006): 1763-1785.</li>
+			<li>Stewart, S.A., and Wynn, T.J. "Mapping Spatial Variation in Rock Properties in Relationship 
+			to Scale-Dependent Structure Using Spectral Curvature" <u>Geology</u> 28 (2000): 691-694.</li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

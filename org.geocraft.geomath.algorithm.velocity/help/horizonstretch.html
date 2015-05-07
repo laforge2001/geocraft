@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Horizon Stretch - Time-Depth Conversion</title>
+<meta name="Keywords" content="stretching a horizon, horizon conversion, converting a horizon, time-to-depth, 
+depth-to-time, horizon stretch, horizon stretching" />
+</head>
+<body>
+<h1>Horizon Stretch - Time-Depth Conversion</h1>
+<p>Horizon Stretch converts horizons from time to depth or from depth to time.</p>
+<h2>Horizon Stretch Overview</h2>
+	<p>Horizon Stretch converts time-based horizons to depth or depth-based horizons to time. 
+	This algorithm uses a velocity volume to perform the conversion, and can convert multiple 
+	horizons at once. The velocity volume used to control stretch can be either a time or a 
+	depth volume, independent of the horizon being converted.</p>
+	<p><strong>Note</strong>:Horizon Stretch interpolates velocity at each node on the horizon grid.</p>
+	<p><strong>Caution</strong>: When loading data, make sure that the unit labels are correct for the 
+	input velocity volume <em>and</em> the input horizons. This is easily done by viewing the volume 
+	along with the horizons and seeing that they are in the same area.</p>
+<h2>Converting Horizons from Time-to-Depth or Depth-to-Time</h2>
+	<ol>
+		<li>Load the input horizons and the velocity volume into GeoCraft.</li>
+		<li>Click the <strong>Add</strong> button next to the <strong>Horizons</strong> field.</li>
+	<p>A <strong>Selection Dialog</strong> displays, listing all of the horizons that you have loaded into GeoCraft.</p>
+		<li>Select the horizons you want to use in the calculation and click <strong>OK</strong>.</li>
+		<li>In the <strong>Horizons</strong> field, select individual horizons and use the <strong>Up</strong> and 
+		<strong>Down</strong> buttons to move the horizons toward the top or bottom of the calculation order. 
+		If you selected a horizon you do not want, highlight the horizon and click <strong>Remove</strong>.</li>
+		<li>(<em>Optional</em>) Select the <strong>Use Area of Interest</strong> check box and select an 
+		<strong>Area of Interest</strong>.</li>
+		<li>Select a <strong>Velocity Volume</strong>.</li>
+		<li>Select a <strong>Conversion Method</strong>:</li>
+			<ul>
+				<li><strong>Cell-based</strong> - vertical velocities are held constant between input values</li>
+				<li><strong>Knee-based</strong> - vertical velocities are linearly interpolated between input values</li>
+			</ul>
+		<li>In the <strong>Output Grid Suffix</strong> field, accept the default or type a new value in the field. This value 
+		gets appended to the end of the original input horizon name when GeoCraft creates the new, converted horizon.</li>
+	<p><strong>Hint</strong>: Consider a label to annotate the output domain. If the input is in time, try "dep", or if the 
+	input is in depth, try "tim".</p>  
+		<li>Click <strong>Run</strong>.</li>
+	</ol>
+	<p>A progress bar is displayed while the conversions run. When the jobs finish, the converted horizons are saved in the 
+	<strong>Repository</strong> view, under the Horizons folder.</p>
+	<p>You may now use the GeoCraft to view the converted horizons.</p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core.help/html/eclipseackstate.xhtml/eclack" />
+	</body>
+</html>

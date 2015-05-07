@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="GeoCraft" id="org.geocraft.abavo.product.product" application="org.geocraft.application" version="1.0.0" useFeatures="true" includeLaunchers="false">
+
+   <configIni use="default">
+      <linux>/org.geocraft.abavo.product/config.ini</linux>
+   </configIni>
+
+   <launcherArgs>
+      <programArgs>-console
+-consoleLog</programArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+   </launcherArgs>
+
+   <windowImages/>
+
+   <splash
+      startupProgressRect="5,275,445,15"
+      startupMessageRect="7,252,445,20"
+      startupForegroundColor="000000" />
+   <launcher name="ABAVO">
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="org.geocraft.feature" version="1.0.0"/>
+      <feature id="org.geocraft.geomath.feature" version="1.0.0"/>
+      <feature id="org.geocraft.abavo.feature" version="1.0.0"/>
+   </features>
+
+
+</product>

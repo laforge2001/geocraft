@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Velocity Model Checker</title>
+<meta name="Keywords" content="velocity model checker, quality assurance, quality control, velocity model, velocity flooding, checking for 
+holes in base horizon, checking for holes in top horizon, checking for holes in horizon, pre-modeling horizon quality control" />
+</head>
+<body>
+<h1>Velocity Model Checker</h1>
+	<p>Velocity Model Checker allows users to QC pairs of top and base salt horizons <em>before</em> 
+	using them in velocity flood. The algorithm will flag holes and crossovers by color coding 
+	the output horizon to give a map view of potential problem areas. Horizons that cross can be 
+	fixed using the <strong>Horizon Merge</strong> utility module.</p>
+	<p>Velocity flooding using top and base salt horizons is often problematic because these horizons 
+	are difficult to pick. They can have missing areas and sometimes they will cross. Additionally,
+	there may be holes in one horizon but not the other. These are all problems for the Velocity Flood
+	module.</p>
+	<p><strong>Note:</strong> Output color assignments match the default <em>Spectrum</em> colormap 
+	used in the GeoCraft Map and 3D Viewers.</p>
+<h2>Overview of the Velocity Model Checker Algorithm</h2>
+	<p>The Velocity Model Checker algorithm saves time by quickly checking for holes in horizon pairs 
+	without requiring you to complete an actual velocity flood model. You can also use the algorithm 
+	to highlight areas where the base horizon rises above the top horizon.</p>
+<h2>Using the Velocity Model Checker Algorithm</h2>
+	<ol>
+		<li>Load two horizons into GeoCraft.</li>
+		<li>Select a <strong>Top Horizon</strong>.</li>
+		<li>Select a <strong>Base Horizon</strong>.</li>
+		<li>Select a different color for each of the <strong>Parameters</strong>, so that you can analyze the differences when you view the model:</li>
+			<ul>
+				<li><strong>Holes in Base Horizon</strong></li>
+				<li><strong>Holes in Top Horizon</strong></li>
+				<li><strong>Holes in both Horizons</strong></li>
+				<li><strong>Base is Above Top (horizon)</strong></li>
+				<li><strong>No conflicts</strong></li>
+			</ul>
+		<li>Accept the <strong>Name</strong>, or type in a new one. Make sure that the 
+		name complies with <a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> GeoCraft file-naming requirements</a>.</li>
+		<li>Click <strong>Run</strong>.</li>
+			<p>GeoCraft runs the algorithm and stores the model horizon in the Repository, under the <strong>Grids</strong> folder.</p>
+		<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+	</ol>
+	<p></p>
+	<h3>Related Topics</h3>
+		<li><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Editing Grid Values in a Spreadsheet View</a></li>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

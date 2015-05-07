@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GeoCraft Repository</title>
+<meta name="Keywords" content="Repository, repository, GeoCraft Repository, data repository, Repository view, views, data container" />
+</head>
+<body>
+<h1>GeoCraft Repository</h1>
+	<p>The GeoCraft Repository is a graphical representation of the geophysical data that is available for use in the 
+	GeoCraft viewers or in GeoCraft algorithms.</p>
+<h2>Repository View</h2>
+	<p>The Repository View displays geoscience data that is currently loaded.</p>
+
+	<p><strong>Note:</strong> Loaded volumes are never stored in GeoCraft. Instead, a link is set 
+	up in the Repository pointing to where the volume resides in the data store. Horizons are 
+	stored in GeoCraft memory as they are loaded. In either case new volumes and horizons are 
+	always written back to the data store of the input volume or horizon. Therefore you do not need 
+	to save volumes nor horizons before exiting GeoCraft. However, creating many copies of large 
+	horizons can consume memory. As a result some modules, such as Group Multiples, write output 
+	horizons back to the data store and set up links in the Repository to these new horizons.</p>
+	
+	<p><strong>Data Units Note:</strong> Because volumes are never stored within GeoCraft, their trace 
+	or sample data are <em>never</em> unit converted. That is, if a velocity data volume in f/sec 
+	is loaded, the data samples are never converted to m/sec. Algorithms, such as the velocity algorithms, 
+	can check unit labels to help insure the data are consistent, but never assume automatic data unit 
+	handling. Always know your data units and convert them to insure consistency with all other 
+	algorithm input parameters. (This does not include trace X,Y and time or depth index values, which 
+	are always unit converted on the fly, as for viewing.)</p>
+	
+<h2>The GeoCraft Repository: An Overview</h2>
+	<p>Before you can view a dataset or perform any calculations, you must load data into the Repository. 
+	The Repository provides a clear separation between data input/output and any actions you want to 
+	perform on the data. When GeoCraft was in the design stage, one of the most important requirements 
+	was that the Repository had to be data store agnostic. That is, algorithms should not have to know 
+	or be concerned where the data is coming from nor where it is going.</p>
+
+	<p>Keeping the GeoCraft Repository data store agnostic is important because it allows us to develop 
+	visualization tools and geoscience algorithms that only need to read and write data from the Repository. 
+	This allows us to easily support new proprietary and open data formats. A key goal of the GeoCraft 
+	project is to make it easy to add new functionality by encapsulating the input/output from the rest 
+	of the program. This simplifies algorithm development for all geoscientists, not just those with a 
+	computer science background.</p>  
+
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/UI_Elements/gc_ui_elements.htm">GeoCraft User Interface Elements</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gc_beforeusing.htm">Before You Use GeoCraft</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/tasks/WorkingWData/data_intro.htm">Working with Data in GeoCraft</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/UI_Elements/gc_restorewindow.htm">Restoring a Closed Window</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

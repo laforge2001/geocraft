@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Linear Interpolation</title>
+<meta name="Keywords" content="interpolation, interpolate a horizon, fill in null values in a horizon" />
+</head>
+<body>
+<h1>Linear Interpolation</h1>
+<p>The Linear Interpolation algorithm linearly interpolates interior nulls using neighboring values.</p>
+<h2>Linear Interpolation Overview</h2>
+<p>This algorithm searches for nulls within a horizon. If a null is found, Linear Interpolate searches 
+up to the specified number of rows (xlines) and columns (inlines) for the nearest non-null value. The 
+algorithm assigns weights to the distance in each direction from the point being interpolated. Nearer 
+distances receive a higher weight, and farther distances receive a lower weight. The Linear 
+Interpolation algorithm then averages the two weighted values to provide an output.</p>
+<p><em>Generally, only interior nulls are interpolated.</em> Linear Interpolate does not extend the 
+horizon to the limits of its box (like the Extrapolate and Median Smooth algorithms do). However, if a portion of 
+the horizon edge is concave, this area may be partially filled, depending on the value of the 
+maximum row and column search range. If the search range is small, little will be filled.</p>
+<h2>Interpolating a Horizon</h2>
+	<ol>
+		<li>Load horizon data into GeoCraft.</li>
+		<li>Select a <strong>Horizon</strong>.</li>
+		<li><em>Optional; only perform this step if you are using an Area of Interest in your 
+		calculation.</em> Select the <strong>Use Area of Interest?</strong> check box.</li>
+		<li><em>Optional</em> Select an <strong>Area of Interest</strong>.</li>
+		<li>Set the <strong>Maximum # of columns (inlines) to fill</strong>.</li>
+		<p><strong>Caution</strong>: This value defaults to zero, which uses the maximum
+		number of columns possible (filling in <strong>all</strong> columns). If you set the value to
+		 1, the algorithm does <strong>not</strong> interpolate data (infill) in any columns.</p> 
+		<li>Set the <strong>Maximum # of rows (xlines) to fill</strong>.</li>
+		<p><strong>Caution</strong>: This value defaults to zero, which means to use the maximum
+		number of rows possible (filling in <strong>all</strong> rows). If you set the value to 1, the 
+		algorithm does <strong>not</strong> interpolate data (infill) in any rows.</p> 
+		<li>Accept the <strong>Name</strong>, or type in a new one. Make sure that the 
+		name complies with <a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> GeoCraft file-naming requirements</a>.</li>
+		<li><em>Optional</em> Type additional text in the <strong>Comments</strong> field. This text 
+		is displayed in the <strong>Properties</strong>	view for the entity.</li>
+		<li>Click <strong>Run</strong>.</li>
+		<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+		</ol>
+	<h3><strong>Example of Linear Interpolation on a Horizon</strong></h3>
+	<p><img src="linearinterp.gif" alt="Linear Interpolation example graphics" height="239" width="463" /></p>
+	<p></p>
+	<h3>Related Topics</h3>
+		<li><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Editing Grid Values in a Spreadsheet View</a></li>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Review id="VelocityModelCheckerReview">
+    <ReviewIssue id="FM0IZW9B">
+        <ReviewIssueMeta>
+            <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2008-10-07 :: 07:46:20:687 CDT</CreationDate>
+            <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2008-10-07 :: 07:48:22:429 CDT</LastModificationDate>
+        </ReviewIssueMeta>
+        <ReviewerId>eric</ReviewerId>
+        <AssignedTo>eric</AssignedTo>
+        <File line="61">src/org/geocraft/geomath/algorithm/horizon/velocitymodelchecker/VelocityModelCheckerTask.java</File>
+        <Type>item.type.label.programLogic</Type>
+        <Severity>item.severity.label.minor</Severity>
+        <Summary>Extracting values out of the model to local fields in the task</Summary>
+        <Description>should we be extracting values out of the model or be using the model directly all the time ? Does it matter ?
+
+utputName = _model.getOutputHorizonName();
+    _topHorizonProp = _model.getTopHorizon();
+    _baseHorizonProp = _model.getBaseHorizon();
+    _topHorizon = (Grid2d) _topHorizonProp.getFeatureRepresentation();
+    _baseHorizon = (Grid2d) _baseHorizonProp.getFeatureRepresentation();
+
+    _topHorizonHole = _model.getHolesInTopHorizon();
+    _baseHorizonHole = _model.getHolesInBaseHorizon();
+    _baseAndTopHole = _model.getHolesInBothHorizons();
+    _baseHigherThanTop = _model.ge</Description>
+        <Annotation></Annotation>
+        <Revision></Revision>
+        <Resolution>item.resolution.label.unsureValidity</Resolution>
+        <Status>item.status.label.open</Status>
+    </ReviewIssue>
+</Review>

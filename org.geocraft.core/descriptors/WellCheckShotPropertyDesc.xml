@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Define the properties for a data file entity and their categories. -->
+<entity-properties entity="WellCheckShot">
+	<!-- There are no properties at the top of the property tree -->
+    <category name="" />
+	
+    <category name="General">
+        <property id="Datastore" display="Datastore"/>
+        <property id="ProjectName" display="Project"/>
+        <property id="StorageDirectory" display="Storage Directory"/>
+        <property id="Comment" display="Comments"/>
+        <property id="LastModifiedDate" display="Modification Date"/>
+		<property id="Well" display="Well"/>
+        <property id="isDirty" display="Dirty?"/>
+    </category>
+    
+    <category name="Data">
+        <property id="DataSource" display="Source"/>
+		<property id="isCheckShot" display="Checkshot?"/>
+		<property id="NumSamples" display="# of samples"/>
+		<property id="Datum" display="Datum"/>
+		<property id="DisplayShift" display="Display shift"/>
+		<property id="SeismicReferenceDatum" display="Seismic reference"/>
+		<property id="VelocityToSeismicDatum" display="Velocity-to-Seismic"/>
+    </category>
+	
+	<!-- Excluded displayable properties -->
+	<exclude>
+		<property id="EntityType" display="Entity type" />
+		<property id="DisplayName" display="Display name" />
+	</exclude>
+
+</entity-properties>

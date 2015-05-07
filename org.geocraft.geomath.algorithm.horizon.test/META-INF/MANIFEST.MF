@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tests for Horizon Algorithms
+Bundle-SymbolicName: org.geocraft.geomath.algorithm.horizon.test
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: org.geocraft.geomath.algorithm.horizon;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit,
+ org.geocraft.geomath.algorithm.util;bundle-version="1.0.0",
+ org.geocraft.core;bundle-version="1.0.0"
+Export-Package: org.geocraft.geomath.algorithm.horizon.clip,
+ org.geocraft.geomath.algorithm.horizon.decimate;uses:="junit.framework",
+ org.geocraft.geomath.algorithm.horizon.erasearea,
+ org.geocraft.geomath.algorithm.horizon.extractarea,
+ org.geocraft.geomath.algorithm.horizon.extrapolate,
+ org.geocraft.geomath.algorithm.horizon.impl;uses:="junit.framework",
+ org.geocraft.geomath.algorithm.horizon.mediansmooth,
+ org.geocraft.geomath.algorithm.horizon.merge

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry exported="true" kind="lib" path="ardor3d-coreimpl_swt.jar"/>
+	<classpathentry exported="true" kind="lib" path="ardor3d-coreimpl_awt.jar" sourcepath="/Ardor3D"/>
+	<classpathentry exported="true" kind="lib" path="ardor3d-core.jar" sourcepath="/Ardor3D"/>
+	<classpathentry exported="true" kind="lib" path="ardor3d-coreimpl_lwjgl.jar"/>
+	<classpathentry exported="true" kind="lib" path="ardor3d-primitives.jar"/>
+	<classpathentry exported="true" kind="lib" path="lwjgl.jar"/>
+	<classpathentry exported="true" kind="lib" path="lwjgl_util.jar"/>
+	<classpathentry exported="true" kind="lib" path="google-collect-snapshot-20080820.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

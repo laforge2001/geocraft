@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<index version="1.0">
+	<entry keyword="Form Widgets">
+		<topic href="help/examplewidgets.htm" />
+	</entry>
+	<entry keyword="Generate Test Data">
+		<topic href="help/fakeDataGenerator.htm" />
+	</entry>
+	<entry keyword="Icon Viewer">
+		<topic href="help/iconviewer.htm" />
+	</entry>
+	<entry keyword="GeoCraft Charting API">
+		<topic href="../org.geocraft.ui.chartviewer/help/gcapi.htm" />
+	</entry>
+</index>

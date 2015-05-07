@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Extract Area</title>
+<meta name="Keywords" content="extract area, extracting an area from a horizon, horizons, extracting an area" />
+</head>
+<body>
+<h1>Extract Area</h1>
+	<p>Extract Area sets the horizon values that are outside of a specified Area of Interest to null.</p>
+<h2>Overview of Extract Area</h2>
+	<p>When you use the Extract Area algorithm, GeoCraft sets horizon nodes that are <em>outside</em> the 
+	Area of Interest to null. Note that the grid size, or number of nodes in the horizon, remains the same.</p>
+<h2>Extracting an Area of Interest from a Horizon</h2>
+	<ol>
+		<li>Load horizon data into GeoCraft.</li>
+		<li>Load an Area of Interest (AOI), or <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gcmvt_craoi.htm">create an Area of Interest</a> 
+		from the horizon that you just loaded into GeoCraft.</li>
+		<li>Select a <strong>Horizon</strong>.</li>
+		<li>Select an <strong>Area of Interest</strong>.</li>
+		<li>Accept the <strong>Name</strong>, or type in a new one. Make sure that the name 
+		complies with <a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> GeoCraft file-naming requirements</a>.</li>
+	<p><strong>Caution</strong>: The value in the <strong>Output Name</strong> field must follow GeoCraft naming conventions.</p>
+		<li><em>Optional</em> Type text in the <strong>Comments</strong> field. Comments are displayed in the Properties view.</li>
+		<li>Click <strong>Run.</strong></li>
+		<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+	</ol>
+<h3><strong>Example</strong></h3>
+	<p><img src="extractarea.gif" alt="Extract Area" height="303" width="546"/></p>
+	<p></p>
+	<h3>Related Topics</h3>
+		<li><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Editing Grid Values in a Spreadsheet View</a></li>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

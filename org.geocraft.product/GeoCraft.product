@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="GeoCraft" id="org.geocraft.product.product" application="org.geocraft.application" useFeatures="true" includeLaunchers="true">
+
+   <aboutInfo>
+      <image path="/org.geocraft.product/splash.bmp"/>
+      <text>
+         GeoCraft is a framework for efficiently prototyping and deploying 
+new geoscience applications. 
+
+GeoCraft is built on top of the Eclipse Rich Client Platform.
+      </text>
+   </aboutInfo>
+
+   <configIni use="default">
+      <linux>/org.geocraft.product/config.ini</linux>
+      <macosx>/org.geocraft.product/config.ini</macosx>
+      <solaris>/org.geocraft.product/config.ini</solaris>
+      <win32>/org.geocraft.product/config.ini</win32>
+   </configIni>
+
+   <launcherArgs>
+      <programArgs>-console
+-consoleLog</programArgs>
+      <vmArgs>-Xms256m
+-Xmx1200m</vmArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+   </launcherArgs>
+
+   <windowImages i16="/org.geocraft.product/icons/GC-mark-16.png" i32="/org.geocraft.product/icons/GC-mark-32.png"/>
+
+   <splash
+      location="org.geocraft.product"
+      startupProgressRect="120,250,345,15"
+      startupMessageRect="120,230,345,20"
+      startupForegroundColor="1E37FF" />
+   <launcher name="GeoCraft">
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <intro introId="org.geocraft.product.intro"/>
+
+   <vm>
+   </vm>
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="org.geocraft.feature" version="1.0.0"/>
+      <feature id="org.geocraft.geomath.feature" version="1.0.0"/>
+      <feature id="org.geocraft.abavo.feature" version="1.0.0"/>
+      <feature id="org.geocraft.ui.viewer.feature" version="1.0.0.qualifier"/>
+   </features>
+
+
+</product>

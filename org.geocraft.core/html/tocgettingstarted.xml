@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Getting Started" link_to="toc.xml#gettingstarted" topic="html/gettingstarted/intro_gc.htm">
+   <topic href="html/gettingstarted/intro_gc.htm" label="Introduction to GeoCraft">
+   </topic>
+   <topic href="html/gettingstarted/gc_beforeusing.htm" label="Before You Use GeoCraft">
+   </topic>
+   <topic href="html/gettingstarted/gcfund_filename_rq.htm" label="GeoCraft File-naming Requirements">
+   </topic>
+</toc>

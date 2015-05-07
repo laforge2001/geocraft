@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Troubleshooting GeoCraft 3D Viewer Problems</title>
+<meta name="Keywords" content="troubleshooting GeoCraft 3D Viewer problems, resolving GeoCraft 3D Viewer issues, 
+GeoCraft 3D Viewer, 3D Viewer view" />
+</head>
+<body>
+<h1>Troubleshooting GeoCraft 3D Viewer Problems</h1>
+<p>This topic provides symptom descriptions for some common GeoCraft 3D Viewer problems, and tells you how to resolve 
+those problems.</p>
+	<p>This topic contains brief descriptions of important 3D viewer features and functionality that you should understand 
+	before you use the viewer.</p>
+		<table border="1">
+					<tr>
+					<td><strong>Problem</strong></td>
+					<td><strong>Possible Cause for Problem</strong></td>
+					<td><strong>Solution</strong></td>
+					</tr>
+					<tr>
+					<td>When I right-click in the <a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/repository.htm">Repository View</a>, 
+					the <strong>Volume Plot</strong> pop-up menu does not display.</td>
+					<td>You must load data that the 3D viewer can render into GeoCraft before the 
+					<strong>View => Volume Plot</strong> menu option activates</td>
+					<td>If the repository does not contain any entities that the 3D viewer can render, the View => Volume Plot menu 
+					option will not be available. See <a href="PLUGINS_ROOT/org.geocraft.core/html/tasks/WorkingWData/data_loading.htm">
+					Loading Data into GeoCraft</a>.</td>
+					</tr>
+					<tr>
+					<td>The Volume Plot is taking a long time to render an object in 3 dimensions.</td>
+					<td>You may have selected some options that will make the Volume Plot take longer to render
+					larger objects. To speed up rendering, make sure that the following options are <em>not</em> selected 
+					in the <strong>Seismic 3D Settings</strong> dialog box: 
+						<ul>
+							<li>Z Slice <strong>Display</strong> check box: Do  not select this check box unless you are 
+							working with an extremely small volume; it can take several hours to render larger volumes 
+							in the Z slice plane</li>
+							<li><strong>Enable smoothing interpolation</strong> check box</li> 
+						</ul>
+					</td>
+					</tr>
+		</table>
+	<p></p>
+	<p></p>
+<h3>Related Topics</h3>
+<ul>
+	<li><a href="3dv_intro.htm">Introduction to the GeoCraft 3D Viewer</a></li>
+	<li><a href="3dv_beforeusing.htm">Before Using the GeoCraft 3D Viewer</a></li>
+	<li><a href="PLUGINS_ROOT/org.geocraft.core/html/UI_Elements/gc_ui_vwr_comfeat.htm">Common Features in GeoCraft Viewers</a></li>
+	<li><a href="3dv_performance.htm">Tips for Using the GeoCraft 3D Viewer and Improving Performance</a></li>
+</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

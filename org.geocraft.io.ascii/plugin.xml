@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.geocraft.core.io.datastoreAccessor">
+      <datastoreAccessor
+            category="Areas of Interest"
+            name="ASCII File AOI"
+            utilClass="org.geocraft.io.ascii.aoi.AsciiAOIAccessorUtil"
+            visible="true">
+         <mapper
+               class="org.geocraft.io.ascii.aoi.AsciiAOIMapper"
+               supportedEntityClassName="MapPolygonAOI">
+         </mapper>
+         <mapper
+               class="org.geocraft.io.ascii.aoi.AsciiAOIMapper"
+               supportedEntityClassName="SeismicSurvey3dAOI">
+         </mapper>
+         <mapper
+               class="org.geocraft.io.ascii.aoi.AsciiAOIMapper"
+               supportedEntityClassName="SeismicSurvey2dAOI">
+         </mapper>
+         <input
+               mapperModel="org.geocraft.io.ascii.aoi.AsciiAOIMapperModel"
+               selector="org.geocraft.io.ascii.aoi.AsciiAOIFileSelector"
+               task="org.geocraft.io.ascii.aoi.AsciiAOILoadTask">
+         </input>
+         <output
+               mapperModel="org.geocraft.io.ascii.aoi.AsciiAOIMapperModel"
+               selector="org.geocraft.io.ascii.aoi.AsciiAOIDirectorySelector"
+               task="org.geocraft.io.ascii.aoi.AsciiAOIExportTask">
+         </output>
+      </datastoreAccessor>
+   </extension>
+   <extension
+         point="org.geocraft.ui.io.datastoreAccessorUI">
+      <datastoreAccessorUI
+            datastoreAccessorId="ASCII File AOI"
+            inputModelView="org.geocraft.io.ascii.aoi.AsciiAOILoadView"
+            outputModelView="org.geocraft.io.ascii.aoi.AsciiAOIExportView">
+      </datastoreAccessorUI>
+   </extension>
+
+</plugin>

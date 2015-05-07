@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.geocraft.test.feature"
+      label="Feature Feature"
+      version="1.0.0">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <includes
+         id="org.geocraft.geomath.test.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.geocraft.abavo.test.feature"
+         version="0.0.0"/>
+
+   <requires>
+      <import plugin="org.junit" version="3.8.2" match="greaterOrEqual"/>
+      <import plugin="org.geocraft.ui.common" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.geocraft.math" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.rcpquickstart.bundletestcollector" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.geocraft.ui.ijython" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.core.filesystem"/>
+      <import plugin="org.geocraft.core"/>
+   </requires>
+
+   <plugin
+         id="org.geocraft.math.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.geocraft.unittest.suite"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.rcpquickstart.bundletestcollector"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.junit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.geocraft.io.gocad.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"/>
+
+   <plugin
+         id="org.geocraft.io.modspec.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"/>
+
+   <plugin
+         id="org.geocraft.core.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"/>
+
+   <plugin
+         id="org.geocraft.io.jms.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.geocraft.io.asciigrid.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"/>
+
+   <plugin
+         id="org.geocraft.io.las.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"/>
+
+</feature>

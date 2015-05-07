@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.tigris.subversion.subclipse.core.svnnature">
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.io.asciigrid,org.geocraft.io.asciigrid"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.io.asciipointset,org.geocraft.io.asciipointset"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.io.las,org.geocraft.io.las"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.io.modspec,org.geocraft.io.modspec"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.io.segy,org.geocraft.io.segy"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.io.gocad,org.geocraft.io.gocad"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.io.javaseis,org.geocraft.io.javaseis"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.io.jms,org.geocraft.io.jms"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.io.ascii,org.geocraft.io.ascii"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.io.remote,org.geocraft.io.remote"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.sectionviewer,org.geocraft.ui.sectionviewer"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.mapviewer,org.geocraft.ui.mapviewer"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.waveletviewer,org.geocraft.ui.waveletviewer"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.chartviewer,org.geocraft.ui.chartviewer"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.tableviewer,org.geocraft.ui.tableviewer"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.model,org.geocraft.ui.model"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.repository,org.geocraft.ui.repository"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.product,org.geocraft.product"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.common,org.geocraft.ui.common"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.io,org.geocraft.ui.io"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.io.util,org.geocraft.io.util"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.math,org.geocraft.math"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.color,org.geocraft.ui.color"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.multiplot,org.geocraft.ui.multiplot"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.plot,org.geocraft.ui.plot"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.form2,org.geocraft.ui.form2"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.algorithm,org.geocraft.algorithm"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.property,org.geocraft.ui.property"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.traceviewer,org.geocraft.ui.traceviewer"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.volumeviewer,org.geocraft.ui.volumeviewer"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.ui.viewer,org.geocraft.ui.viewer"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.abavo.product,org.geocraft.abavo.product"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component/trunk/org.geocraft.algorithm,org.geocraft.algorithm"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/ardor3d/trunk/com.ardor3d,com.ardor3d"/>
+</provider>
+</psf>

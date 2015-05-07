@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.geocraft.core.io.datastoreAccessor">
+      <datastoreAccessor
+            category="Seismic"
+            name="JavaSeis Volume"
+            utilClass="org.geocraft.io.javaseis.VolumeAccessorUtil">
+         <mapper
+               class="org.geocraft.io.javaseis.PostStack3dMapper"
+               supportedEntityClassName="PostStack3d">
+         </mapper>
+         <mapper
+               class="org.geocraft.io.javaseis.PreStack3dMapper"
+               supportedEntityClassName="PreStack3d">
+         </mapper>
+         <input
+               mapperModel="org.geocraft.io.javaseis.VolumeMapperModel"
+               selector="org.geocraft.io.javaseis.VolumeSelector"
+               task="org.geocraft.io.javaseis.VolumeLoadTask">
+         </input>
+         <output
+               mapperModel="org.geocraft.io.javaseis.VolumeMapperModel"
+               selector="org.geocraft.io.javaseis.VolumeLocationSelector"
+               task="org.geocraft.io.javaseis.VolumeExportTask">
+         </output>
+      </datastoreAccessor>
+   </extension>
+   <extension
+         point="org.geocraft.ui.io.datastoreAccessorUI">
+      <datastoreAccessorUI
+            datastoreAccessorId="JavaSeis Volume"
+            inputModelView="org.geocraft.io.javaseis.VolumeLoadView"
+            outputModelView="org.geocraft.io.javaseis.VolumeExportView">
+      </datastoreAccessorUI>
+   </extension>
+
+</plugin>

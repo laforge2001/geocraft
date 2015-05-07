@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Velocity Flood</title>
+<meta name="Keywords" content="salt flooding overview, salt flooding, flooding salt above a horizon, 
+flooding salt below a horizon, flooding salt between horizons, velocity flood, salt velocity flood, 
+gradient, dataset, constant, flood type" />
+</head>
+<body>
+<h1>Velocity Flood</h1>
+	<p>Velocity Flood modifies velocities in regions above, below, or between horizons. Flood velocities 
+	may be defined as constant, gradient, or another dataset.</p>
+	<p>Velocity flooding can fail when bounding horizons have holes, different extents, or when they 
+	cross over. These problems can be very difficult to spot in the output volume. Use the 
+	<strong><a href="PLUGINS_ROOT/org.geocraft.geomath.algorithm.horizon/help/html/velocitymodelchecker.htm">
+	Velocity Model Checker</a></strong> algorithm to identify problems before doing the flood. The 
+	Velocity Model Checker algorithm is in the <strong>Horizon</strong> folder in 
+	the algorithm tree . This algorithm creates a horizon that which is color coded to locate areas 
+	of potential problems in the Map Viewer.</p>
+	<p>Because velocity flooding can take a long time to complete, some flooding algorithms allow users 
+	to preview results in the 3D Viewer for a single inline and xline prior to flooding the entire input 
+	volume. These algorithms are located in the Algorithms tree under the <strong><a href="floodpreview.htm">Preview Algorithms</a></strong> 
+	folder.</p>
+	<h3>Related Topics</h3>
+	<p><a href="vf_datareq.htm">Velocity Flooding Data Requirements</a></p>
+	<p><a href="velocityflood_1ststeps.html">Flooding Salt Velocity in GeoCraft: Starting the Procedure</a></p>
+	<p><a href="velflood_constant.htm">Flooding Salt Velocity with a Constant Flood Type</a></p>
+	<p><a href="velflood_gradient.htm">Flooding Salt Velocity with a Gradient Flood Type</a></p>
+	<p><a href="velflood_dataset.htm">Flooding Salt Velocity with a Dataset Flood Type</a></p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core.help/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="help/contexts.xml"
+            plugin="org.geocraft.geomath.algorithm.example">
+      </contexts>
+   </extension>
+ 
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/progex_toc.xml"
+            primary="false">
+      </toc>
+   </extension>
+   <extension
+         point="org.eclipse.help.index">
+      <index
+            file="help/index.xml">
+      </index>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Programming Examples"
+            class="org.geocraft.geomath.algorithm.example.generator.TestDataGenerator"
+            helpId="org.geocraft.geomath.algorithm.example.fakeDataGenerator"
+            name="Generate Test Data"
+            tooltip="Generate test data"
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+ 
+</plugin>

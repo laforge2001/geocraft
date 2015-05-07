@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Naming Convention and Equation Format for Horizons Created by Multiples Algorithms</title>
+</head>
+<body>
+<h1>Naming and Equation Conventions for Multiples Algorithms</h1>
+<p>The Group Multiples algorithms create multiples as new horizons with a special naming convention 
+in order to clearly specify the travel path for each multiple.</p>
+
+<p>The form is always something like <strong>hm_<em>NNN</em>_<em>MM</em></strong>, where the 
+<em>"hm"</em> is the Horizon Prefix set by the user. The Ns represent the primary reflections 
+at horizon number "N". The Ms represent reflections at horizon number "M" for pegleg paths. 
+There will always be one less number of M's than N's. When reading a travel path the M's are 
+always inserted between the N's. An M of 0 represents a surface reflection.</p>
+
+<p>A few examples will clarify this scheme. Let the first input 
+horizon be waterbottom, the second be top salt and the third be base salt.</p>
+	<ul>
+		<li><em>hm_11_0</em> indicates travel time from waterbottom (i.e. N=1) up to the surface (i.e. M=0) 
+			and back (second N=1), or the first waterbottom multiple</li>
+		<li><em>hm_111_00</em> indicates travel time from waterbottom (N=1) up to the surface (M=0) and back,  
+		    and then up to the surface and back a second time, or the second waterbottom multiple</li>
+		<li><em>hm_1111_000</em> indicates travel time from waterbottom up to the surface and back a 
+			total of 3 times, or the third waterbottom multiple</li>
+		<li><em>hm_22_0</em> indicates travel time from top salt (N=2) up to the surface (M=0) and back, 
+		    or the first top salt multiple</li>
+		<li><em>hm_22_1</em> indicates travel time from top salt (N=2) up to the waterbottom (M=1) 
+			and back, or the first top salt, waterbottom multiple</li>
+		<li><em>hm_33_1</em> indicates travel time from base salt (N=3) up to the waterbottom (M=1) 
+			and back, or the first base salt, waterbottom multiple</li>
+		<li><em>hm_33_2</em> indicates travel time from base salt (N=3) up to the top salt horizon (M=2) 
+			and back, or the first top salt, base salt multiple</li>
+		<li><em>hm_3333_102</em> indicates travel time from base salt up to waterbottom (M=1), then back to base 
+			salt, then up to the surface (M=0) and back to base salt, and finally up to top salt (M=2) and 
+			back to base salt (N=3)</li>
+		<li><em>hm_321_00</em> indicates travel time from base salt (N=3) up to the surface (M=0), then down 
+			to top salt (N=2), then back up to the surface (M=0) and finally down to top salt (N=1)</li>
+	</ul>
+
+<p><strong>More Examples of the Multiples Naming Convention</strong></p>
+<p>The actual equation used for each multiple can also be determined from the naming convention. For example 
+suppose a multiple is named <strong>hm_331_10</strong>.</p>
+<table width="700" border="1" cellspacing="1" cellpadding="1">
+<tr>
+<td><strong>Naming Convention</strong></td>
+<td><strong>Interpretation</strong></td>
+</tr>
+<tr>
+<td>hm</td>
+<td>
+<p>this Horizon Prefix parameter set by the user</p>
+</td>
+</tr>
+<tr>
+<td>_</td>
+<td>first underscore in the file name; every value between the first and second underscore is added in the multiples calculation</td>
+</tr>
+<tr>
+<td>331</td>
+<td>values representing the horizons that will be added in the multiples calculation</td>
+</tr>
+<tr>
+<td>_</td>
+<td>second underscore in the file name; everything value after this is subtracted</td>
+</tr>
+<tr>
+<td>10</td>
+<td>values representing the horizons that will be subtracted from the multiples calculation; remember that zero values are ignored by GeoCraft</td>
+</tr>
+</table>
+<p><strong>Travel time calculation</strong></p>
+<p>Using variable <strong>333_10</strong> from this example, GeoCraft would perform the following calculation:</p>
+<p><strong>H3 + (H3 - H1) + H3</strong></p>
+<h3>Related Topics</h3>
+	<ul>
+		<li><a href="groupmultiples.htm">Group Multiples</a></li>
+		<li><a href="group_multis_predefined_ref.htm">Generating a Predefined Group of Multiples from Horizons</a></li>
+		<li><a href="group_multis_naming_conv.htm">Group Multiples Naming Convention and Equation Format</a></li>
+	</ul>
+<p>Group Multiples<topic label="Group Multiples" href="groupmultiples.htm" /></p>
+<p>Predefined Horizons Created by the Group Multiples Algorithm<topic label="Predefined Horizons Created by the Group Multiples Algorithm" href="group_multis_predefined_ref.htm" /></p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

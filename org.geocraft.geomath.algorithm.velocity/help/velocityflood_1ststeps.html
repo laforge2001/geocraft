@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Flooding Salt Velocity in GeoCraft: Starting the Procedure</title>
+<meta name="Keywords" content="flooding salt velocity, starting a salt velocity flood, beginning velocity flood, salt flooding" />
+</head>
+<body>
+<h1>Flooding Salt Velocity in GeoCraft: Starting the Procedure</h1>
+	<p>Before you begin, ensure that the data you want to use <a href="vf_datareq.htm">meets all GeoCraft requirements for Velocity Flood data</a>. You will 
+	always perform the steps documented in this topic, regardless of the type of salt flooding you perform. After you perform 
+	these steps, you will move on to a second task to complete salt flooding.</p>
+		<ol>
+			<li>Load ModSpec grid (horizon), PostStack 3D (volume), and <em>optional</em> Area of Interest data.</li>
+			<li>Select a PostStack 3D input <strong>Volume</strong>.</li>
+			<li><em>Optional; only perform this step if you want to use an Area of Interest in the calculation</em>. 
+			Select the <strong>Use Area of Interest?</strong> check box.</li>
+			<li><em>Optional</em> Select an <strong>Area of Interest</strong>.</li>
+			<li>Select a <strong>Flood Direction</strong>:</li>
+				<ul>
+					<li><strong>Flood Below</strong>: flood salt velocity below a horizon; you will select a 
+					<strong>Top Horizon</strong> below which to flood</li>
+					<li><strong>Flood Above</strong>: flood salt velocity above a horizon; you will select a 
+					<strong>Base Horizon</strong> above which to flood</li>
+					<li><strong>Flood Between</strong>: flood salt velocity between two horizons; you will 
+					select a <strong>Top Horizon</strong> and a <strong>Base Horizon</strong> between which to flood</li>
+				</ul>
+			<li>Depending upon your choice in the prior step, select the horizon(s) below, above, or between which 
+			you will flood salt.</li>
+			<li>Select a <strong>Flood Type</strong>:</li>
+				<ul>
+					<li><strong>Constant</strong>: uses a constant value for flood velocity; follow the 
+					<a href="velflood_constant.htm">Flooding Salt Velocity with a Constant Flood Type</a> instructions 
+					to complete velocity flooding</li>
+					<li><strong>Gradient (V0 + g*z)</strong>: uses a change in gradient (change in "rise over run") 
+					for flood velocity; 
+					follow the <a href="velflood_gradient.htm">Flooding Salt Velocity with a Gradient Flood Type</a> 
+					instructions to complete velocity flooding</li>
+					<li><strong>Dataset</strong>: uses a volume for flood velocity; follow the 
+					<a href="velflood_dataset.htm">Flooding Salt Velocity with a Dataset Flood Type</a> 
+					instructions to complete velocity flooding</li>
+				</ul>
+			<li>Follow the specific instructions to flood salt velocity with a <a href="velflood_constant.htm">constant</a>, 
+			<a href="velflood_gradient.htm">gradient</a>, or <a href="velflood_dataset.htm">dataset</a> flood type.</li>
+		</ol>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core.help/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

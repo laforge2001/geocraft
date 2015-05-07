@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Predefined Multiples Created by the Group Multiples Algorithm</title>
+<meta name="Keywords" content="predefined multiples, creating surfaces where multiple reflections are expected, predefined groups of multiples from horizons, 
+converting depth horizons into time horizons and converting multiples of horizons back to depth horizons" />
+</head>
+<body>
+<h1>Predefined Multiples Created by the Group Multiples Algorithm</h1>
+<p>The Group Multiples algorithm <topic label="Generating a Predefined Group of Multiples from Horizons" href="hor_multis_group.htm" /> creates the 
+predefined horizons listed here; the number of multiples that GeoCraft lists will depend upon the number of input horizons you selected during 
+the initial calculation.</p>
+<p>GeoCraft creates the multiples in Table 1 when 1  input horizons is selected for a group multiples calculation. 
+Table 1 lists a value representing the horizon name and a value representing the corresponding equation.</p>
+<h3>Multiples Created when One Horizon is Input</h3>
+  <table width="700" border="1" cellpadding="1" cellspacing="1">
+    <em>Table 1: Multiples Created by GeoCraft from the First Input Horizon</em>
+    <tr>
+      <td><strong>Equation&nbsp;&nbsp;h<sub>wb</sub>=water bottom</strong></td>
+      <td><strong>Output Horizon Suffix</strong></td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>wb</sub> + h<sub>wb</sub></td>
+      <td>11_0</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>wb</sub> + h<sub>wb</sub> + h<sub>wb</sub></td>
+      <td>111_00</td>
+    </tr>
+    <tr>
+      <td><em>result</em>= h<sub>wb</sub> + h<sub>wb</sub> + h<sub>wb</sub> + h<sub>wb</sub></td>
+      <td>1111_000</td>
+    </tr>
+  </table>
+<h3>Multiples Created when 2 Horizons are Input</h3>
+<p>GeoCraft creates the multiples in Tables 1&#8212;2 when you use the first and second input horizons for a group multiples calculation.</p>
+<table width="700" border="1" cellspacing="1" cellpadding="1">
+      <em>Table 2: Multiples Created by GeoCraft from the First and Second Input Horizon</em>s
+    <tr>
+      <td><strong>Equation&nbsp;&nbsp;h<sub>ts1</sub>=TopSalt #1&nbsp;&nbsp;h<sub>wb</sub>=water bottom</strong></td>
+      <td><strong>Output Horizon Suffix</strong></td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>ts1</sub> + h<sub>ts1</sub></td>
+      <td>22_0</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>ts1</sub> + h<sub>ts1</sub> + h<sub>ts1</sub></td>
+      <td>222_00</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>ts1</sub> + h<sub>wb</sub></td>
+      <td>21_0</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>ts1</sub> + h<sub>wb</sub> + h<sub>wb</sub></td>
+      <td>211_00</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>ts1</sub> + (h<sub>ts1</sub> - h<sub>wb</sub>)</td>
+      <td><p>22_1</p>      </td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>ts1</sub> + (h<sub>ts1</sub> - h<sub>wb</sub>) + (h<sub>ts1</sub> -h<sub>wb</sub>)</td>
+      <td>222_11</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>ts1</sub> + (h<sub>ts1</sub> - h<sub>wb</sub>) + h<sub>wb</sub></td>
+      <td>221_10</td>
+    </tr>
+    </table>
+<h3>Multiples Created when 3 Horizons are Input</h3>
+<p>GeoCraft creates the multiples in Tables 1&#8212;3 when you use the first, second, and third input horizons for a group multiples calculation.</p>
+<table width="700" border="1" cellspacing="1" cellpadding="1">
+      <em>Table 3: Multiples Created by GeoCraft from the First Three Input Horizons</em>
+    <tr>
+      <td><strong>Equation&nbsp;&nbsp;h<sub>bs1</sub>=BaseSalt #1&nbsp;&nbsp;h<sub>ts1</sub>=TopSalt #1&nbsp;&nbsp;h<sub>wb</sub>=water bottom</strong></td>
+      <td><strong>Output Horizon Suffix</strong></td>
+    </tr>
+<tr>
+      <td><em>result</em> = h<sub>bs1</sub> + h<sub>bs1</sub></td>
+      <td>33_0</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>bs1</sub> + h<sub>wb</sub></td>
+      <td>31_0</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>bs1</sub> + h<sub>wb</sub> + h<sub>wb</sub></td>
+      <td>311_00</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>bs1</sub> + h<sub>ts1</sub></td>
+      <td>32_0</td>
+    </tr>
+    <tr>
+      <td><em>result</em> =  h<sub>bs1</sub> +h<sub>ts1</sub> + h<sub>wb</sub></td>
+      <td>321_00</td>
+    </tr>
+    <tr>
+      <td><em>result</em> =  h<sub>bs1</sub> + (h<sub>bs1</sub>-h<sub>ts1</sub>)</td>
+      <td>33_2</td>
+    </tr>
+    <tr>
+      <td><em>result</em> =  h<sub>bs1</sub> + (h<sub>bs1</sub>-h<sub>ts1</sub>) + h<sub>wb</sub></td>
+      <td>331_20</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>bs1</sub> +(h<sub>ts1</sub>-h<sub>wb</sub>)</td>
+      <td>32_1</td>
+    </tr>
+  </table>
+  <h3>Multiples Created when 4 Horizons are Input</h3>
+  <p>If you select the first, second, third, and fourth input horizons for a group multiples calculation, the GeoCraft Group Multiples algorithm 
+  creates all of the multiples listed in Tables 1&#8212;4.</p>
+  <table width="700" border="1" cellspacing="1" cellpadding="1">
+  <em>Table 4: Additional Multiples Created by GeoCraft from the First Four Input Horizons</em>
+    <tr>
+      <td><strong>Equation&nbsp;&nbsp;h<sub>ts2</sub>=TopSalt #2&nbsp;&nbsp;h<sub>ts1</sub>=TopSalt #1&nbsp;&nbsp;h<sub>wb</sub>=water bottom</strong></td>
+      <td><strong>Output Horizon Suffix</strong></td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>ts2</sub> + h<sub>ts2</sub></td>
+      <td>44_0</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>ts2</sub> + h<sub>ts2</sub> + h<sub>ts2</sub></td>
+      <td>444_00</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>ts2</sub> + h<sub>wb</sub></td>
+      <td>41_0</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>ts2</sub> + h<sub>wb</sub> + h<sub>wb</sub></td>
+      <td>411_00</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>ts2</sub> + (h<sub>ts1</sub>-h<sub>wb</sub>)</td>
+      <td>42_1</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>ts2</sub> + (h<sub>ts1</sub>-h<sub>wb</sub>) + (h<sub>ts1</sub>-h<sub>wb</sub>)</td>
+      <td>422_11</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>ts2</sub> + (h<sub>ts1</sub>-h<sub>wb</sub>) + h<sub>wb</sub></td>
+      <td>421_10</td>
+    </tr>
+  </table>
+  <h3>Multiples Created when 5 Horizons are Input</h3>
+  <p>When you select five horizons for input, the GeoCraft Group Multiples algorithm creates all of the multiples listed in Tables 1&#8212;5.</p>
+<table width="700" border="1" cellspacing="1" cellpadding="1">
+      <em>Table 5: Additional Multiples Created by GeoCraft from the First Five Input Horizons</em>
+    <tr>
+      <td><strong>Equation&nbsp;&nbsp;<br />
+      h<sub>bs2</sub>=BaseSalt #2&nbsp;&nbsp;H<sub>ts2</sub>=TopSalt #2&nbsp;&nbsp;h<sub>bs1</sub>=BaseSalt #1&nbsp;&nbsp;<br />
+      h<sub>ts1</sub>=TopSalt #1&nbsp;&nbsp;h<sub>wb</sub>=water bottom</strong></td>
+      <td><strong>Output Horizon Suffix</strong></td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>bs2</sub> + h<sub>wb</sub></td>
+      <td>51_0</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>bs2</sub> + h<sub>wb</sub> + h<sub>wb</sub></td>
+      <td>511_00</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>bs2</sub> + h<sub>ts1</sub></td>
+      <td>52_0</td>
+    </tr>
+    <tr>
+      <td>      <em>result</em> =  h<sub>bs2</sub> + h<sub>ts1</sub> + h<sub>wb</sub></td>
+      <td>521_00</td>
+    </tr>
+    <tr>
+      <td><em>result</em> =  h<sub>bs2</sub> + (h<sub>bs1</sub> - h<sub>ts1</sub>)</td>
+      <td>53_2</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>bs2</sub> + (h<sub>bs1</sub> - h<sub>ts1</sub>) +  h<sub>wb</sub></td>
+      <td>531_20</td>
+    </tr>
+    <tr>
+      <td><em>result</em> =  h<sub>bs2</sub> +  (h<sub>ts1</sub> - h<sub>wb</sub>)</td>
+      <td>52_1</td>
+    </tr>
+    <tr>
+      <td><em>result</em> = h<sub>bs2</sub> + (h<sub>bs2</sub> - h<sub>ts2</sub>)</td>
+      <td>55_4</td>
+    </tr>
+  </table>
+<h3>Related Topics</h3>
+	<ul>
+		<li><a href="groupmultiples.htm">Group Multiples</a></li>
+		<li><a href="group_multis_naming_conv.htm">Group Multiples Naming Convention and Equation Format</a></li>
+	</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

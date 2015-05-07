@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<component immediate="true" name="Repository Service">
+   <implementation class="org.geocraft.core.repository.Repository"/>
+   <service>
+      <provide interface="org.geocraft.core.repository.IRepository"/>
+   </service>
+</component>

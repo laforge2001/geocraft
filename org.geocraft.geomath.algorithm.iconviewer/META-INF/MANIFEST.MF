@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Icon Viewer Algorithm
+Bundle-SymbolicName: org.geocraft.geomath.algorithm.iconviewer;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.geocraft.ui.common;bundle-version="1.0.0",
+ org.eclipse.ui.forms;bundle-version="3.3.0",
+ org.geocraft.algorithm;bundle-version="1.0.0",
+ org.geocraft.ui.form2;bundle-version="1.0.0",
+ org.geocraft.core;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.geocraft.geomath.algorithm.internal.iconviewer.IconViewerActivator
+Bundle-Vendor: ConocoPhillips
+Export-Package: org.geocraft.geomath.algorithm.iconviewer,
+ org.geocraft.geomath.algorithm.internal.iconviewer;x-internal:=true
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

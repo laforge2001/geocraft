@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="org.geocraft.ui.form2" immediate="true">
+   <implementation class="org.geocraft.ui.form2.ServiceComponent"/>
+   <reference bind="setDatastoreAccessorService" cardinality="1..1" interface="org.geocraft.core.io.IDatastoreAccessorService" name="IDatastoreAccessorService" policy="dynamic" unbind="unsetDatastoreAccessorService"/>
+   <reference bind="setDatastoreAccessorUIService" cardinality="1..1" interface="org.geocraft.ui.form2.IDatastoreAccessorUIService" name="IDatastoreAccessorUIService" policy="dynamic" unbind="unsetDatastoreAccessorUIService"/>
+</component>

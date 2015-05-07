@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="org.geocraft.math.regressionMethod" name="Regression Method" schema="schema/org.geocraft.math.regressionMethod.exsd"/>
+   <extension
+         point="org.geocraft.math.regressionMethod">
+      <regressionMethod
+            acronym="PPD"
+            computer="org.geocraft.math.regression.PerpendicularRegressionComputer"
+            name="Perpendicular">
+      </regressionMethod>
+   </extension>
+   <extension
+         point="org.geocraft.math.regressionMethod">
+      <regressionMethod
+            acronym="LSQ"
+            computer="org.geocraft.math.regression.LeastSquaresRegressionComputer"
+            name="Least-Squares">
+      </regressionMethod>
+   </extension>
+   <extension
+         point="org.geocraft.math.regressionMethod">
+      <regressionMethod
+            acronym="RMA"
+            computer="org.geocraft.math.regression.ReducedMeanAverageRegressionComputer"
+            name="Reduced Mean Average">
+      </regressionMethod>
+   </extension>
+
+</plugin>

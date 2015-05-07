@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="org.geocraft.ui.mapviewer.renderer" name="Map Viewer Renderers" schema="schema/org.geocraft.ui.mapviewer.renderer.exsd"/>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="org.geocraft.ui.mapviewer.actionSet1"
+            label="Map View"
+            visible="true">
+         <action
+               class="org.geocraft.ui.mapviewer.MapPlotActionDelegate"
+               helpContextId="MapPlot"
+               icon="icons/mapview-16.png"
+               id="org.geocraft.ui.mapviewer.MapPlot"
+               label="Map View"
+               menubarPath="plotview/additions"
+               style="push"
+               tooltip="Plots the selected entities in a map view">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            category="org.geocraft.ui.viewer.category"
+            class="org.geocraft.ui.mapviewer.MapViewPart"
+            icon="icons/mapview-16.png"
+            id="org.geocraft.ui.mapviewer.MapViewPart"
+            name="Map Viewer"
+            restorable="true">
+         <description>
+            A viewer for displaying domain objects from a top-down (or map) perspective.
+         </description>
+      </view>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.seismic.SeismicSurvey3dRenderer"
+            name="Seismic Survey 3D Renderer"
+            objectType="SeismicSurvey3d">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.seismic.SeismicSurvey2dRenderer"
+            name="SeismicSurvey2d Renderer"
+            objectType="SeismicSurvey2d">
+      </renderer>
+   </extension>
+   
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.grid.Grid3dRenderer"
+            name="Grid3d Renderer"
+            objectType="Grid3d">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.grid.Grid2dRenderer"
+            name="Grid2d Renderer"
+            objectType="Grid2d">
+      </renderer>
+   </extension>
+
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.polylinefeature.PolylineFeatureRenderer"
+            name="Polyline Feature Renderer"
+            objectType="PolylineFeature">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.pointfeature.PointFeatureRenderer"
+            name="Point Feature Renderer"
+            objectType="PointFeature">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.polylineset.PolylineSetRenderer"
+            name="Polyline Set Renderer"
+            objectType="PolylineSet">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.well.WellRenderer"
+            name="Well Renderer"
+            objectType="Well">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.polygonfeature.PolygonFeatureRenderer"
+            name="Polygon Feature Renderer"
+            objectType="PolygonFeature">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.aoi.SeismicSurvey3dAOIRenderer"
+            name="Seismic AOI Renderer"
+            objectType="SeismicSurvey3dAOI">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.aoi.MapPolygonAOIRenderer"
+            name="Map AOI Renderer"
+            objectType="MapPolygonAOI">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.pointset.PointSetRenderer"
+            name="Point Set Renderer"
+            objectType="PointSet">
+      </renderer>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+         <objectContribution
+         	objectClass="org.geocraft.ui.repository.PropertiesProviderTreeObject"
+         	adaptable="true"
+         	id="org.geocraft.ui.mapviewer.MapViewerContribution">
+         	<filter name="entityTypes" value="org.geocraft.core.model.grid.Grid3d,
+			org.geocraft.core.model.seismic.SeismicSurvey2d,         	
+         	org.geocraft.core.model.seismic.SeismicSurvey3d,
+         	org.geocraft.core.model.aoi.SeismicSurvey3dAOI,
+         	org.geocraft.core.model.aoi.MapPolygonAOI,
+         	org.geocraft.core.model.well.Well,
+         	org.geocraft.core.model.well.WellBore,
+         	org.geocraft.core.model.well.WellLogTrace"/>
+         	<action
+                class="org.geocraft.ui.mapviewer.MapPlotActionDelegate"
+                enablesFor="+"
+                icon="icons/mapview-16.png"
+                id="org.geocraft.ui.mapviewer"
+                label="Map View"
+                menubarPath="org.geocraft.ui.repository.plotview/additions"
+                tooltip="Plots the selected entities in a map view">
+         	</action>
+         </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/html/map_toc.xml"
+            primary="false">
+      </toc>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="help/html/contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.seismic.TraceSectionRenderer"
+            name="Trace Section Renderer"
+            objectType="TraceSection">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.fault.FaultRenderer"
+            name="Fault Interpretation Renderer"
+            objectType="FaultInterpretation">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.seismic.PostStack3dRenderer"
+            name="PostStack3d Renderer"
+            objectType="PostStack3d">
+      </renderer>
+   </extension>
+   <extension
+         point="org.eclipse.help.index">
+      <index
+            file="help/html/index.xml">
+      </index>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.seismic.PostStack2dRenderer"
+            name="PostStack2d Renderer"
+            objectType="PostStack2d">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.mapviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.mapviewer.renderer.seismic.PreStack3dRenderer"
+            name="PreStack3d Renderer"
+            objectType="PreStack3d">
+      </renderer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.geocraft.ui.viewer.dataviewer.preferences"
+            class="org.geocraft.ui.mapviewer.MapViewerPreferencePage"
+            id="org.geocraft.ui.mapviewer.preferences"
+            name="Map Viewer">
+      </page>
+      <page
+            category="org.geocraft.ui.mapviewer.preferences"
+            class="org.geocraft.ui.mapviewer.renderer.well.WellRendererPreferencePage"
+            id="org.geocraft.ui.mapviewer.well.preferences"
+            name="Wells">
+      </page>
+      <page
+            category="org.geocraft.ui.mapviewer.preferences"
+            class="org.geocraft.ui.mapviewer.renderer.fault.FaultRendererPreferencePage"
+            id="org.geocraft.ui.mapviewer.fault.preferences"
+            name="Faults">
+      </page>
+      <page
+            category="org.geocraft.ui.mapviewer.preferences"
+            class="org.geocraft.ui.mapviewer.renderer.pointset.PointSetRendererPreferencePage"
+            id="org.geocraft.ui.mapviewer.pointset.preferences"
+            name="Point Sets">
+      </page>
+      <page
+            category="org.geocraft.ui.mapviewer.preferences"
+            class="org.geocraft.ui.mapviewer.renderer.grid.GridRendererPreferencePage"
+            id="org.geocraft.ui.mapviewer.grid.preferences"
+            name="Grids">
+      </page>
+   </extension>
+
+
+</plugin>

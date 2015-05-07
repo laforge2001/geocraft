@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="WaveletPlot" title="GeoCraft Wavelet Viewer">
+      <description>Use the GeoCraft Wavelet Plot Viewer to see a visual representation of wavelet, amplitude spectrum, and phase spectrum data.</description>
+      <topic href="help/html/gc_vwr_wv_vwng.htm" label="GeoCraft Wavelet Viewer"/>
+   </context>
+</contexts>

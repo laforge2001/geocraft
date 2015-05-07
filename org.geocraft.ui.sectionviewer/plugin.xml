@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="org.geocraft.ui.sectionviewer.renderer" name="Section Viewer Renderer" schema="schema/org.geocraft.ui.sectionviewer.renderer.exsd"/>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            category="org.geocraft.ui.viewer.category"
+            class="org.geocraft.ui.sectionviewer.SectionViewerPart"
+            icon="icons/sectionview-16.png"
+            id="org.geocraft.ui.sectionviewer.SectionViewerPart"
+            name="Section Viewer"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="org.geocraft.ui.sectionviewer.actionSet1"
+            label="Section View"
+            visible="true">
+         <action
+               class="org.geocraft.ui.sectionviewer.action.SectionPlotActionDelegate"
+               icon="icons/sectionview-16.png"
+               id="org.geocraft.ui.sectionviewer.SectionPlot"
+               label="Section View"
+               menubarPath="plotview/additions"
+               style="push">
+         </action>
+      </actionSet>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+         <objectContribution
+         	objectClass="org.geocraft.ui.repository.PropertiesProviderTreeObject"
+         	adaptable="true"
+         	id="org.geocraft.ui.sectionviewer.SectionViewerContribution">
+         	<filter name="entityTypes" value="
+         	org.geocraft.core.model.seismic.SeismicSurvey2d,
+         	org.geocraft.core.model.seismic.PostStack2d,
+         	org.geocraft.core.model.seismic.SeismicSurvey3d,
+         	org.geocraft.core.model.seismic.PostStack3d,
+         	org.geocraft.core.model.seismic.PreStack3d,
+         	org.geocraft.core.model.well.Well,
+         	org.geocraft.core.model.well.WellLogTrace"/>
+         	<action
+                class="org.geocraft.ui.sectionviewer.action.SectionPlotActionDelegate"
+                enablesFor="+"
+                helpContextId="sectionplot"
+                icon="icons/sectionview-16.png"
+                id="org.geocraft.ui.sectionviewer.SectionPlot"
+                label="Section View"
+                menubarPath="org.geocraft.ui.repository.plotview/additions">
+         	</action>
+         </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.geocraft.ui.viewer.dataviewer.preferences"
+            class="org.geocraft.ui.sectionviewer.preference.PreferencePage"
+            id="org.geocraft.ui.sectionviewer.preferences"
+            name="Section Viewer">
+      </page>
+      <page
+            category="org.geocraft.ui.sectionviewer.preferences"
+            class="org.geocraft.ui.sectionviewer.renderer.seismic.SeismicDatasetRendererPreferencePage"
+            id="org.geocraft.ui.sectionviewer.seismic.preferences"
+            name="Seismic">
+      </page>
+      <page
+            category="org.geocraft.ui.sectionviewer.preferences"
+            class="org.geocraft.ui.sectionviewer.renderer.grid.GridRendererPreferencePage"
+            id="org.geocraft.ui.sectionviewer.grid.preferences"
+            name="Grids">
+      </page>
+      <page
+            category="org.geocraft.ui.sectionviewer.preferences"
+            class="org.geocraft.ui.sectionviewer.renderer.well.WellRendererPreferencePage"
+            id="org.geocraft.ui.sectionviewer.well.preferences"
+            name="Wells">
+      </page>
+      <page
+            category="org.geocraft.ui.sectionviewer.preferences"
+            class="org.geocraft.ui.sectionviewer.renderer.fault.FaultRendererPreferencePage"
+            id="org.geocraft.ui.sectionviewer.fault.preferences"
+            name="Faults">
+      </page>
+      <page
+            category="org.geocraft.ui.sectionviewer.preferences"
+            class="org.geocraft.ui.sectionviewer.renderer.pointset.PointSetRendererPreferencePage"
+            id="org.geocraft.ui.sectionviewer.pointset.preferences"
+            name="Point Sets">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="help/html/contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/html/sview_toc.xml"
+            primary="false">
+      </toc>
+   </extension>
+   <extension
+         point="org.geocraft.ui.sectionviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.sectionviewer.renderer.seismic.PostStack3dRenderer"
+            name="PostStack3d Renderer">
+         <object
+               type="PostStack3d">
+         </object>
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.sectionviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.sectionviewer.renderer.seismic.PostStack2dRenderer"
+            name="PostStack2d Renderer">
+         <object
+               type="PostStack2d">
+         </object>
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.sectionviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.sectionviewer.renderer.seismic.PreStack3dRenderer"
+            name="PreStack3d Renderer">
+         <object
+               type="PreStack3d">
+         </object>
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.sectionviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.sectionviewer.renderer.grid.Grid3dRenderer"
+            name="Grid3d Renderer">
+         <object
+               type="Grid3d">
+         </object>
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.sectionviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.sectionviewer.renderer.pointset.PointSetRenderer"
+            name="PointSet Renderer">
+         <object
+               type="PointSet">
+         </object>
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.sectionviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.sectionviewer.renderer.well.WellRenderer"
+            name="Well Renderer">
+         <object
+               type="Well">
+         </object>
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.sectionviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.sectionviewer.renderer.fault.FaultRenderer"
+            name="Fault Surface Renderer">
+         <object
+               type="FaultInterpretation">
+         </object>
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.sectionviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.sectionviewer.renderer.grid.Grid2dRenderer"
+            name="Grid2d Renderer">
+         <object
+               type="Grid2d">
+         </object>
+      </renderer>
+   </extension>
+
+</plugin>

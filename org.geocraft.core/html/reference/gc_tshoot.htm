@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GeoCraft Troubleshooting</title>
+<meta name="Keywords" content="GeoCraft troubleshooting, troubleshooting, correcting problems, problems with GeoCraft, resolving problems" />
+</head>
+<body>
+<h1>GeoCraft Troubleshooting</h1>
+	<p>This topic contains brief descriptions of GeoCraft problems you may encounter, and ways to resolve those problems.</p>
+				<table border="1">
+					<tr>
+					<td><strong>Description of Problem</strong></td>
+					<td><strong>Explanation and Resolution</strong></td>
+					</tr>
+					<tr>
+					<td>When I click <strong>Run</strong> in an algorithm panel, GeoCraft does 
+					not perform any action.</td>
+					<td>The GeoCraft repository probably already contains a file with the name that would 
+					result from the output of the calculation (the value in the <strong>Output Name</strong> or 
+					<strong>Name</strong> field, in	most algorithms). See 
+					<a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> 
+					GeoCraft File-naming Requirements</a> for details.</td>
+					</tr>
+					<tr>
+					<td>I tried to edit a data set in GeoCraft, but could not.</td>
+					<td><p>Data loss or corruption can occur because:</p> 
+					<ul>
+					<li>the data set was edited in third-party software while GeoCraft was 
+					processing the data; see <a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/gcfund_ed_3rdptysw.htm"> 
+					Editing Data Sets in Third-party Software While GeoCraft is Processing the Data for details</a> <em>or</em></li>
+					<li>you had two versions of GeoCraft running simultaneously, and you tried to 
+					edit or process the same data set in both running versions of GeoCraft at once. See 
+					<a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/gcfund_multi_inst_gc.htm"> 
+					Running Multiple Instances of GeoCraft at Once</a> for details.</li>
+					</ul></td>
+					</tr>
+					<tr>
+					<td>I want to view information in a window (such as Properties, the Repository, 
+					or the Error Log), but GeoCraft is not displaying that window.</td>
+					<td>The window may have been closed by mistake. To resolve this issue, either reset <a href="PLUGINS_ROOT/org.geocraft.core/html/UI_Elements/gc_resetdefault.htm">GeoCraft 
+					to its default layout settings</a>,	or <a href="PLUGINS_ROOT/org.geocraft.core/html/UI_Elements/gc_restorewindow.htm">restore 
+					(open) the window</a> that you want to use.</td>
+					</tr>
+			</table>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

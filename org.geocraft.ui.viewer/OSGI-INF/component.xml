@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component immediate="true" name="org.geocraft.ui.viewer">
+   <implementation class="org.geocraft.ui.viewer.ViewersService"/>
+   <service>
+      <provide interface="org.geocraft.core.service.viewer.IViewersService"/>
+   </service>
+</component>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+ 	<component name="io ui" immediate="true">
+ 	        <implementation class="org.geocraft.internal.ui.io.ServiceComponent"/>
+ 	        <reference bind="setRepository" cardinality="1..1" interface="org.geocraft.core.repository.IRepository" name="repository" policy="dynamic" unbind="unsetRepository"/>
+ 	        <reference bind="setDatastoreAccessorService" cardinality="1..1" interface="org.geocraft.core.io.IDatastoreAccessorService" name="datastoreAccessorService" policy="dynamic" unbind="unsetDatastoreAccessorService"/>
+ 	        <reference bind="setDatastoreAccessorUIService" cardinality="1..1" interface="org.geocraft.ui.form2.IDatastoreAccessorUIService" name="datastoreAccessorUIService" policy="dynamic" unbind="unsetDatastoreAccessorUIService"/>
+ 	</component>

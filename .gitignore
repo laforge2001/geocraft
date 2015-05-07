@@ -1,0 +1,6 @@
+bin/
+.metadata/
+.svn/
+*~
+com.cop.*/
+.recommenders/

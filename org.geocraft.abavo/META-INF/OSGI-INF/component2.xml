@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<component name="regressionMethodService" immediate="true">
+	<implementation class="org.geocraft.internal.abavo.ServiceComponent"/>
+	<reference bind="addService" cardinality="1..1" interface="org.geocraft.math.regression.IRegressionMethodService" name="regressionMethodService" policy="dynamic" unbind="removeService"/>
+</component>

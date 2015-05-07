@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Util Plug-in
+Bundle-SymbolicName: org.geocraft.io.util
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: ConocoPhillips
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.geocraft.io.util;
+  uses:="org.geocraft.core.model,
+   org.geocraft.core.model.aoi,
+   org.geocraft.core.model.mapper,
+   org.geocraft.core.model.datatypes",
+ org.geocraft.io.util.subvolume,
+ org.geocraft.io.util.volume
+Require-Bundle: org.geocraft.core;bundle-version="1.0.0"

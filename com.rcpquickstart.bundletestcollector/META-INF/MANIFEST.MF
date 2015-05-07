@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Testcollector Plug-in
+Bundle-SymbolicName: com.rcpquickstart.bundletestcollector
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.rcpquickstart.internal.bundletestcollector.Activator
+Bundle-Vendor: RCPQUICKSTART
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit;bundle-version="3.8.2"
+Bundle-ActivationPolicy: lazy
+Export-Package: com.rcpquickstart.bundletestcollector,
+ com.rcpquickstart.internal.bundletestcollector;x-internal:=true
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

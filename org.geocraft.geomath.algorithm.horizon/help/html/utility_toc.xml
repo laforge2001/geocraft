@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Horizon Utility Algorithms" link_to="help/html/horizon_toc.xml#horizonUtilityAlgorithms">
+   <topic href="help/html/clip_grid.htm" label="Clip Algorithm">
+   </topic>
+   <topic href="help/html/horizon_convert.htm" label="Convert Horizon Algorithm">
+   </topic>
+   <topic href="help/html/decimate.htm" label="Decimate Horizon Algorithm">
+   </topic>
+   <topic href="help/html/erase_area.htm" label="Erase Area Algorithm">
+   </topic>
+   <topic href="help/html/ExtractArea.htm" label="Extract Area">
+   </topic>
+   <topic href="help/html/extrapolate.htm" label="Extrapolate Algorithm">
+   </topic>
+   <topic href="help/html/gridlines.htm" label="Grid Lines Algorithm">
+   </topic>
+   <topic href="help/html/HorizonMerge.htm" label="Horizon Merge">
+   </topic>
+</toc>

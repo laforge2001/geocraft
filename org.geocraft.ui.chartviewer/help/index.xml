@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<index version="1.0">
+	<entry keyword="Histogram Viewer">
+		<topic href="help/histogram.htm" />
+	</entry>
+	<entry keyword="GeoCraft Programming Examples: Charting API Code">
+		<topic href="help/gcapi.htm" />
+	</entry>
+</index>

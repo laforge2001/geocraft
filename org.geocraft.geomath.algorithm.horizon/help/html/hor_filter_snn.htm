@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Symmetric Nearest Neighbor Algorithm</title>
+<meta name="Keywords" content="symmetric nearest neighbor algorithm, SNN algorithm, smoothing, mean, noise reduction" />
+</head>
+<body>
+<h1>Symmetric Nearest Neighbor Algorithm</h1>
+	<p>The Symmetric Nearest Neighbor (SNN) filter algorithm compares each pixel inside a kernel with the 
+	pixel that is directly opposite of it inside the kernel. Linear filters work by convolution within a moving window 
+	that is called a <em>kernel</em>. The input pixel is at the center of the kernel. The nonzero part of the kernel is 
+	the kernel <em>support</em>.</p>
+	<h2>Overview of the Symmetric Nearest Neighbor Algorithm</h2>
+		<p>The SNN filter preserves the edges of a data set, and is very effective at noise reduction. SNN compares opposite 
+		pairs of pixels in the support, and selects the pixel from each pair that is closest in value to the central input
+		pixel. Then, SNN returns the mean of the selected pixels.</p>
+		<p><strong>Tip</strong>: The SNN filter is a good choice when you need to filter a faulted horizon, and you must 
+		preserve the edges of the horizon. SNN is a versatile filter.</p>
+	<h2>Using the GeoCraft SNN Algorithm to Filter a Seismic Horizon</h2>
+		<ol>
+			<li>Load seismic horizon data into GeoCraft.</li>
+			<li>Select a <strong>Horizon</strong>.</li>
+			<li>Accept the <strong>Size</strong>, or type in a new value. The size is the number of inlines
+			and xlines in the sample.</li>
+			<p><strong>Tip</strong>: Size must be an odd number that is 3 or greater.</p>
+			<li>Accept the <strong>Name</strong>, or type in a new one. Make sure that the name 
+			complies with <a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> GeoCraft file-naming requirements</a>.</li>
+			<li><em>Optional</em> Type in <strong>Comments</strong>. Text typed in this field displays in the 
+			<strong>Property</strong>view when the new horizon is selected in the <strong>Repository</strong>.</li>
+			<li>Click <strong>Run</strong>.</li>
+				<p>GeoCraft runs the calculation, and creates the new, smoothed, horizon. The new horizon is in the 
+				<strong>Repository</strong>, under the <strong>Grids</strong> folder.</p>
+			<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+		</ol>
+	<h3>References</h3>
+		<p>To learn more about the filters used to smooth horizon data, see the following journal article:</p> 
+		<p>Hall, Matt T. "Smooth Operator: Smoothing Seismic Interpretations and Attributes." 
+		<u>The Leading Edge</u> 26.1 (2007): 16-20.</p>
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="hor_linear_algorithms.htm">Linear filter algorithms</a></li>
+			<li><a href="hor_filter_kuwahara.htm">Kuwahara filter algorithm</a></li>
+			<li><a href="hor_linear_filter.htm">Linear filter algorithm</a></li>
+		</ul>
+	<p></p>
+	<h3>Related Topics</h3>
+		<li><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Editing Grid Values in a Spreadsheet View</a></li>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

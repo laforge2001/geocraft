@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Review id="VelocityModelCheckerReview">
+    <ReviewIssue id="FMMER2OJ">
+        <ReviewIssueMeta>
+            <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2008-10-22 :: 15:18:26:515 CDT</CreationDate>
+            <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2008-10-22 :: 15:18:39:142 CDT</LastModificationDate>
+        </ReviewIssueMeta>
+        <ReviewerId>duncan</ReviewerId>
+        <AssignedTo>eric</AssignedTo>
+        <File></File>
+        <Type>item.type.label.optimization</Type>
+        <Severity>item.severity.label.normal</Severity>
+        <Summary>javadoc </Summary>
+        <Description>what are the numbers?</Description>
+        <Annotation></Annotation>
+        <Revision></Revision>
+        <Resolution>item.resolution.label.unsureValidity</Resolution>
+        <Status>item.status.label.open</Status>
+    </ReviewIssue>
+    <ReviewIssue id="FMMERNR0">
+        <ReviewIssueMeta>
+            <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2008-10-22 :: 15:18:53:820 CDT</CreationDate>
+            <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2008-10-22 :: 16:00:47:393 CDT</LastModificationDate>
+        </ReviewIssueMeta>
+        <ReviewerId>duncan</ReviewerId>
+        <AssignedTo>eric</AssignedTo>
+        <File></File>
+        <Type>item.type.label.optimization</Type>
+        <Severity>item.severity.label.normal</Severity>
+        <Summary>integer?</Summary>
+        <Description>what does value mean?</Description>
+        <Annotation></Annotation>
+        <Revision></Revision>
+        <Resolution>item.resolution.label.validFixlater</Resolution>
+        <Status>item.status.label.open</Status>
+    </ReviewIssue>
+    <ReviewIssue id="FMMESO49">
+        <ReviewIssueMeta>
+            <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2008-10-22 :: 15:19:40:953 CDT</CreationDate>
+            <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2008-10-22 :: 15:19:46:647 CDT</LastModificationDate>
+        </ReviewIssueMeta>
+        <ReviewerId>duncan</ReviewerId>
+        <AssignedTo>eric</AssignedTo>
+        <File></File>
+        <Type>item.type.label.optimization</Type>
+        <Severity>item.severity.label.normal</Severity>
+        <Summary>delete?</Summary>
+        <Description></Description>
+        <Annotation></Annotation>
+        <Revision></Revision>
+        <Resolution>item.resolution.label.unsureValidity</Resolution>
+        <Status>item.status.label.open</Status>
+    </ReviewIssue>
+    <ReviewIssue id="FMMET3TB">
+        <ReviewIssueMeta>
+            <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2008-10-22 :: 15:20:01:295 CDT</CreationDate>
+            <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2008-10-22 :: 15:57:44:914 CDT</LastModificationDate>
+        </ReviewIssueMeta>
+        <ReviewerId>duncan</ReviewerId>
+        <AssignedTo>eric</AssignedTo>
+        <File></File>
+        <Type>item.type.label.optimization</Type>
+        <Severity>item.severity.label.normal</Severity>
+        <Summary>lame javadoc</Summary>
+        <Description></Description>
+        <Annotation></Annotation>
+        <Revision></Revision>
+        <Resolution>item.resolution.label.validNeedsfixing</Resolution>
+        <Status>item.status.label.open</Status>
+    </ReviewIssue>
+</Review>

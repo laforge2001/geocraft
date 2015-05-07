@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Troubleshooting ABAVO Problems</title>
+<meta name="Keywords" content="troubleshooting ABAVO problems, resolving ABAVO issues, ABAVO" />
+</head>
+<body>
+<h1>Troubleshooting ABAVO Problems</h1>
+	<p>This topic provides descriptions for some common ABAVO problems, and tells you how to resolve each problem.</p>
+		<table border="1">
+					<tr>
+					<td><strong>Symptom</strong></td>
+					<td><strong>Cause</strong></td>
+					<td><strong>Resolution</strong></td>
+					</tr>
+					<tr>
+					<td>ABAVO is taking a long time to draw crossplots.</td>
+					<td>You may be creating one or more crossplots that contain data sets with more than 200,000 points.</td>
+					<td>See <strong>Reducing the Amount of Time ABAVO Takes to Draw a Crossplot</strong> in <a href="abavo_performance.htm">ABAVO: Tips for 
+					Using the Plug-in and Improving Its Performance</a></td>
+					</tr>
+					<tr>
+					<td>The Color Class Background does not display when ABAVO draws a background and event ellipse.</td>
+					<td>You must use the same Active Series data number <em>and</em> the same regression line to create the background
+					and event ellipses. If you select a different regression line or Active Series of data, the background color
+					will not display.</td>
+					<td>See <strong>Use the Same Active Series Data and Regression Line to Create the Background <em>and</em> Event Ellipses
+					</strong> in <a href="abavo_performance.htm">ABAVO: Tips for Using the Plug-in and Improving Its Performance</a></td>
+					</tr>
+					<tr>
+					<td>The Color Class Background and Region Bounds do not display when ABAVO creates the background and event ellipses.</td>
+					<td>When the Class Background or Region Bounds do not display, it is usually because some of the region lines
+					are crossed.</td>
+					<td><p>Perform the following procedure to resolve the issue.</p>
+						<ol>
+							<li>Turn off the data points for the background and event ellipse data.</li>
+							<li>See if any region lines cross each other.</li>
+							<li>If region lines do cross each other, correct the problem:</li>
+								<ol type="a">
+									<li>Perform the steps in <a href="abavo_trouble_linepos.htm">Changing Line Position in a Crossplot</a>.</li>
+									<li>Repeat the procedure in step <strong>a</strong> until all region lines are no longer crossed.</li>
+									<li>Press mouse button 3 to refresh the ABAVO crossplot window.</li>
+								</ol>
+						</ol>
+					</td>
+					</tr>
+					<tr>
+					<td>The Color Class Background does not match the Region Lines.</td>
+					<td>The region lines within the plot need to be updated.</td>
+					<td>Position the cursor in the Crossplot window and click mouse button 3 (MB3) to refresh the plot.</td>
+					</tr>
+					<tr>
+					<td>I updated the region lines within the Crossplot, but the Color Class Background <em>still</em> does not match the region lines.</td>
+					<td>A setting on the Ellipse Model table needs to be changed.</td>
+					<td>
+						<ol>
+							<li>Click <strong>Edit Ellipse Model</strong>.</li>
+							<li>Clear the <strong>Symmetry Lock on Region Bounds</strong> check box.</li>
+							<li>Click <strong>Apply</strong>.</li>
+						</ol>
+					</td>
+					</tr>
+					<tr>
+					<td>I lost my existing data sets (or, existing data sets were overwritten when a crossplot was generated).</td>
+					<td>You ran an ABAVO calculation <em>before</em> you selected a new Active Series number in the <strong>Crossplot</strong> window.
+					The previous data that was associated with the Active Series number is lost; it cannot be retrieved.</td>
+					<td>Select a new Active Series number before you run each new ABAVO job.</td>
+					</tr>
+					<tr>
+					<td>The Java Virtual Machine (JVM) runs out of memory and I cannot create crossplots.</td>
+					<td>You may be creating one or more crossplots that contain data sets with more than 200,000 points.</td>
+					<td>See <strong>Reducing the Amount of Time ABAVO Takes to Draw a Crossplot</strong> in <a href="abavo_performance.htm">ABAVO: Tips for 
+					Using the Plug-in and Improving Its Performance</a></td>
+					</tr>
+					</table>
+		<h3>Related Topics</h3>
+			<ul>
+				<li><a href="abavo_intro.htm">Introduction to ABAVO</a></li>
+				<li><a href="abavo_beforeusing.htm">Before Using ABAVO</a></li>
+				<li><a href="abavo_performance.htm">Improving ABAVO Performance</a></li>
+			</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

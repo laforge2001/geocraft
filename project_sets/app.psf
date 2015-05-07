@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.tigris.subversion.subclipse.core.svnnature">
+<project reference="0.9.3,https://wush.net/svn/geocraft/app/trunk/org.geocraft.geomath,org.geocraft.geomath"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/app/trunk/org.geocraft.gnuplot,org.geocraft.gnuplot"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/app/trunk/org.geocraft.abavo,org.geocraft.abavo"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/app/trunk/org.geocraft.geomath.help,org.geocraft.geomath.help"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/app/trunk/org.geocraft.geomath.algorithm.ui,org.geocraft.geomath.algorithm.ui"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/app/trunk/org.geocraft.feature,org.geocraft.feature"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/app/trunk/org.geocraft.geomath.feature,org.geocraft.geomath.feature"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/app/trunk/org.geocraft.abavo.feature,org.geocraft.abavo.feature"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/app/trunk/org.geocraft.ui.viewer.feature,org.geocraft.ui.viewer.feature"/>
+</provider>
+</psf>

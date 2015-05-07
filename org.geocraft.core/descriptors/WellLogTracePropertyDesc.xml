@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Define the properties for a data file entity and their categories. -->
+<entity-properties entity="WellLogTrace">
+	<!-- There are no properties at the top of the property tree -->
+    <category name="" />
+	
+    <category name="General">
+        <property id="Datastore" display="Datastore"/>
+        <property id="ProjectName" display="Project"/>
+        <property id="StorageDirectory" display="Storage Directory"/>
+        <property id="Comment" display="Comments"/>
+        <property id="LastModifiedDate" display="Modification date"/>
+		<property id="Well" display="Well"/>
+        <property id="isDirty" display="Dirty?"/>
+    </category>
+    
+    <category name="Header">
+		<property id="TraceMnemonic" display="Log mnemonic"/>
+		<property id="TraceName" display="Log name"/>
+		<property id="TraceProcess" display="Log process"/>
+		<property id="TraceType" display="Log type"/>
+		<property id="TraceVersion" display="Log version"/>
+		<property id="CreationDate" display="Created"/>
+		<property id="NumSamples" display="# of samples"/>
+		<property id="LogPass" display="Log pass"/>
+		<property id="RunNumber" display="Run #"/>
+		<property id="ServiceName" display="ServiceName"/>
+		<property id="SoftwareSource" display="Software source"/>
+		<property id="CreationUserID" display="Creation user ID"/>
+		<property id="UpdateUserID" display="Update user ID"/>
+		<property id="ZTop" display="Top MD"/>
+		<property id="ZBase" display="Base MD"/>
+    </category>
+   
+    <category name="Data">
+        <property id="DataSource" display="Source"/>
+		<property id="DataUnit" display="Unit"/>
+		<property id="MinValue" display="Min"/>
+		<property id="MaxValue" display="Max"/>
+		<property id="NullValue" display="Null"/>
+    </category>
+	
+	<!-- Excluded displayable properties -->
+	<exclude>
+		<property id="EntityType" display="Entity type" />
+		<property id="DisplayName" display="Display name" />
+	</exclude>
+
+</entity-properties>

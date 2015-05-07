@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Property Plug-in
+Bundle-SymbolicName: org.geocraft.ui.property;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
+ org.eclipse.ui;bundle-version="3.4.0",
+ org.eclipse.ui.views;bundle-version="3.3.0",
+ org.eclipse.ui.navigator;bundle-version="3.3.101",
+ org.eclipse.ui.forms;bundle-version="3.3.101",
+ org.geocraft.core;bundle-version="1.0.0",
+ org.geocraft.ui.common;bundle-version="1.0.0",
+ org.geocraft.ui.repository;bundle-version="1.0.0",
+ org.geocraft.ui.model;bundle-version="1.0.0",
+ org.geocraft.product;bundle-version="1.0.0",
+ org.geocraft.algorithm;bundle-version="1.0.0",
+ org.geocraft.ui.form2;bundle-version="1.0.0"
+Bundle-Vendor: ConocoPhillips
+Export-Package: org.geocraft.ui.property
+Import-Package: org.geocraft.algorithm,
+ org.geocraft.core.common.model,
+ org.geocraft.geomath.algorithm.ui,
+ org.geocraft.internal.geomath,
+ org.geocraft.internal.geomath.view

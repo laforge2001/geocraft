@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="GeoMath"
+            id="org.geocraft.geomath.category">
+      </category>
+      <view
+            class="org.geocraft.internal.geomath.view.AlgorithmsView"
+            icon="icons/function.png"
+            id="org.geocraft.geomath.views.AlgorithmsView"
+            name="Algorithms"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.geocraft.internal.geomath.GeoMathPerspective"
+            icon="icons/function.png"
+            id="GeoMath.perspective"
+            name="GeoMath Algorithms">
+      </perspective>
+   </extension>
+</plugin>

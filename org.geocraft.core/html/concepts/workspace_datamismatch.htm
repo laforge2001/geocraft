@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GeoCraft Session: Loading Data that Does Not Match Unit Preferences</title>
+<meta name="Keywords" content="GeoCraft Session: Loading Data that Does Not Match Unit Preferences" />
+</head>
+<body>
+<h1>GeoCraft Sessions: Loading Data that Does Not Match Unit Preferences</h1>
+	<p>Project data that you load into GeoCraft should match the unit preferences defined in your 
+	GeoCraft workspace. If you load data into GeoCraft that is in different units, 
+	GeoCraft will load the data but will convert the units to match the session unit system. GeoCraft 
+	does not change projection coordinate systems, nor data units, such as velocity in m/sec to ft/sec.</p>
+	<p>See the following topics for a detailed explanation about how GeoCraft handles units, and unit mismatches when data are loaded:</p>
+		<ul>
+			<li><a href="workspace_datamismatch.htm">Loading Data that Does Not Match Unit Preferences</a></li>
+			<li><a href="gc_uom_concept.htm">Unit Preference Settings and How GeoCraft Performs Data Unit Conversions</a></li>
+		</ul>
+	<p>When data is about to be loaded from a different unit system, GeoCraft will display a warning message in the 
+	<strong>Load</strong> dialog box, as shown below.</p> 
+	
+	<p><img src="unitwarn.gif" alt="GeoCraft warning message indicating that units for data being 
+	loaded do not match unit preferences for workspace session" /></p>
+	<p>Generally, units should not matter. However, if a session could be saved in one unit system
+	and then restored later in another unit system, there is the potential for X,Ys to be in error. 
+	To help prevent this GeoCraft sessions have a fixed unit system which cannot be changed. If 
+	another session is restored, the unit system of that session is maintained.</p>
+	 
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="gc_sessions.htm">The GeoCraft Session</a></li>
+			<li><a href="gc_svsessions.htm">Saving a GeoCraft Session</a></li>
+			<li><a href="workspace_multi.htm">Creating Multiple Sessions</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

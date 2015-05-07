@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Define the properties for a data file entity and their categories. -->
+<entity-properties entity="Grid3d">
+	<!-- There are no properties at the top of the property tree -->
+    <category name="" />
+	
+    <category name="General">
+        <property id="Datastore" display="Datastore"/>
+        <property id="ProjectName" display="Project"/>
+        <property id="EarthModel" display="Earth Model"/>
+        <property id="GeologicFeature" display="Geological Feature"/>
+        <property id="DataSource" display="Data Source"/>
+        <property id="Interpreter" display="Interpreter"/>
+        <property id="StorageDirectory" display="Storage Directory"/>
+        <property id="Comment" display="Comments"/>
+        <property id="LastModifiedDate" display="Modification Date"/>
+        <property id="isDirty" display="Dirty?"/>
+    </category>
+    
+    <category name="Geometry">
+        <property id="DatumElevation" display="Elev. Datum"/>
+        <property id="Geometry" display="Geometry"/>
+        <property id="NumRows" display="Row Count"/>
+        <property id="NumColumns" display="Column Count"/>
+    </category>
+    
+    <category name="Data">
+        <property id="OnsetType" display="Onset Type"/>
+        <property id="DataUnit" display="Data Unit"/>
+        <property id="MinValue" display="Min. Value"/>
+        <property id="MaxValue" display="Max. Value"/>
+        <property id="NullValue" display="Null Value"/>
+    </category>
+	
+	<!-- Excluded displayable properties -->
+	<exclude>
+		<property id="EntityType" display="Entity Type" />
+		<property id="DisplayName" display="Display Name" />
+	</exclude>
+
+</entity-properties>

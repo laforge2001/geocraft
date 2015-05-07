@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Define the properties for a data file entity and their categories. -->
+<entity-properties entity="Layer">
+	<!-- There are no properties at the top of the property tree -->
+    <category name="" />
+	
+    <category name="File">
+        <property id="ProjectName" display="Project"/>
+        <property id="LastModifiedDate" display="Modification date"/>
+        <property id="isDirty" display="Dirty?"/>
+    </category>
+    
+    <category name="Data">
+        <property id="Description" display="Description"/>
+        <property id="Owner" display="Owner"/>
+        <property id="CoordinateSystemName" display="Coordinate System"/>
+		<property id="FeatureNameAttribute" display="Feature Attribute"/>
+		<property id="is3D" display="3D?"/>
+		<property id="isMeasured" display="Measured?"/>
+    </category>
+    
+    <category name="General">
+        <property id="Comment" display="Comments"/>
+    </category>
+	
+	<!-- Excluded displayable properties -->
+	<exclude>
+		<property id="EntityType" display="Entity type" />
+		<property id="DisplayName" display="Display name" />
+	</exclude>
+
+</entity-properties>

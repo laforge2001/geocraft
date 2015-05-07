@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Selecting Processing Bounds for ABAVO Data</title>
+<meta name="Keywords" content="Class Background, ABAVO, ABAVO class background, processing bounds, processing bounds tab" />
+</head>
+<body>
+<h1>Selecting Processing Bounds for ABAVO Data</h1>
+		<p>This section discusses setting processing limits for creating the ABAVO Crossplot. It also covers 
+		limiting processing for generating the Class volume and the A+B volume. Processing is primarily limited by 
+		either restricting the inline or the xline range of the input volume. Limiting the inline and/or xline 
+		range reduces the number of points displayed in the crossplot. If over 200,000 points are displayed, 
+		the crossplot may take several seconds to display.  In order to focus on a single horizon, you must 
+		also set up time or depth ranges for both the background series and the anomaly series. These windows 
+		can be either constant times or depths, or they can be horizon based.</p>
+	<ol>
+		<li>You can limit the number of points to crossplot by either selecting an AOI, or by specifying inline 
+		and xline ranges directly.</li>
+		<li><em>Optional</em> Select an <strong>Area of Interest</strong>.</li>
+	<li>If you did not select an AOI as part of the processing boundary, accept the default Inline and Xline  
+	ranges or type new Start and End values into any of the following fields:</li>
+		<ul>
+			<li><strong>Start Inline</strong></li>
+			<li><strong>End Inline</strong></li>
+			<li><strong>Start Xline</strong></li>
+			<li><strong>End Xline</strong></li>
+		</ul>
+	<li>Select a <strong>Time Mode</strong> for each data series. The option you select will dictate the fields that 
+	are available for data input.</li>
+		<ul>
+			<li><strong>Between Times or Depths</strong>: if you select this option you will type values in 
+			the <strong>Start Time (Depth)</strong> and <strong>End Time (Depth)</strong> fields.</li>
+			<li><strong>Relative to Horizon</strong>: if you select this option you must specify a <strong>Top 
+			Horizon</strong> and type values in the <strong>Relative Start</strong> and <strong>Relative End</strong> 
+			fields, such as -20 and 20 to begin 20 ms above the horizon and end 20 ms after the horizon. If input 
+			is in depth, these values are in the preferred depth unit.</li>
+			<li><strong>Relative to Horizons</strong>: if you select this option you must specify a <strong>Top 
+			Grid</strong> and <strong>Base Grid</strong>, and then type values in the <strong>Relative Start</strong> 
+			and <strong>Relative End</strong> fields, such as -20 and 20 to begin 20 ms above the horizon and end 20 
+			ms after the horizon. If input is in depth, these values are in the preferred depth unit.</li>
+		</ul>
+	</ol>
+	<p>You are now ready to press <em>Run</em>. Please refer to the 
+	<a href="http://www.wush.net/trac/geocraft/wiki/TutorialAbavo"> ABAVO Tutorial </a> for information regarding 
+	selecting AVO class regions.</p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

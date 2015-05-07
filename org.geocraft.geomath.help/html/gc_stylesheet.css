@@ -1,0 +1,137 @@
+a:link { color: #0000FF; }
+a:visited {color: #FF00FF; }
+a:hover { color: #00CCFF; }
+a:active { color: #FF0000; }
+
+body {	
+	background-color: #FFFACD;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	color: #000;
+	text-align: left;
+	line-height: normal;	
+	margin: 1em;
+}
+
+code {	
+	background-color: silver;
+	font-family: Courier, monospace;
+	font-size: 1em;
+	color: #000;
+	text-align: left;
+	line-height: normal;	
+}
+
+/*Common Property Values for Table Selectors; Color Property Set So Table Text Colors Do Not Default in Older Browsers*/
+table, td, th {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	color: #000;
+	text-align: left;
+}
+
+p {
+	margin: auto;
+	padding-bottom: 1em;
+}
+
+/*Lists*/
+ul-1 {
+	text-indent: -2em;
+	display: list-item;
+	list-style-type: disc;
+	margin-left: 2em;
+	padding-left: 1em;
+}
+ul-2 {
+	text-indent: -3em;
+	display: list-item;
+	list-style-type: disc;
+	margin-left: 4em;
+	padding-left: 1em;
+}
+alpha1 {
+	text-indent: -2em;
+	display: list-item;
+	list-style-type: lower-alpha;
+	margin-left: 2em;
+	padding-left: 1em;
+}
+alpha2 {
+	text-indent: -3em;
+	display: list-item;
+	list-style: lower-alpha;
+	margin-left: 3em;
+	padding-left: 1em;
+}
+listcontinue1 {
+	text-indent: -2em;
+	list-style: none outside;
+	margin-left: 2em;
+	padding-left: 1em;
+}
+listcontinue2 {
+	text-indent: -3em;
+	display: list-item;
+	list-style: none outside;
+	margin-left: 3em;
+	padding-left: 1em;
+}
+
+ol-1 {
+	text-indent: -2em;
+	list-style: decimal outside;
+	margin-left: 2em;
+	padding-left: 1em;
+	display: list-item;
+}
+ol-2 {
+	text-indent: -3em;
+	display: list-item;
+	list-style: decimal outside;
+	margin-left: 3em;
+	padding-left: 1em;
+}
+/*Common Property Values in Heading Style Selectors*/
+h1, h2, h3 {
+    color: #000080;
+    font-weight: bold;
+	padding-top: 1em;
+}
+
+h1 {	
+	font-size: 2em;
+	margin-top: auto;
+}
+h2 {
+	font-size: 1.5em;
+	}
+h3 {
+	font-size: 1.15em;
+}
+/*Special Paragraph Style Selectors*/
+img {
+    border: 1px solid #000;
+	text-indent: 3em;
+}
+imagecaption {
+	font-style: italic;
+	text-indent: 3.5em;
+	padding-top: 1px;   
+}
+/*Elements and identifiers*/
+blockquote {
+	border:thin
+	color: #000
+	background-color: silver
+	margin-left: 5em
+	margin-bottom: 1em
+	margin-top: 1em
+	margin: right: 1em
+} 
+
+<div id ="coding example">
+	background-color: silver
+	<blockquote>
+	<p></p>
+</div>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="Core Services">
+   <implementation class="org.geocraft.core.service.ServiceProvider"/>
+   <reference bind="setViewersService" cardinality="1..1" interface="org.geocraft.core.service.viewer.IViewersService" name="Viewer Service" policy="static" unbind="unsetViewersService"/>
+   <reference bind="setRepository" cardinality="1..1" interface="org.geocraft.core.repository.IRepository" name="Repository Service" policy="static" unbind="unsetRepository"/>
+   <reference bind="setLoggingService" cardinality="1..1" interface="org.geocraft.core.service.logging.ILoggingService" name="Logging Service" policy="static" unbind="unsetLoggingService"/>
+   <reference bind="setMessageService" cardinality="1..1" interface="org.geocraft.core.service.message.IMessageService" name="Message Service" policy="static" unbind="unsetMessageService"/>
+   <reference bind="setAlgorithmsService" cardinality="1..1" interface="org.geocraft.core.service.algorithm.IAlgorithmsService" name="Algorithm Service" policy="static" unbind="unsetAlgorithmsService"/>
+   <reference bind="setDatastoreAccessorService" cardinality="1..1" interface="org.geocraft.core.io.IDatastoreAccessorService" name="Datastore Accessor Service" policy="static" unbind="unsetDatastoreAccessorService"/>
+   <reference bind="bindColorMapService" cardinality="1..1" interface="org.geocraft.core.service.color.IColorMapService" name="Color Map Service" policy="static" unbind="unbindColorMapService"/>
+   <reference bind="bindColorFormatService" cardinality="1..1" interface="org.geocraft.core.service.color.IColorFormatService" name="Color Format Service" policy="static" unbind="unbindColorFormatService"/>
+</component>

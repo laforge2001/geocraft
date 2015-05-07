@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Horizon Merge</title>
+<meta name="Keywords" content="Horizon Merge, Min Max Or operation on multiple horizons, minimum operation on many horizons, 
+maximum operation on many horizons, OR operation on many horizons" />
+</head>
+<body>
+<h1>Horizon Merge</h1>
+<p>The Horizon Merge algorithm allows you to merge horizons by performing Minimum, Maximum, or OR operations on several horizons.</p>
+<p><strong>Note</strong>: You must use horizons with exactly the same geometry in your calculations to merge the horizons; if the 
+geometries of the horizons differ, this algorithm will not work.</p>
+<h2>Overview of the Horizon Merge</h2>
+<p>Horizon Merge is similar to algorithms in the Basic Math (Minimum and Maximum) and Boolean Algebra (OR) algorithms, but you may 
+select an unlimited number of horizons for this operation (the Basic Math and Boolean Algebra algorithms limit you to 2 input horizons).</p>
+<p><strong>Note</strong>: Once horizons are selected, the HorizonMinMaxOr allows you to change their order by moving them up or down in 
+the list. Horizons are processed in a top-down order for the OR merge operation.</p>
+<p>Horizon Merge does not modify the original input horizon(s).</p>
+<h3>How the Horizon Merge Algorithm Works</h3>
+	<ol>
+		<li>For the <em>OR</em> operation the algorithm starts with the top-most horizon <em>first</em> and searches for the
+		first non-null value in the list of input horizons at each node.</li>
+		<li>For the <em>MIN</em> and <em>MAX</em> operations the algorithm scans all input horizons, ignoring order, and outputs 
+		either the minimum or the maximum value at each node.</li>
+		<li>If all horizons are null, a null is output.</li>
+	</ol>
+<h2>Performing a Horizon Minimum, Maximum, or OR Operation on Several Horizons in a Single Run</h2>
+	<p><strong>Caution:</strong> The horizons that you create during this procedure are held in memory <em>only</em>; if you do not save them before you quit GeoCraft, 
+	you will lose the data.</p>
+	<ol>
+		<li>Load horizon data into GeoCraft.</li>
+		<li>Click the <strong>Add</strong> button next to the <strong>Horizons</strong> field.</li>
+	<p>A <strong>Selection Dialog</strong> displays, listing all of the horizons that you have loaded into GeoCraft.</p>
+		<li>Select the horizons you want to use in the calculation and click <strong>OK</strong>.</li>
+		<li>In the <strong>Horizons</strong> field, select individual horizons and use the <strong>Up</strong> and <strong>Down</strong> buttons to 
+		move the horizons toward the top or bottom of the calculation order. GeoCraft gives preferential treatment to the top-most horizon in the list when
+		trying to replace null values in other horizons within the list. If you selected a horizon you do not want, highlight the horizon and 
+		click <strong>Remove</strong>.</li>
+		<li>In <strong>The Operation to Perform</strong> field, select <strong>Minimum</strong>, <strong>Maximum</strong>, or <strong>OR</strong>.</li>
+		<li>Accept the <strong>Name</strong>, or type in a new one. Make sure that the name 
+		complies with <a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> GeoCraft file-naming requirements</a>.</li>
+		<li>Click <strong>Run</strong>.</li>
+			<p>GeoCraft performs the operations on the selected horizons, and populates the new horizons into the <strong>Repository</strong>.</p>
+		<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+	</ol>
+	<p>You may now plot and view the data in a GeoCraft viewer.</p>
+	<p></p>
+	<h3>Related Topics</h3>
+		<li><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Editing Grid Values in a Spreadsheet View</a></li>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

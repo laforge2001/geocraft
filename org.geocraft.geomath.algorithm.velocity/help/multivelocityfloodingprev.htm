@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Multi-Flooding Velocity Preview</title>
+<meta name="Keywords" content="Multi-Flooding Preview, previewing a multiple salt velocity flood, performing a quality assurance check on a
+multiple salt velocity flood calculation, visual inspection of a multiple salt velocity flood calculation" />
+</head>
+<body>
+<h1>Multi-Flooding Velocity Preview</h1>
+		<p>Multi-Flooding Velocity Preview allows you to perform a quick visual quality assurance check of horizons 
+		and parameters used in a constant velocity flood between multiple pairs of horizons at once. This is done by 
+		flooding only the current Inline and Xline in the 3D Viewer. When Run is pressed, the output volume is put 
+		on the Repository and must be displayed in the 3D Viewer. As you navigate through the volume, only the current 
+		inline and xline are processed and results are sent back to the viewer. When results are ok, the entire volume 
+		can be processed and output.</p>
+	<h2>Overview of the Multi-Flooding Preview Algorithm</h2>
+		<p>Multi-Flooding Preview performs a velocity flood with a constant velocity between several pairs of horizons, 
+		allowing you to quickly check flood results. This algorithm also differs from the standard Velocity Flood by 
+		allowing you to import several pairs of horizons and do a constant velocity flood between each pair of horizons 
+		in one pass.</p>
+
+		<p><strong>Note</strong>: When you run this algorithm, the output volume must be displayed in the 3D viewer. 
+		Whenever the Inline or Xline are changed, the algorithm is automatically re-run to process the new lines and 
+		the 3D Viewer is automatically updated. When the results are satisfactory, the entire volume can be processed 
+		by right-clicking on the output volume in the Repository, selecting Export, and specifying a data store.</p>
+
+	<h2>Performing a Quality Assurance Check on Data Sets with the Multi-Flooding Preview Algorithm</h2>
+	<p><strong>Caution</strong>: When loading data, make sure that the unit labels are correct and consistent for all 
+	input volumes <em>and</em> horizons. This is easily done by viewing the volume along with the horizons and seeing 
+	that they are in the same area.</p>
+		<ol>
+			<li>Load volume data into GeoCraft.</li>
+			<li>Load horizon data into GeoCraft.</li>
+			<li>Select an input <strong>Volume</strong>.</li>
+			<li>Click <strong>Add</strong> to select your top horizons.</li>
+			<li>In the selection dialog, highlight the horizons you want to use in the preview and click <strong>OK</strong>.</li>
+			<li><em>Optional</em> In the <strong>Top Horizons</strong> list box, highlight a horizon and click the button to 
+			<strong>Remove</strong> it from the calculation; or to move it <strong>Up</strong> or <strong>Down</strong> in the 
+			multiples calculation order.</li>
+			<li>Repeat steps 4-6 to select and order the <strong>Base Horizons</strong> for the multiples flooding preview.</li>
+			<li>Accept the <strong>Flood Velocity #<em>n</em></strong>, or type a new value in the field. Each pair of 
+			top and base horizons will have its own field to set flood velocity. This field defaults to 5000 feet per second.</li>
+			<li>Accept the <strong>Volume Name</strong>, or type a new value in the field. This is the name GeoCraft gives
+			to the new volume that results from this calculation.</li>
+			<li>Click <strong>Run</strong>.</li>
+		</ol>
+	<p>GeoCraft performs the calculation. A process bar displays while the algorithm runs.</p>
+	<p>When the algorithm completes its calculation, the Volume view opens to display the preview data.</p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

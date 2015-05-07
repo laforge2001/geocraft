@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Horizon to Area of Interest</title>
+<meta name="Keywords" content="create area of interest, AOI, area of interest, area of interest from a volume, create a 3D area of interest" />
+</head>
+<body>
+<h1>Horizon to Area of Interest</h1>
+	<p>Create an area of interest (AOI) from an existing 3D horizon by finding the horizon edge.</p>
+<h2>Overview of Horizon to Area of Interest Algorithm</h2>
+	<p>The Horizon to Area of Interest algorithm tries to create an area of interest (AOI) for an existing 3D 
+	horizon in GeoCraft by searching row by row for the first non-null node and the last non-null node. That 
+	is, it attempts to create the AOI as the outline of the edge of the input horizon.</p>
+	
+	<p><strong>Note:</strong> 3D AOIs can also be created graphically in Map View by drawing a polygon around 
+	the area of interest, and by creating a rectangular AOI by limiting the Inline and Xline range and setting 
+	a step or increment. The method described here is yet another way. Once created, the AOI is stored in the 
+	Repository. It can be dragged out onto a Map view for visualization.</p>
+
+	<p><strong>WARNING:</strong> The 3D AOI is created "in memory". That is, it is not automatically saved and 
+	restored. Nor does a right-click on the AOI and selecting <em>Save</em> actually save anything! <strong>You 
+	<em>must</em> select <em>Export</em> and export the AOI to an ascii file.</strong> Then when you later restart GeoCraft 
+	you must right-click on the AOI folder in the Repository and select <em>Load</em>.</p>
+	
+<h2>Running Horizon to Area of Interest</h2>
+	<ol>
+		<li>Load a horizon into GeoCraft.</li>
+		<li>Select an <strong>Input Horizon</strong></li>
+		<li>Accept the default output <strong>Area of Interest Name</strong> or enter a new name.</li>
+		<li>Click <strong>Run</strong>.</li>
+	</ol>
+	<p>GeoCraft runs the algorithm, creates the AOI, and storing it in the Repository, in the 
+	<strong>Areas of Interest</strong> folder.</p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

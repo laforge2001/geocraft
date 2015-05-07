@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<index version="1.0">
+	<entry keyword="Before Using the 3D Viewer">
+		<topic href="help/3dv_beforeusing.htm"/>
+	</entry>
+	<entry keyword="Introduction to the 3D Viewer">
+		<topic href="help/3dv_intro.htm"/>
+	</entry>
+	<entry keyword="Tips for Using the 3D Viewer">
+		<topic href="help/3dv_performance.htm"/>
+	</entry>
+	<entry keyword="Comparing Two Volumes in a Single 3D View Plot">
+		<topic href="help/3dv_task_compvols.htm"/>
+	</entry>
+	<entry keyword="Viewing an Object in the 3D Viewer">
+		<topic href="help/3dv_task_viewobj.htm"/>
+	</entry>
+	<entry keyword="Changing the Zoom Speed in the 3D Viewer">
+		<topic href="help/3dv_task_zmspd.htm"/>
+	</entry>
+	<entry keyword="Performing Tasks in the GeoCraft 3D Viewer">
+		<topic href="help/3dv_tasklist.htm"/>
+	</entry>
+	<entry keyword="Troubleshooting GeoCraft 3D Viewer Problems">
+		<topic href="help/3dv_trouble.htm"/>
+	</entry>
+	<entry keyword="Changing the Azimuth Settings in the 3D Viewer">
+		<topic href="help/3dvtask_azimuth.htm"/>
+	</entry>
+	<entry keyword="Changing the Sunlight Settings in the 3D Viewer">
+		<topic href="help/3dvtask_azimuth.htm"/>
+	</entry>
+</index>

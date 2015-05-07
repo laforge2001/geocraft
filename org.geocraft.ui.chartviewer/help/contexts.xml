@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="GCHistPlot" title="Histogram Viewer">
+      <description>Use the GeoCraft Histogram to plot the number of observations that occur within a distinct category.</description>
+      <topic href="help/histogram.htm" label="Histogram Viewer"/>
+   </context>
+   <context id="GCExChartAPI" title="GeoCraft Charting API Programming Example Code">
+      <description>Copy the GeoCraft Charting API sample code to create scatter, histogram, pie, or grid image charts.</description>
+      <topic href="help/gcapi.htm" label="GeoCraft Programming Examples: Charting API Code"/>
+   </context>
+   <context id="GCScatPlot" title="GeoCraft Scatter Plot View">
+      <description>Use the GeoCraft Scatter Plot to compare data from two well log plots.</description>
+      <topic href="help/scatter.htm" label="GeoCraft Scatter Plot View"/>
+   </context>
+</contexts>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Horizon GLCM Algorithm</title>
+<meta name="Keywords" content="Horizon GLCM Algorithm, lineament algorithms, gray level co-occurrence matrix, 
+GLCM, Horizon GLCM, texture algorithms, finding horizon texture attributes, texture" />
+</head>
+<body>
+<h1>Horizon Texture (GLCM) Algorithm</h1>
+	<p>The Horizon Texture algorithm computes horizon texture attributes using the Gray Level Co-occurrence 
+	   Matrix (GLCM) method. Co-occurrence is a measure of how often one color occurs next to a similar color or 
+	   a different color after quantization into a fixed (64) number of gray levels. Smooth textures will have fewer 
+	   transitions. Users control the search distance in grid cells and the size of the region to scan. For more 
+	   information, see the tutorial on GLCM at www.fp.ucalgary.ca/mhallbey/the_glcm.htm. The following texture 
+	   attributes are computed and output as grids:</p>
+		<ul>
+			<li><strong>entropy</strong>: indicates the amount of disorder (unexpected change) within the image</li>
+			<li><strong>homogeneity</strong>: indicates the overall smoothness of the image</li>
+			<li><strong>inertia</strong>: indicates the amount of local variation within the image</li>
+			<li><strong>quantized</strong>: indicates the amount of compression within the image</li>
+			<li><strong>energy</strong>: indicates the textural uniformity within the image</li>
+		</ul>
+	<h2>Using the Horizon Texture Algorithm to Compute Texture Attributes</h2>
+		<ol>
+			<li>Load horizon data into GeoCraft.</li>
+			<li>Select a <strong>Horizon</strong>.</li>
+			<li>Set the <strong>Search distance </strong>. The number you type in this field is the radius, in grid cells,
+			that is the offset used to compute the GLCM. In general the smaller the number, the smoother the results.</li>
+			<li>Set the <strong>Volume distance</strong>. The number you type in this field is the size of the region,
+			in grid cells, used to compute the GLCM. In general the larger the number, the smoother the results.</li>
+			<li>Type an output <strong>Name</strong>.</li>
+			<li><em>Optional</em> Type text in the <strong>Comments</strong> field. Text typed in this field is displayed
+			in the Properties region when an entity is selected in the <a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/repository.htm">Repository</a>.</li>
+			<li>Click <strong>Run</strong>.</li>
+					<p>Each output grid is stored in the <a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/repository.htm">Repository</a> 
+					under the selected input horizon.</p>
+			<li>Use the GeoCraft <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">Map Plot</a> to view the new grids.</li>
+		</ol>
+	
+<h2>References</h2>
+	<ul>
+		<li>Haralick, R.M. 1979. Statistical and Structural Approaches to Texture. Proceedings of the 
+		IEEE, Vol. 67 pp.786-804.</li>
+		<li>Haralick, R.M., K. Shanmugam and I. Dinstein. 1973. Textural Features for Image 
+		Classification. IEEE Transactions on Systems, Man and Cybernetics. SMC vol. 3 no. 6 
+		pp.610-620.</li>
+	</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

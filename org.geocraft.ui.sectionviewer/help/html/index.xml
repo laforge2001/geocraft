@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<index version="1.0">
+	<entry keyword="Before You Use the GeoCraft Section View">
+		<topic href="help/html/gc_vwr_sv_before.html" />
+	</entry>
+	<entry keyword="GeoCraft Section Plot">
+		<topic href="help/html/gc_vwr_section.html" />
+	</entry>
+	<entry keyword="Plotting a Section View">
+		<topic href="help/html/gc_sview_vwplot.html" />
+	</entry>
+	<entry keyword="Completing Tasks in the GeoCraft Section View">
+		<topic href="help/html/gc_sview_tasks.html" />
+	</entry>
+	<entry keyword="Using the Section Navigator">
+		<topic href="help/html/gc_sview_nav.html" />
+	</entry>
+	<entry keyword="Viewing Lines Selected in Map View within the Section View">
+		<topic href="help/html/gc_sview_mapevent.html" />
+	</entry>
+</index>

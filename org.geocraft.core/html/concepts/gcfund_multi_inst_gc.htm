@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Running Multiple Instances of GeoCraft</title>
+<meta name="Keywords" content="multiple instances, GeoCraft, running multiple instances of GeoCraft" />
+</head>
+<body>
+<h1>Running Multiple Instances of GeoCraft</h1>
+	<p>You may run more than one instance of GeoCraft simultaneously. However, if you do run more than one instance of
+	GeoCraft at once, make sure that you do <em>not</em> edit or write to the same data set in both instances of 
+	GeoCraft simultaneously.</p>
+	<p><strong>Note</strong>: Do not attempt to read the same data set with two instances of GeoCraft that are running simultaneously, because this could create an 
+	I/O bottleneck. For example, if multiple GeoCraft sessions were running, and two processes tried to read the same input volume at the same time, both processes 
+	could slow considerably.</p>
+	<p><strong>Caution!</strong>: If you edit a data set in multiple instances of GeoCraft, you may lose or corrupt the data set. To avoid data corruption 
+	or data loss, do not edit a data set from multiple instances of GeoCraft simultaneously, and do not have GeoCraft write output from two or more processes that 
+	are running at the same time, to the same file.</p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

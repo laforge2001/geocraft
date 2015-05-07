@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Volume Calculation</title>
+<meta name="Keywords" content="volume calc, volume calculation, linear transform, convert volume data, AOI" />
+</head>
+<body>
+<h1>Volume Calculation</h1>
+		<p>The Volume Calculation algorithm applies a simple linear transform to a single input 
+		volume over an area of interest (AOI).</p>
+	<h2>Overview of the Volume Calculation Algorithm</h2>
+		<p>Volume Calc applies a linear transform, <strong>Vout = (B1*Vin) + B2</strong>, where B1 and B2 are either 
+		constant values or horizons.</p>
+	<h2>Using Volume Calculation to Perform Linear Transforms</h2>
+		<ol>
+			<li>Load volume data into GeoCraft.</li>
+			<li>Load Area of Interest data into GeoCraft.</li>
+			<li><em>Optional</em> Load horizon data into GeoCraft.</li>
+			<li>Select a <strong>Volume</strong>.</li>
+			<li><em>Optional; only perform this step if do <strong>not</strong> want to use an area of interest 
+			in the calculation</em>. Clear the <strong>Use Area of Interest?</strong> check box.</li>
+			<li>Select an <strong>Area of Interest</strong>.</li>
+			<li>In the <strong>Parameters</strong> section, select an option and corresponding value for the B1 and B2 variables:</li>
+				<ul>
+					<li><strong>Use a constant</strong>; type a value in the <strong>B<em>n</em> Value</strong> field</li>
+					<li><strong>Use a horizon</strong>; select a <strong>B<em>n</em> Horizon</strong></li>
+				</ul>
+			<li>Accept the <strong>Volume Name</strong>, or type a new value in the field. If you leave the <strong>Volume Name</strong> 
+			field unchanged, GeoCraft appends <strong>vc</strong> to the input file name.</li>
+			<li><em>Optional;</em> Type additional information in the <strong>Comments</strong> field. Text from this field displays
+			in the <strong>Properties</strong> view when an entity is selected in the repository.</li>
+			<li>Click <strong>Run</strong>.</li>
+		</ol>
+			<p>GeoCraft performs the calculation and writes the new volume to the data repository. You may view the data in the 3D viewer.</p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

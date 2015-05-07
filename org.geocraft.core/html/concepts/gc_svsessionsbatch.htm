@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Saving a GeoCraft Session in Batch Mode</title>
+<meta name="Keywords" content="Saving a GeoCraft Session in Batch Mode, batch mode, gcb" />
+</head>
+<body>
+<h1>Saving a GeoCraft Session for Batch</h1>
+	<p>Use this procedure to save a GeoCraft session in order to run it later in batch mode, so that you can 
+	<a href="PLUGINS_ROOT/com.cop.spark.product/help/gcbatch.htm"> create and run batch processes in GeoCraft</a>.</p>
+	
+	<p><strong>Note</strong>: The <strong>Save Session as Batch</strong> command saves any project-specific
+	<a href="PLUGINS_ROOT/org.geocraft.core/html/tasks/UserPreferences/gc_setprefs.htm">preferences</a> that 
+	you set during the session. When GeoCraft is restarted later in a batch run, those preferences are 
+	restored before the repository is built, so that unit system preferences in the original workspace are 
+	maintained.</p>
+	<h2>To Save a GeoCraft Session as a Batch File</h2>
+		<ol>
+			<li>Launch GeoCraft.</li>
+			<li><em>Optional</em> <a href="PLUGINS_ROOT/org.geocraft.core/html/tasks/WorkingWData/data_loading.htm">Load data into GeoCraft</a>.</li>
+			<li>Make any changes to the current GeoCraft environment (for example: change the default layout for GeoCraft; 
+			or change the preferences).</li>
+			<li>Open an algorithm.</li> 
+			<li>Populate all required fields within the algorithm panel and enter optional data that you want to run within 
+			the algorithm.</li>
+			<li>Select <strong>File => Save Session as Batch</strong>.</li>
+			<li>In the <strong>Batch Saveset</strong> dialog box, type a <strong>Name</strong> for the batch session.</li>
+			<li>In the <strong>Save in</strong> folder accept the default value, or browse to another folder.</li>
+			<li>Click <strong>OK</strong>.</li>
+		</ol>
+		<p>GeoCraft saves the session batch file with a <strong>*.gcb</strong> filename extension. Note that if 
+		more than one algorithm are visible (opened) in the center parameter panel of the GeoCraft window, all 
+		algorithms are saved in the batch session file.</p>
+	<p><strong>Caution</strong>: The GeoCraft team recommends using only one algorithm in a batch process. If you use more 
+	than one algorithm, the algorithms will be executed sequentially but unfortunately results may not be what you expect, 
+	particularly if the output from one algorithm must feed into another. Currently this type of batch operation cannot 
+	be done. This restriction will be lifted when a workflow editor is provided.</p>
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="PLUGINS_ROOT/com.cop.spark.product/help/gcbatch.htm">GeoCraft Batch Processing</a></li>
+			<li><a href="gc_sessions.htm">GeoCraft Sessions</a></li>
+			<li><a href="gc_svsessions.htm">Saving a GeoCraft Session</a></li>
+			<li><a href="gc_sessionslaunch.htm">How Session Files Behave When Launching and Closing GeoCraft</a></li>
+			<li><a href="gc_restsessions.htm">Switching GeoCraft Sessions</a></li>
+			<li><a href="gc_files_sessions.htm">GeoCraft Session Files</a></li>
+			<li><a href="workspace_datamismatch.htm">Loading Data that Does Not Match Unit Preferences</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

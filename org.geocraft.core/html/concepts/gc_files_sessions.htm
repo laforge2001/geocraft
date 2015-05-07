@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GeoCraft Session Files</title>
+<meta name="Keywords" content="GeoCraft Session Files, session files, location of session files, files for sessions" />
+</head>
+<body>
+<h1>GeoCraft Session Files</h1>
+	<p>GeoCraft creates two types of session files:</p>
+		<ul>
+			<li><strong>*.gcs</strong>: GeoCraft session files, which are stored in the GeoCraft 
+			<strong>workspace/sessions</strong> subdirectory</li>
+			<li><strong>*.gcb</strong>: GeoCraft session batch files, which are stored in the GeoCraft 
+			<strong>workspace/gcbatch</strong> subdirectory</li>
+		</ul>
+	<p>By default, GeoCraft session files are stored in subdirectories of your current workspace. However, you may store them in
+	any directory you choose when saving a session.</p>
+	<p>GeoCraft session files are written in XML code, so it is possible for you to invalidate a session file if you make 
+	changes in the XML file (for example, by changing the names of keys within the file).</p>
+	<p><strong>Caution</strong>! Do not edit the session files; you may lose or corrupt data within the session file and be unable to use it.</p>
+	<h2>Managing GeoCraft Session Files</h2>
+		<p>GeoCraft does not have an automated mechanism to delete, back up, or restore the GeoCraft session files. You must manage the GeoCraft 
+		session file directories and their contents. If you no longer need a session file, navigate to the directory in which the session file 
+		is stored, and manually delete that file.</p>
+	<h2>Using Session Files</h2>
+		<p>You can create as many session files as you want to in your working environment. A session is an instance of GeoCraft, and the state 
+		in which that instance was when you saved it.</p>
+		<p>Session files retain the state of your current GeoCraft environment, including:</p>
+			<ul>
+				<li> <a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/repository.htm"> Repository </a> contents </li>
+				<li> data that was displayed in the <a href="PLUGINS_ROOT/org.geocraft.core/html/UI_Elements/gc_ui_viewers.htm">GeoCraft Viewers</a>, 
+				and the settings at which that data was displayed </li>
+				<li>GeoCraft algorithms that were open and in use</li>
+				<li>user preferences, including the session unit system preference</li>
+				<li>the following views, and any plots within the view:</li>
+					<ul>
+						<li>ABAVO</li>
+						<li>3D View</li>
+						<li>Map View</li>
+						<li>Section View</li>
+						<li>Wavelet View</li>
+						<li>Well Log Plot (for LAS wells)</li>
+					</ul>
+			</ul>
+		<p>Currently, session files do not restore the following views:</p>
+			<ul>
+				<li>Histogram Plot</li>
+				<li>Scattergram Plot</li>
+			</ul>
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="gc_sessions.htm">GeoCraft Sessions</a></li>
+			<li><a href="gc_svsessions.htm">Saving a GeoCraft Session</a></li>
+			<li><a href="gc_svsessionsbatch.htm">Saving a GeoCraft Session in Batch Mode</a></li>
+			<li><a href="gc_sessionslaunch.htm">How Session Files Behave When Launching and Closing GeoCraft</a></li>
+			<li><a href="gc_restsessions.htm">Switching GeoCraft Sessions</a></li>
+			<li><a href="workspace_datamismatch.htm">Loading Data that Does Not Match Unit Preferences</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

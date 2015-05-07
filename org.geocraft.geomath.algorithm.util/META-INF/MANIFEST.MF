@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Util Plug-in
+Bundle-SymbolicName: org.geocraft.geomath.algorithm.util;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
+ org.eclipse.jface;bundle-version="3.4.0",
+ org.apache.commons.beanutils;bundle-version="1.7.0",
+ org.geocraft.core;bundle-version="1.0.0",
+ org.geocraft.algorithm;bundle-version="1.0.0"
+Export-Package: org.geocraft.geomath.algorithm,
+ org.geocraft.geomath.algorithm.util;uses:="org.geocraft.core.model,org.geocraft.core.model.datatypes",
+ org.geocraft.geomath.algorithm.util.asciiexport,
+ org.geocraft.geomath.algorithm.util.parameters
+Import-Package: org.apache.commons.collections

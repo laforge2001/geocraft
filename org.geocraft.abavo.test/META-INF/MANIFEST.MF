@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test Fragment
+Bundle-SymbolicName: org.geocraft.abavo.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: ConocoPhillips
+Fragment-Host: org.geocraft.abavo;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit
+Export-Package: org.geocraft.abavo.ellipse,
+ org.geocraft.abavo.polygon,
+ org.geocraft.abavo.process

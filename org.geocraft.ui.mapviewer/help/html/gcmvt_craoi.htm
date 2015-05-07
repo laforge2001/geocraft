@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Creating an Area of Interest with the Map Plot View</title>
+<meta name="Keywords" content="Defining an Area of Interest, AOI, Creating an Area of Interest with the Map View" />
+</head>
+<body>
+<h1>Creating and Editing an ASCII Area of Interest with the Map Plot View</h1>
+	<p>Areas of Interest (AOIs) allow you to restrict processing within the defined area of a 2D or 3D data set. Use the 
+	<strong>Utilities</strong> menu to define 3D AOIs using an inline or xline range and increment, 
+	or 2D AOIs by using a shot point range and increment.</p>
+	<p>You can create an AOI in the Map View, and save it in an ASCII file format. If you create AOIs and save your  
+	session before you exit GeoCraft, your AOIs are restored when you return to that GeoCraft session.</p>
+	<p>Once the AOI is created and displayed in Map View, you may edit it by right-clicking on the AOI in the 
+	Layers tab and selecting <em>Edit AOI Polygons</em>. To move the polygon, hold the shift key down and 
+	left-click and hold one of the nodes, drag the polygon to the new position, and let go. To modify the 
+	polygon shape, hold the control key down and left-click on one of the nodes, dragging it to the new 
+	position. When done, exit the edit mode by clicking the middle mouse button. Then in the Repository 
+	right-click on the AOI and select <em>Save</em> to update.</p>
+	<h2>Drawing an ASCII AOI with the Map View</h2>
+	<p><strong>Note</strong>: You must use a unique filename each time you create an ASCII AOI, or 
+	GeoCraft will display an error message, and the file will not be saved.</p>
+		<ol>
+			<li><a href="gc_vwr_map_using.htm">View the data</a> that you want to use to create an ASCII AOI in the Map View.</li>
+			<li>Click the <strong>Define AOI</strong> icon (the first icon on the second row).</li> 
+			<li>Move the cursor onto the object in the Map Plot.</li>
+			<li>Click MB1 to create an initial corner point for the AOI.</li>
+			<li>Move the mouse and click MB1 to create additional corner points for the AOI.</li>
+			<li><em>Optional.</em> Hold down <strong>SHIFT</strong> and click MB2 to 
+			delete an existing point in the AOI.</li>
+			<li>Click MB2 to complete (stop defining) the AOI.</li> 
+			<p>The <strong>Save ASCII AOI</strong> dialog box is displayed.</p>
+			<li>Accept the default in the <strong>File Name</strong> field, or type in a new name.</li>
+			<li>Click <strong>OK</strong>.</li>
+		</ol>
+			<p>GeoCraft saves the AOI. You can find the AOI in the <strong>Areas of Interest</strong> folder in the 
+			<a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/repository.htm">Repository View</a>, and in the 
+			<strong>Areas/Regions of Interest</strong> folder under 
+			the <a href="PLUGINS_ROOT/org.geocraft.core/html/UI_Elements/gc_ui_vwr_layread.htm">GeoCraft Viewer Layer Model and Readout Tabs</a>.</p>
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="gc_vwr_mapaoiset.htm">Editing the Settings of an Area of Interest within the Map Plot View</a></li>
+			<li><a href="gc_mapvwr_tasks.htm">Completing Tasks in the GeoCraft Map Plot Viewer</a></li>
+			<li><a href="gc_vwr_map_using.htm">Viewing Data in the GeoCraft Map Plot</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/UI_Elements/gc_ui_vwr_layread.htm">GeoCraft Viewer Layer Model and Readout Tabs</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

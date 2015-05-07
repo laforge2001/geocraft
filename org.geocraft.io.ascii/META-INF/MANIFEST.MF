@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ASCII I/O
+Bundle-SymbolicName: org.geocraft.io.ascii;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.geocraft.io.ascii.Activator
+Bundle-Vendor: ConocoPhillips
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.forms;bundle-version="3.4.1",
+ org.geocraft.core;bundle-version="1.0.0",
+ org.geocraft.core.session;bundle-version="1.0.0",
+ org.geocraft.ui.form2;bundle-version="1.0.0",
+ org.geocraft.ui.io;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.geocraft.io.ascii,
+ org.geocraft.io.ascii.aoi

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Fundamentals of the GeoCraft Data Store Architecture</title>
+<meta name="Keywords" content="file-naming requirements, unique filenames, filename requirements, datastore, GeoCraft datastore architecture" />
+</head>
+<body>
+<h1>Fundamentals of the GeoCraft Data Store Architecture</h1>
+	
+	<p>GeoCraft is data store independent. This means it does not require specific data storage formats. Instead, 
+	data from various data stores (for example, SEGY, LAS files, or an enterprise class database) 
+	is loaded into a common <a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/repository.htm"> Repository </a> 
+	so that GeoCraft algorithms and viewers may manipulate and display the data. As a result, creating new modules (algorithms) is 
+	simpler because the algorithms do not have to read and write every kind of data format; the Repository provides this capability.</p>
+	<h2>Unique File Name Requirement</h2>
+	<p>All file names within the GeoCraft Repository must have a unique file name. If you do not provide a unique file name, you may overwrite an 
+	existing file.</p>
+	
+	<p><strong>Caution</strong>: If a file already exists in the Repository, GeoCraft displays a warning icon 
+	(a small yellow triangle). GeoCraft also displays a message that states the file currently exists in the Repository. 
+	You must change the output name of the file before you click <strong>Go</strong>. If you do not change the output name, 
+	and run the algorithm, GeoCraft will overwrite the existing file.</p>
+	
+<h2>How GeoCraft Handles Input Data</h2>	
+	<p>You must load all data that will be used as input into the GeoCraft Repository before the data may be used by algorithms in calculations.</p> 
+	<p>Loaded volumes are never stored within GeoCraft. Instead, GeoCraft links from the Repository to the location where the volume resides in its data store.</p> 
+	<p>However, well logs and horizons are stored in GeoCraft memory and accessed as they are needed. This is known as being lazy-loaded.</p> 
+	
+<h2>How GeoCraft Handles Output Data</h2>	
+	<p>When input data is processed by GeoCraft algorithms, output well logs, horizons, and volumes are written back to 
+	the same data store as the input data. As a result, the data is automatically saved by GeoCraft. If you exit GeoCraft and save 
+	the current session, this newly-created data is restored along with the original input data when GeoCraft restarts.</p>
+	
+	<p>In addition, all output well logs and horizons are automatically persisted (written back) into the originating data store, 
+	just as new volumes have always been output directly to the data store. If you save the GeoCraft session, you will restore all wells, horizons, 
+	and volumes without having to to first export and then re-load each of these entities.</p>
+	
+	<p><strong>Note</strong>: Horizons are usually stored in memory. Hence creating many copies of large horizons 
+	can consume memory. As a result the Group Multiples algorithm, which generates many output horizons, stores 
+	the horizons in the datastore with a link in the Repository.</p>
+	
+<h2>How GeoCraft Handles Data Projection Systems and Units</h2>
+	<p><strong>Note</strong>: Although GeoCraft will convert X,Y coordinates between feet and meters, it does not convert X,Ys nor Lat, Longs to 
+	a different projection coordinate system. All input data must be in the same geographic coordinate system.</p>
+	<p>Volumes are never stored within GeoCraft, so their trace or sample data are never unit converted. 
+	That is, if a velocity data volume in ft/sec is loaded, the data samples are never converted to m/sec, 
+	even if the unit preferences are set to metric. However, algorithms such as Velocity Flood or Volume Stretch, 
+	do check data unit labels to help insure the data are consistent.</p> 
+	<p>Do not assume that GeoCraft has performed automatic data unit handling. You must always know your data units, and 
+	convert them yourself to ensure consistency with all other algorithm input parameters.</p> 
+	<p><strong>Note</strong>: This recommendation does not include trace X,Y and time or depth index values, 
+	which are always unit-converted, as for viewing.</p>
+	
+<h2>Seismic Data</h2>
+	<p>GeoCraft may hold a subset of seismic data in memory during algorithm execution. Some operations may also create temporary volumes to store 
+	interim results. Temporary volumes are written to the same data store from which the original data was read.</p>
+	
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<component name="Datastore Accessor Service" immediate="true">
+	<implementation class="org.geocraft.internal.core.io.DatastoreAccessorService"/>
+ <service>
+    <provide interface="org.geocraft.core.io.IDatastoreAccessorService"/>
+ </service>
+</component>

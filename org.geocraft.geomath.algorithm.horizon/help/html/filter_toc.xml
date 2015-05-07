@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Horizon Filters Algorithms" link_to="help/html/horizon_toc.xml#horizonFilterAlgorithms" topic="help/html/hor_linear_algorithms.htm">
+   <topic href="help/html/hor_linear_filter.htm" label="Convolution">
+   </topic>
+   <topic href="help/html/hor_filter_kuwahara.htm" label="Kuwahara">
+   </topic>
+   <topic href="help/html/mediansmooth.htm" label="Median Smooth">
+   </topic>
+   <topic href="help/html/hor_filter_snn.htm" label="Symmetric Nearest Neighbor">
+   </topic>
+   <topic href="help/html/weightedsmooth.htm" label="Weighted Smooth">
+   </topic>
+</toc>

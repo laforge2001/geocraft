@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Map Plot" link_to="../org.geocraft.core.help/toc.xml#GCViewers" topic="help/html/gc_vwr_map.htm">
+   <topic href="help/html/gc_vwr_map.htm" label="Introduction to the GeoCraft Map Plot">
+   </topic>
+   <topic href="help/html/gc_vwr_map_using.htm" label="Viewing Data in the GeoCraft Map Plot">
+   </topic>
+   <topic href="help/html/gc_mapvwr_tasks.htm" label="Completing Tasks in the GeoCraft Map Plot Viewer">
+      <topic href="help/html/gc_mapvwr_chgstenvals.htm" label="Changing the Start and End Values of an Object in the Map Plot">
+      </topic>
+      <topic href="help/html/gcmvt_craoi.htm" label="Creating an Area of Interest (AOI) with the Map Plot Viewer">
+      </topic>
+      <topic href="help/html/gc_mapvwr_xyloc.htm" label="Viewing the X,Y Location of the Cursor in the Map Plot">
+      </topic>
+   </topic>
+</toc>

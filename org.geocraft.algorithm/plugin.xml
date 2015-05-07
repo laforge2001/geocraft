@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="org.geocraft.algorithm" name="Standalone Algorithm" schema="schema/org.geocraft.algorithm.exsd"/>
+   <extension-point id="org.geocraft.algorithm.programmatic" name="Programmatic Algorithms" schema="schema/org.geocraft.algorithm.programmatic.exsd"/>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.geocraft.internal.algorithm.StandaloneAlgorithmEditor"
+            default="false"
+            id="org.geocraft.algorithm.StandaloneAlgorithmEditor"
+            matchingStrategy="org.geocraft.internal.algorithm.StandaloneAlgorithmEditorMatchingStrategy"
+            name="Standalone Algorithm Editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.elementFactories">
+      <factory
+            class="org.geocraft.internal.algorithm.StandaloneAlgorithmFactory"
+            id="org.geocraft.algorithm.StandaloneAlgorithmFactory">
+      </factory>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Programming Examples"
+            class="org.geocraft.algorithm.example.FormWidgets"
+            helpId="org.geocraft.algorithm.example.formwidgets"
+            name="Form Widgets"
+            tooltip="Examples of parameter form widgets"
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+
+
+</plugin>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.tigris.subversion.subclipse.core.svnnature">
+<project reference="0.9.3,https://wush.net/svn/geocraft/component.test/trunk/org.geocraft.math.test,org.geocraft.math.test"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component.test/trunk/org.geocraft.io.gocad.test,org.geocraft.io.gocad.test"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component.test/trunk/org.geocraft.io.modspec.test,org.geocraft.io.modspec.test"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component.test/trunk/org.geocraft.io.asciigrid.test,org.geocraft.io.asciigrid.test"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component.test/trunk/org.geocraft.io.las.test,org.geocraft.io.las.test"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component.test/trunk/org.geocraft.io.jms.test,org.geocraft.io.jms.test"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/component.test/trunk/org.geocraft.io.util.test,org.geocraft.io.util.test"/>
+</provider>
+</psf>

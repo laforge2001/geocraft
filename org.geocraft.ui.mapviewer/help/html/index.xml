@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<index version="1.0">
+	<entry keyword="Completing Tasks in the GeoCraft Map Plot Viewer">
+		<topic href="help/html/gc_mapvwr_tasks.htm" />
+	</entry>
+	<entry keyword="Defining an Area of Interest with the Map Plot Viewer">
+		<topic href="help/html/gcmvt_craoi.htm" />
+	</entry>
+	<entry keyword="Viewing Data in the GeoCraft Map Plot">
+		<topic href="help/html/gc_vwr_map_using.htm" />
+	</entry>
+</index>

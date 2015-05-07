@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Wavelet Viewer" link_to="../org.geocraft.core/html/toc.xml#GCViewers" topic="help/html/gc_vwr_wave.htm">
+   <topic href="help/html/gc_vwr_wv_before.htm" label="Before You Use the GeoCraft Wavelet Viewer">
+   </topic>
+   <topic href="help/html/gc_vwr_wv_vwng.htm" label="GeoCraft Wavelet Viewer">
+   </topic>
+   <topic href="help/html/gc_vwr_wv_mult.htm" label="Viewing Multiple Wavelets in a Single Plot">
+   </topic>
+</toc>

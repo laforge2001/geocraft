@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Setting Unit of Measurement Preferences in GeoCraft</title>
+<meta name="Keywords" content="Unit of measurement preferences" />
+</head>
+<body>
+<h1>Setting Unit of Measurement Preferences in GeoCraft</h1>
+	<p>The first time you start GeoCraft, you will be prompted to specify a the unit of measure system 
+	(metric or imperial) for project data that is loaded into the <a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/gc_sessions.htm">GeoCraft session</a>. 
+	You may create multiple For this reason it may be helpful to name the workspace with an "m" or "ft" at the end, especially if 
+	some of your projects are metric and some are imperial. It is best not to load metric data into 
+	imperial projects and vice versa. You will specify these parameters in a dialog similar to the 
+	one displayed below:</p>
+	<p><img src="PLUGINS_ROOT/org.geocraft.core/html/concepts/workspace.gif" alt="GeoCraft Session Chooser" /></p>
+
+	<p><strong>Note</strong>: Unit of measure preferences are <em>fixed</em> when the session is created and cannot be changed. 
+	This feature prevents data in a single session from being loaded in imperial and metric coordinates. If you work with data in 
+	both unit systems, create separate sessions for metric and imperial data sets.</p>
+
+	<h2>How GeoCraft Handles Conversions when Data or the Unit System does not Match the Session Unit System Preference</h2>
+		<p>At times, you will load data into GeoCraft that does not match the unit of measure preferences that are set for that GeoCraft session. GeoCraft will 
+		display a warning message to let you know that the data you are loading does not match the unit system preferences that have been set for 
+		the GeoCraft session.</p>
+		<p><img src="PLUGINS_ROOT/org.geocraft.core/html/concepts/unitwarn.gif" alt="GeoCraft warning message indicating that units for data being loaded do not match unit preferences 
+		for workspace session" /></p>
+		<p>Then, depending upon the data type, GeoCraft either converts the data to the GeoCraft session's preferred unit of measure, or leaves the data in its existing unit of measure 
+		format.</p>
+		<h3>GeoCraft Unit of Measure Conversion Rules</h3>
+			<p>GeoCraft will <strong>always</strong> convert the following types of units to the unit preferences of the GeoCraft session:</p>
+			<ol>
+				<li>X,Y coordinates for all horizons (grids)</li>
+				<li>depth units</li>
+				<li>time units</li>
+				<li>all well-related units</li>
+				<li>X,Y coordinates of volumes</li>
+			</ol>
+	<p>GeoCraft <strong>never</strong> converts data units, such as velocities. For example, an input velocities measured in in m/sec would 
+	not be converted to ft/sec.</p>
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/gc_sessions.htm">GeoCraft Sessions</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/gc_svsessions.htm">Saving a GeoCraft Session</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/gc_svsessionsbatch.htm">Saving a GeoCraft Session in Batch Mode</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/gc_restsessions.htm">Restoring GeoCraft Sessions</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/tasks/gc_switchsession.htm">Switching Sessions in GeoCraft</a></li>
+			<li><a href="data_intro.htm">Working with Data in GeoCraft</a></li>
+			<li><a href="data_formats.htm">GeoCraft Data Formats</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

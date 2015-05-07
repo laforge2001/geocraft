@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Interpretation Algorithms" link_to="../org.geocraft.geomath.help/toc.xml#interpretationAlgorithms">
+   <topic href="../org.geocraft.geomath.algorithm.horizon/help/html/groupmultiples.htm" label="Group Multiples">
+      <topic href="../org.geocraft.geomath.algorithm.horizon/help/html/group_multis_predefined_ref.htm" label="Predefined Multiples Created by the Group Multiples Algorithm">
+      </topic>
+      <topic href="../org.geocraft.geomath.algorithm.horizon/help/html/group_multis_naming_conv.htm" label="Naming Convention and Equation Format for Horizons Created by Multiples Algorithms">
+      </topic>
+   </topic>
+   <topic href="help/html/traceintegration.htm" label="Trace Integration">
+   </topic>
+</toc>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="clip" title="Clip Horizon">
+      <description>Clip Horizon limits time or depth values in a horizon replacing them with nulls or setting them to the specified minimum and maximum range.</description>
+      <topic href="help/html/clip_grid.htm" label="Clip algorithm"/>
+   </context>
+   <context id="EraseArea" title="Erase Area">
+      <description>Erase Area sets all values within an area of interest to null.</description>
+      <topic href="help/html/erase_area.htm" label="Erase Area"/>
+   </context>
+   <context id="groupmultiples" title="Group Multiples">
+      <description>Group Multiples computes a set of predefined multiples from depth or time input horizons.</description>
+      <topic href="help/html/groupmultiples.htm" label="Group Multiples"/>
+      <topic href="help/html/group_multis_naming_conv.htm" label="Naming Convention and Equation Format for Horizons Created by Group Multiples Algorithm"/>
+      <topic href="help/html/group_multis_predefined_ref.htm" label="Predefined Multiples Created by the Group Multiples Algorithm"/>
+   </context>
+   <context id="mediansmooth" title="Median Smooth">
+      <description>Median Smooth uses a median filter to smooth a horizon. A median filter is a non-linear filtering technique that preserves steps in maps.</description>
+      <topic href="help/html/mediansmooth.htm" label="Median Smooth"/>
+   </context>
+   <context id="decimate" title="Decimate Horizon">
+      <description>Decimate extracts points from a grid. Grid geometry is not changed.</description>
+      <topic href="help/html/decimate.htm" label="Decimate"/>
+   </context>
+   <context id="InterpolateLinear" title="Linear Interpolation">
+      <description>Linear Interpolation removes null values in a horizon by performing linear interpolation on nearby values. Linear Interpolation does not extend the horizon to the limits of its box; only interior nulls are interpolated.</description>
+      <topic href="help/html/InterpolateLinear.htm" label="Linear Interpolation"/>
+   </context>
+   <context id="HorizonMerge" title="Horizon Merge">
+      <description>Horizon Merge will merge several horizons with the same geometry using Minimum, Maximum, or OR operations.</description>
+      <topic href="help/html/HorizonMerge.htm" label="Horizon Merge"/>
+   </context>
+   <context id="ExtractArea" title="Extract Area">
+      <description>Extract Area sets all values outside a specified area of interest to null.</description>
+      <topic href="help/html/ExtractArea.htm" label="Extract Area"/>
+   </context>
+   <context id="velocitymodelchecker" title="Velocity Model Checker">
+      <description>Velocity Model Checker will QC top and base salt horizons before using them in velocity flood.</description>
+      <topic href="help/html/velocitymodelchecker.htm" label="Velocity Model Checker"/>
+   </context>
+   <context id="convert" title="Convert Horizon">
+      <description>Convert Horizon changes the origin and grid spacing of an existing horizon and create a new horizon. This algorithm only modifies the grid on which a horizon is displayed; it does not modify the horizon itself.</description>
+      <topic href="help/html/horizon_convert.htm" label="Convert Horizon"/>
+   </context>
+   <context id="extrapolate" title="Extrapolate">
+      <description>Extrapolate extends an existing horizon by creating new data points within the grid using nearby values. Extrapolation is similar to interpolation, but the results are often less meaningful, and are more uncertain.</description>
+      <topic href="help/html/extrapolate.htm" label="Extrapolate"/>
+   </context>
+   <context id="gridlines" title="Grid Lines">
+      <description>GridLines extracts lines from a grid. Grid geometry is not changed.</description>
+      <topic href="help/html/gridlines.htm" label="Grid Lines"/>
+   </context>
+   <context id="weightedsmooth" title="Weighted Smooth">
+      <description>Weighted Smooth will smooth an input horizon using an optional second horizon as a mask.</description>
+      <topic href="help/html/weightedsmooth.htm" label="Weighted Smooth"/>
+   </context>
+   <context id="tessellate" title="Interpolate Tessellate">
+      <description>Interpolate Tessellate uses triangular tessellation to fill null values in a horizon.</description>
+      <topic href="help/html/tessellate.htm" label="Tessellate"/>
+   </context>
+   <context id="KuwaharaFilter" title="Kuwahara Filter Algorithm">
+      <description>Kuwahara median filters preserve steps and isolate anomalies in an attribute.</description>
+      <topic href="help/html/hor_filter_kuwahara.htm" label="Kuwahara Filter Algorithm"/>
+   </context>
+   <context id="snn" title="Symmetric Nearest Neighbor Algorithm">
+      <description>Symmetric Nearest Neighbor (SNN) smoothes by comparing corresponding pixels across a kernel, selecting values that are closest to the center pixel value, and then averaging.</description>
+      <topic href="help/html/hor_filter_snn.htm" label="Symmetric Nearest Neighbor Algorithm"/>
+   </context>
+   <context id="filter" title="Convolution (Linear Filters) Algorithm">
+      <description>The Convolution (Linear Filters) algorithm smooths horizons with a Gaussian, Square Mean, or Circular Mean filter. The Convolution algorithm passes horizon data through a linear filter to reduce noise in the seismic image.</description>
+      <topic href="help/html/hor_linear_filter.htm" label="Convolution (Linear Filters) Algorithm"/>
+   </context>
+</contexts>

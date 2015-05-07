@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="org.geocraft.core.shell.commandexecutor" name="Command Executor" schema="schema/org.geocraft.core.shell.commandexecutor.exsd"/>
+   <extension-point id="org.geocraft.core.shell.scriptexecutor" name="Script Executor" schema="schema/org.geocraft.core.shell.scriptexecutor.exsd"/>
+   <extension-point id="org.geocraft.core.io.datastoreAccessor" name="Datastore Accessor" schema="schema/org.geocraft.core.io.datastoreAccessor.exsd"/>
+   <extension-point id="org.geocraft.core.color.colorFormat" name="Color Format Service" schema="schema/org.geocraft.core.color.colorFormat.exsd"/>
+   <extension-point id="org.geocraft.core.color.colorMap" name="Color Map Service" schema="schema/org.geocraft.core.color.colorMap.exsd"/>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.geocraft.core.common.preferences.GeoCraftPreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="html/toc.xml"
+            primary="true">
+      </toc>
+      <toc
+            file="html/tocconcepts.xml">
+      </toc>
+      <toc
+            file="html/tocgettingstarted.xml">
+      </toc>
+      <toc
+            file="html/tocreference.xml">
+      </toc>
+      <toc
+            file="html/toc_samples.xml">
+      </toc>
+      <toc
+            file="html/toctasks.xml">
+      </toc>
+   </extension>
+   <extension
+         point="org.geocraft.core.color.colorFormat">
+      <colorFormat
+            canRead="true"
+            canWrite="true"
+            class="org.geocraft.core.color.format.GenericColorFormat"
+            name="Generic ASCII Color File">
+      </colorFormat>
+   </extension>
+   <extension
+         point="org.geocraft.core.color.colorMap">
+      <colorMap
+            class="org.geocraft.core.color.map.GrayscaleColorMap"
+            description="A default grayscale color map."
+            name="Grayscale">
+      </colorMap>
+   </extension>
+   <extension
+         point="org.geocraft.core.color.colorMap">
+      <colorMap
+            class="org.geocraft.core.color.map.SeismicColorMap"
+            description="A default seismic color map (red-white-blue)"
+            name="Seismic">
+      </colorMap>
+   </extension>
+   <extension
+         point="org.geocraft.core.color.colorMap">
+      <colorMap
+            class="org.geocraft.core.color.map.SpectrumColorMap"
+            description="A default spectrum color map"
+            name="Spectrum">
+      </colorMap>
+   </extension>
+   <extension
+         point="org.geocraft.core.color.colorMap">
+      <colorMap
+            class="org.geocraft.core.color.map.RainbowColorMap"
+            description="A default rainbow color map"
+            name="Rainbow">
+      </colorMap>
+   </extension>
+
+</plugin>

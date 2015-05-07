@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Attributes" topic="help/html/curvature.htm" link_to="../org.geocraft.geomath.help/toc.xml#attributeAlgorithms">
+   <link toc="../org.geocraft.abavo/help/abavo_toc.xml"/>
+   <topic href="help/html/curvature.htm" label="Horizon Curvature">
+   </topic>
+   <topic href="../org.geocraft.geomath.algorithm.texture/help/glcm.htm" label="Horizon GLCM (Texture)">
+   </topic>
+</toc>

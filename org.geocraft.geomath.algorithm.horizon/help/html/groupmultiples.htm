@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Group Multiples</title>
+<meta name="Keywords" content="creating surfaces where multiple reflections are expected, predefined groups of 
+multiples from horizons, converting depth horizons into time horizons and converting multiples of horizons back 
+to depth horizons" />
+</head>
+<body>
+<h1>Group Multiples</h1>
+	<p>Group Multiples computes specific, predefined multiples, including interbed multiples, from a 
+	list of input horizons ordered by increasing time or depth. Input horizons may be in either time or 
+	depth, but if they are in depth, an input velocity volume is also required.</p>
+	<p><strong>Note</strong>: Predefined Set #1 allows up to 5 input depth or time horizons. Predefined 
+	Set #2 allows up to 3 input time horizons. GeoCraft creates multiples with a <a href="group_multis_naming_conv.htm"> common naming convention</a>
+	and format to clearly specify peglegs <a href="group_multis_predefined_ref.htm">(see predefined multiples 
+	for Set #1)</a>. The naming convention for output multiple horizons does not reflect the names of the input 
+	horizons.  However, users can change the default prefix for output horizon names to do this.</p>
+	<p><strong>Caution</strong>: Input horizons must be in order by increasing depth or time. If they are not, 
+	then resulting multiples may extend above zero time. If the input are depth horizons, the output will be
+	clipped at zero depth by the time to depth conversion. Time horizons are not clipped at zero time.</p>
+	
+	<p><strong>WARNING:</strong> Group Multiples always writes the output horizons back to the input horizon 
+	datastore rather than storing them only in memory. This is necessary because many horizons can be created, 
+	and if these are large horizons, they could consume all available memory.</p>
+<h2>Overview of the Group Multiples Algorithm</h2>
+	<p>Group Multiples can generate two different, predefined sets of multiples. If the input horizons are in time, results 
+	are in time and a velocity volume is not required. If the input horizons are in depth and you select Set #1, a 
+	velocity volume is required.</p>
+	<ul>
+		<li><em>Set #1</em> converts up to 5 depth horizons to time, computes a specific set of time multiples, 
+		and then converts these horizons back to depth. Input depth horizons require an input velocity volume. If the input 
+		horizons are in time, results will be in time and a velocity volume is <em>not</em> required.</li>
+		<li><em>Set #2</em> computes all multiples for up to 3 input time horizons.</li>
+	</ul>
+	<p>All horizons created by Group Multiples share a common naming convention to describe pegleg paths: 
+	<a href="group_multis_naming_conv.htm">common naming convention and equation format</a>.</p>
+<h2>Generating Multiples from Selected Input Horizons</h2>
+	<ol>
+	
+		<li>Load horizon data into GeoCraft.</li>
+		<li>Load a velocity volume (with units of velocity) into GeoCraft if the horizons are in depth.</li>
+		<li>Click <strong>Add</strong>.</li>
+	<p>A <strong>Selection Dialog</strong> pops up, listing all of the horizons loaded into GeoCraft.</p>
+		<li>Select the horizons to use in the calculation and click <strong>OK</strong>.</li>
+		<li>Sort horizons by increasing time or depth in the <strong>Horizons</strong> field, by selecting 
+		individual horizons and using the <strong>Up</strong> and <strong>Down</strong> buttons to move the 
+		horizons toward the top or bottom of the list.</li>
+		<li>Select an interval <strong>Velocity Volume</strong> if horizons are in depth.</li>
+		<li>Select a <strong>Predefined Group of Multiples</strong>:</li>
+			<ul>
+				<li><strong>Set #1 (Maximum of 5 Horizons)</strong> calculates predefined multiples for up to 
+				5 depth or time horizons</li>
+				<li><strong>Set #2 (Maximum of 3 Horizons)</strong> calculates all possible multiples for up 
+				to 3 time horizons</li>
+			</ul>
+		<li>Select a depth <strong>Conversion Method</strong>:</li>
+			<ul>
+				<li><strong>Cell-based</strong> - velocity is calculated analogous to a constant conversion method. 
+				Velocity is held constant vertically in depth or time between input velocities.</li>
+				<li><strong>Knee-based</strong> - velocity is calculated analogous to a linear conversion method.
+				Velocity is linearly interpolated vertically in depth or time between input velocities.</li>
+			</ul>
+		<li>Accept the <strong>Horizon Prefix</strong>, or type in a new value that complies 
+		with <a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> GeoCraft file-naming requirements</a>.</li>
+		<li>Click <strong>Run</strong>.</li>
+			<p>GeoCraft calculates <strong>and saves</strong> the multiple horizons to the same location where the original horizons 
+	are located. GeoCraft creates multiples with a <a href="group_multis_naming_conv.htm">common naming convention and 
+	equation format</a>. The new multiples populate into the <strong>Repository</strong> window, under the <strong>Grids</strong> folder.</p>
+		<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+	</ol>
+		<h3>Related Topics</h3>
+		<ul>
+			<li><a href="group_multis_naming_conv.htm">Group Multiples Naming Convention</a> </li>
+			<li><a href="group_multis_predefined_ref.htm">Predefined Group Multiples for Set #1</a> </li>
+		</ul>
+	<p></p>
+	<h3><strong>Top Salt Example</strong></h3>
+		<p><img src="groupmultiples.gif" alt="Group Multiples" /></p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="examplewidgets" title="Form Widgets">
+      <description>The Form Widgets example illustrates using GeoCraft forms components for user interface (UI) elements.</description>
+      <topic href="help/examplewidgets.htm" label="Form Widgets"/>
+   </context>
+   <context id="fakeDataGenerator" title="Generate Test Data">
+      <description>The Generate Test Data algorithm creates test data sets for testing.</description>
+      <topic href="help/fakeDataGenerator.htm" label="Generate Test Data"/>
+   </context>
+   <context id="iconviewer" title="Icon Viewer">
+      <description>Display all of the GeoCraft icons for user interfaces (UI).</description>
+      <topic href="help/iconviewer.htm" label="Icon Viewer"/>
+   </context>
+   <context id="GCExChartAPI" title="GeoCraft Charting API">
+      <description>Example GeoCraft Charting code to create scatter, histogram, pie, or grid image charts.</description>
+      <topic href="../org.geocraft.ui.chartviewer/help/gcapi.htm" label="GeoCraft Charting API"/>
+   </context>
+</contexts>

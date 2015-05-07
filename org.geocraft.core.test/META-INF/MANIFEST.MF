@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Core Test
+Bundle-SymbolicName: org.geocraft.core.test
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: org.geocraft.core;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit;bundle-version="3.8.2"
+Import-Package: com.rcpquickstart.bundletestcollector
+Export-Package: org.geocraft.core;uses:="junit.framework",
+ org.geocraft.core.color,
+ org.geocraft.core.common.math;uses:="junit.framework",
+ org.geocraft.core.common.preferences;uses:="junit.framework",
+ org.geocraft.core.common.util;uses:="junit.framework",
+ org.geocraft.core.model,
+ org.geocraft.core.model.aoi,
+ org.geocraft.core.model.datatypes,
+ org.geocraft.core.model.property,
+ org.geocraft.core.model.seismic,
+ org.geocraft.core.model.util,
+ org.geocraft.core.model.well,
+ org.geocraft.core.service.message;uses:="junit.framework"

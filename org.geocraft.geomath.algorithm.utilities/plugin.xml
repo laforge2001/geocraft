@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+<extension
+      point="org.eclipse.help.contexts">
+   <contexts
+         file="help/contexts.xml">
+   </contexts>
+</extension>
+<extension
+      point="org.eclipse.help.toc">
+   <toc
+         file="help/utilities_toc.xml"
+         primary="false">
+   </toc>
+</extension>
+<extension
+      point="org.eclipse.help.index">
+   <index
+         file="help/index.xml">
+   </index>
+</extension>
+<extension
+      point="org.geocraft.algorithm">
+   <algorithm
+         category="Utilities"
+         class="org.geocraft.geomath.algorithm.utilities.areaofinterest.CreateAreaOfInterestAlgorithm"
+         helpId="org.geocraft.geomath.algorithm.utilities.areaofinterest"
+         name="Create a 3D Area of Interest"
+         tooltip="Create a 3D Area of Interest"
+         visible="true">
+   </algorithm>
+</extension>
+<extension
+      point="org.geocraft.algorithm">
+   <algorithm
+         category="Utilities"
+         class="org.geocraft.geomath.algorithm.utilities.areaofinterest.Create2dAreaOfInterestAlgorithm"
+         helpId="org.geocraft.geomath.algorithm.utilities.aoi_2"
+         name="Create a 2D Area of Interest"
+         tooltip="Create a 2D Area of Interest"
+         visible="true">
+   </algorithm>
+</extension>
+<extension
+      point="org.geocraft.algorithm">
+   <algorithm
+         category="Utilities"
+         class="org.geocraft.geomath.algorithm.utilities.areaofinterest.HorizonToAreaOfInterest"
+         helpId="org.geocraft.geomath.algorithm.utilities.horizon2aoi"
+         name="Horizon to Area of Interest"
+         tooltip="Create an Area of Interest from the edge of an existing horizon"
+         visible="true">
+   </algorithm>
+</extension>
+
+</plugin>

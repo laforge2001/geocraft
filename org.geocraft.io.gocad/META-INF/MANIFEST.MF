@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Gocad Plug-in
+Bundle-SymbolicName: org.geocraft.io.gocad;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: COP
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.databinding;bundle-version="1.1.0",
+ org.eclipse.core.runtime;bundle-version="3.4.0",
+ org.eclipse.swt;bundle-version="3.4.0",
+ org.eclipse.ui.forms;bundle-version="3.3.100",
+ org.geocraft.core;bundle-version="1.0.0",
+ org.geocraft.core.session;bundle-version="1.0.0",
+ org.geocraft.ui.io;bundle-version="1.0.0",
+ org.geocraft.ui.form2;bundle-version="1.0.0",
+ org.geocraft.math;bundle-version="1.0.0"
+Export-Package: org.geocraft.io.gocad.pointset
+ 

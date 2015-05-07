@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Velocity Flood Preview</title>
+<meta name="Keywords" content="velocity flood preview, previewing a salt velocity flood, performing a quality assurance check on a salt
+velocity flood calculation, visual inspection of a salt velocity flood calculation" />
+</head>
+<body>
+<h1>Velocity Flood Preview</h1>
+		<p>Velocity Flood Preview allows you to perform a quick visual quality assurance check of horizons 
+		and parameters used in velocity flooding. This is done by flooding only the current Inline and Xline 
+		in the 3D Viewer. When Run is pressed, the output volume is put on the Repository and must be 
+		displayed in the 3D Viewer. As you navigate through the volume, only the current inline and xline 
+		are processed and results are sent back to the viewer. When results are ok, the entire volume 
+		can be processed and output.</p>
+		<p>This version of Velocity Flood is basically identical to the standard (non-preview) Velocity 
+		Flood except that users can quickly view results as they navigate in the 3D Viewer.</p>
+	<h2>Overview of the Velocity Flood Preview Algorithm</h2>
+		<p>Velocity Flood Preview does a velocity flood calculation. When the algorithm completes, the 
+		results are displayed in the 3D viewer so that you can check the data for anomalies (for example, 
+		holes in the top or base salt horizons).</p>
+
+		<p><strong>Note</strong>: When you run this algorithm, the output volume must be displayed in the 3D viewer. 
+		Whenever the Inline or Xline are changed, the algorithm is automatically re-run to process the new lines and 
+		the 3D Viewer is automatically updated. When the results are satisfactory, the entire volume can be processed 
+		by right-clicking on the output volume in the Repository, selecting Export, and specifying a data store.</p>
+		
+	<h2>Performing a Quality Assurance Check on Data with the Velocity Flood Preview Algorithm</h2>
+		<p>You use the same procedure to perform a quality assurance check of your data as you do to perform an
+		actual velocity flood on the data. This procedure links you to several online help topics that you would use to complete
+		a real velocity flood calculation.</p>
+		<ol>
+			<li><a href="vf_datareq.htm">Ensure that the data set meets all Velocity Flooding Data Requirements</a>.</li>
+			<li>Follow the steps outlined in <a href="velocityflood_1ststeps.html">Flooding Salt Velocity in GeoCraft: Starting the 
+			Procedure</a> to begin the flooding process.</li>
+			<li>Use one of the following procedures to run the type of salt flood you need performed on your data set:</li>
+				<ul>
+					<li><a href="velflood_constant.htm">Flooding Salt Velocity with a Constant Flood Type</a></li>
+					<li><a href="velflood_gradient.htm">Flooding Salt Velocity with a Gradient Flood Type</a></li>
+					<li><a href="velflood_dataset.htm">Flooding Salt Velocity with a Dataset Flood Type</a></li>
+				</ul>
+			<li>Perform a quality assurance check on the data when GeoCraft displays the results in the 3D viewer.</li>
+		</ol>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

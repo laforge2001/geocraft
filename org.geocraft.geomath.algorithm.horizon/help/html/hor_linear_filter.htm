@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Convolution (Linear Filters) Algorithm</title>
+<meta name="Keywords" content="linear filters algorithm, kernel, support of filter, convolution with a moving window,
+smoothing, horizon, Gaussian, square mean, circle mean, Linear Filters Algorithm, Convolution Algorithm" />
+</head>
+<body>
+<h1>Convolution (Linear Filters) Algorithm</h1>
+	<p>The Linear Filters algorithm smooths horizons with the Gaussian, Square Mean, or Circular Mean filtering method.</p>
+	<h2>Overview of the Linear Filters Algorithm</h2>
+		<p>Linear filters give the same response in all parts of a data set; they do not adapt to the data. GeoCraft calculates 
+		linear filter size in pixels (the picture element). All GeoCraft calculation results from seismic horizon samples 
+		are measured in pixels.</p> 
+		<p>Linear filters work by convolution within a moving window that is called a <em>kernel</em>. The input pixel is at 
+		the center of the kernel. The nonzero part of the kernel is the kernel <em>support</em>. Linear filters apply the 
+		same weights to all pixels in a data set, so they are very fast. However, linear filters smooth every pixel 
+		equally, so they do not perform sensitive smoothing on the data set.</p>
+	<h2>Using the GeoCraft Linear Filter Algorithm to Smooth a Horizon</h2>
+		<ol>
+			<li>Load seismic horizon data into GeoCraft.</li>
+			<li>Select a <strong>Horizon</strong>.</li>
+			<li>Select a <strong>Linear Filter</strong>:</li>
+				<ul>
+					<li><strong>Gaussian</strong>: applies weights according to the Gaussian distribution, where the
+					kernel and degree of smoothing are controlled; however, noise is simply mixed into the result, and smoothing
+					is random. For best results, remove spikes from a sample before you use a Gaussian filter to smooth the 
+					sample.</li>
+					<li><strong>Square mean</strong>: a linear filter with a square-shaped support (the support
+					is the nonzero part of the filter) </li>
+					<li><strong>Circular mean</strong>: a linear filter with a circle-shaped support (the support
+					is the nonzero part of the filter)</li>
+				</ul>
+			<li>Accept the sample <strong>Size</strong>, or type a new value in the field. Size is the number of 
+			inlines and xlines that are calculated for the sample.</li>
+			<p><strong>Tip</strong>: Size must be an odd number that is 3 or greater.</p>
+			<li>Accept the <strong>Name</strong>, or type in a new one. Make sure that the name 
+			complies with <a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> GeoCraft file-naming requirements</a>.</li>
+			<li><em>Optional</em> Type in <strong>Comments</strong>. Text typed in this field displays in the 
+			<strong>Property</strong>view when the new horizon is selected in the <strong>Repository</strong>.</li>
+			<li>Click <strong>Run</strong>.</li>
+				<p>GeoCraft runs the calculation, and creates the new, smoothed, horizon. The new horizon is in the
+				<strong>Repository</strong>, under the <strong>Grids</strong> folder.</p>
+			<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+		</ol>
+
+	<h3>References</h3>
+		<p>To learn more about the filters used to smooth horizon data, see the following journal article:</p> 
+		<p>Hall, Matt T. "Smooth Operator: Smoothing Seismic Interpretations and Attributes." 
+		<u>The Leading Edge</u> 26.1 (2007): 16-20.</p>
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="hor_linear_algorithms.htm">Linear filter algorithms</a></li>
+			<li><a href="hor_filter_kuwahara.htm">Kuwahara filter algorithm</a></li>
+			<li><a href="hor_filter_snn.htm">Symmetric nearest neighbor filter algorithm</a></li>
+		</ul>
+	<p></p>
+	<h3>Related Topics</h3>
+		<li><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Editing Grid Values in a Spreadsheet View</a></li>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

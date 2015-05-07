@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="ellipseRegionsModel" name="Ellipse Regions Model" schema="schema/ellipseRegionsModel.exsd"/>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.geocraft.internal.abavo.ABavo3dPerspective"
+            icon="icons/DataSeries16.png"
+            id="org.geocraft.abavo.abavo3dPerspective"
+            name="ABAVO 3D">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.geocraft.internal.abavo.ABavo2dPerspective"
+            icon="icons/DataSeries16.png"
+            id="org.geocraft.abavo.abavo2dPerspective"
+            name="ABAVO 2D">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="org.geocraft.abavo.category"
+            class="org.geocraft.abavo.crossplot.ABavoCrossplotViewPart"
+            id="org.geocraft.abavo.abavoCrossplotViewPart"
+            name="ABAVO Crossplot"
+            restorable="true">
+      </view>
+      <category
+            id="org.geocraft.abavo.category"
+            name="ABAVO">
+      </category>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Attributes/ABAVO 3D"
+            class="org.geocraft.abavo.crossplot.CrossplotAvsB3d"
+            helpId="org.geocraft.abavo.crossplotavsb"
+            name="Crossplot A vs B (3D)"
+            tooltip="Adds a series to the AB crossplot"
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Attributes/ABAVO 3D"
+            class="org.geocraft.abavo.classbkg.GenerateClassVolume3d"
+            helpId="org.geocraft.abavo.classbackground"
+            name="Generate Class Volume (3D)"
+            tooltip="Creates a 3D class background volume"
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Attributes/ABAVO 3D"
+            class="org.geocraft.abavo.aplusb.GenerateAplusBVolume3d"
+            helpId="org.geocraft.abavo.AplusB"
+            name="Generate A+B Volume (3D)"
+            tooltip="Creates a 3D A + B volume"
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.core.color.colorMap">
+      <colorMap
+            class="org.geocraft.abavo.ClassBackgroundColorMap"
+            description="The classification colors used in ABAVO."
+            name="Class Background">
+      </colorMap>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.geocraft.abavo.preferences.CrossplotPreferencePage"
+            id="org.geocraft.abavo.CrossplotPreferences"
+            name="ABAVO Crossplot">
+      </page>
+      <page
+            category="org.geocraft.abavo.CrossplotPreferences"
+            class="org.geocraft.abavo.preferences.CrossplotPreferencePage2"
+            id="org.geocraft.abavo.CrossplotPreferences2"
+            name="Data Series">
+      </page>
+      <page
+            category="org.geocraft.abavo.CrossplotPreferences"
+            class="org.geocraft.abavo.preferences.CrossplotPreferencePage3"
+            id="org.geocraft.abavo.CrossplotPreferences3"
+            name="Ellipses">
+      </page>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Attributes/ABAVO 2D"
+            class="org.geocraft.abavo.crossplot.CrossplotAvsB2d"
+            helpId="org.geocraft.abavo.crossplotavsb"
+            name="Crossplot A vs B (2D)"
+            tooltip="Adds a series to the AB crossplot"
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Attributes/ABAVO 2D"
+            class="org.geocraft.abavo.classbkg.GenerateClassVolume2d"
+            helpId="org.geocraft.abavo.classbackground"
+            name="Generate Class Volume (2D)"
+            tooltip="Creates a 2D class background volume"
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Attributes/ABAVO 2D"
+            class="org.geocraft.abavo.aplusb.GenerateAplusBVolume2d"
+            helpId="org.geocraft.abavo.AplusB"
+            name="Generate A+B Volume (2D)"
+            tooltip="Creates a 2D A + B volume"
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension point="org.eclipse.help.contexts">
+      <contexts file="help/contexts.xml">
+      </contexts>
+   </extension>
+   <extension point="org.eclipse.help.toc">
+      <toc file="help/abavo_toc.xml" primary="false">
+      </toc>
+   </extension>
+   <extension point="org.eclipse.help.contentProducer">
+   <binding producerId="org.eclipse.help.dynamic" />
+   </extension>
+   <extension
+         point="org.eclipse.help.index">
+      <index
+            file="help/index.xml">
+      </index>
+   </extension>
+   <extension
+         point="org.geocraft.abavo.ellipseRegionsModel">
+      <definition
+            class="org.geocraft.abavo.ellipse.AlaskaSmallEllipsesModel"
+            name="Alaska (Small Ellipses)">
+      </definition>
+   </extension>
+   <extension
+         point="org.geocraft.abavo.ellipseRegionsModel">
+      <definition
+            class="org.geocraft.abavo.ellipse.AlaskaBigEllipsesModel"
+            name="Alaska (Big Ellipses)">
+      </definition>
+   </extension>
+</plugin>

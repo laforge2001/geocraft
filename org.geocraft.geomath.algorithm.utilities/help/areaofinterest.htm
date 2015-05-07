@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Create a 3D Area of Interest</title>
+<meta name="Keywords" content="create area of interest, AOI, area of interest, area of interest from a volume, create a 3D area of interest" />
+</head>
+<body>
+<h1>Create a 3D Area of Interest</h1>
+	<p>Create an area of interest (AOI) for an existing 3D volume.</p>
+<h2>Overview of Create a 3D Area of Interest Algorithm</h2>
+	<p>The Create Area of Interest algorithm allows you to create an area of interest (AOI) for an existing 3D volume in GeoCraft. You can
+	then use the AOI in other calculations. This algorithm creates 3D AOIs; see <a href= "aoi_2.htm">Creating a 2D Area of Interest</a> for instructions 
+	about creating 2D AOIs.</p>
+	<p><strong>Note:</strong> 3D AOIs can also be created graphically in Map View by drawing a polygon around 
+	the area of interest. The method described here allows one to create either a rectangular AOI by limiting  
+	the Inline and Xline range, or a decimated volume AOI by setting a Delta or step, such as to process every 10th 
+	Inline or Xline for example.</p>
+<h2>Creating a 3D Area of Interest</h2>
+	<ol>
+		<li>Load a 3D volume into GeoCraft.</li>
+		<li>Select an <strong>Input Volume</strong>. GeoCraft populates	the <strong>Input Volume Parameters</strong> 
+		and <strong>Output Area of Interest Parameter</strong> fields with values for the selected volume.</li>
+		<li>Type values into the <strong>Output AOI Parameter</strong> fields to create your AOI:</li>
+			<ul>
+				<li><strong>Inline Start</strong> - Starting Inline number</li>
+				<li><strong>Inline End</strong> - Ending Inline number</li>
+				<li><strong>Inline Delta</strong> - Delta or step for processing inlines</li>
+				<li><strong>xline Start</strong> - Starting Xline number</li>
+				<li><strong>xline End</strong> - Ending Xline number</li>
+				<li><strong>xline Delta</strong> - Delta or step for processing xlines</li>
+			</ul>
+			<p><strong>Note:</strong> Start and End values are moved to the nearest valid Inline or Xline. If 
+			Delta is invalid, it is reset to the data value. For example if the first inline number is 
+			larger than the ending inline, because the line is reversed, then Delta will be a negative number. 
+			But if the user enters as a positive Delta value, it will be reset to the actual, negative, value.</p>
+			<p><em><strong>Hint:</strong> To see the actual values used to create the AOI, do not supply an Output 
+			AOI Name. The Start, End, and Delta values will be included in the default Output AOI Name.</em></p>  
+		<li><em>Optional</em> Select the <strong>Input your own area of interest name?</strong> check box.</li>
+		<li><em>Optional; only available if you selected the <strong>Input your own area of interest name?</strong> 
+		check box</em>. 
+		Type in an <strong>Area of Interest Name</strong>.</li>
+		<li>Click <strong>Run</strong>.</li>
+	</ol>
+	<p>GeoCraft runs the calculation, and creates the AOI, storing it in the Repository, in the 
+	<strong>Areas of Interest</strong> folder. If you did <em>not</em> provide an output name,
+	GeoCraft names the file <strong>var<em>nnn</em>=input volume name + process parameters</strong>.</p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

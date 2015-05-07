@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Setting the AGC and Geometric Gain Parameters for Section View</title>
+<meta name="Keywords" content="changing settings of a section view plot, changing AGC and geometric gain settings" />
+</head>
+<body>
+<h1>Setting the AGC and Geometric Gain Parameters for Section View</h1>
+	<p>Trace normalization for the Section Viewer is set in the Settings dialog. The Normalization option in 
+	the Rendering tab gives users several ways to set trace scales, such as by trace or display (absolute) 
+	average, trace or display maximum, or user defined limits. Trace average and maximum means the scale 
+	factor changes from trace to trace. Display average and maximum use a single scale value derived over 
+	all traces in the display.</p>
+	<p>However, sometimes the seismic gain decays with time or depth and these options are not enough. Other 
+	times one needs to equalize amplitudes between two or more volumes that have different scaling. For these 
+	cases an AGC or Geometric Gain control is necessary. These options are on the "AGC and Geometric Gain" tab 
+	in the Settings Dialog. The AGC option does not ask for a gain level. It sets the absolute average value 
+	over the moving window to 1.</p>
+		<ol>
+			<li><a href="gc_sview_vwplot.htm">View a section plot</a>.</li>
+			<li>In the <a href="PLUGINS_ROOT/org.geocraft.core/html/UI_Elements/gc_ui_elements.htm">Layers</a> 
+			tab, highlight the entity for which you want to change rendering settings.</li>
+			<li>Right-click the mouse button on that entity.</li>
+			<li>In the <strong>Settings</strong> dialog box, select the <strong>AGC and Geometric Gain</strong> tab.</li>
+			<li>In the <strong>AGC and Geometric Gain</strong> tab, change settings for the following properties:</li>
+			<ul>
+				<li>Click <strong>Apply AGC</strong> to apply automatic gain control for the display</li>
+				<li>Select the desired <strong>AGC Type</strong> window to use, either Boxcar or Gaussian</li>
+				<li>Enter an <strong>AGC Window Length</strong> or use the default</li>
+				<li>Click <strong>Apply Geometric Gain</strong> to remove spherical spreading effects</li>
+				<li>Enter an initial gain at zero time <strong>t0</strong> or use the default</li>
+				<li>Enter the spreading constant <strong>n</strong> or use the default</li>
+				<li>Enter a time to limit the gain <strong>tmax</strong> or use the default</li>
+			</ul>
+			<li>Click <strong>OK</strong> or <strong>Apply</strong></li>
+		</ol>
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="gc_sview_vwplot.htm">Plotting a Section View</a></li>
+			<li>Setting the Rendering Parameters for the Section View</li>
+			<li>Setting the Color Bar Parameters for the Section View</li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

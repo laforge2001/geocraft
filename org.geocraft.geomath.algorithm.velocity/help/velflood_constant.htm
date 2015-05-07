@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Flooding Salt Velocity with a Constant Flood Type</title>
+<meta name="Keywords" content="flooding salt velocity with a constant flood type, salt flooding, 
+flooding salt above a horizon, flooding salt below a horizon, flooding salt between horizons, velocity flood, 
+salt velocity flood, flooding salt with constant values" />
+</head>
+<body>
+<h1>Flooding Salt Velocity with a Constant Flood Type</h1>
+	<ol>
+		<li>Select the <strong>Constant(s) or Horizon(s)</strong> option:</li>
+			<ul>
+				<li><strong>Use a constant</strong> - GeoCraft uses a constant value to calculate flood velocity. 
+				GeoCraft contains a default value in the <strong>Flood Velocity (ft/s)</strong> field. Water has a 
+				constant velocity of 5000 feet per second, or approximately 1500 meters per second. However, if you have 
+				data about the water temperature, depth, or pressure, you may want to type a different value in the 
+				<strong>Flood Velocity (ft/s)</strong> field.</li>
+				<li><strong>Use a horizon</strong> - GeoCraft varies the flood velocity with a horizon. If you use a horizon 
+				for a variable velocity, select a <strong>Velocity horizon (ft/s)</strong>.</li>
+			</ul>
+	<p><strong>Note</strong>: The data units of <em>each horizon</em> that you select during this task <em>must</em> 
+	match the data unit of the input volume. For example, if the input volume is measured in feet per second, all horizons 
+	used in this calculation must also be measured in feet per second.<br />
+	If the data units for the input volume and any horizon in the calculation do not match, GeoCraft displays an error in the 
+	<strong>System Messages</strong> window and does not complete the calculation.</p>
+		<li>In the <strong>Volume Name (ft/s)</strong> field accept the default value, type characters after the underscore to 
+		append to the volume name when the calculation runs, or clear the field and type in a new name.</li>
+		<li>Click <strong>Run</strong>.</li>
+	</ol>
+	<p>GeoCraft creates a new volume that is flooded with the salt velocity parameters you set during this task. You can use 
+	a GeoCraft viewer to review the results of the calculation.</p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

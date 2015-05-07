@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.tigris.subversion.subclipse.core.svnnature">
+<project reference="0.9.3,https://wush.net/svn/geocraft/core.test/trunk/org.geocraft.core.test,org.geocraft.core.test"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/releng/unit.tests/trunk/org.geocraft.unittest.suite,org.geocraft.unittest.suite"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/releng/unit.tests/trunk/org.geocraft.test.feature,org.geocraft.test.feature"/>
+<project reference="0.9.3,https://wush.net/svn/geocraft/releng/unit.tests/trunk/com.rcpquickstart.bundletestcollector,com.rcpquickstart.bundletestcollector"/>
+</provider>
+</psf>

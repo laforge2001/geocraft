@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Define the properties for a data file entity and their categories. -->
+<entity-properties entity="Well">
+	<!-- There are no properties at the top of the property tree -->
+    <category name="" />
+	
+    <category name="General">
+        <property id="Datastore" display="Datastore"/>
+        <property id="ProjectName" display="Project"/>
+        <property id="StorageDirectory" display="Storage Directory"/>
+        <property id="Comment" display="Comments"/>
+        <property id="LastModifiedDate" display="Modification Date"/>
+        <property id="isDirty" display="Dirty?"/>
+    </category>
+    
+    <category name="Description">
+		<property id="CurrentOperator" display="Current operator"/>
+        <property id="WellStatus" display="Status"/>
+		<property id="WellType" display="Type"/>
+		<property id="Identifier" display="Identifier type"/>
+		<property id="IdentifierType" display="Identifier"/>
+		<property id="PlatformIdentifier" display="Platform ID"/>
+		<property id="SpudDate" display="Spud date"/>
+		<property id="County" display="County"/>
+		<property id="StateOrProvince" display="State/Province"/>
+		<property id="Country" display="Country"/>
+		<property id="LeaseName" display="Lease name"/>
+		<property id="LeaseNumber" display="Lease #"/>
+		<property id="PermitNumber" display="Permit #"/>
+		<property id="OCSNumber" display="OCS #"/>
+		<property id="Location" display="Location"/>
+		<property id="TotalDepth" display="Total depth"/>
+		<property id="TotalDepthType" display="Total depth type"/>
+		<property id="Field" display="Field"/>
+		<property id="OffshoreArea" display="Offshore area"/>
+		<property id="OffshoreBlock" display="Offshore block"/>
+        <property id="WaterDepth" display="Water depth"/>
+        <property id="DataSource" display="Source"/>
+		<property id="GroundElevation" display="Ground elevation"/>
+    </category>
+	
+	<!-- Excluded displayable properties -->
+	<exclude>
+		<property id="EntityType" display="Entity type" />
+		<property id="DisplayName" display="Display name" />
+	</exclude>
+
+</entity-properties>

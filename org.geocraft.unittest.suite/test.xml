@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+
+<project name="testsuite" default="run" basedir=".">
+	<property file="${builder}/build.properties" />
+  <!-- sets the properties eclipse-home, and library-file -->
+  <!-- The property ${eclipse-home} should be passed into this script -->
+  <!-- Set a meaningful default value for when it is not. -->
+  <property name="eclipse-home" value="${basedir}\..\.."/>
+	<property name="plugin-name" value="org.geocraft.unittest.suite"/>
+	<property name="buildDirectory" value="${user.home}/geocraft-build"/>
+	
+	
+  <!-- This target holds all initialization code that needs to be done for -->
+  <!-- all tests that are to be run. Initialization for individual tests -->
+  <!-- should be done within the body of the suite target. -->
+  <target name="init">
+    <tstamp/>
+  </target>
+
+  <!-- This target defines the tests that need to be run. -->
+  <target name="suite">
+  	<echo message="my eclipse home directory is: ${eclipse-home}" />
+  	<echo message="my library file is: ${library-file}" />
+  	<echo message="my plugin-name is: ${plugin-name}" />
+    <ant target="core-test" antfile="${library-file}" dir="${eclipse-home}">
+      <!-- why the heck was this jdt-folder before -->
+      <property name="os" value="${baseos}" />
+      <property name="ws" value="${basews}" />
+      <property name="arch" value="${basearch}" />
+      <property name="data-dir" value="${eclipse-home}/workspace"/>
+      <property name="plugin-name" value="${plugin-name}"/>
+      <property name="classname" 
+                value="org.geocraft.unittest.suite.AllTests"/>
+      <property name="extraVMargs" value="-Demma.coverage.out.file=${coverageDirectory}/coverage.emma -Dosgi.parentClassloader=ext"/>
+    </ant>
+  	<!--
+  	<ant target="ui-test" antfile="${library-file}" dir="${eclipse-home}">
+  	      <property name="data-dir" value="${jdt-folder}"/>
+  	      <property name="plugin-name" value="${plugin-name}"/>
+  	      <property name="classname" 
+  	                value="org.geocraft.unittest.suite.AllUiTests"/>
+  	      <property name="vmargs"
+  	      			value="-Dpython.home=LOOKATMEIAMBEINGPASSEDIN!!!!!!!!"/>
+  	</ant>
+  	-->
+  </target>
+
+  <!-- This target holds code to cleanup the testing environment after -->
+  <!-- after all of the tests have been run. You can use this target to -->
+  <!-- delete temporary files that have been created. -->
+  <target name="cleanup">
+  </target>
+
+  <!-- This target runs the test suite. Any actions that need to happen -->
+  <!-- after all the tests have been run should go here. -->
+  <target name="run" depends="init,suite,cleanup"/>
+  
+	<!-- This target runs the performance test suites. -->
+  <target name="performance">
+  </target>	
+	
+</project>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="help/contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/velocity_toc.xml"
+            primary="false">
+      </toc>
+   </extension>
+   <extension
+         point="org.eclipse.help.index">
+      <index
+            file="help/index.xml">
+      </index>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Velocity"
+            class="org.geocraft.geomath.algorithm.velocity.flood.VelocityFloodAlgorithm"
+            helpId="org.geocraft.geomath.algorithm.velocity.velocityFlood"
+            name="Velocity Flood"
+            tooltip="Velocity Flood"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Interpretation"
+            class="org.geocraft.geomath.algorithm.velocity.multiples.GroupMultiplesAlgorithm"
+            helpId="org.geocraft.geomath.algorithm.horizon.groupmultiples"
+            name="Group Multiples"
+            tooltip="Compute 1st- and 2nd-order horizon multiples, including peglegs"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Velocity"
+            class="org.geocraft.geomath.algorithm.velocity.horizonstretch.GridTimeDepthConversion"
+            helpId="org.geocraft.geomath.algorithm.velocity.horizonstretch"
+            name="Horizon Stretch 3D (t->d or d->t)"
+            tooltip="Convert 3D time-based grids to depth, or depth-based grids to time."
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Velocity"
+            class="org.geocraft.geomath.algorithm.velocity.volumestretch.VolumeStretch3d"
+            helpId="org.geocraft.geomath.algorithm.velocity.volumestretch"
+            name="Volume Stretch 3D (t->d or d->t)"
+            tooltip="Convert time-based volumes to depth, or depth-based volumes to time."
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Velocity"
+            class="org.geocraft.geomath.algorithm.velocity.velocitysmoothing.VelocitySmoothing"
+            helpId="org.geocraft.geomath.algorithm.velocity.velocitysmoothing"
+            name="Velocity Smoothing"
+            tooltip="Smoothes a velocity volume"
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Velocity"
+            class="org.geocraft.geomath.algorithm.velocity.horizoncascade.GridCascade3d"
+            helpId="org.geocraft.geomath.algorithm.velocity.horizoncascade"
+            name="Horizon Cascade 3D (d-&gt;t-&gt;d)"
+            tooltip="Convert a depth horizon to time with one velocity, then back to depth with a second velocity"
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Velocity"
+            class="org.geocraft.geomath.algorithm.velocity.volumecascade.VolumeCascade3d"
+            helpId="org.geocraft.geomath.algorithm.velocity.volumecascade"
+            name="Volume Cascade 3D (d-&gt;t-&gt;d)"
+            tooltip="Convert a depth volume to time with one velocity, then back to depth with a second velocity"
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Velocity/Preview"
+            class="org.geocraft.geomath.algorithm.velocity.flood.preview.VelocityFloodPreview"
+            helpId="org.geocraft.geomath.algorithm.velocity.velocityfloodprev"
+            name="Velocity Flood 3D (Preview)"
+            tooltip="Creates an in-memory volume that performs on-the-fly flooding"
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Velocity/Preview"
+            class="org.geocraft.geomath.algorithm.velocity.flood.preview.VelocityMultiFloodPreview"
+            helpId="org.geocraft.geomath.algorithm.velocity.multivelocityFloodingprev"
+            name="Velocity Multi-Flood 3D (Preview)"
+            tooltip="Creates an in-memory volume that performs multiple on-the-fly flooding"
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+</plugin>

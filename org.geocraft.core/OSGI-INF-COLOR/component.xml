@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component immediate="true" name="Color Format Service">
+   <implementation class="org.geocraft.core.service.color.ColorFormatService"/>
+   <service>
+      <provide interface="org.geocraft.core.service.color.IColorFormatService"/>
+   </service>
+</component>

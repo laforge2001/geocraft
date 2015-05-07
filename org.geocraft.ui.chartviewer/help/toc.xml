@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="GeoCraft Histogram Viewer" link_to="../org.geocraft.core/html/toc.xml#GCViewers" topic="help/histogram.htm">
+   <topic href="help/histogram.htm" label="GeoCraft Histogram Viewer">
+   </topic>
+   <topic href="help/hist_plot.htm" label="Plotting Data in the Histogram Viewer">
+   </topic>
+   <topic href="help/histmulti_plot.htm" label="Plotting Multiple Data Entities in the Histogram Viewer">
+   </topic>
+   <topic href="help/scatter.htm" label="GeoCraft Scatter Plot Viewer">
+      <topic href="help/scatter_swap.htm" label="Moving a Well Log from the X to the Y Axis on the Scatter Plot">
+      </topic>
+      <topic href="help/scatter_lintolog.htm" label="Changing the Scatter Plot from a Linear to a Log Scale">
+      </topic>
+      <topic href="help/scatter_setrange.htm" label="Setting the Minimum (Start) and Maximum (End) Range in a Scatter Plot Display">
+      </topic>
+      <topic href="help/scatter_z.htm" label="Setting the Z Bound Domains for a Scatter Plot Display">
+      </topic>
+      <topic href="help/scatter_title.htm" label="Changing the Title for a Scatter Plot">
+      </topic>
+   </topic>
+</toc>

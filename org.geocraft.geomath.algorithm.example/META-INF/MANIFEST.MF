@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Algorithm Examples
+Bundle-SymbolicName: org.geocraft.geomath.algorithm.example;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui;bundle-version="3.4.0",
+ org.eclipse.ui.forms;bundle-version="3.3.100",
+ org.eclipse.help,
+ org.eclipse.core.databinding;bundle-version="1.1.0",
+ org.geocraft.core;bundle-version="1.0.0",
+ org.geocraft.math;bundle-version="1.0.0",
+ org.geocraft.ui.common;bundle-version="1.0.0",
+ org.geocraft.algorithm;bundle-version="1.0.0",
+ org.geocraft.ui.form2;bundle-version="1.0.0"
+Bundle-Vendor: ConocoPhillips
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.geocraft.geomath.algorithm.example.generator,
+ org.geocraft.geomath.algorithm.example.generator.entity

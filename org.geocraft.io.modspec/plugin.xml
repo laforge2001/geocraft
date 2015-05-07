@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.geocraft.core.io.datastoreAccessor">
+      <datastoreAccessor
+            category="Grids"
+            name="ModSpec Grid"
+            utilClass="org.geocraft.io.modspec.GridAccessorUtil">
+         <mapper
+               class="org.geocraft.io.modspec.GridMapper"
+               supportedEntityClassName="Grid3d">
+         </mapper>
+         <input
+               mapperModel="org.geocraft.io.modspec.GridMapperModel"
+               selector="org.geocraft.io.modspec.GridFileSelector"
+               task="org.geocraft.io.modspec.GridLoadTask">
+         </input>
+         <output
+               mapperModel="org.geocraft.io.modspec.GridMapperModel"
+               selector="org.geocraft.io.modspec.GridLocationSelector"
+               task="org.geocraft.io.modspec.GridExportTask">
+         </output>
+      </datastoreAccessor>
+   </extension>
+   <extension
+         point="org.geocraft.ui.io.datastoreAccessorUI">
+      <datastoreAccessorUI
+            datastoreAccessorId="ModSpec Grid"
+            inputModelView="org.geocraft.io.modspec.GridLoadView"
+            outputModelView="org.geocraft.io.modspec.GridExportView">
+      </datastoreAccessorUI>
+   </extension>
+
+</plugin>

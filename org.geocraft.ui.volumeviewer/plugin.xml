@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="org.geocraft.ui.volumeviewer.renderers" name="Volume Viewer Renderers" schema="schema/org.geocraft.ui.volumeviewer.renderers.exsd"/>
+   <extension-point id="org.geocraft.ui.volumeviewer.renderer" name="Volume View Renderers" schema="schema/org.geocraft.ui.volumeviewer.renderer.exsd"/>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="org.geocraft.ui.volumeviewer.actionSet1"
+            label="3D View"
+            visible="true">
+         <action
+               class="org.geocraft.internal.ui.volumeviewer.VolumePlotActionDelegate"
+               helpContextId="org.geocraft.ui.volumeviewer.VolumePlot.3Dview"
+               icon="icons/volumeview-16.png"
+               id="org.geocraft.ui.volumeviewer.VolumePlot"
+               label="3D View"
+               menubarPath="plotview/additions"
+               tooltip="View geophysical data in a 3-D perspective">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            category="org.geocraft.ui.viewer.category"
+            class="org.geocraft.ui.volumeviewer.VolumeViewPart"
+            icon="icons/volumeview-16.png"
+            id="org.geocraft.ui.volumeviewer.VolumeViewPart"
+            name="3D Viewer"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+         <objectContribution
+         	objectClass="org.geocraft.ui.repository.PropertiesProviderTreeObject"
+         	adaptable="true"
+         	id="org.geocraft.ui.volumeviewer.VolumeViewContribution">
+         	<filter name="entityTypes" value="
+         	org.geocraft.core.model.seismic.PostStack2d,
+         	org.geocraft.core.model.seismic.PostStack2dLine,
+         	org.geocraft.core.model.seismic.PostStack3d,
+         	org.geocraft.core.model.seismic.PreStack3d,
+         	org.geocraft.core.model.seismic.SeismicSurvey3d,
+         	org.geocraft.core.model.grid.Grid3d,
+			org.geocraft.core.model.grid.Grid2d,
+         	org.geocraft.core.model.well.Well,
+         	org.geocraft.core.model.well.WellBore,
+         	org.geocraft.core.model.well.WellLogTrace,
+         	org.geocraft.core.model.well.WellPick,
+         	org.geocraft.core.model.PolylineSet"/>
+         	<action
+                class="org.geocraft.internal.ui.volumeviewer.VolumePlotActionDelegate"
+                enablesFor="+"
+                icon="icons/volumeview-16.png"
+                id="org.geocraft.ui.volumeviewer.VolumePlot"
+                label="3D View"
+                menubarPath="org.geocraft.ui.repository.plotview/additions"
+                tooltip="Plot selected objects in a 3D viewer">
+         	</action>
+         </objectContribution>
+         
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.geocraft.ui.viewer.dataviewer.preferences"
+            class="org.geocraft.ui.volumeviewer.VolumeViewerPreferencePage"
+            id="org.geocraft.ui.volumeviewer.preferences"
+            name="3D Viewer">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="help/html/contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.geocraft.ui.volumeviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.volumeviewer.renderer.grid.Grid3dRenderer"
+            name="Grid Renderer"
+            type="Grid3d">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.volumeviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.volumeviewer.renderer.well.WellRenderer"
+            name="Well Renderer"
+            type="Well">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.volumeviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.volumeviewer.renderer.well.WellPickRenderer"
+            name="Well Pick Renderer"
+            type="WellPick">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.volumeviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.volumeviewer.renderer.seismic.PostStack3dRenderer"
+            name="PostStack3d Renderer"
+            type="PostStack3d">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.volumeviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.volumeviewer.renderer.fault.FaultRenderer"
+            name="Fault Renderer"
+            type="FaultInterpretation">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.volumeviewer.renderer">
+      <renderer
+            class="org.geocraft.ui.volumeviewer.renderer.pointset.PointSetRenderer"
+            name="PointSet Renderer"
+            type="PointSet">
+      </renderer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.geocraft.ui.volumeviewer.preferences"
+            class="org.geocraft.ui.volumeviewer.renderer.grid.Grid3dRendererPreferencePage"
+            id="org.geocraft.ui.volumeviewer.grid.preferences"
+            name="Grids">
+      </page>
+      <page
+            category="org.geocraft.ui.volumeviewer.preferences"
+            class="org.geocraft.ui.volumeviewer.renderer.well.WellRendererPreferencePage"
+            id="org.geocraft.ui.volumeviewer.well.preferences"
+            name="Wells">
+      </page>
+      <page
+            category="org.geocraft.ui.volumeviewer.preferences"
+            class="org.geocraft.ui.volumeviewer.renderer.seismic.SeismicDatasetRendererPreferencePage"
+            id="org.geocraft.ui.volumeviewer.seismic.preferences"
+            name="Seismic">
+      </page>
+      <page
+            category="org.geocraft.ui.volumeviewer.preferences"
+            class="org.geocraft.ui.volumeviewer.renderer.pointset.PointSetRendererPreferencePage"
+            id="org.geocraft.ui.volumeviewer.pointset.preferences"
+            name="Point Sets">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/toc.xml"
+            primary="false">
+      </toc>
+   </extension>
+   <extension
+         point="org.eclipse.help.index">
+      <index
+            file="help/index.xml">
+      </index>
+   </extension>
+</plugin>
+   

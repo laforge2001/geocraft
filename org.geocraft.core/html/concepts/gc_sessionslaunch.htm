@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>How Session Files Behave When Launching and Closing GeoCraft</title>
+<meta name="Keywords" content="How Session Files Behave When Launching and Closing GeoCraft, session file behavior, sessions" />
+</head>
+<body>
+<h1>How Session Files Behave When Launching and Closing GeoCraft</h1>
+	<p>A workspace contains saved sessions, including a memory of the last active session file you used and how you started
+	that particular session. If you save or restore a GeoCraft session, that becomes your last active session. The next time you launch GeoCraft, 
+	that session will be displayed in the dialog box for your selection.</p>
+	<h2>How Session Files Behave When You Launch GeoCraft</h2>
+		<p>When you launch GeoCraft, a <strong>Geocraft Workspace Selection</strong> dialog displays:</p>
+		<p><img src="workspace2.gif" alt="GeoCraft Workspace Chooser" /></p>
+		<p>GeoCraft remembers and restores all settings on this dialog box to their settings the last time you launched GeoCraft. 
+		In particular, the restore option is set depending on whether the check box was selected or cleared the last time you used it.</p>
+	<h2>Starting a Different GeoCraft Session</h2>
+		<p>When GeoCraft launches, you have the option to restore the last active session (if one exists). If you prefer to restore a different
+		session, perform the following steps:</p>
+			<ol>
+				<li>Launch GeoCraft.</li>
+				<li>When the <strong>Geocraft Workspace Selection</strong> dialog is displayed, do not select your last active session.</li>
+				<li>When GeoCraft is launched, select <strong>File => Restore Session</strong>.</li>
+				<li>Follow the directions in the <a href="gc_restsessions.htm">Switching GeoCraft Sessions</a> topic to select the 
+				session in which you want to work.</li>
+			</ol>
+	<h2>How Session Files Behave When You Close GeoCraft</h2>
+		<p>When you select <strong>File => Exit</strong>, the <strong>Save Session</strong> dialog box is always displayed.</p>
+		<p>You have the following options on this dialog:</p>
+			<ul>
+				<li><strong>Yes</strong>: opens a <strong>Session Selection</strong> dialog that prompts you for a session filename. You may
+				save the session file in the workspace sessions subdirectory or browse to another directory.</li>
+				<p><strong>Caution</strong>: If you type in a name for an existing sessions file, you will overwrite the file.</p>
+				<li><strong>No</strong>: closes GeoCraft without saving any changes to the session file</li>
+				<li><strong>Cancel</strong>: leaves GeoCraft open</li>
+			</ul>
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="gc_sessions.htm">GeoCraft Sessions</a></li>
+			<li><a href="gc_svsessions.htm">Saving a GeoCraft Session</a></li>
+			<li><a href="gc_svsessionsbatch.htm">Saving a GeoCraft Session in Batch Mode</a></li>
+			<li><a href="gc_restsessions.htm">Switching GeoCraft Sessions</a></li>
+			<li><a href="workspace_datamismatch.htm">Loading Data that Does Not Match Unit Preferences</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Velocity Smoothing</title>
+<meta name="Keywords" content="velocity smoothing, improving migration results, removing rough transitions in models" />
+</head>
+<body>
+<h1>Velocity Smoothing</h1>
+		<p>The Velocity Smoothing algorithm removes rough transitions from a velocity model by smoothing 
+		adjacent values. An Area of Interest can be used to reduce the amount of processing. This module 
+		may be used to smooth other types of volumes in addition to velocity volumes.</p>
+		
+		<p><strong>Caution</strong>: Although this module can be used to smooth any volume, <em>if 
+		the volume contains zeros, using the Slowness option will result in division by zero.</em> 
+		<strong>Therefore, do not apply this in the Slowness domain with seismic volumes.</strong></p> 
+	<h2>Overview of Velocity Smoothing</h2>
+		<p>Velocity Smoothing averages adjacent values based upon the following options:</p>
+			<ul>
+				<li>kernel width</li>
+				<li>smoothing kernel type</li>
+				<li>smoothing domain</li>
+				<li>width (and amplitude, if applicable) of smoothing kernel</li>
+			</ul>
+	<h2>Smoothing a Velocity Volume</h2>
+			<ol>
+				<li>Load the velocity volume data into GeoCraft.</li>
+				<li>Select the input <strong>Volume</strong>.</li>
+				<li><em>Optional; only perform this step if you want to use an area of interest.</em> Select the <strong>Use Area 
+				of Interest?</strong> check box.</li>
+				<li><em>Optional</em>Select an <strong>Area of Interest</strong>.</li>
+				<li>Accept the values in the <strong>Kernel Width (Indexed Values) X, Y, Z</strong> fields, or type in new values.</li>
+				<li>Click <strong>Recalculate Dimensions</strong>.</li>
+				<p>GeoCraft returns the kernel width dimensions for the volume you selected.</p>
+				<li>Select a <strong>Smoothing Kernel Type</strong>:</li>
+					<ul>
+						<li><strong>Boxcar</strong> - performs the calculation using a rectangular window function; the 
+						amplitude parameter is calculated at full value, and the width parameter is calculated as a percentage</li>
+						<li><strong>Gaussian</strong> - performs the calculation using a Gaussian function; parameters are 
+						always calculated full width by half maximum value</li>
+					</ul>
+				<li>Select a <strong>Smoothing Domain</strong>:</li>
+					<ul>
+						<li><strong>Slowness</strong> - smooth the volume using the reciprocal of the phase (apparent) velocity</li>
+						<li><strong>Velocity</strong> - smooth the volume using apparent velocity</li>
+					</ul>
+				<li>The items displayed in the <strong>Parameters</strong> group box vary depending upon the Smoothing 
+				Kernel Type you selected:</li>
+					<ul>
+						<li>If you selected <strong>Boxcar</strong>, type values in the <strong>Boxcar Amplitude</strong> and 
+						<strong>Boxcar Width (percentage)</strong> fields.</li>
+						<li>If you selected <strong>Gaussian</strong>, type a value in the <strong>Full Width at Half Maximum</strong> 
+						field.</li>
+					</ul>
+				<li>Accept the <strong>Output Volume Name</strong>, or type a new name in the field.</li>
+				<li>Click <strong>Run</strong>.</li>
+			</ol>
+			<p>GeoCraft runs the algorithm, and the new volume populates in the Repository under 
+			the <strong>Seismic</strong> folder.</p>
+			<p>You may now use GeoCraft plotting and viewing tools to view the volume.</p>
+			<p></p>
+			<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="basicmath" title="Basic Math">
+      <description>GeoCraft&apos;s Basic Math calculator performs general mathematical functions on horizons loaded into GeoCraft, such as exponentiation, and finding the absolute, maximum, minimum, or average value.</description>
+      <topic href="help/basicmath.htm" label="Basic Math"/>
+   </context>
+   <context id="booleanalgebra" title="Boolean Algebra">
+      <description>GeoCraft&apos;s Boolean Algebra calculator performs Boolean Algebraic operations on horizons loaded into GeoCraft (for example: Equal Values, Intersecting Values, or Excluded Elements).</description>
+      <topic href="help/booleanalgebra.htm" label="Boolean Algebra"/>
+   </context>
+   <context id="scientific" title="Scientific Calculations">
+      <description>Geomath&apos;s Scientific Calculator performs scientific calculations on horizons loaded into GeoCraft. For example, you can calculate the Arc Tangent, Cosine, or Base 10 Logarithm.</description>
+      <topic href="help/scientific.htm" label="Scientific Calculations"/>
+   </context>
+</contexts>

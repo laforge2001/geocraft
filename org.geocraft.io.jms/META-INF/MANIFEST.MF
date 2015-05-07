@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Jms Plug-in
+Bundle-SymbolicName: org.geocraft.io.jms;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: javax.jms,
+ org.apache.activemq.broker,
+ org.apache.activemq.command,
+ org.apache.activemq.transport,
+ org.apache.activemq.util,
+ org.apache.activemq.xbean,
+ org.geocraft.io.jms;uses:="javax.jms,org.apache.activemq.transport"
+Bundle-ClassPath: .,
+ activemq-all-5.7.0.jar,
+ commons-pool-1.6.jar
+Require-Bundle: org.geocraft.core;bundle-version="1.0.0",
+ org.geocraft.product;bundle-version="1.0.0"

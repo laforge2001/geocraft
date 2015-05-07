@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="sectionplot" title="GeoCraft Section Plot">
+      <description>Use the GeoCraft Section Plot to see a visual representation of the time and trace data in an entity.</description>
+      <topic href="help/html/gc_vwr_section.htm" label="GeoCraft Section Plot"/>
+   </context>
+</contexts>

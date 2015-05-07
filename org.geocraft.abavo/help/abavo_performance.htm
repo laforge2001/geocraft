@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ABAVO: Tips for Using the Plug-in and Improving Its Performance</title>
+<meta name="Keywords" content="Improving ABAVO performance, ABAVO performance tips, troubleshooting ABAVO 
+performance problems, ABAVO" />
+</head>
+<body>
+<h1>ABAVO: Tips for Using the Plug-in and Improving Its Performance</h1>
+		<p>The following tips will help you use ABAVO and ensure that the plug-in runs at its peak performance:</p>
+	<table border="1">
+					<tr>
+					<td><strong>Tip</strong></td>
+					<td><strong>Explanation and Further Details</strong></td>
+					</tr>
+					<tr>
+					<td>Reduce the Amount of Time ABAVO Takes to Draw a Crossplot</td>
+					<td><p>Make sure that each crossplot contains less than 200,000 points, particularly if you are creating
+					several crossplot data sets at once. If several of your data sets exceed 200,000 points, ABAVO draws the crossplots slowly, and the 
+					Java Virtual Machine (JVM) may run out of memory.</p>
+					<p>Estimate the number of points in a crossplot with this equation:</p>
+					<p><strong>number of inlines</strong> x <strong>number of crosslines</strong> x <strong>number of Time 
+					samples</strong> = <strong>number of points in crossplot</strong></p>
+					<p>If the total number of points is greater than 200,000, use one of the following options to reduce 
+					the points in the crossplot:</p>
+						<ul>
+							<li>use the Peaks &amp; Troughs data mode</li>
+							<li>reduce the time window for your calculation</li>
+							<li>use an Area of Interest (AOI) to limit the inline and crossline range</li>
+							<li>delete any data sets that you do not need from the crossplot</li>
+						</ul></td>
+					</tr>
+					<tr>
+					<td>Use the Same Active Series Data and Regression Line to Create the Background <em>and</em> Event Ellipses</td>
+					<td>If you want to construct a background and an event ellipse, you must use the same Active Series data number 
+					and regression line to create both ellipses. If you use a different Active Series number or regression line in either 
+					ellipse, the color class background will <em>not</em> display.</td>
+					</tr>
+					<tr>
+					<td>View Plot Statistics and Processing Information While ABAVO Runs Calculations</td>
+					<td>ABAVO automatically computes plot processing information and regression statistics as each data set 
+					is completed. You can view the data results in the GeoCraft Error Log.</td>
+					</tr>
+	</table>
+		<h3>Related Topics</h3>
+			<ul>
+				<li><a href="abavo_beforeusing.htm">Before Using ABAVO</a></li>
+				<li><a href="abavo_trouble.htm">Troubleshooting ABAVO Problems</a></li>
+				<li><a href="abavo_intro.htm">Introduction to ABAVO</a></li>
+			</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

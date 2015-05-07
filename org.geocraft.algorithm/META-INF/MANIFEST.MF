@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Algorithm Plug-in
+Bundle-SymbolicName: org.geocraft.algorithm;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.geocraft.algorithm.Activator
+Bundle-Vendor: ConocoPhillips
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.geocraft.ui.form2;bundle-version="1.0.0",
+ org.eclipse.ui.forms;bundle-version="3.3.101",
+ org.geocraft.ui.common;bundle-version="1.0.0",
+ org.geocraft.core.session;bundle-version="1.0.0",
+ org.geocraft.core;bundle-version="1.0.0",
+ org.geocraft.io.util;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.geocraft.algorithm,
+ org.geocraft.algorithm.example,
+ org.geocraft.algorithm.thread,
+ org.geocraft.internal.algorithm;x-internal:=true
+Service-Component: OSGI-INF/component.xml

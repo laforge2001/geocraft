@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="help/html/contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/html/attributes_toc.xml"
+            primary="false">
+      </toc>
+   </extension>
+   <extension
+         point="org.eclipse.help.base.luceneSearchParticipants">
+      <binding
+            participantId="org.eclipse.help.base.xhtml">
+      </binding>
+   </extension>
+   <extension
+         point="org.eclipse.help.contentProducer">
+      <binding
+            producerId="org.eclipse.help.dynamic.binding1">
+      </binding>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Attributes"
+            class="org.geocraft.geomath.algorithm.curvature.HorizonCurvatureAlgorithm"
+            helpId="org.geocraft.geomath.algorithm.curvature.curvature"
+            name="Horizon Curvature"
+            tooltip="Horizon-based Curvature Analysis"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.eclipse.help.index">
+      <index
+            file="help/html/index.xml">
+      </index>
+   </extension>
+
+</plugin>

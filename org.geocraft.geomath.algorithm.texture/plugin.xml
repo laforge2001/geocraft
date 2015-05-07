@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="help/contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/toc.xml"
+            primary="false">
+      </toc>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Attributes"
+            class="org.geocraft.geomath.algorithm.texture.HorizonGlcmAlgorithm"
+            helpId="org.geocraft.geomath.algorithm.texture.glcm"
+            name="Horizon GLCM"
+            tooltip="Compute horizon texture attributes using the GLCM approach. "
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.eclipse.help.index">
+      <index
+            file="help/index.xml">
+      </index>
+   </extension>
+
+</plugin>

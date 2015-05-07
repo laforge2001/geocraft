@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Tasks" link_to="toc.xml#tasks">
+	<topic label="Setting GeoCraft Preferences"  href="html/tasks/UserPreferences/gc_setprefs.htm">
+	</topic>
+ <topic href="html/tasks/gc_feedback.html" label="Providing Feedback to the GeoCraft Team">
+ </topic>
+ <topic href="../org.geocraft.ui.volumeviewer/help/3dv_intro.htm" label="Using the GeoCraft 3D Viewer">
+    <topic href="../org.geocraft.ui.volumeviewer/help/3dv_beforeusing.htm" label="Before You Use the GeoCraft 3D Viewer">
+    </topic>
+    <topic href="html/tasks/UserPreferences/3dv_preferences.htm" label="Setting Display Preferences for the GeoCraft 3D Volume Viewer">
+       <topic href="html/tasks/UserPreferences/3dv_preferences_horiz.htm" label="Setting Horizon Display Preferences in the GeoCraft 3D Volume Viewer">
+       </topic>
+       <topic href="html/tasks/UserPreferences/3dv_preferences_horiz_int.htm" label="Setting Horizon Intersection Display Preferences in the GeoCraft 3D Volume Viewer">
+       </topic>
+       <topic href="html/tasks/UserPreferences/3dv_preferences_well.htm" label="Setting Well Display Preferences in the GeoCraft 3D Volume Viewer">
+       </topic>
+    </topic>
+    <topic href="../org.geocraft.ui.volumeviewer/help/3dv_performance.htm" label="GeoCraft 3D Viewer: Tips for Using the Viewer and Improving Its Performance">
+       <topic href="../org.geocraft.ui.volumeviewer/help/html/3dv_perftips_centering.htm" label="Making an Object the Point of Rotation in the GeoCraft 3D Viewer">
+       </topic>
+    </topic>
+    <topic href="../org.geocraft.ui.volumeviewer/help/3dv_tasklist.htm" label="Performing Tasks in the GeoCraft 3D Viewer">
+    </topic>
+    <topic href="../org.geocraft.ui.volumeviewer/help/3dv_trouble.htm" label="Troubleshooting GeoCraft 3D Viewer Problems">
+    </topic>
+ </topic>
+ <topic href="html/tasks/WorkingWData/data_intro.htm" label="Working with Data in GeoCraft">
+    <topic href="html/concepts/gcfund_datapersist_arch.htm" label="Fundamentals of the GeoCraft Data Store Architecture">
+    </topic>
+    <topic href="html/tasks/WorkingWData/data_formats.htm" label="GeoCraft Data Formats">
+    </topic>
+    <topic href="html/tasks/WorkingWData/data_loading.htm" label="Loading Data into GeoCraft">
+    </topic>
+    <topic href="html/tasks/WorkingWData/data_unloading.htm" label="Unloading a Single Data Entity (Variable) from GeoCraft">
+    </topic>
+    <topic href="html/tasks/WorkingWData/data_resetting.htm" label="Removing All Data from the GeoCraft Repository">
+    </topic>
+ </topic>
+</toc>

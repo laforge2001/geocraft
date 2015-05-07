@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--AgileJ Ltd. (http://www.agilej.com)-->
+<ajsv>
+    <diagram style="standardDiagramStyles.diagramStyle.Standard Basic Style" version="1.4.5">
+        <switch switchID="standardDiagramStyles.styleEnumSwitch.Manhattan Lines" switchValue="dependence, fields, inheritance"/>
+        <switch switchID="standardDiagramStyles.styleEnumSwitch.Line Types" switchValue="dependence, field, inheritance"/>
+        <switch switchID="standardDiagramStyles.styleEnumSwitch.Signature Length" switchValue="short"/>
+        <switch switchID="standardDiagramStyles.styleEnumSwitch.Visibility" switchValue="public, private"/>
+        <switch switchID="standardDiagramStyles.styleEnumSwitch.Members" switchValue="fields, methods, initializers"/>
+        <class className="org.geocraft.core.model.Layer" project="Spark" xLocation="-836" yLocation="-94"/>
+        <class className="org.geocraft.core.model.FeatureAttribute" project="Spark" xLocation="-321" yLocation="-91"/>
+        <class className="org.geocraft.core.model.PolygonFeature" project="Spark" xLocation="-304" yLocation="362"/>
+        <class className="org.geocraft.core.model.PolylineFeature" project="Spark" xLocation="-552" yLocation="347"/>
+        <class className="org.geocraft.core.model.PointFeature" project="Spark" xLocation="-40" yLocation="382"/>
+        <class className="org.geocraft.core.model.SimplePolygon" project="Spark" xLocation="-117" yLocation="692"/>
+        <class className="org.geocraft.core.model.Feature" project="Spark" xLocation="-69" yLocation="3"/>
+        <class className="org.geocraft.core.model.LayerAttribute" project="Spark" xLocation="-550" yLocation="-11"/>
+    </diagram>
+</ajsv>

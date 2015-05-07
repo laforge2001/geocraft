@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="ABAVO Perspective" topic="help/abavo_intro.htm" link_to="../org.geocraft.geomath.help/toc.xml#algorithm">
+   <topic href="help/abavo_intro.htm" label="Introduction to ABAVO">
+      <topic href="help/abavo_beforeusing.htm" label="Before You Use ABAVO">
+         <topic href="../org.geocraft.core/html/tasks/UserPreferences/crossplotpreferences.htm" label="Setting ABAVO Crossplot Preferences">
+            <topic href="../org.geocraft.core/html/tasks/UserPreferences/gcpref_default.htm" label="Restoring Default ABAVO Crossplot Preferences">
+            </topic>
+         </topic>
+      </topic>
+      <topic href="help/abavo_performance.htm" label="Tips for Using ABAVO and Improving Its Performance">
+      </topic>
+      <topic href="help/abavo_tasklist.htm" label="Performing ABAVO Tasks">
+         <topic href="help/cb_inputtab.htm" label="Loading ABAVO Input Data">
+         </topic>
+         <topic href="help/cb_procbounds.htm" label="Selecting Processing Bounds for ABAVO Data">
+         </topic>
+         <topic href="help/cb_classific.htm" label="Entering ABAVO Classification Data">
+         </topic>
+         <topic href="help/AplusB.htm" label="Generating an A+B Volume">
+         </topic>
+         <topic href="help/crossplotavsb.htm" label="Generating an A vs. B Crossplot">
+         </topic>
+         <topic href="help/classbackground.htm" label="Generating a Class Background Volume">
+         </topic>
+         <topic href="help/av_crossplot_intro.htm" label="Using the ABAVO Crossplot to View, Manipulate, and Analyze Calculation Data">
+            <topic href="help/av_xplot_ed_polymove.htm" label="Moving a Polygon Model">
+            </topic>
+            <topic href="help/avtask_xplot_cursrtooltp.htm" label="Tracking the Intercept and Gradient Values with Cursor Movements in the ABAVO Crossplot View">
+            </topic>
+            <topic href="help/avtask_xplot_broadcursr.htm" label="Displaying the Current Location of the Cursor in the ABAVO Crossplot">
+            </topic>
+            <topic href="help/avtask_xplot_home.htm" label="Returning an Object to Its Original Location in the Crossplot">
+            </topic>
+            <topic href="help/avtask_xplot_pan.htm" label="Scrolling (Panning) Through an Image in the Crossplot View">
+            </topic>
+            <topic href="help/avtasks_xplot_zoomin.htm" label="Zooming In On an Object in the ABAVO Crossplot View">
+            </topic>
+            <topic href="help/avtasks_xplot_zoomout.htm" label="Zooming Out From an Object in the ABAVO Crossplot View">
+            </topic>
+            <topic href="help/av_xplot_dataseries.htm" label="Setting the Active Data Series for a Calculation">
+            </topic>
+            <topic href="help/av_maj_axis.htm" label="Setting the Major Axis for a Regression Line">
+            </topic>
+            <topic href="help/av_displist.htm" label="Hiding and Displaying Items in the ABAVO Crossplot (Display List)">
+            </topic>
+            <topic href="help/av_toolbar_btns.htm" label="Quick Reference: ABAVO Crossplot Toolbar Buttons">
+            </topic>
+            <topic href="help/av_alg_buttons.htm" label="Accessing the ABAVO Algorithms from the Crossplot View">
+            </topic>
+            <topic href="help/av_xplot_createpolygon.htm" label="Creating Polygon Models">
+            </topic>
+            <topic href="help/av_xplot_constructellipse.htm" label="Constructing Ellipse Models">
+            </topic>
+            <topic href="help/av_canvas_layout_ed.htm" label="Changing the Appearance of a Crossplot">
+            </topic>
+            <topic href="help/av_xplot_ed_ellipsemod.htm" label="Changing Ellipse Models">
+            </topic>
+            <topic href="help/av_cross_mod_load.htm" label="Loading a Polygon Model">
+            </topic>
+            <topic href="help/av_ellip_mod_load.htm" label="Loading an Ellipse Model">
+            </topic>
+            <topic href="help/abavo_trouble_lineslope.htm" label="Changing Line Slope in a Crossplot">
+            </topic>
+            <topic href="help/abavo_trouble_linepos.htm" label="Changing Line Position in a Crossplot">
+            </topic>
+            <topic href="help/avtask_xplot_editcolorbar.htm" label="Changing the Colors in an ABAVO Crossplot">
+            </topic>
+            <topic href="help/avtask_xplot_editclasscolor.htm" label="Changing the Class (Background) Colors in an ABAVO Crossplot">
+            </topic>
+            <topic href="help/av_canvas_layout_ed.htm" label="Changing the Appearance of Text, Titles, and Labels in a Crossplot">
+            </topic>
+         </topic>
+      </topic>
+      <topic href="help/abavo_trouble.htm" label="Troubleshooting ABAVO Problems">
+         <topic href="help/abavo_trouble_linepos.htm" label="Changing Line Position in a Crossplot">
+         </topic>
+         <topic href="help/abavo_trouble_lineslope.htm" label="Changing Line Slope in a Crossplot">
+         </topic>
+      </topic>
+   </topic>
+</toc>

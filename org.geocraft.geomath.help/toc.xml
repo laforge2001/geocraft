@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="GeoMath Perspective">
+	<topic href="html/algorithm.html" label="Algorithms">
+    </topic>
+ <topic label="4D Seismic Algorithms">
+    <anchor id="seismicAlgorithms4D"/>
+ </topic>
+ <topic label="Attributes Algorithms">
+    <anchor id="attributeAlgorithms"/>
+ </topic>
+ <topic href="../org.geocraft.geomath.algorithm.calculator/help/basicmath.htm" label="Calculator Algorithms">
+    <anchor id="calculatorAlgorithms"/>
+ </topic>
+ <topic label="Horizon Algorithms">
+    <anchor id="horizonAlgorithms"/>
+ </topic>
+ <topic label="Interpretation Algorithms">
+    <anchor id="interpretationAlgorithms"/>
+ </topic>
+ <topic label="Pore Pressure Algorithms">
+    <anchor id="porePressureAlgorithms"/>
+ </topic>
+ <topic label="Programming Examples">
+    <anchor id="programmingExamples"/>
+ </topic>
+ <topic label="Utilities Algorithms">
+    <anchor id="utilitiesAlgorithms"/>
+    <anchor id="utilityAlgorithms"/>
+ </topic>
+ <topic label="Velocity Algorithms">
+    <anchor id="velocityAlgorithms"/>
+ </topic>
+ <topic label="Volume Algorithms">
+    <anchor id="volumeAlgorithms"/>
+ </topic>
+ <topic label="Wavelet Processing">
+    <anchor id="waveletAlgorithms"/>
+ </topic>
+ <topic label="Well Algorithms">
+    <anchor id="wellAlgorithms"/>
+ </topic>
+</toc>

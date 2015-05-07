@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Define the properties for a data file entity and their categories. -->
+<entity-properties entity="SeismicSurvey3d">
+	<!-- There are no properties at the top of the property tree -->
+    <category name="" />
+
+    <category name="Inline">
+        <property id="NumInlines" display="Inline Count"/>
+        <property id="InlineRange" display="Inline Range"/>
+    </category>
+    
+    <category name="Crossline">
+        <property id="NumXlines" display="Xline Count"/>
+        <property id="XlineRange" display="Xline Range"/>
+    </category>
+    
+    <category name="Geometry">
+        <property id="NumRows" display="Row Count"/>
+        <property id="NumColumns" display="Column Count"/>
+    </category>
+	
+	<!-- Excluded displayable properties -->
+	<exclude>
+		<property id="DisplayName" display="Display Name" />
+	</exclude>
+	
+</entity-properties>

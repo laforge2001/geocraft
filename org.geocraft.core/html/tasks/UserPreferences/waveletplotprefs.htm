@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Setting Wavelet Plot Preferences</title>
+<meta name="Keywords" content="wavelet plot preferences, setting user preferences, GeoCraft settings, changing user preferences" />
+</head>
+<body>
+<h1>Setting Wavelet Plot Preferences</h1>
+	<p>Use this procedure to configure the functionality of the GeoCraft Wavelet plot viewer.</p>
+		<ol>
+			<li>Select <strong>Edit => Preferences</strong>.</li>
+			<li>Select <strong>Wavelet Plots</strong>.</li>
+			<li>Select the <a href="gc_setprefs_scope.htm">preference scope</a>.</li>
+			<li>In the Time Domain group box, select a scaling option.</li>
+				<ul>
+					<li>Automatic scaling: GeoCraft automatically applies a scale factor to the time domain</li>
+					<li>Manual scaling: GeoCraft uses a factor that you supply to scale the time domain</li>
+				</ul>
+			<li><em>Optional; only perform this step if you set the Time Domain to use Manual scaling.</em> Type in 
+			a <strong>Scale Factor</strong>.</li>
+			<li>In the Amplitude Spectrum group box, type in a <strong>Maximum Frequency</strong> or accept the value.</li>
+			<li>Select a scaling option.</li>
+				<ul>
+					<li>Automatic scaling: GeoCraft automatically scales the frequency spectrum.</li>
+					<li>Manual scaling: GeoCraft uses a factor that you supply to scale the frequency spectrum</li>
+				</ul>
+			<li><em>Optional; only perform this step if you set the Amplitude Spectrum to use Manual scaling.</em> Type in 
+			a <strong>Scale Factor</strong>.</li>
+			<li>Set a <strong>Spectrum Type</strong> for wavelet plots:</li>
+				<ul>
+					<li><strong>Amplitude</strong>: wavelets plot in linear amplitude as a function of frequency</li>
+					<li><strong>Linear Power</strong>: wavelets plot in linear power (amplitude squared)</li>
+					<li><strong>Decibel Power</strong>: wavelets plot in a decibel (db) power scale</li>
+				</ul>
+			<li>If Decibel Power is selected, enter a <strong>dB Range</strong>, or accept the default value.</li>
+			<li>In the Phase Spectrum group box, select the <strong>Display the Phase Spectrum Plot</strong> check box if you want 
+			to display the Phase Spectrum in the Wavelet Viewer.</li>
+			<li>Select the <strong>Unwrap Phase</strong> check box if you want GeoCraft to unwrap the phase spectrum 
+			to a continuous phase.</li>
+			<li>Type a value between 1 and 100 in the <strong>Amplitude Spectrum Threshold %</strong> field.</li>
+			<li>Set the <strong>Minimum Phase</strong> value in degrees.</li>
+			<li>Set the <strong>Maximum Phase</strong> value in degrees.</li>
+			<li>Select the <strong>Add Regression Line</strong> check box to add regression lines to wavelet plots.</li>
+			<li>Set the <strong>Minimum Regression Frequency</strong>.</li>
+			<li>Click <strong>OK</strong>.</li>
+		</ol>
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="gc_setprefs.htm">Setting GeoCraft Preferences</a></li>
+			<li><a href="gc_setprefs_scope.htm">Setting the Scope of GeoCraft Preferences</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

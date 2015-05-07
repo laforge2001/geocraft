@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Introduction to ABAVO</title>
+<meta name="Keywords" content="Introduction to ABAVO, ABAVO overview, intro to ABAVO, ABAVO" />
+</head>
+<body>
+<h1>Introduction to ABAVO</h1>
+	<p>ABAVO (Amplitude/Background and Amplitude Variation with Offset) is an amplitude versus offset 
+	crossplot analysis program developed by ConocoPhillips Company.</p>
+<p>ABAVO analyzes amplitude variations with offset to determine whether lithology or fluid changes in a 
+	geographical area might be visible. ABAVO uses either normal incidence (A) and gradient (B); or near and 
+	far seismic sections as the input source of data for crossplot analysis. Then, geoscientists interpret these 
+	A and B crossplots. The corresponding fluid factor trends are calculated by ABAVO and displayed graphically.</p>
+<h2>Overview of ABAVO</h2>
+	<p>ABAVO can analyze 2D and 3D seismic data. This is the ABAVO workflow; follow these steps when
+	working in ABAVO:</p>
+		<ol>
+			<li>Compute the intercept and gradient for a background data series.</li>
+			<li>Compute the intercept and gradient for an anomalous data series.</li>
+			<li>ABAVO uses the intercept-gradient crossplots to construct a background ellipse and a
+			maximum ellipse; this results in a defined ellipse model where AVO classes are color-coded
+			by region.</li>
+			<li>You may push seismic data sets through the ellipse model to locate and analyze other anomalies by color.</li>
+			<li><em>Optional</em> You may also construct a polygon from the crossplot and use the polygon
+			to locate similar anomalies on the seismic data set.</li>
+		</ol>
+<h2>Using the ABAVO Input Panels</h2>
+	<p>Before you can perform most ABAVO functions, you must enter data on the ABAVO input panels. These tabs are located 
+	in the lower-left corner of the panel, as shown	in the following figure.</p>
+	<p><img src="clssbkgrdtab.gif" alt="ABAVO Class Volume Tabs" /></p>
+	<p><em>ABAVO data input tabs</em></p>
+	<p>For detailed instructions about how to enter data for each tab, view the following topics:</p>
+		<ul>
+			<li><a href="cb_inputtab.htm">Entering ABAVO Input Data</a></li>
+			<li><a href="cb_procbounds.htm">Entering ABAVO Processing Bounds Data</a></li>
+	</ul>
+<h2>Starting ABAVO Algorithms</h2>
+	<p>The best way to start up ABAVO is to first open the ABAVO perspective if GeoCraft is not 
+	already in this perspective. Do this by clicking <em>Perspectives => ABAVO 2D</em> for 2D 
+	seismic, or <em>Perspectives => ABAVO 3D</em> for 3D seismic. When GeoCraft switches to the 
+	ABAVO perspective, the ABAVO Crossplot window is created and the <em>Crossplot A vs B</em> 
+	algorithm is opened in the main window. Other ABAVO algorithms can be launched directly from 
+	the crossplot window using the <a href="av_alg_buttons.htm">ABAVO Algorithm Buttons</a>.</p>
+<h3>Related Topics</h3>
+<ul>
+	<li><a href="abavo_beforeusing.htm">Before Using ABAVO</a></li>
+	<li><a href="abavo_tasklist.htm">Performing ABAVO Tasks</a></li>
+	<li><a href="abavo_trouble.htm">Troubleshooting ABAVO Problems</a></li>
+	<li><a href="abavo_performance.htm">Improving ABAVO Performance</a></li>
+</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

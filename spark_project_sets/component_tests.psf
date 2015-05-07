@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.tigris.subversion.subclipse.core.svnnature">
+<project reference="0.9.3,http://svn.conocophillips.net/cop/spark/component.test/trunk/com.cop.spark.io.petromod.test,com.cop.spark.io.petromod.test"/>
+<project reference="0.9.3,http://svn.conocophillips.net/cop/spark/component.test/trunk/com.cop.spark.io.abacus.test,com.cop.spark.io.abacus.test"/>
+<project reference="0.9.3,http://svn.conocophillips.net/cop/spark/component.test/trunk/com.cop.spark.io.geoprobe.test,com.cop.spark.io.geoprobe.test"/>
+</provider>
+</psf>

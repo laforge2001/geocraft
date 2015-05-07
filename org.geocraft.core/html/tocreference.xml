@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Reference" link_to="toc.xml#reference">
+   <topic href="html/reference/gc_tshoot.htm" label="GeoCraft Troubleshooting">
+   </topic>
+   <topic href="html/reference/gc_performance.htm" label="Tips for Using GeoCraft and Improving Its Performance">
+   </topic>
+   <topic href="html/reference/gc_background.htm" label="Running GeoCraft Processes in the Background">
+   </topic>
+</toc>

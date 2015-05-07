@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Trace Integration</title>
+<meta name="Keywords" content="Trace Integration, upward sands, reflection-seismic data, transforming reflection-seismic data into relative
+impedance log, relative impedance log, transforming upward sands" />
+</head>
+<body>
+<h1>Trace Integration</h1>
+		<p>Trace Integration transforms existing reflection-seismic data into relative impedance.</p>
+	<h2>Overview of the Trace Integration Algorithm</h2>
+		<p>Performing trace integration on data can be helpful for observing cases like fining upward 
+		sands that do not have a top sand reflection. Trace integration with an operator length of one is 
+		simply a running sum of traces samples when the data are regularly sampled. However this process 
+		effectively boosts low frequency noise. As a result trace integration is often followed by a low 
+		cut bandpass filter. The Trace Integration algorithm in GeoCraft allows users to perform both 
+		processes in one step by setting the operator length larger than 1.</p>
+		<p>The Trace Integration algorithm works with 2D and 3D volume data.</p>
+<p><strong>Note</strong>: Trace integration should be applied to zero-phase broadband reflection data.</p>
+        <p><strong>CAUTION!</strong>: Some 2D data stores limit the number of characters in file names. For example, 
+	in some data stores the file name must be 9 characters or less. If you are working with 2D volume data 
+	from a data store with file name limitations, <em>modify</em> the GeoCraft 
+	<strong>Volume Name</strong> to comply with the data store requirements.</p>
+<h2>Transforming Reflection Seismic Data into Relative Impedance</h2>
+		<ol>
+			<li>Select the <strong>Type of Volume</strong>:</li>
+				<ul>
+				  <li><strong>2D</strong>: two-dimensional volume data</li>
+				  <li><strong>3D</strong>: three-dimensional volume data</li>
+				</ul>
+            <li>Select a seismic <strong>Volume</strong>.</li>
+			<li><em>Optional; only perform this step if you want to use an area of interest.</em> Select the <strong>Use Area 
+			of Interest?</strong> check box.</li>
+			<li><em>Optional; only perform this step if you want to limit the volume to a specific area of interest.</em> Select an
+			<strong>Area of Interest</strong>.</li>
+			<li>In the <strong>Operator Length</strong> field, accept the value (80) in the field, or type in a new value.</li>
+			<p><em>Operator Length</em> defines the length of the integration operator.</p>
+			<p>When Operator Length is set to 1 sample, the operator does a running sum of trace samples. 
+			This produces a 90-degree phase shift and a 1/f high cut. This effect is often seen 
+			as a ramp in time or a low frequency spike, which can be removed by applying a low-cut filter.</p>
+			<p>When Operator Length is set to a value larger than 1, such as the default value of 80 samples, 
+            the operator is a sliding window that adds the nearest 80 trace samples. An Operator Length value of 
+            80 greatly reduces the time ramp and removes low frequencies, so that you may not have to apply 
+            additional filtering to the calculation.</p>
+			<li>Accept the value in the <strong>Output Volume Name</strong> field, or type in a new value.</li>
+			<li>Click <strong>Run</strong>.</li>
+		</ol>
+			<p>Use the volume plotting tools to view the results from the calculation.</p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

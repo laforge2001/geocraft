@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.geocraft.core.io.datastoreAccessor">
+      <datastoreAccessor
+            category="Point Sets"
+            name="GOCAD PointSet"
+            utilClass="org.geocraft.io.gocad.pointset.PointSetAccessorUtil">
+         <mapper
+               class="org.geocraft.io.gocad.pointset.PointSetMapper"
+               supportedEntityClassName="PointSet">
+         </mapper>
+         <input
+               mapperModel="org.geocraft.io.gocad.pointset.PointSetMapperModel"
+               selector="org.geocraft.io.gocad.pointset.PointSetSelector"
+               task="org.geocraft.io.gocad.pointset.PointSetLoadTask">
+         </input>
+      </datastoreAccessor>
+   </extension>
+   <extension
+         point="org.geocraft.ui.io.datastoreAccessorUI">
+      <datastoreAccessorUI
+            datastoreAccessorId="GOCAD PointSet"
+            inputModelView="org.geocraft.io.gocad.pointset.PointSetLoadView"
+            outputModelView="org.geocraft.io.gocad.pointset.PointSetExportView">
+      </datastoreAccessorUI>
+   </extension>
+
+</plugin>

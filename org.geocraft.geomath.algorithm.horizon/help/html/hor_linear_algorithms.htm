@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Linear Filter Algorithms</title>
+<meta name="Keywords" content="linear algorithms, smoothing horizons, smoothing seismic interpretations, removing noise from seismic interpretations, linear algorithm, 
+Kuwahara algorithm, symmetric nearest neighbor algorithm" />
+</head>
+<body>
+<h1>Linear Filter Algorithms</h1>
+	<p>Linear filter algorithms remove noise from seismic data interpretations. This is also known as smoothing seismic interpretations.</p>
+<h2>Overview of Linear Filter Algorithms</h2>
+	<p>Linear filters apply the same operations and weight to each input pixel of data within a seismic interpretation or a digital image; the filters do not 
+	adapt to the data. The filters work by convolution with a kernel (moving window) over the data set, so they are very fast. However, the filters are 
+	not very sensitive to the data, so everything is smoothed equally.</p>
+<h2>Linear Filter Algorithms Available in GeoCraft</h2>
+	<p>GeoCraft provides the following linear filter algorithms:</p>
+		<ul>
+			<li><a href="hor_linear_filter.htm">Convolution (Linear Filters)</a></li>
+			<li><a href="hor_filter_kuwahara.htm">Kuwahara</a></li>
+			<li><a href="mediansmooth.htm">Median Smooth</a></li>
+			<li><a href="hor_filter_snn.htm">Symmetric Nearest Neighbor</a></li>
+			<li><a href="weightedsmooth">Weighted Smooth</a></li>
+		</ul>
+	<h3>References</h3>
+		<p>To learn more about the filters used to smooth horizon data, see the following journal article:</p> 
+		<p>Hall, Matt T. "Smooth Operator: Smoothing Seismic Interpretations and Attributes." 
+		<u>The Leading Edge</u> 26.1 (2007): 16-20.</p>
+	<p></p>
+	<h3>Related Topics</h3>
+		<li><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Editing Grid Values in a Spreadsheet View</a></li>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

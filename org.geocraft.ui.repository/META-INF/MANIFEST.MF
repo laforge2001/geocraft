@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Repository UI
+Bundle-SymbolicName: org.geocraft.ui.repository;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: ConocoPhillips
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.ui.forms;bundle-version="3.3.0",
+ org.eclipse.ui.navigator;bundle-version="[3.3.0,4.0.0)",
+ org.eclipse.ui.views;bundle-version="3.3.0",
+ org.geocraft.core;bundle-version="1.0.0",
+ org.geocraft.ui.common;bundle-version="1.0.0",
+ org.geocraft.ui.model;bundle-version="1.0.0",
+ org.geocraft.ui.io;bundle-version="1.0.0",
+ org.geocraft.product;bundle-version="1.0.0",
+ org.geocraft.core.session;bundle-version="1.0.0",
+ org.geocraft.io.util;bundle-version="1.0.0"
+Export-Package: org.geocraft.ui.repository,
+ org.geocraft.ui.repository.action
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

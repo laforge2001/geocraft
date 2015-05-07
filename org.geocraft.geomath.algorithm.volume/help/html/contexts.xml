@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="traceint" title="Trace Integration">
+      <description>Trace Integration transforms existing reflection seismic data into relative impedance.</description>
+      <topic href="help/html/traceintegration.htm" label="Trace Integration"/>
+   </context>
+   <context id="volumecalc" title="Volume Calculator Algorithm">
+      <description>Volume Calc applies the linear transform: Vout = (B1*Vin) + B2 over an area of interest. B1 and B2 are either constant values or horizons.</description>
+      <topic href="help/html/volumecalc.htm" label="Volume Calculator Algorithm"/>
+   </context>
+   <context id="mvxp" title="MVXP Algorithm">
+      <description>MVXP does median-based windowed scaling on seismic volumes.</description>
+      <topic href="help/html/mvxp.htm" label="MVXP Algorithm"/>
+   </context>
+</contexts>

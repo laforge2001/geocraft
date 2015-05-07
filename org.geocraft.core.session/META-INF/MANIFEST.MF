@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Session Plug-in
+Bundle-SymbolicName: org.geocraft.core.session
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.geocraft.core.internal.session.Activator
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
+ org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.jface,
+ org.geocraft.core;bundle-version="1.0.0"
+Export-Package: org.geocraft.core.internal.session;x-internal:=true,
+ org.geocraft.core.session;uses:="org.osgi.service.prefs,org.geocraft.core.model.mapper"
+Import-Package: org.eclipse.core.runtime.preferences

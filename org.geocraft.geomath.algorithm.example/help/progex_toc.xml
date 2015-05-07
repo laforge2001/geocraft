@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Programming Example Algorithms" link_to="../org.geocraft.geomath.help/toc.xml#programmingExamples">
+   <topic href="help/examplewidgets.htm" label="Form Widgets">
+   </topic>
+   <topic href="help/fakeDataGenerator.htm" label="Generate Test Data">
+   </topic>
+   <topic href="../org.geocraft.ui.chartviewer/help/gcapi.htm" label="GeoCraft Charting API">
+   </topic>
+   <topic href="help/iconviewer.htm" label="Icon Viewer">
+   </topic>
+</toc>

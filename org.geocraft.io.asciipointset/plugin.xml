@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.geocraft.core.io.datastoreAccessor">
+      <datastoreAccessor
+            category="Point Sets"
+            name="Ascii PointSet"
+            utilClass="org.geocraft.io.asciipointset.AsciiPointSetAccessorUtil">
+         <mapper
+               class="org.geocraft.io.asciipointset.AsciiPointSetMapper"
+               supportedEntityClassName="PointSet">
+         </mapper>
+         <input
+               mapperModel="org.geocraft.io.asciipointset.AsciiPointSetMapperModel"
+               selector="org.geocraft.io.asciipointset.AsciiPointSetSelector"
+               task="org.geocraft.io.asciipointset.AsciiPointSetLoadTask">
+         </input>
+      </datastoreAccessor>
+   </extension>
+   <extension
+         point="org.geocraft.ui.io.datastoreAccessorUI">
+      <datastoreAccessorUI
+            datastoreAccessorId="Ascii PointSet"
+            inputModelView="org.geocraft.io.asciipointset.AsciiPointSetLoadView"
+            outputModelView="org.geocraft.io.asciipointset.AsciiPointSetExportView">
+      </datastoreAccessorUI>
+   </extension>
+
+</plugin>

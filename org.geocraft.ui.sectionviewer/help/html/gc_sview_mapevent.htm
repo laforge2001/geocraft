@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Viewing Lines Selected in Map View within the Section View</title>
+<meta name="Keywords" content="section view, seeing map view events in section view" />
+</head>
+<body>
+<h1>Viewing Lines Selected in Map View within the Section View</h1>
+	<p>Section View can display Inlines, Xlines, or Arbitrary lines selected in Map View. You can 
+	broadcast the cursor position from the Map View to the Section View, or from the Section View
+	to the Map View.</p>
+		<ol>
+			<li>Open Map View on the <strong>Survey</strong> node under <em>2D Seismic</em> or 
+			<em>3D Seismic</em> folders in the <em>Repository</em> tree. This node contains the 
+			geometry for the volume and must be displayed in Map View. If you also desire to view 
+			a particular horizon, simply open a Map View for that horizon and click the 
+			<strong>Cursor reception is disabled</strong> icon to enable cursor tracking. 
+			However, section lines can only be selected from the Survey Map View.</li>
+			<li>Click the <strong>Cursor broadcast is disabled</strong> on the Survey Map View toolbar.</li>
+			<li>If not already displayed, open Section View for the data volume.</li>
+			<li>Click the <strong>Cursor receive is disabled</strong> on the Section View toolbar.</li>
+			<li>In the Survey Map View <em>Layers</em> tab right-click on the <strong>Survey</strong> node 
+			and select either an Inline, Xline, or Arbitrary Section from the pop up menu.</li>
+			<li>If you want to select a specific inline or xline, click the <em>Readout</em> tab 
+			in the Map View so you can read the inline and xline number.</li> 
+			<li>When the cursor changes to a plus sign over the map, select the line to display by pressing MB2. 
+			For arbitrary lines left click to draw the line and when done click MB2 to display the line 
+			in Section View. The selected line is now displayed in Section View.</li>
+			<li>In Section View click the <strong>Cursor broadcast is disabled</strong> icon.</li>
+			<li>In Map View click the <strong>Cursor reception is disabled</strong> icon.</li>
+			</ol>
+	<p>Now as the cursor is moved around in Section View, its position can be seen in Map View - i.e. 
+	the Survey Map View or any other horizon displayed in Map View with cursor reception enabled. If 
+	the cursor is moved in Map View to intersect the line of section, its position in Section View 
+	is annotated by a plus sign at the top of the nearest trace.</p> 
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="gc_sview_vwplot.htm">Plotting a Section View</a></li>
+			<li><a href="gc_vwr_sv_before.htm">Before You Use the GeoCraft Section View</a></li>
+			<li><a href="gc_sview_nav.htm">Setting Data Navigation Along the Inline or the Xline Axis in the Section View</a></li>
+			<li><a href="zrange.htm">Setting Z Range Values in the Section View</a></li>
+			<li><a href="gc_sview_2dseis.htm">Viewing 2D Seismic Data in the Section View</a></li>
+			<li><a href="sview_settings.htm">Changing Plot Settings in the Section View</a></li>
+			<li><a href="gc_sview_mapevent.htm">Viewing Lines Selected in the Map View within the Section View</a></li>
+			<li><a href="gc_sview_grp.htm">Toggling the Group Entities Display On and Off</a></li>
+			<li><a href="gc_sview_redraw.htm">Manually Refreshing Data within the Section View</a></li>
+			<li><a href="gc_sview_tasks.htm">Completing Tasks in the Section View</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

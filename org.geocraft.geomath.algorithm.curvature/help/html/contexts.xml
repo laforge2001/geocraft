@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="curvature" title="Horizon Curvature">
+      <description>Compute horizon-based curvature attributes.</description>
+      <topic href="help/html/curvature.htm" label="Horizon Curvature"/>
+   </context>
+</contexts>

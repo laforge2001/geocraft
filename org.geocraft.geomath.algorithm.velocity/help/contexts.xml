@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="horizonstretch" title="Horizon Stretch">
+      <description>Horizon Stretch converts time-based horizons to depth and depth-based horizons to time.</description>
+      <topic href="help/horizonstretch.html" label="Horizon Stretch"/>
+   </context>
+   <context id="velocityFlood" title="Velocity Flood">
+      <description>Velocity Flood modifies velocities above, below, or between horizons, using constant or variable flood velocities.</description>
+      <topic href="help/velocityflood.html" label="Velocity Flood"/>
+      <topic href="help/velocityflood_1ststeps.html" label="Flooding Salt Velocity in GeoCraft: Starting the Procedure"/>
+      <topic href="help/velflood_constant.htm" label="Flooding Salt Velocity with a Constant Flood Type"/>
+      <topic href="help/velflood_gradient.htm" label="Flooding Salt Velocity with a Gradient Flood Type"/>
+      <topic href="help/velflood_dataset.htm" label="Flooding Salt Velocity with a Dataset Flood Type"/>
+   </context>
+   <context id="volumestretch" title="Volume Stretch">
+      <description>Volume Stretch converts depth-based volumes to time, or converts time-based volumes to depth.</description>
+      <topic href="help/volumestretch.html" label="Volume Stretch"/>
+   </context>
+   <context id="horizoncascade" title="Horizon Cascade (d-&gt;t-&gt;d)">
+      <description>Horizon Cascade (d-&gt;t-&gt;d) converts a depth horizon to time using one velocity, then back to depth using a second velocity.</description>
+      <topic href="help/horizoncascade.htm" label="Horizon Cascade (d-&gt;t-&gt;d)"/>
+   </context>
+   <context id="volumecascade" title="Volume Cascade (d-&gt;t-&gt;d)">
+      <description>Volume Cascade (d-&gt;t-&gt;d) converts a depth volume to time using one velocity, then back to depth using a second velocity.</description>
+      <topic href="help/volumecascade.htm" label="Volume Cascade"/>
+   </context>
+   <context id="multivelocityFloodingprev" title="Multi-Flooding Preview">
+      <description>Preview results from constant velocity flooding between several horizon pairs. This allows a quick check of flooding parameters by processing only the current Inline or Xline in the 3D Viewer.</description>
+      <topic href="help/multivelocityfloodingprev.htm" label="Multi-Flooding Velocity Preview"/>
+   </context>
+   <context id="velocityfloodprev" title="Velocity Flood Preview">
+      <description>Preview results from the standard velocity flooding algorithm. This allows a quick check of flooding parameters by processing only the current Inline or Xline in the 3D Viewer.</description>
+      <topic href="help/velocityfloodprev.htm" label="Velocity Flood Preview"/>
+   </context>
+   <context id="velocitysmoothing" title="Velocity Smoothing">
+      <description>Velocity Smoothing removes rough transitions from a volume by laterally smoothing adjacent traces.</description>
+      <topic href="help/velocitysmoothing.htm" label="Velocity Smoothing"/>
+   </context>
+</contexts>

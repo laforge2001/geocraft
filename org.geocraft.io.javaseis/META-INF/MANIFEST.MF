@@ -1,0 +1,47 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Javaseis Plug-in
+Bundle-SymbolicName: org.geocraft.io.javaseis;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: ConocoPhillips
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.databinding;bundle-version="1.1.0",
+ org.eclipse.core.runtime;bundle-version="3.4.0",
+ org.eclipse.swt;bundle-version="3.4.0",
+ org.eclipse.jface;bundle-version="3.4.1",
+ org.eclipse.ui.forms;bundle-version="3.3.100",
+ org.geocraft.core;bundle-version="1.0.0",
+ org.geocraft.core.session;bundle-version="1.0.0",
+ org.geocraft.ui.io;bundle-version="1.0.0",
+ org.geocraft.ui.form2;bundle-version="1.0.0",
+ org.geocraft.math;bundle-version="1.0.0",
+ org.geocraft.io.util;bundle-version="1.0.0",
+ org.geocraft.ui.common;bundle-version="1.0.0",
+ jtk.edu.mines.boole;bundle-version="1.0.0"
+Bundle-NativeCode: lib/linux/x86/libaccess.so; lib/linux/x86/libJSUtilFile.so; lib/linux/x86/libmpich.so; lib/linux/x86/libmpijava.so; lib/linux/x86/libsavesignals.so; osname=linux; processor=x86, 
+ lib/linux/x86_64/libaccess.so; lib/linux/x86_64/libJSUtilFile.so; lib/linux/x86_64/libmpich.so; lib/linux/x86_64/libmpijava.so; lib/linux/x86_64/libsavesignals.so; osname=Linux; processor=x86_64
+Bundle-ClassPath: org_javaseis.jar,
+ .,
+ lib/mpijava.jar
+Export-Package: org.geocraft.internal.io.javaseis,
+ org.geocraft.io.javaseis,
+ org.javaseis.array,
+ org.javaseis.compress,
+ org.javaseis.examples,
+ org.javaseis.fft,
+ org.javaseis.grid,
+ org.javaseis.imaging,
+ org.javaseis.io,
+ org.javaseis.io.test,
+ org.javaseis.parallel,
+ org.javaseis.parset,
+ org.javaseis.properties,
+ org.javaseis.seiszip,
+ org.javaseis.server,
+ org.javaseis.tests,
+ org.javaseis.transform,
+ org.javaseis.util,
+ org.javaseis.util.access,
+ org.javaseis.util.datavolume,
+ org.javaseis.wavelet
+Eclipse-PlatformFilter: (osgi.os=linux)

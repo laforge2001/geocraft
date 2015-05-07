@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ASCII Horizon Import</title>
+<meta name="Keywords" content="ASCII Horizon Import, ascii, Ascii Horizon Import, ASCII, import, ASCII reader, GeoCraft utilities, 
+convert ASCII data to a horizon, ASCII conversion" />
+</head>
+<body>
+<h1>ASCII Horizon Import</h1>
+	<p>The ASCII Horizon Import algorithm imports one or more horizons in ASCII columnar format into GeoCraft. 
+	The input data format is expected to be something like X, Y, H1, H2, etc, where every horizon has the same 
+	X,Y grid nodes. Columns can be in any order. For each line in the ASCII file, the input data columns 
+	must be separated by spaces or tabs. The input horizon may be in time or depth but all output horizons 
+	must have the same index type, time or depth. Header lines at the top of the file may be skipped.</p>
+	<p>Input grid properties are not expected to be able to be read from the input data file. As a result, 
+	these must be supplied by the user, such as the grid origin, increment, angle, and the number of rows and columns.</p> 
+	<p><strong>Note</strong>: You can create up to 5 new horizons at once with this algorithm.</p>
+	<h2>Converting ASCII Data Into Horizons</h2>
+		<ol>
+			<li>Select the Input <strong>Directory</strong> where the ASCII file is located.</li>
+			<li>Type in the <strong>Input file Name</strong>.</li>
+			<li>Select the <strong>Index Type</strong> for the input data:</li>
+				<ul>
+					<li><strong>Depth</strong>: the horizon is in depth</li>
+					<li><strong>Time</strong>: the horizon is in time</li>
+				</ul>
+			<li>Select the <strong>XY Units</strong> of the input data:</li>
+				<ul>
+					<li><strong>meter</strong>: the XY data in the ASCII data are in meters</li>
+					<li><strong>foot</strong>: the XY data in the ASCII data are in feet</li>
+				</ul>
+			<li>Select the Data Units for the grid you are creating:</li>
+				<ul>
+					<li><strong>meter</strong></li>
+					<li><strong>foot</strong></li>
+					<li><strong>kilometer</strong></li>
+				</ul>
+			<li>Type the <strong>Starting Line Number</strong> that is in the ASCII input file.</li>
+			<li>Type the <strong>Number of Horizons</strong> that you want to create from the ASCII input file.</li>
+			<li>Type the <strong>X Column #</strong>; the column number in the ASCII file that contains the X locations.</li>
+			<li>Type the <strong>Y Column #</strong>; the column number in the ASCII file that contains the Y locations.</li>
+			<li>Type the <strong>H1 Column #</strong>; the column number in the ASCII file that contains the actual horizon value. 
+			This field is repeated to specify the column number of each input horizon.</li>
+			<p>Now, you will enter parameters for the output horizons.</p>
+			<li>Type in the <strong>X Origin</strong>.</li>
+			<li>Type in the <strong>Y Origin</strong>.</li>
+			<li>Type in the <strong>Column Spacing</strong>.</li>
+			<li>Type in the <strong>Row Spacing</strong>.</li>
+			<li>Type in the <strong># of columns</strong> (i.e. nodes in the X direction).</li>
+			<li>Type in the <strong># of rows</strong> (i.e. nodes in the Y direction).</li>
+			<li>Type in the <strong>Primary angle</strong>.</li>
+			<li>Type in the <strong>Null Value</strong>.</li>
+			<li>Type the <strong>H<em>n</em> Name</strong>. If you are creating multiple horizons, GeoCraft will display 
+			a name field for each horizon, which you can change if desired.</li>
+			<li>Click <strong>Run</strong>.</li>
+		</ol>
+		<p>GeoCraft stores each horizon in the <a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/repository.htm"> Repository view, </a> 
+		under the <strong>Grids</strong> folder. Use the GeoCraft <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">Map Plot</a> 
+		to view and examine results.</p>
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/UI_Elements/gc_ui_viewers.htm"> GeoCraft Viewers</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/tasks/gc_tasks.htm">Performing GeoCraft Tasks</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

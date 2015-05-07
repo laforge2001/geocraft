@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Color Plug-in
+Bundle-SymbolicName: org.geocraft.ui.color;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.geocraft.ui.color.Activator
+Bundle-Vendor: ConocoPhillips
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.forms;bundle-version="3.3.100",
+ org.geocraft.core;bundle-version="1.0.0",
+ org.geocraft.ui.common;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.geocraft.ui.color,
+ org.geocraft.ui.color.action
+Bundle-ActivationPolicy: lazy

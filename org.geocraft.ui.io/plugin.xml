@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="datastoreAccessorUI" name="Datastore Accessor UI" schema="schema/datastoreAccessorUI.exsd"/>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="org.geocraft.ui.io.actionSet"
+            label="Load"
+            visible="true">
+         <action
+               class="org.geocraft.ui.io.actions.LoadAction"
+               icon="icons/Import16.gif"
+               id="org.geocraft.ui.io.actions.LoadAction"
+               label="&amp;Load..."
+               menubarPath="file/additions"
+               tooltip="Load from a data store">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>

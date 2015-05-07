@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Volume Plug-in
+Bundle-SymbolicName: org.geocraft.geomath.algorithm.volume;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.databinding;bundle-version="1.1.0",
+ org.eclipse.ui.forms,
+ org.eclipse.ui;bundle-version="3.4.0",
+ org.eclipse.help,
+ org.apache.commons.collections;bundle-version="3.2.1",
+ org.geocraft.core,
+ org.geocraft.geomath.algorithm.util;bundle-version="1.0.0",
+ org.geocraft.ui.common,
+ org.geocraft.geomath.algorithm.ui,
+ org.geocraft.io.util;bundle-version="1.0.0",
+ org.geocraft.algorithm;bundle-version="1.0.0",
+ org.geocraft.ui.form2;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.geocraft.geomath.algorithm.volume.integration,
+ org.geocraft.geomath.algorithm.volume.mvxp,
+ org.geocraft.geomath.algorithm.volume.volumecalc

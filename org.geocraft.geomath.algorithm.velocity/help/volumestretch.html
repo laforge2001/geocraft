@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Volume Stretch - Convert between Time and Depth</title>
+<meta name="Keywords" content="stretching a volume, volume stretch, converting volumes from time to depth, converting volumes from depth to time, 
+volume conversion" />
+</head>
+<body>
+<h1>Volume Stretch</h1>
+<p>Volume Stretch converts time volumes to depth, or depth volumes to time. The velocity volume used 
+to control stretch can be either a time or a depth volume, independent of the volume being converted.</p>
+<h2>Volume Stretch Algorithm Overview</h2>
+<p>Volume Stretch converts time volumes to depth, and depth volumes to time. An Area of Interest (AOI) may 
+be used to limit processing.</p>
+<p><strong>Note</strong>: If you select an Area of Interest for the calculation, the algorithm <em>only</em> 
+converts traces from within the AOI. Traces outside the AOI are set null.</p>
+	<p><strong>CAUTION!</strong>: Some 2D data stores limit the number of characters in file names. For example, 
+	in some data stores the file name must be 9 characters or less. If you are working with 2D volume data 
+	from a data store with file name limitations, <em>modify</em> the GeoCraft 
+	<strong>Volume Name</strong> to comply with the data store requirements.</p>
+<h2>Converting a Depth or Time based Volume</h2>
+<ol>
+<li>Load the depth or time seismic volume into GeoCraft.</li>
+<li>Load the depth or time velocity volume into GeoCraft.</li>
+<li>Select the <strong>Type of Volume</strong>:</li>
+	<ul>
+	  <li><strong>2D</strong>: two-dimensional volume data</li>
+	  <li><strong>3D</strong>: three-dimensional volume data</li>
+	</ul>
+<li>Click <strong>Seismic Volume</strong>, and select the input volume to convert.</li>
+<li>Click <strong>Velocity Volume</strong> <strong>(ft/s)</strong>, and select a velocity volume.</li>
+<strong>Note:</strong> The velocity volume used to control stretch can be either a time or a depth volume, 
+independent of the volume being converted.
+<li><em>Optional</em> Select the <strong>Use Area of Interest (AOI)?</strong> check box if desired.</li>
+<li><em>Optional</em> Select an <strong>Area of Interest</strong>. This field is only available 
+when the <strong>Use Area of Interest (AOI)?</strong> check box is selected.</li>
+<li>Select an option in the <strong>Parameters</strong> field:</li>
+<ul>
+<li><strong>Cell-based</strong> - vertical velocities are held constant between input values</li>
+<li><strong>Knee-based</strong> - vertical velocities are linearly interpolated between input values</li>
+</ul>
+<li>Enter a valid value in the <strong>Sample Rate</strong> field in time or depth.</li>
+<li>Enter a valid value in the <strong>Maximum Time or Depth</strong> field.</li>
+<li>In the <strong>Output Volume Name</strong> field accept the default value, or type a new value.</li>
+<li>Click <strong>Run</strong>.</li>
+</ol>
+<p>A progress bar is displayed while the conversion runs. When the job completes, the converted 
+volume is in the <strong>Repository</strong>.</p>
+<p>You may now plot and view the data in a GeoCraft viewer.</p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core.help/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

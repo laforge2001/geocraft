@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="org.geocraft.ui.chartviewer.renderer" name="Chart Renderer" schema="schema/org.geocraft.ui.chartviewer.renderer.exsd"/>
+   <extension
+         point="org.geocraft.ui.chartviewer.renderer">
+      <renderer
+            chartType="ScatterChart"
+            class="org.geocraft.ui.chartviewer.renderer.scatter.ScatterDataRenderer"
+            objectType="ScatterData">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.chartviewer.renderer">
+      <renderer
+            chartType="GridImageChart"
+            class="org.geocraft.ui.chartviewer.renderer.image.GridImageRenderer"
+            objectType="GridImageData">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.chartviewer.renderer">
+      <renderer
+            chartType="PieChart"
+            class="org.geocraft.ui.chartviewer.renderer.pie.PieDataRenderer"
+            objectType="PieData">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.chartviewer.renderer">
+      <renderer
+            chartType="HistogramChart"
+            class="org.geocraft.ui.chartviewer.renderer.histogram.HistogramDataRenderer"
+            objectType="HistogramData">
+      </renderer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+         <objectContribution
+            adaptable="true"
+            id="org.geocraft.ui.chartviewer.HistogramPlotContribution"
+            objectClass="org.geocraft.ui.repository.PropertiesProviderTreeObject">
+         <filter
+               name="entityTypes" value="org.geocraft.core.model.seismic.PostStack3d,
+               org.geocraft.core.model.grid.Grid2d,
+               org.geocraft.core.model.grid.Grid3d,
+               org.geocraft.core.model.well.WellLogTrace">
+         </filter>
+         <action
+               class="org.geocraft.ui.chartviewer.action.HistogramPlotAction"
+               enablesFor="+"
+               helpContextId="GCHistPlot"
+               icon="icons/histogram-16.png"
+               id="org.geocraft.ui.chartviewer.action"
+               label="Histogram Plot"
+               menubarPath="org.geocraft.ui.repository.plotview/additions"
+               tooltip="create a histogram plot for the selected data entity">
+         </action>
+      </objectContribution>
+         <objectContribution
+               adaptable="true"
+               id="org.geocraft.ui.chartviewer.ScatterPlotContribution"
+               objectClass="org.geocraft.ui.repository.PropertiesProviderTreeObject">
+            <filter
+               name="entityTypes" value="org.geocraft.core.model.seismic.PostStack3d,
+               org.geocraft.core.model.grid.Grid2d,
+               org.geocraft.core.model.grid.Grid3d,
+               org.geocraft.core.model.well.WellLogTrace">
+            </filter>
+            <action
+                  class="org.geocraft.ui.chartviewer.action.ScatterPlotAction"
+                  enablesFor="+"
+                  helpContextId="GCScatPlot"
+                  icon="icons/histogram-16.png"
+                  id="org.geocraft.ui.chartviewer.action1"
+                  label="Scatter Plot"
+                  menubarPath="org.geocraft.ui.repository.plotview/additions"
+                  tooltip="create a scatter plot for the selected data entity">
+            </action>
+         </objectContribution>
+         <objectContribution
+               adaptable="true"
+               id="org.geocraft.ui.chartviewer.PolarPlotContribution"
+               objectClass="org.geocraft.ui.repository.PropertiesProviderTreeObject">
+            <filter
+                  name="entityTypes" value="org.geocraft.core.model.grid.Grid3d,
+                  org.geocraft.core.model.seismic.PostStack3d">
+            </filter>
+            <action
+                  class="org.geocraft.ui.chartviewer.action.PolarPlotAction"
+                  enablesFor="+"
+                  helpContextId="GCScatPlot"
+                  icon="icons/DataSeries16.png"
+                  id="org.geocraft.ui.chartviewer.action3"
+                  label="Polar Plot"
+                  menubarPath="org.geocraft.ui.repository.plotview/additions"
+                  tooltip="create a polar plot for the selected data entity">
+            </action>
+         </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="org.geocraft.ui.chartviewer.actionSet1"
+            label="Histogram Plot"
+            visible="true">
+         <action
+               class="org.geocraft.ui.chartviewer.action.HistogramPlotAction"
+               helpContextId="GCHistPlot"
+               icon="icons/histogram-16.png"
+               id="org.geocraft.ui.chartviewer.HistogramPlot"
+               label="Histogram Plot"
+               menubarPath="plotview/additions"
+               style="push"
+               tooltip="Create a histogram plot of the selected data entity">
+         </action>
+      </actionSet>
+      <actionSet
+            id="org.geocraft.ui.chartviewer.actionSet2"
+            label="Scatter Plot"
+            visible="true">
+         <action
+               class="org.geocraft.ui.chartviewer.action.ScatterPlotAction"
+               helpContextId="GCScatPlot"
+               icon="icons/histogram-16.png"
+               id="org.geocraft.ui.chartviewer.ScatterPlot"
+               label="Scatter Plot"
+               menubarPath="plotview/additions"
+               style="push"
+               tooltip="Create a scatter plot of the selected data entity">
+         </action>
+      </actionSet>
+      <actionSet
+            id="org.geocraft.ui.chartviewer.actionSet3"
+            label="Polar Plot"
+            visible="true">
+         <action
+               class="org.geocraft.ui.chartviewer.action.ScatterPlotAction"
+               helpContextId="GCScatPlot"
+               icon="icons/DataSeries16.png"
+               id="org.geocraft.ui.chartviewer.scatter.polar.PolarPlot"
+               label="Polar Plot"
+               menubarPath="plotview/additions"
+               style="push"
+               tooltip="Create a scatter plot of the selected data entity">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="help/contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/toc.xml"
+            primary="false">
+      </toc>
+   </extension>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Programming Examples"
+            class="org.geocraft.ui.chartviewer.algorithm.ChartingExample"
+            helpId="org.geocraft.ui.chartviewer.algorithm.chartingexample"
+            name="GeoCraft Charting API"
+            tooltip="Examples of charting in GeoCraft"
+            version="beta"
+            visible="true">
+      </algorithm>
+   </extension>
+   <extension
+         point="org.eclipse.help.index">
+      <index
+            file="help/index.xml">
+      </index>
+   </extension>
+   <extension
+         point="org.geocraft.ui.chartviewer.renderer">
+      <renderer
+            chartType="HistogramChart"
+            class="org.geocraft.ui.chartviewer.renderer.histogram.grid.Grid2dRenderer"
+            objectType="Grid2d">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.chartviewer.renderer">
+      <renderer
+            chartType="HistogramChart"
+            class="org.geocraft.ui.chartviewer.renderer.histogram.grid.Grid3dRenderer"
+            objectType="Grid3d">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.chartviewer.renderer">
+      <renderer
+            chartType="HistogramChart"
+            class="org.geocraft.ui.chartviewer.renderer.histogram.seismic.PostStack3dRenderer"
+            objectType="PostStack3d">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.chartviewer.renderer">
+      <renderer
+            chartType="HistogramChart"
+            class="org.geocraft.ui.chartviewer.renderer.histogram.well.WellLogTraceRenderer"
+            objectType="WellLogTrace">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.chartviewer.renderer">
+      <renderer
+            chartType="ScatterChart"
+            class="org.geocraft.ui.chartviewer.renderer.scatter.well.WellLogTracesRenderer"
+            objectType="WellLogTrace[]">
+      </renderer>
+   </extension>
+   <extension
+         point="org.geocraft.ui.chartviewer.renderer">
+      <renderer
+            chartType="ScatterChart"
+            class="org.geocraft.ui.chartviewer.renderer.polar.PolarChartRenderer"
+            objectType="PolarChartData">
+      </renderer>
+   </extension>
+
+</plugin>

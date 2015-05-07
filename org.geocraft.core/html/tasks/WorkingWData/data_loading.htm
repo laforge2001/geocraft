@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Loading Data into GeoCraft</title>
+<meta name="Keywords" content="TBD - write help topic" />
+</head>
+<body>
+<h1>Loading Data into GeoCraft</h1>
+	<p>You must load data into GeoCraft before you can run algorithms or view data (such as volume or map plots). 
+	Use this procedure to load data into the GeoCraft 
+	<a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/repository.htm"> Repository </a>.</p>
+		<ol>
+			<li>Select <strong>File=>Load</strong> from the menu.</li>
+			<li>In the <strong>Datastore Selection</strong> dialog box, expand the category of 
+			data (for example, 3D Seismic or Point Sets) that you want to load.</li>
+			<li>Highlight the data type that you want to load and click <strong>OK</strong>.</li>
+			<li>Navigate to the file system and directory where the data is stored.</li>
+			<li>Highlight the data you want to load and click <strong>OK</strong>.</li>
+			<p>GeoCraft will display a data properties dialog. If data properties (for example, data units) are missing, 
+			you will need to provide that information before you can load data into GeoCraft. If all data properties are known, 
+			you will need to verify the data properties before you load data into GeoCraft.</p>
+			<li>Verify or set the data properties and click <strong>OK</strong>.</li>
+		</ol>
+			<p>GeoCraft determines whether the data is in prestack or poststack format, and loads the data into the 
+			correct folder in the <a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/repository.htm"> Repository </a>. For example, 
+			the <strong>Grids</strong> folder contains horizons, and the <strong>3D Seismic</strong> folder contains
+			volumes.</p>
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="data_intro.htm">Working with data in GeoCraft</a></li>
+			<li><a href="data_formats.htm">GeoCraft Data Formats</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.core/html/concepts/gcfund_datapersist_arch.htm"> GeoCraft datastore concepts</a></li>
+			<li><a href="data_unloading.htm"> Unloading data from GeoCraft a single variable at a time</a></li>
+			<li><a href="data_resetting.htm"> Unloading <em>all</em> data variables from GeoCraft</a></li>
+			<li><a href="data_export.htm">Exporting Data from GeoCraft</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

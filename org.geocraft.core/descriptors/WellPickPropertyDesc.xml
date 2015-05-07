@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Define the properties for a data file entity and their categories. -->
+<entity-properties entity="WellPick">
+	<!-- There are no properties at the top of the property tree -->
+    <category name="" />
+	
+    <category name="General">
+        <property id="Datastore" display="Datastore"/>
+        <property id="ProjectName" display="Project"/>
+        <property id="StorageDirectory" display="Storage Directory"/>
+        <property id="Comment" display="Comments"/>
+        <property id="LastModifiedDate" display="Modification Date"/>
+		<property id="Well" display="Well"/>
+		<property id="Interpreter" display="Interpreter"/>
+        <property id="isDirty" display="Dirty?"/>
+    </category>
+    
+    <category name="Data">
+		<property id="Qualifier" display="Qualifier"/>
+		<property id="ConfidenceFactor" display="Confidence factor"/>
+		<property id="PickDepth" display="Pick depth"/>
+		<property id="PickDomain" display="Pick domain"/>
+		<property id="DipAngle" display="Dip angle"/>
+		<property id="DipAzimuth" display="Dip azimuth"/>
+		<property id="Occurrence" display="Occurrence"/>
+		<property id="PickDate" display="Pick date"/>
+		<property id="PickSource" display="Pick source"/>
+		<property id="PickType" display="Pick type"/>
+    </category>
+	
+	<!-- Excluded displayable properties -->
+	<exclude>
+		<property id="EntityType" display="Entity type" />
+		<property id="DisplayName" display="Display name" />
+	</exclude>
+
+</entity-properties>

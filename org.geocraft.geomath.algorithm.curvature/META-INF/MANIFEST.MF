@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Curvature algorithms
+Bundle-SymbolicName: org.geocraft.geomath.algorithm.curvature;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: ConocoPhillips
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.swt;bundle-version="3.4.0",
+ org.eclipse.jface;bundle-version="3.4.0",
+ org.eclipse.help,
+ org.eclipse.ui.forms;bundle-version="3.3.100",
+ org.geocraft.core,
+ org.geocraft.algorithm,
+ org.geocraft.ui.form2;bundle-version="1.0.0"
+Import-Package: org.geocraft.algorithm
+Export-Package: org.geocraft.geomath.algorithm.curvature,
+ org.geocraft.geomath.algorithm.curvature.attribute

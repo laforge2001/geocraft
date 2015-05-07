@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.geocraft.algorithm">
+      <algorithm
+            category="Programming Examples"
+            class="org.geocraft.geomath.algorithm.iconviewer.IconViewer"
+            helpId="org.geocraft.geomath.algorithm.iconviewer"
+            name="Icon Viewer"
+            tooltip="Show icons available to GeoCraft developers"
+            version="production"
+            visible="true">
+      </algorithm>
+   </extension>
+</plugin>

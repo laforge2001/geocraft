@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Form Plug-in
+Bundle-SymbolicName: org.geocraft.ui.form2;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.geocraft.ui.form2.Activator
+Bundle-Vendor: ConocoPhillips
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.databinding;bundle-version="1.1.1",
+ org.eclipse.ui.forms;bundle-version="3.3.101",
+ org.eclipse.ui.views;bundle-version="3.3.0",
+ org.geocraft.core;bundle-version="1.0.0",
+ org.geocraft.ui.common;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.geocraft.ui.form2,
+ org.geocraft.ui.form2.field,
+ org.geocraft.ui.form2.field.aoi
+Service-Component: META-INF/OSGI-INF/component.xml

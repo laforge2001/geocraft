@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="areaofinterest" title="Create a 3D Area of Interest">
+      <description>Create an area of interest (AOI) for an existing 3D volume.</description>
+      <topic href="help/areaofinterest.htm" label="Create a 3D Area of Interest"/>
+   </context>
+   <context id="horizon2aoi" title="Horizon to Area of Interest">
+      <description>Create an area of interest (AOI) from the edge of an existing horizon.</description>
+      <topic href="help/horizon2aoi.htm" label="Horizon to Area of Interest"/>
+   </context>
+   <context id="aoi_2" title="Create a 2D Area of Interest">
+      <description>Create an area of interest (AOI) for an existing 2D volume.</description>
+      <topic href="help/aoi_2.htm" label="Create a 2D Area of Interest"/>
+   </context>
+   <context id="asciihorizonimport" title="ASCII Horizon Import">
+      <description>Use the ASCII Horizon Import algorithm to import raw ASCII data into GeoCraft and convert the data into horizons per your specifications.</description>
+      <topic href="help/asciihorizonimport.htm" label="ASCII Horizon Import"/>
+   </context>
+</contexts>

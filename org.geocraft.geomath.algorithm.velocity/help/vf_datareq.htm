@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Velocity Flooding Data Requirements</title>
+<meta name="Keywords" content="velocity flooding data, requirements for velocity flooding data, salt flooding data requirements" />
+</head>
+<body>
+<h1>Velocity Flooding Data Requirements</h1>
+	<p><strong>Caution</strong>: If your data does <em>not</em> meet one of the following requirements, 
+	GeoCraft displays a message in the <strong>Error Log</strong>, and the program does not run.</p>
+	<p>Data used for velocity flooding must meet the following requirements:</p>
+		<ul>
+			<li>If you are flooding between two horizons, both horizons <em>must</em> have the same grid sampling.</li>
+			<li>Velocity units for flood data (either constant, gradient, or dataset) <em>must</em> be consistent. 
+			For example, if the input volume is in feet per second, the flood dataset must also be in feet per second.</li>
+			<li>Vertical units for the input velocity volume and horizons <em>must</em> match. 
+			For example, if the input velocity is a depth-based volume, all horizons must also be depth-based.</li>
+			<li>Velocity gradient flooding is only allowed on depth input volumes.</li>
+			<li>Velocity gradient units must be either feet/sec/foot or meter/sec/meter.</li>
+			<li>The output volume name is not required to be a unique filename and you can overwrite existing data.</li>
+			<li>All input parameters must be unit consistent with the input velocity volume.</li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Define the properties for a data file entity and their categories. -->
+<entity-properties entity="WellBore">
+	<!-- There are no properties at the top of the property tree -->
+    <category name="" />
+	
+    <category name="File">
+        <property id="ProjectName" display="Project"/>
+        <property id="LastModifiedDate" display="Modification date"/>
+        <property id="isDirty" display="Dirty?"/>
+    </category>
+    
+    <category name="Data">
+        <property id="ElevationDatum" display="Elevation datum"/>
+        <property id="DataSource" display="Source"/>
+		<property id="CalcMethod" display="Calc method"/>
+		<property id="DefaultCheckShot" display="Default checkshot"/>
+    </category>
+    
+    <category name="Well">
+        <property id="Well" display="Name"/>
+		<property id="TotalDepth" display="Total depth"/>
+		<property id="TotalDepthType" display="Total depth type"/>
+		<property id="BoreStatus" display="Status"/>
+		<property id="CompletionDate" display="Completion date"/>
+		<property id="SpudDate" display="Spud date"/>
+		<property id="Elevation" display="Elevation"/>
+		<property id="FlowDirection" display="Flod direction"/>
+		<property id="FluidType" display="Fluid type"/>
+		<property id="FormationAtTD" display="Formation at TD"/>
+		<property id="PlugBackTotalDepth" display="Plugback total depth"/>
+        <property id="Identifier" display="Idnetifier"/>
+        <property id="IdentifierType" display="Identifier type"/>
+		<property id="AzimuthNorthType" display="Azimuth North type"/>
+		<property id="PathAzimuth" display="Path azimuth"/>
+		<property id="PathDip" display="Path dip"/>
+		<property id="BottomLocation" display="Bottom location"/>
+		<property id="ShowType" display="Show type"/>
+    </category>
+    
+    <category name="General">
+        <property id="Comment" display="Comments"/>
+    </category>
+	
+	<!-- Excluded displayable properties -->
+	<exclude>
+		<property id="EntityType" display="Entity type" />
+		<property id="DisplayName" display="Display name" />
+	</exclude>
+
+</entity-properties>

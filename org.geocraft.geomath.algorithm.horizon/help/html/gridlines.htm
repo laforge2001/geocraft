@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GridLines</title>
+<meta name="Keywords" content="adding grid lines to a horizon, generating grid lines in a horizon, grid lines, generating grid lines in an existing
+horizon" />
+</head>
+<body>
+<h1>GridLines</h1>
+	<p>The Grid Lines algorithm extracts rows and columns (lines) from a horizon to make a sparse horizon. 
+	The output grid that the algorithm creates has the same number of nodes, and decimated grid nodes are set to null.</p>
+	<p>The Grid Lines and Decimate algorithms are similar, with the following exceptions:</p>
+		<ul>
+			<li>Grid Lines uses an OR operation to pass node values; the Decimate algorithm uses an AND operation to pass node values</li>
+			<li>Grid Lines extracts lines, and Decimate extracts points</li>
+			<li>Grid Lines outputs row and column lines, and discards points</li>
+		</ul>
+<h2>Overview of the GridLines Algorithm</h2>
+	<p>GridLines generates a new grid from an existing horizon by selecting every <em>nth</em> 
+	row or column node. If you set the row spacing to 10 and the column spacing to 5, the algorithm 
+	will output every 10th row and every 5th column. All other node values will be set to null.</p>
+	<p><strong>Note</strong>: The horizon may contain zeroes within the inline or xline; the algorithm is able to calculate Grid Lines for a new horizon with 
+	zeroes in either direction.</p>
+	
+<h2>Running the Grid Lines Algorithm</h2>
+	<ol>
+		<li>Load horizon data into GeoCraft.</li>
+		<li>Select an <strong>Input Grid</strong>.</li>
+		<li>Type in a <strong>Row Spacing</strong> value to specify the row increment.</li>
+		<li>Type in a <strong>Column Spacing</strong> value to specify the column increment</li>
+		<li>Type in the <strong>Output Grid Name</strong>. Make sure that the name 
+		complies with <a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> 
+		GeoCraft file-naming requirements</a>.</li>
+		<li><em>Optional</em> Type in <strong>Output Comments</strong>. The comments are part of the 
+		metadata for the new horizon, and may be seen in the <strong>Properties</strong> view when 
+		the new horizon is selected in the <strong>Repository</strong>.</li>
+		<li>Click <strong>Run</strong>.</li>
+			<p>GeoCraft runs the algorithm, and the new horizon is populated into the <strong>Grids</strong> folder in the <strong>Repository</strong>.</p>
+		<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+	</ol>
+		<p><strong>Note</strong>: The Grid Lines algorithm outputs row and column lines, and discards points.</p>
+		<p><strong>Tip</strong>: Use the <strong><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Table Viewer</a></strong> for quality control, to ensure that decimation was performed properly.</p>
+	<p></p>
+	<h3>Example</h3>
+		<p>In this example, set <strong>Row Spacing</strong> 10 and <strong>Column Spacing</strong>to 5.</p> 
+		<p>If the current row number is evenly divisible by 10, then every node is passed through, independent of column number. 
+		(The entire row is output. If the current row is not divisible by 10, but the current column is divisible by 5, then the 
+		node value is passed through, independent of line number. (Every 5th column is output.)</p> 
+		<p><strong>Note</strong>: In the Grid Lines algorithm, if either <strong>Row Spacing</strong> or <strong>Column Spacing</strong> are set to <strong>1</strong>, 
+		there will be no decimation. All node values will be output.</p> 
+	<p></p>
+	<p></p>
+	<h3>Related Topics</h3>
+		<ul>
+			<li><a href="PLUGINS_ROOT/org.geocraft.geomath.algorithm.horizon/help/html/decimate.htm">Decimate algorithm</a></li>
+			<li><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Editing Grid Values in a Spreadsheet View</a></li>
+		</ul>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

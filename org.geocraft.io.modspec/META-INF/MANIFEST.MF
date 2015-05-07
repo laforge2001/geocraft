@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ModSpec I/O
+Bundle-SymbolicName: org.geocraft.io.modspec;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.databinding;bundle-version="1.1.0",
+ org.eclipse.ui,
+ org.eclipse.ui.forms;bundle-version="3.3.100",
+ org.geocraft.core,
+ org.geocraft.ui.io;bundle-version="1.0.0",
+ org.geocraft.ui.form2;bundle-version="1.0.0",
+ org.geocraft.ui.common;bundle-version="1.0.0",
+ org.apache.commons.beanutils;bundle-version="1.7.0",
+ org.geocraft.core.session;bundle-version="1.0.0"
+Bundle-Vendor: ConocoPhillips
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.geocraft.internal.io.modspec;x-internal:=true,
+ org.geocraft.io.modspec

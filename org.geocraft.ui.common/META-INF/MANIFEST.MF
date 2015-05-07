@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Common Plug-in
+Bundle-SymbolicName: org.geocraft.ui.common
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: ConocoPhillips
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.views;bundle-version="3.3.0",
+ org.eclipse.ui.forms;bundle-version="3.3.100",
+ org.geocraft.core;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.geocraft.internal.ui.common;x-internal:=true,
+ org.geocraft.ui.common,
+ org.geocraft.ui.common.image,
+ org.geocraft.ui.common.tree,
+ org.geocraft.ui.common.util.algorithm,
+ org.geocraft.ui.common.util.validation

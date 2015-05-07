@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="crossplotavsb" title="ABAVO Crossplot Topics">
+      <description>ABAVO (Amplitude over Background and Amplitude Variation with Offset) is an amplitude versus offset crossplot analysis program.</description>
+      <topic href="help/av_xplot.htm" label="ABAVO Crossplot Topics"/>
+   </context>
+   <context id="classbackground" title="Class Background Volume">
+      <description>ABAVO (Amplitude over Background and Amplitude Variation with Offset) is an amplitude versus offset crossplot analysis program.</description>
+      <topic href="help/classbackground.htm" label="Class Background Volume"/>
+      <topic href="help/cb_inputtab.htm" label="Loading ABAVO Input Data"/>
+      <topic href="help/cb_procbounds.htm" label="Selecting Processing Bounds for ABAVO Data"/>
+      <topic href="help/cb_classific.htm" label="Entering ABAVO Classification Data"/>
+   </context>
+   <context id="CrossplotPreferences" title="Setting ABAVO Crossplot Preferences">
+      <description>Use the Crossplot Preferences page to change the way that GeoCraft displays ABAVO data.</description>
+      <topic href="../org.geocraft.core/html/tasks/UserPreferences/crossplotpreferences.htm" label="Setting ABAVO Crossplot Preferences"/>
+   </context>
+   <context id="AplusB" title="A+B Volume Algorithm">
+      <description>Use this algorithm to generate an A+B volume.</description>
+      <topic href="help/AplusB.htm" label="Generating an A+B Volume"/>
+   </context>
+</contexts>

@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MVXP Algorithm</title>
+<meta name="Keywords" content="MVXP, median value trace expansion, median value scaling" />
+</head>
+<body>
+<h1>MVXP Algorithm</h1>
+	<p>The MVXP (Median Value trace eXPansion) algorithm performs median-based, windowed scaling on volumes.</p>
+
+	<p><strong>CAUTION!</strong>: Some 2D data stores limit the number of characters in file names. For example, 
+	in some data stores the file name must be 9 characters or less. If you are working with 2D volume data 
+	from a data store with file name limitations, <em>modify</em> the GeoCraft 
+	<strong>Output Volume Name</strong> to comply with the data store requirements.</p>
+
+	<h2>Overview of the MVXP Algorithm</h2>
+		<p>MVXP computes the median trace absolute amplitude for a series of windows down the trace. A 
+		scale factor trace is derived by linearly interpolating these median values between the center 
+		of each window and then dividing the seismic trace by this scale trace. As a result each output 
+		trace will have an average median value near 1. Each trace is processed independently.</p>
+		
+		<p>The original purpose of MVXP was to rescale seismic data so that floating point data volumes 
+		could be output as 8-bit volumes, conserving disk space. Using a scale factor, trace gain could  
+		be set so there was little or no clipping of high amplitudes while preserving low amplitudes. 
+		See <a href="mvxp_scalefactor.htm">Setting Scale Factor.</a></p>
+
+		<p>The following fields are optional, but you may find them useful:</p>
+			<ul>
+				<li><strong>Area of Interest</strong> (AOI) limits the amount of input data used in the calculation</li>
+				<li><strong>Scale Factor</strong> takes all values in a trace and multiplies them by the 
+				value in the <strong>Scale Factor</strong> field</li>
+				<li><strong>Clip Factor</strong> limits the amplitude range of input data used to compute 
+				the median</li>
+			</ul>
+		<h3>Using a Clip Factor</h3>
+		<p>If you specify a Clip Factor in your calculation, values greater than the Clip Factor value are 
+		changed to match the clip factor value.</p>
+		<p><strong>Tip</strong>: When the Clip Factor is set to 0, Clip is turned off and <em>all</em> trace 
+		values are included in the calculations.</p>
+	<h2>Using MVXP to Scale Volumes</h2>
+		<ol>
+			<li>Load volume data into GeoCraft.</li>
+			<li><em>Optional</em> Load an Area of Interest (AOI) into GeoCraft.</li>
+			<li>Select an <strong>Input Volume</strong>.</li>
+			<li><em>Optional; only perform this step if you will use an AOI during the calculation.</em> Select the 
+			<strong>Use Area of Interest?</strong> check box.</li>
+			<li><em>Optional</em> Select an <strong>Area of Interest</strong>.</li>
+			<li>Accept the <strong>Start Time</strong>, or type a new value in the field. This value specifies 
+			the start time of the trace in milliseconds.</li>
+			<li>Accept the <strong>End Time</strong>, or type a new value in the field. This value 
+			specifies the end time of the trace in milliseconds.</li>
+			<li>Accept the <strong>Scale Factor</strong>, or type a new value in the field.</li>
+			<li><em>Optional; only perform this step if you will use a clip factor during the calculation.</em> Select the 
+			<strong>Use a ClipFactor?</strong> check box.</li>
+			<li><em>Optional</em> Type a value in the <strong>Clip Factor</strong> field.</li>
+			<li>Accept the <strong>Window Length (# of samples)</strong>, or type a new value in the field.</li>
+			<li>Accept the <strong>Output Volume Name</strong>, or type a new name in the field. If you are working with a 
+			2D volume from a data store that has file-naming restrictions, modify the <strong>Output Volume Name</strong>
+			to meet those restrictions.</li>
+			<li>Click <strong>Run</strong>.</li>
+		</ol>
+	<p>GeoCraft runs the calculation, and the new volume populates in the <strong>Repository</strong> under the <strong>2D Seismic</strong> 
+	or <strong>3D Seismic</strong> folder.</p>
+	<p>Use the Volume or Section Plot tools to compare the new volume with the original.</p>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

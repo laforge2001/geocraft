@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Las Plug-in
+Bundle-SymbolicName: org.geocraft.io.las;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
+ org.eclipse.ui;bundle-version="3.4.1",
+ org.eclipse.ui.forms;bundle-version="3.3.101",
+ org.eclipse.jface;bundle-version="3.4.1",
+ org.geocraft.core;bundle-version="1.0.0",
+ org.geocraft.ui.form2;bundle-version="1.0.0",
+ org.geocraft.ui.io,
+ org.geocraft.ui.common;bundle-version="1.0.0",
+ org.geocraft.core.session;bundle-version="1.0.0"
+Export-Package: org.geocraft.internal.io.las;x-internal:=true,
+ org.geocraft.io.las,
+ org.geocraft.io.las.table

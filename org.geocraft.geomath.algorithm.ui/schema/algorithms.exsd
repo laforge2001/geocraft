@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.geocraft.geomath" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="org.geocraft.geomath" id="algorithms" name="GeoMath Algorithm"/>
+      </appinfo>
+      <documentation>
+         [Enter description of this extension point.]
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="algorithm" minOccurs="0" maxOccurs="unbounded"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="algorithm">
+      <annotation>
+         <documentation>
+            Describes parameters needed to display the algorithm in the user interface and to perform the computation. 
+&lt;br&gt;
+&lt;br&gt;
+The algorithm is defined by:
+&lt;ul&gt;
+ &lt;li&gt;one or more pages to display in the editor&lt;/li&gt;
+ &lt;li&gt;one javabean that contains the parameters&lt;/li&gt;
+ &lt;li&gt;one task that performs the computation&lt;/li&gt;
+&lt;/ul&gt;
+         </documentation>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="page" minOccurs="1" maxOccurs="unbounded"/>
+            <element ref="model"/>
+            <element ref="task"/>
+         </sequence>
+         <attribute name="parentLocation" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Specify the location in the algorithm tree view that you want this algorithm to appear. The menu(s) will be created automatically for you.  
+&lt;br&gt;
+&lt;br&gt;
+The Clip algorithm is located in the Horizon menu by specifying the parentLocation to be Horizon
+&lt;br&gt;
+&lt;br&gt;
+You can define nested menus like this Velocity/Util
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The name of this algorithm. Needs to be unique within this bundle. 
+&lt;br&gt;
+&lt;br&gt;
+eg Clip
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="helpId" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The fully qualified name of the help id. This is referenced by the main help system and also used to display context sensitive help from the Algorithm Editor. 
+&lt;br&gt;
+&lt;br&gt;
+eg org.geocraft.geomath.algorithm.horizon.clip
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="toolTip" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Not currently used.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="page">
+      <annotation>
+         <documentation>
+            Specify the class that defines a single page in the editor. 
+&lt;br&gt;
+&lt;br&gt;
+eg org.geocraft.geomath.algorithm.horizon.clip.ClipView
+&lt;br&gt;
+&lt;br&gt;
+You can define multiple pages and they will appear in the order that are defined.
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.geocraft.ui.form.ViewComposite:"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="icon" type="string">
+            <annotation>
+               <documentation>
+                  Icon shown in the page header
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="resource"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="model">
+      <annotation>
+         <documentation>
+            The model allows a clean seperation between the user interface, validation and the computational logic.
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The javabean that defines the parameter model for this algorithm. It may extend AbstractModel
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.geocraft.core.common.model.AbstractModel:"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="validator" type="string">
+            <annotation>
+               <documentation>
+                  The global validator for the algorithm model that extends org.geocraft.core.common.model
+&lt;br&gt;
+&lt;br&gt;
+The GeoCraft framework handles simple validation like ensuring that a float field contains a numeric value. But for more complex validation logic you need to implement a global validator.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.geocraft.core.common.model.Validator:"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="task">
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The task is called by the Geocraft framework to perform the actual computation. The task may extend AbstractTask. 
+&lt;br&gt;
+&lt;br&gt;
+The framework will provide you with a progress monitor object that you can use to provide feedback and let the user cancel the task.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.geocraft.core.common.progress.AbstractTask:"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         [Enter the first release in which this extension point appears.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         [Enter extension point usage example here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiinfo"/>
+      </appinfo>
+      <documentation>
+         [Enter API information here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="implementation"/>
+      </appinfo>
+      <documentation>
+         [Enter information about supplied implementation of this extension point.]
+      </documentation>
+   </annotation>
+
+
+</schema>

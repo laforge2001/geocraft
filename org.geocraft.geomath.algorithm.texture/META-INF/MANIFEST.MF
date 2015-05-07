@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Texture Plug-in
+Bundle-SymbolicName: org.geocraft.geomath.algorithm.texture;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: ConocoPhillips
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.help,
+ org.geocraft.core;bundle-version="1.0.0",
+ org.geocraft.algorithm,
+ org.geocraft.ui.form2;bundle-version="1.0.0"
+Export-Package: org.geocraft.geomath.algorithm.texture

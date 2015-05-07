@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Kuwahara Filter Algorithm</title>
+<meta name="Keywords" content="Kuwahara, filter algorithms, smoothing seismic interpretations, isolating attribute anomalies, smoothing horizons" />
+</head>
+<body>
+<h1>Kuwahara Filter Algorithm</h1>
+	<p>A Kuwahara filter reduces noise while preserving the edges of an image.</p>
+	<h2>Overview of the Kuwahara Filter</h2>
+		<p>Choose the Kuwahara filter when you need to isolate anomalies within a data set's attributes. Consider using a different filter if
+		you have a data set with a lot of random noise; the Kuwahara filter does not handle random noise well.</p>
+		<p>The Kuwahara filter performs the following operations when it filters data:</p>
+			<ol>
+				<li>Divides the kernel support into four regions</li>
+				<li>Selects the region with the lowest variance (the smallest spread of values)</li>
+				<li>Returns the mean of the pixels within the selected region</li>
+			</ol>
+		<p>This filter ensures that similar data contributes to the output, and that the edges are <em>not</em> averaged across the
+		data set. The position and magnitude of edges is maintained, but smoother areas of the image tend to get blurred. The result is a flat
+		image with sharp edges.</p>
+		<p><strong>Tip</strong>: For the best results with a Kuwahara filter, use a mild median filter on your data set first, and then run
+		the Kuwahara filter against the data set.</p>
+	<h2>Smoothing Data with the Kuwahara Filter in GeoCraft</h2>
+		<ol>
+			<li>Load horizon data into GeoCraft.</li>
+			<li>Select a <strong>Horizon</strong>.</li>
+			<li>Type a pixel filter value in the <strong>Size</strong> field.</li>
+			<li>Accept the <strong>Name</strong>, or type in a new one. Make sure that 
+			the name complies with <a href="PLUGINS_ROOT/org.geocraft.core/html/gettingstarted/gcfund_filename_rq.htm"> GeoCraft file-naming requirements</a>.</li>
+			<li><em>Optional</em> Type additional text in the <strong>Comments</strong> field. Text typed in this field displays in the 
+			<strong>Properties</strong> view when the filtered horizon is selected in the Repository.</li>
+			<li>Click <strong>Run</strong>.</li>
+				<p>GeoCraft runs the algorithm and smooths the horizon. The resulting horizon is in the Repository, under the Grids folder, with its parent horizon.</p>
+			<li>Use the <a href="PLUGINS_ROOT/org.geocraft.ui.mapviewer/help/html/gc_vwr_map.htm">GeoCraft Map Plot</a> to view the results.</li>
+		</ol>
+	<h3>References</h3>
+		<p>To learn more about the filters used to smooth horizon data, see the following journal article:</p> 
+		<p>Hall, Matt T. Smooth Operator: Smoothing Seismic Interpretations and Attributes. 
+		<em>The Leading Edge</em> 26.1 (2007): 16-20.</p>
+	<h3>Related Topics</h3>
+	<ul>
+			<li><a href="hor_linear_algorithms.htm">Linear algorithms</a></li>
+			<li><a href="hor_linear_filter.htm">Linear filters</a></li>
+			<li><a href="hor_filter_snn.htm">Symmetric nearest neighbor</a></li>
+	</ul>
+	<p></p>
+	<h3>Related Topics</h3>
+		<li><a href="PLUGINS_ROOT/org.geocraft.ui.tableviewer/help/tableplot.htm">Editing Grid Values in a Spreadsheet View</a></li>
+	<p></p>
+	<p></p>
+	<include path="org.geocraft.core/html/eclipseackstate.xhtml/eclack" />
+</body>
+</html>

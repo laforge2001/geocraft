@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.geocraft.core" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="org.geocraft.core" id="org.geocraft.core.io.datastoreAccessor" name="Datastore Accessor"/>
+      </appinfo>
+      <documentation>
+         [Enter description of this extension point.]
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="datastoreAccessor"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="datastoreAccessor">
+      <complexType>
+         <sequence>
+            <element ref="mapper" minOccurs="1" maxOccurs="unbounded"/>
+            <element ref="input" minOccurs="0" maxOccurs="1"/>
+            <element ref="output" minOccurs="0" maxOccurs="1"/>
+         </sequence>
+         <attribute name="name" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The datastore name (e.g. ModSpec Grid, SEG-Y Volume, etc).
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="utilClass" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The datastore accessor being implemented must implement the IDatastoreAccessor interface.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":org.geocraft.core.io.IDatastoreAccessorUtil"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="category" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="Grids">
+                  </enumeration>
+                  <enumeration value="Wells">
+                  </enumeration>
+                  <enumeration value="Faults">
+                  </enumeration>
+                  <enumeration value="Wavelets">
+                  </enumeration>
+                  <enumeration value="Areas of Interest">
+                  </enumeration>
+                  <enumeration value="Point Sets">
+                  </enumeration>
+                  <enumeration value="Culture">
+                  </enumeration>
+                  <enumeration value="Seismic">
+                  </enumeration>
+               </restriction>
+            </simpleType>
+         </attribute>
+         <attribute name="visible" type="boolean">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="mapper">
+      <annotation>
+         <documentation>
+            The mapper element describes a mapper associated with the datastore accessor. There will be 1 or more mappers associated with each datastore accessor, depending upon the relationship between datastore entries and GeoCraft entities.
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Each mapper associated with the datastore accessor must extend the AbstractMapper base class.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.geocraft.core.model.AbstractMapper:"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="supportedEntityClassName" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The name of the supported entity from the domain model. The text of the supported entity must exactly match the java class name (e.g. Grid3d, PostStack3d, etc). The full class name (e.g. org.geocraft.core.model.grid.Grid3d) is not necessary, just the simple name.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="input">
+      <complexType>
+         <attribute name="mapperModel" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The model of properties used by an entity mapper.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.geocraft.core.model.mapper.MapperModel:"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="task" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The task for importing an entity into GeoCraft.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.geocraft.core.io.ImportTask:"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="selector" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The selector for choosing items to import from a datastore. This could be a file selection dialog or some other custom chooser.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.geocraft.core.io.DatastoreEntrySelector:"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="output">
+      <complexType>
+         <attribute name="mapperModel" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The model of properties used by an entity mapper.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.geocraft.core.model.mapper.MapperModel:"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="task" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The task for exporting an entity from GeoCraft.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.geocraft.core.io.ExportTask:"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="selector" type="string">
+            <annotation>
+               <documentation>
+                  The selector for choosing a location to export in a datastore. This could be a directory selection dialog or some other custom chooser.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":org.geocraft.core.io.IDatastoreLocationSelector"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         [Enter the first release in which this extension point appears.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         [Enter extension point usage example here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiinfo"/>
+      </appinfo>
+      <documentation>
+         [Enter API information here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="implementation"/>
+      </appinfo>
+      <documentation>
+         [Enter information about supplied implementation of this extension point.]
+      </documentation>
+   </annotation>
+
+
+</schema>
