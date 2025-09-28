@@ -6,19 +6,19 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: ConocoPhillips
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.ui.forms;bundle-version="3.3.101",
+ org.eclipse.ui.forms,
  org.eclipse.help,
- org.eclipse.ui.views;bundle-version="3.3.0",
- org.geocraft.ui.plot;bundle-version="1.0.0",
- org.geocraft.ui.common;bundle-version="1.0.0",
- org.geocraft.core;bundle-version="1.0.0",
- org.geocraft.ui.viewer;bundle-version="1.0.0",
- org.geocraft.ui.form2;bundle-version="1.0.0",
- org.geocraft.ui.color;bundle-version="1.0.0",
- org.geocraft.ui.model;bundle-version="1.0.0",
- org.geocraft.ui.repository;bundle-version="1.0.0",
- org.geocraft.io.ascii;bundle-version="1.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+ org.eclipse.ui.views,
+ org.geocraft.ui.plot,
+ org.geocraft.ui.common,
+ org.geocraft.core,
+ org.geocraft.ui.viewer,
+ org.geocraft.ui.form2,
+ org.geocraft.ui.color,
+ org.geocraft.ui.model,
+ org.geocraft.ui.repository,
+ org.geocraft.io.ascii
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.geocraft.internal.ui.mapviewer;x-internal:=true,
  org.geocraft.internal.ui.mapviewer.viewer;x-internal:=true,
  org.geocraft.internal.ui.mapviewer.viewer.action;x-internal:=true,

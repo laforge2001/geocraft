@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.osgi.framework.internal.core.BundleURLConnection;
+import org.eclipse.core.runtime.FileLocator;
 import org.geocraft.core.service.ServiceProvider;
 import org.geocraft.core.service.logging.ILogger;
 
@@ -75,15 +75,12 @@ public class Utilities {
 
     URL entry = Platform.getBundle(bundleName).getEntry(".");
     if (entry != null) {
-      URLConnection connection;
       try {
-        connection = entry.openConnection();
-        if (connection instanceof BundleURLConnection) {
-          URL fileURL = ((BundleURLConnection) connection).getFileURL();
-          URI uri = new URI(fileURL.toString());
-          String path = new File(uri).getAbsolutePath();
-          return path.substring(0, path.length() - 1);
-        }
+        // Use FileLocator to resolve bundle URLs to file system paths
+        URL fileURL = FileLocator.toFileURL(entry);
+        URI uri = new URI(fileURL.toString());
+        String path = new File(uri).getAbsolutePath();
+        return path.substring(0, path.length() - 1);
       } catch (IOException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();

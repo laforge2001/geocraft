@@ -11,7 +11,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.WorkbenchException;
-import org.eclipse.ui.internal.Workbench;
+// Removed import org.eclipse.ui.internal.Workbench; for e4 compatibility
 import org.geocraft.core.common.preferences.PreferencesUtil;
 import org.geocraft.core.service.ServiceProvider;
 import org.geocraft.ui.internal.viewer.ServiceComponent;
@@ -54,7 +54,8 @@ public class ViewerHelper {
 
   private static void initViewerPerspective() {
     IWorkbench workbench = PlatformUI.getWorkbench();
-    IAdaptable input = ((Workbench) workbench).getDefaultPageInput();
+    // In e4, use null for default input instead of internal API
+    IAdaptable input = null;
     try {
       _plotWindow = workbench.openWorkbenchWindow("Viewer.perspective", input);
     } catch (WorkbenchException e) {

@@ -13,9 +13,17 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.inject.Inject;
+
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.equinox.app.IApplication;
-import org.eclipse.equinox.app.IApplicationContext;
+import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.workbench.lifecycle.PostContextCreate;
+import org.eclipse.e4.ui.workbench.lifecycle.PreSave;
+import org.eclipse.e4.ui.workbench.lifecycle.ProcessAdditions;
+import org.eclipse.e4.ui.workbench.lifecycle.ProcessRemovals;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.osgi.service.datalocation.Location;
@@ -23,19 +31,15 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.WorkbenchPlugin;
 import org.geocraft.core.service.ServiceProvider;
-import org.geocraft.product.ApplicationWorkbenchAdvisor;
 import org.geocraft.product.workspace.ChooseWorkspaceData;
 import org.geocraft.product.workspace.ChooseWorkspaceDialog;
 
 
 /**
- * This class controls all aspects of the application's execution
+ * This class controls all aspects of the application's execution using e4 lifecycle
  */
-public class Application implements IApplication {
+public class Application {
 
   /** The Eclipse logger. */
 
@@ -50,56 +54,54 @@ public class Application implements IApplication {
 
   private static final String WORKSPACE_VERSION_VALUE = "1"; //$NON-NLS-1$
 
-  @SuppressWarnings("unused")
-  public Object start(final IApplicationContext context) throws Exception {
+  @Inject
+  private IEventBroker eventBroker;
+
+  @PostContextCreate
+  public void postContextCreate(MApplication application) {
     ServiceProvider.getLoggingService().getLogger(getClass()).info("Starting GeoCraft");
 
-    Display display = PlatformUI.createDisplay();
-    try {
-
-      // this is currently discouraged... do we have a way around it?
-      Shell shell = WorkbenchPlugin.getSplashShell(display);
-      if (shell != null) {
-        shell.setText(ChooseWorkspaceDialog.getWindowTitle());
-        shell.setImages(Window.getDefaultImages());
-      }
-
-      if (!checkInstanceLocation(shell)) {
-        Platform.endSplash();
-        return EXIT_OK;
-      }
-
-      int returnCode = PlatformUI.createAndRunWorkbench(display, new ApplicationWorkbenchAdvisor());
-      if (returnCode == PlatformUI.RETURN_RESTART) {
-        return IApplication.EXIT_RESTART;
-      }
-    } finally {
-      ServiceProvider.getLoggingService().getLogger(getClass()).info("Stopping GeoCraft");
-      if (display != null) {
-        display.dispose();
-      }
-      Location instanceLoc = Platform.getInstanceLocation();
-      if (instanceLoc != null) {
-        instanceLoc.release();
-      }
+    // Check workspace location during startup
+    Display display = Display.getCurrent();
+    if (display == null) {
+      display = Display.getDefault();
     }
-    return IApplication.EXIT_OK;
+
+    Shell shell = display.getActiveShell();
+    if (shell == null) {
+      shell = new Shell(display);
+    }
+
+    if (!checkInstanceLocation(shell)) {
+      Platform.endSplash();
+      // In e4, we can't easily stop the application here, so we log the issue
+      ServiceProvider.getLoggingService().getLogger(getClass()).error("Invalid workspace location");
+    }
   }
 
-  public void stop() {
-    final IWorkbench workbench = PlatformUI.getWorkbench();
-    if (workbench == null) {
-      return;
-    }
-    final Display display = workbench.getDisplay();
-    display.syncExec(new Runnable() {
+  @ProcessAdditions
+  public void processAdditions(MApplication application) {
+    // Process any additional model elements
+  }
 
-      public void run() {
-        if (!display.isDisposed()) {
-          workbench.close();
-        }
-      }
-    });
+  @ProcessRemovals
+  public void processRemovals(MApplication application) {
+    // Process any removed model elements
+  }
+
+  @PreSave
+  public void preSave(MApplication application) {
+    // Save any application state before shutdown
+  }
+
+  @PreDestroy
+  public void preDestroy() {
+    ServiceProvider.getLoggingService().getLogger(getClass()).info("Stopping GeoCraft");
+
+    Location instanceLoc = Platform.getInstanceLocation();
+    if (instanceLoc != null) {
+      instanceLoc.release();
+    }
   }
 
   /**

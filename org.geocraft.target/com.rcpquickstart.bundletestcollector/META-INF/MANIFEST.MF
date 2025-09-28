@@ -6,6 +6,6 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.rcpquickstart.internal.bundletestcollector.Activator
 Bundle-Vendor: RCPQUICKSTART
 Require-Bundle: org.eclipse.core.runtime,
- org.junit;bundle-version="3.8.2"
+ org.junit
 Eclipse-LazyStart: true
 Export-Package: com.rcpquickstart.bundletestcollector

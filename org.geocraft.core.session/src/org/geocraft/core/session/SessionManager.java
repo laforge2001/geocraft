@@ -46,9 +46,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.XMLMemento;
-import org.eclipse.ui.internal.IWorkbenchConstants;
-import org.eclipse.ui.internal.Workbench;
-import org.eclipse.ui.internal.WorkbenchWindow;
+// Removed internal Workbench imports for e4 compatibility
 import org.geocraft.core.common.util.Utilities;
 import org.geocraft.core.model.Entity;
 import org.geocraft.core.model.Model;
@@ -430,8 +428,9 @@ public class SessionManager {
     //APPEND ECLIPSE STATE FOR EACH OF ITS WINDOWS
     for (IWorkbenchWindow win : windows) {
       writeXML("<!-- Start of state for Eclipse window: " + getWorkbenchWindowID(win) + " -->");
-      XMLMemento memento = XMLMemento.createWriteRoot(IWorkbenchConstants.TAG_WINDOW);
-      ((WorkbenchWindow) win).saveState(memento);
+      XMLMemento memento = XMLMemento.createWriteRoot("window");
+      // In e4, save basic window information instead of internal state
+      memento.putString("windowId", getWorkbenchWindowID(win));
       _windowState = layoutStateToString(memento);
       writeXML(_windowState);
     }
@@ -644,8 +643,8 @@ public class SessionManager {
       }
 
       //  prepare the active workbench window for restoration
-      Workbench workbench = (Workbench) PlatformUI.getWorkbench();
-      IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+      // In e4, use public API instead of internal casting
+      IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
       //clear the active algorithms registry
       ServiceProvider.getAlgorithmsService().removeAll();
 
@@ -669,7 +668,8 @@ public class SessionManager {
         ArrayList<Perspective> windowPerspectives = desc.getPerspectives(windowId);
         //there is at least 1 perspective
         perspectiveId = windowPerspectives.get(0).getPerspectiveID();
-        IAdaptable input = workbench.getDefaultPageInput();
+        // In e4, default page input is typically null
+        IAdaptable input = null;
         try {
           workbenchWindow = PlatformUI.getWorkbench().openWorkbenchWindow(perspectiveId, input);
           //set the plot window (if any)
@@ -1256,8 +1256,13 @@ public class SessionManager {
     BufferedReader reader = new BufferedReader(new StringReader(windowState));
     try {
       IMemento memento = XMLMemento.createReadRoot(reader);
-      ((WorkbenchWindow) workbenchWindow).restoreState(memento, desc);
-      IWorkbenchPage[] pages = ((WorkbenchWindow) workbenchWindow).getPages();
+      // In e4, use public API for perspective restoration
+      try {
+        PlatformUI.getWorkbench().showPerspective(desc.getId(), workbenchWindow);
+      } catch (WorkbenchException e) {
+        ServiceProvider.getLoggingService().getLogger(getClass()).error("Failed to restore perspective", e);
+      }
+      IWorkbenchPage[] pages = workbenchWindow.getPages();
       //restore all the editors (algorithms)
       for (IWorkbenchPage page : pages) {
         IEditorReference[] editorRefs = page.getEditorReferences();

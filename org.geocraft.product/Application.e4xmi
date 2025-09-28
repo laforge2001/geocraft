@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmlns:ui="http://www.eclipse.org/ui/2010/UIModel/application/ui" xmi:id="_geocraft_app" elementId="org.geocraft.e4.application" bindingContexts="_bindingContext">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_trimmedWindow" elementId="org.geocraft.mainwindow" label="GeoCraft" x="50" y="50" width="1024" height="768">
+    <children xsi:type="ui:PartSashContainer" xmi:id="_partSashContainer" elementId="org.geocraft.partsash" horizontal="true">
+      <children xsi:type="basic:PartStack" xmi:id="_leftStack" elementId="org.geocraft.leftstack">
+        <children xsi:type="basic:Part" xmi:id="_repositoryPart" elementId="org.geocraft.ui.repository.RepositoryView" contributionURI="bundleclass://org.geocraft.ui.repository/org.geocraft.ui.repository.RepositoryView" label="Repository" iconURI="platform:/plugin/org.geocraft.ui.repository/icons/Repository_16x16.png"/>
+        <children xsi:type="basic:Part" xmi:id="_algorithmsPart" elementId="org.geocraft.geomath.view.AlgorithmsView" contributionURI="bundleclass://org.geocraft.geomath/org.geocraft.internal.geomath.view.AlgorithmsView" label="Algorithms"/>
+      </children>
+      <children xsi:type="basic:PartStack" xmi:id="_centerStack" elementId="org.geocraft.centerstack">
+        <children xsi:type="basic:Part" xmi:id="_welcomePart" elementId="org.geocraft.product.intro.WelcomeView" contributionURI="bundleclass://org.geocraft.product/org.geocraft.product.intro.WelcomeView" label="Welcome" visible="false"/>
+      </children>
+      <children xsi:type="basic:PartStack" xmi:id="_rightStack" elementId="org.geocraft.rightstack">
+        <children xsi:type="basic:Part" xmi:id="_propertiesPart" elementId="org.geocraft.ui.property.PropertiesView" contributionURI="bundleclass://org.geocraft.ui.property/org.geocraft.ui.property.PropertiesView" label="Properties"/>
+      </children>
+    </children>
+    <mainMenu xmi:id="_mainMenu" elementId="org.geocraft.mainmenu">
+      <children xsi:type="menu:Menu" xmi:id="_fileMenu" elementId="org.geocraft.filemenu" label="File">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_saveSessionMenuItem" elementId="org.geocraft.savesession" label="Save Session" iconURI="platform:/plugin/org.geocraft.product/icons/SaveFile_16x16.png" command="_saveSessionCommand"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_saveSessionAsMenuItem" elementId="org.geocraft.savesessionas" label="Save Session As..." iconURI="platform:/plugin/org.geocraft.product/icons/FileSaveAs_16x16.png" command="_saveSessionAsCommand"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_saveBatchAsMenuItem" elementId="org.geocraft.savebatchas" label="Save Session As Batch" iconURI="platform:/plugin/org.geocraft.product/icons/BatchFileSaveAs_16x16.png" command="_saveBatchAsCommand"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_restoreSessionMenuItem" elementId="org.geocraft.restoresession" label="Restore Session" iconURI="platform:/plugin/org.geocraft.product/icons/restore_16x16.gif" command="_restoreSessionCommand"/>
+        <children xsi:type="menu:MenuSeparator" xmi:id="_fileSeparator1" elementId="org.geocraft.fileseparator1"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_exitMenuItem" elementId="org.geocraft.exit" label="Exit" command="_exitCommand"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_windowMenu" elementId="org.geocraft.windowmenu" label="Window">
+        <children xsi:type="menu:Menu" xmi:id="_perspectiveMenu" elementId="org.geocraft.perspectivemenu" label="Open Perspective"/>
+        <children xsi:type="menu:Menu" xmi:id="_viewMenu" elementId="org.geocraft.viewmenu" label="Show View"/>
+        <children xsi:type="menu:MenuSeparator" xmi:id="_windowSeparator1" elementId="org.geocraft.windowseparator1"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_preferencesMenuItem" elementId="org.geocraft.preferences" label="Preferences" command="_preferencesCommand"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_helpMenu" elementId="org.geocraft.helpmenu" label="Help">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_aboutMenuItem" elementId="org.geocraft.about" label="About GeoCraft" command="_aboutCommand"/>
+      </children>
+    </mainMenu>
+  </children>
+  <handlers xmi:id="_saveSessionHandler" elementId="org.geocraft.savesessionhandler" contributionURI="bundleclass://org.geocraft.product/org.geocraft.product.action.SaveSessionHandler" command="_saveSessionCommand"/>
+  <handlers xmi:id="_saveSessionAsHandler" elementId="org.geocraft.savesessionashandler" contributionURI="bundleclass://org.geocraft.product/org.geocraft.product.action.SaveSessionAsHandler" command="_saveSessionAsCommand"/>
+  <handlers xmi:id="_saveBatchAsHandler" elementId="org.geocraft.savebatchashandler" contributionURI="bundleclass://org.geocraft.product/org.geocraft.product.action.SaveBatchAsHandler" command="_saveBatchAsCommand"/>
+  <handlers xmi:id="_restoreSessionHandler" elementId="org.geocraft.restoresessionhandler" contributionURI="bundleclass://org.geocraft.product/org.geocraft.product.action.RestoreSessionHandler" command="_restoreSessionCommand"/>
+  <handlers xmi:id="_exitHandler" elementId="org.geocraft.exithandler" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.handlers.QuitHandler" command="_exitCommand"/>
+  <handlers xmi:id="_preferencesHandler" elementId="org.geocraft.preferenceshandler" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.workbench.addons.preferencesaddon.PreferenceSpyHandler" command="_preferencesCommand"/>
+  <handlers xmi:id="_aboutHandler" elementId="org.geocraft.abouthandler" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.handlers.AboutHandler" command="_aboutCommand"/>
+  <bindingTables xmi:id="_bindingTable" elementId="org.geocraft.bindingtable" bindingContext="_bindingContext">
+    <bindings xmi:id="_exitBinding" elementId="org.geocraft.exitbinding" keySequence="CTRL+X" command="_exitCommand"/>
+    <bindings xmi:id="_helpBinding" elementId="org.geocraft.helpbinding" keySequence="F1" command="_helpCommand"/>
+  </bindingTables>
+  <commands xmi:id="_saveSessionCommand" elementId="saveSession.command" commandName="Save Session"/>
+  <commands xmi:id="_saveSessionAsCommand" elementId="saveSessionAs.command" commandName="Save Session As..."/>
+  <commands xmi:id="_saveBatchAsCommand" elementId="saveBatchAs.command" commandName="Save Session As Batch"/>
+  <commands xmi:id="_restoreSessionCommand" elementId="restoreSession.command" commandName="Restore Session"/>
+  <commands xmi:id="_exitCommand" elementId="org.eclipse.ui.file.exit" commandName="Exit"/>
+  <commands xmi:id="_preferencesCommand" elementId="org.eclipse.ui.window.preferences" commandName="Preferences"/>
+  <commands xmi:id="_aboutCommand" elementId="org.eclipse.ui.help.aboutAction" commandName="About"/>
+  <commands xmi:id="_helpCommand" elementId="org.eclipse.ui.help.dynamicHelp" commandName="Dynamic Help"/>
+  <addons xmi:id="_modelService" elementId="ModelService" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ModelServiceAddon"/>
+  <addons xmi:id="_commandService" elementId="CommandService" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandServiceAddon"/>
+  <addons xmi:id="_contextService" elementId="ContextService" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextServiceAddon"/>
+  <addons xmi:id="_bindingService" elementId="BindingService" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.BindingServiceAddon"/>
+  <addons xmi:id="_handlerService" elementId="HandlerService" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerServiceAddon"/>
+  <addons xmi:id="_cleanupAddon" elementId="CleanupAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CleanupAddon"/>
+  <addons xmi:id="_dialogAddon" elementId="DialogAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+  <addons xmi:id="_minMaxAddon" elementId="MinMaxAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon"/>
+  <addons xmi:id="_splitterAddon" elementId="SplitterAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.splitteraddon.SplitterAddon"/>
+  <bindingContexts xmi:id="_bindingContext" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
+</application:Application>

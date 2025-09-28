@@ -6,17 +6,22 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: ConocoPhillips
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
- org.eclipse.ui.forms;bundle-version="3.3.0",
+ org.eclipse.ui.forms,
  org.eclipse.ui.navigator;bundle-version="[3.3.0,4.0.0)",
- org.eclipse.ui.views;bundle-version="3.3.0",
- org.geocraft.core;bundle-version="1.0.0",
- org.geocraft.ui.common;bundle-version="1.0.0",
- org.geocraft.ui.model;bundle-version="1.0.0",
- org.geocraft.ui.io;bundle-version="1.0.0",
- org.geocraft.product;bundle-version="1.0.0",
- org.geocraft.core.session;bundle-version="1.0.0",
- org.geocraft.io.util;bundle-version="1.0.0"
+ org.eclipse.ui.views,
+ org.eclipse.e4.ui.model.workbench,
+ org.eclipse.e4.core.di,
+ org.eclipse.e4.core.di.annotations,
+ org.eclipse.e4.ui.services,
+ org.eclipse.e4.ui.di,
+ org.geocraft.core,
+ org.geocraft.ui.common,
+ org.geocraft.ui.model,
+ org.geocraft.ui.io,
+ org.geocraft.product,
+ org.geocraft.core.session,
+ org.geocraft.io.util
 Export-Package: org.geocraft.ui.repository,
  org.geocraft.ui.repository.action
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy

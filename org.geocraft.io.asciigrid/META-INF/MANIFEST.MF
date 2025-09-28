@@ -3,13 +3,13 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Asciigrid
 Bundle-SymbolicName: org.geocraft.io.asciigrid;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.eclipse.equinox.preferences;bundle-version="3.2.201",
- org.eclipse.swt;bundle-version="3.4.1",
- org.geocraft.core;bundle-version="1.0.0",
- org.geocraft.core.session;bundle-version="1.0.0",
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Require-Bundle: org.eclipse.equinox.preferences,
+ org.eclipse.swt,
+ org.geocraft.core,
+ org.geocraft.core.session,
  org.geocraft.ui.io,
- org.geocraft.ui.form2;bundle-version="1.0.0",
- org.geocraft.geomath.algorithm.util;bundle-version="1.0.0",
- org.eclipse.core.runtime;bundle-version="3.5.0"
+ org.geocraft.ui.form2,
+ org.geocraft.geomath.algorithm.util,
+ org.eclipse.core.runtime
 Export-Package: org.geocraft.io.asciigrid

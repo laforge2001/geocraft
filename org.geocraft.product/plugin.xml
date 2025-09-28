@@ -4,15 +4,6 @@
    <extension-point id="org.geocraft.product.saveables" name="Saveable resources on shutdown" schema="schema/org.geocraft.product.saveables.exsd"/>
 
    <extension
-         id="org.geocraft.application"
-         point="org.eclipse.core.runtime.applications">
-      <application>
-         <run
-               class="org.geocraft.Application">
-         </run>
-      </application>
-   </extension>
-   <extension
          point="org.eclipse.ui.bindings">
       <key
             commandId="org.eclipse.ui.file.exit"
@@ -29,15 +20,11 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            application="org.geocraft.application"
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
             name="GeoCraft">
          <property
                name="appName"
                value="GeoCraft">
-         </property>
-         <property
-               name="preferenceCustomization"
-               value="plugin_customization.ini">
          </property>
          <property
                name="aboutImage"
@@ -62,6 +49,18 @@
          <property
                name="startupProgressRect"
                value="120,250,345,15">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+         <property
+               name="applicationXMI"
+               value="org.geocraft.product/Application.e4xmi">
+         </property>
+         <property
+               name="lifeCycleURI"
+               value="bundleclass://org.geocraft.product/org.geocraft.Application">
          </property>
       </product>
    </extension>

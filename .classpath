@@ -1,0 +1,3 @@
+org.geocraft.core/bin=org.geocraft.core
+org.geocraft.product/bin=org.geocraft.product
+org.geocraft.ui.common/bin=org.geocraft.ui.common

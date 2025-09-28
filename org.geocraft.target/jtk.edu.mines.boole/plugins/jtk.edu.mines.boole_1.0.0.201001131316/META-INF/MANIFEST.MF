@@ -30,6 +30,6 @@ Bundle-NativeCode: lib/linux/x64/libedu_mines_jtk_lapack.so; lib/linux
   lib/windows/x86/mingwm10.dll; osname=win32; processor=x86
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: jtk.edu.mines.boole
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 
 

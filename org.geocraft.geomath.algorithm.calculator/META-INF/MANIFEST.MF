@@ -4,17 +4,17 @@ Bundle-Name: GeoMath Calculator Algorithms
 Bundle-SymbolicName: org.geocraft.geomath.algorithm.calculator;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: ConocoPhillips
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
- org.geocraft.core;bundle-version="1.0.0",
- org.eclipse.ui.forms;bundle-version="3.3.100",
- org.eclipse.ui;bundle-version="3.4.0",
- org.apache.commons.collections;bundle-version="3.2.1",
- org.geocraft.geomath.algorithm.util;bundle-version="1.0.0",
- org.eclipse.core.databinding;bundle-version="1.1.1",
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Require-Bundle: org.eclipse.core.runtime,
+ org.geocraft.core,
+ org.eclipse.ui.forms,
+ org.eclipse.ui,
+ org.apache.commons.collections,
+ org.geocraft.geomath.algorithm.util,
+ org.eclipse.core.databinding,
  org.eclipse.help,
- org.geocraft.algorithm;bundle-version="1.0.0",
- org.geocraft.ui.form2;bundle-version="1.0.0"
+ org.geocraft.algorithm,
+ org.geocraft.ui.form2
 Export-Package: org.geocraft.geomath.algorithm.calculator,
  org.geocraft.geomath.algorithm.calculator.basicmath,
  org.geocraft.geomath.algorithm.calculator.booleanalgebra,

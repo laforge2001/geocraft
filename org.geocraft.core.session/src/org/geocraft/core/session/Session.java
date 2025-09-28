@@ -14,8 +14,8 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.XMLMemento;
-import org.eclipse.ui.internal.Workbench;
-import org.eclipse.ui.internal.WorkbenchWindow;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.geocraft.core.common.xml.XmlIO;
 import org.geocraft.core.common.xml.XmlUtils;
 import org.geocraft.core.model.Entity;
@@ -185,12 +185,17 @@ public class Session implements XmlIO {
    * @param repositoryNode the repository node within the document.
    */
   private static void saveWorkbenchState(final Document doc, final Element workbenchNode) throws Exception {
+    // Note: In e4, workbench state saving is handled differently through the application model
+    // This method may need to be refactored to work with e4 model persistence
     for (IWorkbenchWindow iwindow : PlatformUI.getWorkbench().getWorkbenchWindows()) {
-      WorkbenchWindow window = (WorkbenchWindow) iwindow;
       Element windowNode = doc.createElement(WORKBENCH_WINDOW_TAG);
       workbenchNode.appendChild(windowNode);
       XMLMemento memento = new XMLMemento(doc, windowNode);
-      window.saveState(memento);
+      // For e4 compatibility, save basic window information instead of internal state
+      memento.putString("windowId", iwindow.toString());
+      if (iwindow.getActivePage() != null) {
+        memento.putString("activePerspective", iwindow.getActivePage().getPerspective().getId());
+      }
     }
   }
 
@@ -284,9 +289,8 @@ public class Session implements XmlIO {
    * @param workbenchNode the workbench node within the document.
    */
   public static void restoreWorkbenchState(final Document doc, final Element workbenchNode) throws Exception {
-    Workbench workbench = (Workbench) PlatformUI.getWorkbench();
-    IWorkbenchWindow[] windows = workbench.getWorkbenchWindows();
-    int numWindows = workbench.getWorkbenchWindowCount();
+    IWorkbenchWindow[] windows = PlatformUI.getWorkbench().getWorkbenchWindows();
+    int numWindows = windows.length;
     for (int i = numWindows - 1; i > 0; i--) {
       windows[i].close();
     }
@@ -307,15 +311,26 @@ public class Session implements XmlIO {
         }
       }
 
-      WorkbenchWindow window = (WorkbenchWindow) PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+      IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
       if (i > 0) {
-        IAdaptable input = workbench.getDefaultPageInput();
-        window = (WorkbenchWindow) PlatformUI.getWorkbench().openWorkbenchWindow(activePerspectiveId, input);
+        // In e4, default page input is typically null
+        IAdaptable input = null;
+        window = PlatformUI.getWorkbench().openWorkbenchWindow(activePerspectiveId, input);
       }
-      for (IWorkbenchPage page : window.getPages()) {
-        page.closeAllPerspectives(true, true);
+
+      // In e4, window state restoration is handled differently
+      // For compatibility, we restore the basic perspective
+      if (window != null && activePerspective != null) {
+        try {
+          for (IWorkbenchPage page : window.getPages()) {
+            page.closeAllPerspectives(true, true);
+          }
+          PlatformUI.getWorkbench().showPerspective(activePerspective.getId(), window);
+        } catch (Exception e) {
+          // Handle restoration errors gracefully
+          ServiceProvider.getLoggingService().getLogger(Session.class).error("Failed to restore perspective", e);
+        }
       }
-      window.restoreState(memento, activePerspective);
     }
   }
 

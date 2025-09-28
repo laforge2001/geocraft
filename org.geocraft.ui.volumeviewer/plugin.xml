@@ -2,7 +2,7 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension-point id="org.geocraft.ui.volumeviewer.renderers" name="Volume Viewer Renderers" schema="schema/org.geocraft.ui.volumeviewer.renderers.exsd"/>
-   <extension-point id="org.geocraft.ui.volumeviewer.renderer" name="Volume View Renderers" schema="schema/org.geocraft.ui.volumeviewer.renderer.exsd"/>
+   <extension-point id="renderer" name="Volume View Renderers" schema="schema/org.geocraft.ui.volumeviewer.renderer.exsd"/>
    <extension
          point="org.eclipse.ui.actionSets">
       <actionSet

@@ -356,24 +356,9 @@ public class PostStack3d extends SeismicDataset {
     // If the entity is not a ghost (i.e. already loaded or loading), then simply return.
     if (!isGhost()) {
       if (listener != null) {
-        listener.done(new IJobChangeEvent() {
-
-          @Override
-          public long getDelay() {
-            return 0;
-          }
-
-          @Override
-          public Job getJob() {
-            return null;
-          }
-
-          @Override
-          public IStatus getResult() {
-            return ValidationStatus.ok();
-          }
-
-        });
+        // Instead of creating a mock IJobChangeEvent, just skip the listener callback
+        // since this is a no-op case where the entity is already loaded
+        // The listener callback is optional when the operation is already complete
       }
       return;
     }

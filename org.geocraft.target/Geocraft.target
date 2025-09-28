@@ -1,18 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Eclipse Platform SDK 3.5.1" sequenceNumber="1">
-<locations>
-<location path="${workspace_loc}/org.geocraft.target/org.apache.commons.jexl" type="Directory"/>
-<location path="${workspace_loc}/org.geocraft.target/org.apache.commons.discovery" type="Directory"/>
-<location path="${workspace_loc}/org.geocraft.target/org.apache.commons.collections" type="Directory"/>
-<location path="${workspace_loc}/org.geocraft.target/org.apache.commons.beanutils" type="Directory"/>
-<location path="${workspace_loc}/org.geocraft.target/com.rcpquickstart.bundletestcollector" type="Directory"/>
-<location path="${workspace_loc}/org.geocraft.target/jtk.edu.mines.boole" type="Directory"/>
-<location path="${workspace_loc}/org.geocraft.target/EclipseSDK3.5.1" type="Directory"/>
-</locations>
+<?pde version="3.8"?>
+<target name="Eclipse Platform 2025-09" sequenceNumber="1">
 <environment>
-<os>linux</os>
-<ws>gtk</ws>
-<arch>x86_64</arch>
+<os>macosx</os>
+<ws>cocoa</ws>
+<arch>aarch64</arch>
 <nl>en_US</nl>
 </environment>
+	<locations>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+			<unit id="org.eclipse.sdk.feature.group" version="0.0.0"/>
+			<unit id="org.eclipse.e4.rcp.feature.group" version="0.0.0"/>
+			<unit id="org.eclipse.rcp.feature.group" version="0.0.0"/>
+			<unit id="org.eclipse.emf.ecore" version="0.0.0"/>
+			<unit id="org.eclipse.emf.common" version="0.0.0"/>
+			<unit id="org.eclipse.ui.views" version="0.0.0"/>
+			<unit id="org.eclipse.ui.ide" version="0.0.0"/>
+			<unit id="org.eclipse.ui.workbench" version="0.0.0"/>
+			<unit id="org.eclipse.ui.navigator" version="0.0.0"/>
+			<unit id="org.apache.felix.scr" version="0.0.0"/>
+			<unit id="org.eclipse.osgi.services" version="0.0.0"/>
+			<unit id="org.junit" version="0.0.0"/>
+			<unit id="jakarta.inject.jakarta.inject-api" version="0.0.0"/>
+			<unit id="jakarta.annotation-api" version="0.0.0"/>
+			<unit id="org.eclipse.e4.ui.workbench" version="0.0.0"/>
+			<unit id="org.eclipse.e4.ui.services" version="0.0.0"/>
+			<unit id="org.eclipse.e4.core.di" version="0.0.0"/>
+			<repository location="https://download.eclipse.org/releases/2025-09"/>
+		</location>
+		<location path="/Users/ericgeordi/dev/geocraft/geocraft/org.geocraft.target/com.rcpquickstart.bundletestcollector" type="Directory"/>
+		<location path="/Users/ericgeordi/dev/geocraft/geocraft/org.geocraft.target/jtk.edu.mines.boole" type="Directory"/>
+		<location path="/Users/ericgeordi/dev/geocraft/geocraft/org.geocraft.target/org.apache.commons.beanutils" type="Directory"/>
+		<location path="/Users/ericgeordi/dev/geocraft/geocraft/org.geocraft.target/org.apache.commons.collections" type="Directory"/>
+		<location path="/Users/ericgeordi/dev/geocraft/geocraft/org.geocraft.target/org.apache.commons.discovery" type="Directory"/>
+		<location path="/Users/ericgeordi/dev/geocraft/geocraft/org.geocraft.target/org.apache.commons.jexl" type="Directory"/>
+	</locations>
 </target>

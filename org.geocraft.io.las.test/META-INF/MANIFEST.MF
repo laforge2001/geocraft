@@ -3,6 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Test Fragment
 Bundle-SymbolicName: org.geocraft.io.las.test
 Bundle-Version: 1.0.0.qualifier
-Fragment-Host: org.geocraft.io.las;bundle-version="1.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.junit;bundle-version="3.8.2"
+Fragment-Host: org.geocraft.io.las
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Require-Bundle: org.junit

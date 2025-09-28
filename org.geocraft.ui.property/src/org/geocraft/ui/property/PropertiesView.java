@@ -38,8 +38,8 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.views.ViewsPlugin;
 import org.eclipse.ui.part.DrillDownAdapter;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
@@ -193,7 +193,8 @@ public class PropertiesView extends ViewPart implements IMessageSubscriber {
         }
       }
     };
-    _showCategoriesAction.setImageDescriptor(ViewsPlugin.getViewImageDescriptor("elcl16/tree_mode.gif"));
+    // In e4, use null for image descriptor instead of internal API
+    _showCategoriesAction.setImageDescriptor(null);
     _showCategoriesAction.setToolTipText("Show Categories/List");
 
     _showTreeAction = new Action("Expand/Collapse") {
@@ -211,7 +212,8 @@ public class PropertiesView extends ViewPart implements IMessageSubscriber {
         }
       }
     };
-    _showTreeAction.setImageDescriptor(ViewsPlugin.getViewImageDescriptor("elcl16/filter_ps.gif"));
+    // In e4, use null for image descriptor instead of internal API
+    _showTreeAction.setImageDescriptor(null);
     _showTreeAction.setToolTipText("Expand/Collapse");
 
     // add selection listener

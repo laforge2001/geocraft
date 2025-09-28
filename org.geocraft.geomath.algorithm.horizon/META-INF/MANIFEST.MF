@@ -4,16 +4,16 @@ Bundle-Name: Horizon Algorithms
 Bundle-SymbolicName: org.geocraft.geomath.algorithm.horizon;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.ui.forms;bundle-version="3.3.100",
- org.eclipse.ui;bundle-version="3.4.0",
- org.eclipse.core.databinding;bundle-version="1.1.1",
+ org.eclipse.ui.forms,
+ org.eclipse.ui,
+ org.eclipse.core.databinding,
  org.eclipse.help,
- org.apache.commons.collections;bundle-version="3.2.1",
- org.apache.commons.beanutils;bundle-version="1.8.0",
+ org.apache.commons.collections,
+ org.apache.commons.beanutils,
  org.geocraft.core,
  org.geocraft.geomath.algorithm.util,
- org.geocraft.algorithm;bundle-version="1.0.0",
- org.geocraft.ui.form2;bundle-version="1.0.0"
+ org.geocraft.algorithm,
+ org.geocraft.ui.form2
 Bundle-Vendor: ConocoPhillips
 Export-Package: org.geocraft.geomath.algorithm.horizon.clip;
   uses:="org.geocraft.core.model.property,
@@ -148,6 +148,6 @@ Export-Package: org.geocraft.geomath.algorithm.horizon.clip;
    org.geocraft.geomath.algorithm,
    org.geocraft.ui.form2",
  org.geocraft.internal.geomath.algorithm.horizon;x-internal:=true
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.geocraft.internal.geomath.algorithm.horizon.Activator

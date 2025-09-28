@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension-point id="org.geocraft.ui.waveletviewer.renderer" name="Wavelet Viewer Renderers" schema="schema/org.geocraft.ui.waveletviewer.renderer.exsd"/>
+   <extension-point id="renderer" name="Wavelet Viewer Renderers" schema="schema/org.geocraft.ui.waveletviewer.renderer.exsd"/>
    <extension
          point="org.eclipse.ui.views">
       <view

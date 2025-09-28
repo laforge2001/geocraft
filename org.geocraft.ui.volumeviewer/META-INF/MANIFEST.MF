@@ -3,21 +3,21 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Volume Viewer based on jME
 Bundle-SymbolicName: org.geocraft.ui.volumeviewer;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ClassPath: .
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
- org.eclipse.ui;bundle-version="3.4.0",
- org.eclipse.ui.views;bundle-version="3.4.1",
- org.eclipse.ui.forms;bundle-version="3.3.101",
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.ui.views,
+ org.eclipse.ui.forms,
  org.eclipse.help,
- org.geocraft.core;bundle-version="1.0.0",
- org.geocraft.ui.repository;bundle-version="1.0.0",
- org.geocraft.ui.viewer;bundle-version="1.0.0",
- org.geocraft.ui.common;bundle-version="1.0.0",
- com.ardor3d;bundle-version="1.0.0",
- org.geocraft.ui.model;bundle-version="1.0.0",
- org.geocraft.ui.form2;bundle-version="1.0.0",
- org.geocraft.ui.color;bundle-version="1.0.0"
+ org.geocraft.core,
+ org.geocraft.ui.repository,
+ org.geocraft.ui.viewer,
+ org.geocraft.ui.common,
+ com.ardor3d,
+ org.geocraft.ui.model,
+ org.geocraft.ui.form2,
+ org.geocraft.ui.color
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: ConocoPhillips
 Export-Package: org.geocraft.internal.ui.volumeviewer;x-internal:=true,
