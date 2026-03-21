@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.ui,
  org.geocraft.core.session;bundle-version="1.0.0",
  org.geocraft.core;bundle-version="1.0.0",
  org.geocraft.io.util;bundle-version="1.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.geocraft.algorithm,
  org.geocraft.algorithm.example,

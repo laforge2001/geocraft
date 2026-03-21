@@ -18,7 +18,7 @@ Require-Bundle: org.eclipse.ui,
  org.geocraft.ui.model;bundle-version="1.0.0",
  org.geocraft.ui.repository;bundle-version="1.0.0",
  org.geocraft.io.ascii;bundle-version="1.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.geocraft.internal.ui.mapviewer;x-internal:=true,
  org.geocraft.internal.ui.mapviewer.viewer;x-internal:=true,
  org.geocraft.internal.ui.mapviewer.viewer.action;x-internal:=true,

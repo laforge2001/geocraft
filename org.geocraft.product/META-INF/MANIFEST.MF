@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
  org.geocraft.ui.model;bundle-version="1.0.0",
  org.geocraft.ui.common;bundle-version="1.0.0"
 Bundle-Vendor: ConocoPhillips
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.geocraft;uses:="org.eclipse.equinox.app",
  org.geocraft.product;uses:="org.eclipse.jface.action,org.eclipse.ui.application,org.eclipse.ui",
  org.geocraft.product.action;uses:="org.eclipse.jface.action,org.eclipse.ui.views,org.eclipse.ui",

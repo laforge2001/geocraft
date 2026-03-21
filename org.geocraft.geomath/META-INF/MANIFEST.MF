@@ -11,6 +11,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.geocraft.ui.common;bundle-version="1.0.0",
  org.geocraft.core;bundle-version="1.0.0"
 Bundle-Vendor: ConocoPhillips
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.geocraft.internal.geomath;x-internal:=true,
  org.geocraft.internal.geomath.view;x-internal:=true

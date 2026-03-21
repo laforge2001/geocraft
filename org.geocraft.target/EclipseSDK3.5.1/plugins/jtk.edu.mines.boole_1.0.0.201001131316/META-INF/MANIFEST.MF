@@ -1,0 +1,35 @@
+Manifest-Version: 1.0
+Export-Package: edu.mines.jtk.awt,edu.mines.jtk.bench,edu.mines.jtk.ds
+ p,edu.mines.jtk.dsp.demo,edu.mines.jtk.dsp.test,edu.mines.jtk.interp,
+ edu.mines.jtk.interp.test,edu.mines.jtk.io,edu.mines.jtk.io.test,edu.
+ mines.jtk.la,edu.mines.jtk.la.test,edu.mines.jtk.lapack,edu.mines.jtk
+ .lapack.test,edu.mines.jtk.mesh,edu.mines.jtk.mesh.test,edu.mines.jtk
+ .mosaic,edu.mines.jtk.mosaic.demo,edu.mines.jtk.mosaic.demo.resources
+ ,edu.mines.jtk.mosaic.resources,edu.mines.jtk.mosaic.test,edu.mines.j
+ tk.ogl,edu.mines.jtk.ogl.test,edu.mines.jtk.opengl,edu.mines.jtk.open
+ gl.test,edu.mines.jtk.opt,edu.mines.jtk.opt.test,edu.mines.jtk.sgl,ed
+ u.mines.jtk.sgl.resources,edu.mines.jtk.sgl.test,edu.mines.jtk.util,e
+ du.mines.jtk.util.test,junit.textui
+Bundle-ClassPath: boole.jar,jar/gluegen-rt.jar,jar/jogl.jar,jar/junit.
+ jar
+Bundle-Version: 1.0.0.201001131316
+Bundle-Name: Boole
+Bundle-NativeCode: lib/linux/x64/libedu_mines_jtk_lapack.so; lib/linux
+ /x64/libedu_mines_jtk_opengl.so; lib/linux/x64/libgluegen-rt.so; lib/
+ linux/x64/libjogl_awt.so; lib/linux/x64/libjogl_cg.so; lib/linux/x64/
+ libjogl.so; osname=linux; processor=x86_64,lib/linux/x86/libedu_mines
+ _jtk_lapack.so; lib/linux/x86/libedu_mines_jtk_opengl.so; lib/linux/x
+ 86/libgluegen-rt.so; lib/linux/x86/libjogl_awt.so; lib/linux/x86/libj
+ ogl_cg.so; lib/linux/x86/libjogl.so; osname=linux; processor=x86,lib/
+ macosx/x64/libgluegen-rt.jnilib; lib/macosx/x64/libjogl_awt.jnilib; l
+ ib/macosx/x64/libjogl_cg.jnilib; lib/macosx/x64/libjogl.jnilib; osnam
+ e=macosx; processor=x86_64,lib/macosx/x86/libgluegen-rt.jnilib; lib/m
+ acosx/x86/libjogl_awt.jnilib; lib/macosx/x86/libjogl_cg.jnilib; lib/m
+ acosx/x86/libjogl.jnilib; osname=macosx; processor=x86,lib/windows/x8
+ 6/edu_mines_jtk_lapack.dll; lib/windows/x86/edu_mines_jtk_opengl.dll;
+  lib/windows/x86/mingwm10.dll; osname=win32; processor=x86
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: jtk.edu.mines.boole
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+
+

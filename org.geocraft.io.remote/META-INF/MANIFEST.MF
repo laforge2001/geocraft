@@ -4,7 +4,7 @@ Bundle-Name: Remote Plug-in
 Bundle-SymbolicName: org.geocraft.io.remote;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: COP
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.geocraft.io.jms;bundle-version="1.0.0",
  org.geocraft.ui.sectionviewer;bundle-version="1.0.0",
  org.geocraft.ui.mapviewer;bundle-version="1.0.0",

@@ -1,0 +1,125 @@
+# SWT Migration Log - GeoCraft on Apple Silicon macOS
+
+## Problem
+GeoCraft is an Eclipse RCP 3.5.1 app. The original SWT cocoa x86_64 3.5.1 jars don't work on modern macOS (Sequoia / Darwin 24.6.0) on Apple Silicon (arm64).
+
+## Environment
+- macOS 15 (Darwin 24.6.0), Apple Silicon (arm64)
+- Default JDK: OpenJDK 21 Temurin
+- Eclipse launch uses Java 11 (x86_64 under Rosetta) — confirmed by class version 55 limit
+- Target platform: Eclipse SDK 3.5.1 (directory-based at `org.geocraft.target/EclipseSDK3.5.1/`)
+- `osgi.arch` reports `x86_64` at runtime (Rosetta), not `aarch64`
+
+## What We've Tried
+
+### Attempt 1: Replace x86_64 SWT with newer x86_64 version (3.127.0)
+- Downloaded `org.eclipse.swt.cocoa.macosx.x86_64_3.127.0.jar` from Maven Central
+- **Result**: Maven Central artifact missing MANIFEST.MF — not a valid OSGi bundle
+- Re-downloaded from Eclipse p2 repo — proper bundle
+- **Result**: Fragment-Host `[3.0.0,4.0.0)` matched old host, but...
+- SWT 3.127.0 is compiled for Java 17 (class file version 61.0)
+- Runtime is Java 11 → `UnsupportedClassVersionError`
+- **Status**: FAILED — Java version mismatch
+
+### Attempt 2: Add aarch64 SWT fragment (3.127.0)
+- Downloaded `org.eclipse.swt.cocoa.macosx.aarch64_3.127.0.jar`
+- Fragment-Host required `[3.127.0,4.0.0)` but host is 3.5.1
+- **Status**: FAILED — host version mismatch, also Java 17 class files
+
+### Attempt 3: Replace SWT host with 3.127.0
+- Downloaded `org.eclipse.swt_3.127.0.jar` from Maven Central
+- Moved old `org.eclipse.swt_3.5.1.v3555a.jar` to backup
+- **Result**: New host couldn't resolve: `Missing imported package org.eclipse.swt.accessibility2`
+- Caused cascade failure — everything depending on SWT failed
+- **Status**: FAILED — new host incompatible with 3.5.1 platform
+
+### Attempt 4: Restore old host + patched aarch64 3.122.0 (Java 11 compatible)
+- Restored `org.eclipse.swt_3.5.1.v3555a.jar` host
+- Downloaded `org.eclipse.swt.cocoa.macosx.aarch64_3.122.0.jar` from Eclipse p2 (4.26)
+- Confirmed class file version 55 (Java 11 compatible)
+- Patched Fragment-Host from `[3.116.0,4.0.0)` to `[3.0.0,4.0.0)`
+- Patched Eclipse-PlatformFilter to accept both `aarch64` and `x86_64`
+- Removed signatures (ECLIPSE_.SF, ECLIPSE_.RSA)
+- Moved old x86_64 3.127.0 fragment to backup
+- **Runtime result**: aarch64 fragment resolves, no more UnsupportedClassVersionError or cascade failures
+- **Compilation result**: Still getting "import org.eclipse.swt cannot be resolved" in Eclipse IDE
+- **Status**: PARTIAL — runtime improved, but IDE still can't find SWT classes on build path
+
+## Current State of Target Platform Plugins (SWT-related)
+```
+org.eclipse.swt_3.5.1.v3555a.jar                    ← host bundle (original)
+org.eclipse.swt.cocoa.macosx_3.5.1.v3555a.jar       ← 32-bit cocoa (x86/ppc filter)
+org.eclipse.swt.cocoa.macosx.source_3.5.1.v3555a.jar
+org.eclipse.swt.cocoa.macosx.aarch64_3.122.0.jar    ← patched: host [3.0.0,4.0.0), filter accepts x86_64+aarch64
+backup/org.eclipse.swt_3.5.1.v3555a.jar             ← copy of host
+backup/org.eclipse.swt.cocoa.macosx.x86_64_3.5.1.v3555a.jar  ← original x86_64 (broken on modern macOS)
+backup/org.eclipse.swt.cocoa.macosx.x86_64.source_3.5.1.v3555a.jar
+backup/org.eclipse.swt.cocoa.macosx.x86_64_3.127.0.jar ← Java 17, removed
+```
+
+## Current Problem (Compilation)
+Eclipse IDE PDE target platform still can't resolve `org.eclipse.swt` packages for compilation.
+All errors are "The import org.eclipse.swt cannot be resolved" — meaning the SWT fragment
+isn't being picked up as a source of `org.eclipse.swt.*` packages by the PDE build path resolver.
+
+This is likely because:
+- The old x86_64 fragment was deleted (it provided classes for the IDE's build path)
+- The new aarch64 fragment is there but PDE may not resolve it due to platform filter
+- PDE target platform resolver uses the IDE's `osgi.arch` (could be aarch64 if IDE is native)
+  vs. the runtime's `osgi.arch` (x86_64 under Rosetta)
+
+### Attempt 5: Change target definition arch to aarch64
+- Target definition had `<arch>x86_64</arch>` — PDE only resolves fragments matching that arch
+- Eclipse IDE is native aarch64, so the aarch64 fragment exists but PDE skips it due to target arch
+- Changed `Geocraft.target` arch from `x86_64` to `aarch64`
+- **Result**: Same compilation errors — SWT still not resolved
+- **Status**: FAILED — target arch change alone doesn't fix it
+
+### Attempt 6: Fix corrupt manifest + remove arch from platform filter
+- Previous jar rebuild had corrupt manifest due to sed not handling MANIFEST line wrapping
+- Line 19-20 were: `Eclipse-PlatformFilter: (& ... (osgi.arch=a` / ` arch64) )`
+- sed only replaced line 19, leaving orphaned continuation `arch64) )` → malformed filter
+- Rebuilt jar from clean source using Edit tool instead of sed
+- Removed arch constraint entirely: `Eclipse-PlatformFilter: (& (osgi.ws=cocoa) (osgi.os=macosx) )`
+- Fragment-Host: `[3.0.0,4.0.0)` (correct)
+- Java 11 compatible (class version 55)
+- **Result**: Same compilation errors — SWT still not resolved
+- **Status**: FAILED — even with clean manifest and no arch filter, PDE still can't resolve fragment
+
+### Attempt 7: Use x86_64 SWT 3.122.0 + target arch x86_64
+- Realized aarch64 target causes JTK bundle resolution failure (Bundle-NativeCode only has macosx/x64, not aarch64)
+- Downloaded `org.eclipse.swt.cocoa.macosx.x86_64_3.122.0.v20221123-2302.jar` from Eclipse 4.26 p2
+- Confirmed Java 11 compatible (class version 55)
+- Patched Fragment-Host from `[3.116.0,4.0.0)` to `[3.0.0,4.0.0)`
+- Removed signatures, stripped per-entry digests
+- Platform filter left as-is: `(& (osgi.ws=cocoa) (osgi.os=macosx) (osgi.arch=x86_64) )`
+- Changed target arch back to `x86_64`, bumped sequenceNumber to 3
+- Rationale: x86_64 target resolves both SWT (x86_64 fragment) and JTK (macosx/x64 native code)
+- Modern 3.122.0 x86_64 native code should work on macOS Sequoia under Rosetta (unlike old 3.5.1)
+- **Compilation result**: SUCCESS — SWT compilation errors resolved, PDE resolves the x86_64 fragment
+- **Runtime result**: Fragment resolved, but crashed with `UnsatisfiedLinkError` — stale arm64 jnilib cached at `~/.swt/lib/macosx/x86_64/` from previous aarch64 attempt. Deleted cache, retesting.
+- Also: `com.ardor3d` fails with `Missing host Bundle-NativeCode_0.0.0` (separate issue)
+- After cache clear, still got arm64 jnilib — the aarch64 fragment (attempt 6, no arch filter) was also resolving and providing arm64 native libs
+- Moved aarch64 fragment to backup, cleared `~/.swt/lib/macosx/x86_64/` again
+- **Result**: GeoCraft launches successfully on macOS Sequoia under Rosetta/x86_64 Java 11
+- **Status**: SUCCESS
+
+## Current State of Target Platform Plugins (SWT-related)
+```
+org.eclipse.swt_3.5.1.v3555a.jar                        ← host bundle (original)
+org.eclipse.swt.cocoa.macosx_3.5.1.v3555a.jar           ← 32-bit cocoa (x86/ppc filter)
+org.eclipse.swt.cocoa.macosx.source_3.5.1.v3555a.jar
+org.eclipse.swt.cocoa.macosx.aarch64_3.122.0.jar        ← patched aarch64 (attempt 6, kept)
+org.eclipse.swt.cocoa.macosx.x86_64_3.122.0.jar         ← NEW: patched x86_64 (attempt 7)
+jtk.edu.mines.boole_1.0.0.201001131316/                  ← JTK (has macosx/x64 native only)
+backup/org.eclipse.swt_3.5.1.v3555a.jar
+backup/org.eclipse.swt.cocoa.macosx.x86_64_3.5.1.v3555a.jar
+backup/org.eclipse.swt.cocoa.macosx.x86_64.source_3.5.1.v3555a.jar
+backup/org.eclipse.swt.cocoa.macosx.x86_64_3.127.0.jar
+```
+
+## Key Constraints
+- SWT fragment must be compiled for Java 11 (class version ≤ 55)
+- Fragment-Host must accept `[3.0.0,4.0.0)` to attach to 3.5.1 host
+- Platform filter must match whatever arch the Eclipse IDE reports
+- Old SWT 3.5.1 x86_64 native code doesn't work on modern macOS

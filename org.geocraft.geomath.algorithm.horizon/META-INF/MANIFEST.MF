@@ -148,6 +148,6 @@ Export-Package: org.geocraft.geomath.algorithm.horizon.clip;
    org.geocraft.geomath.algorithm,
    org.geocraft.ui.form2",
  org.geocraft.internal.geomath.algorithm.horizon;x-internal:=true
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.geocraft.internal.geomath.algorithm.horizon.Activator
