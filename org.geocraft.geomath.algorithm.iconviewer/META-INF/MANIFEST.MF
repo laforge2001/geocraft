@@ -15,4 +15,4 @@ Bundle-Activator: org.geocraft.geomath.algorithm.internal.iconviewer.IconViewerA
 Bundle-Vendor: ConocoPhillips
 Export-Package: org.geocraft.geomath.algorithm.iconviewer,
  org.geocraft.geomath.algorithm.internal.iconviewer;x-internal:=true
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

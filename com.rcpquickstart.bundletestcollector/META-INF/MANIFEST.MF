@@ -10,4 +10,4 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-ActivationPolicy: lazy
 Export-Package: com.rcpquickstart.bundletestcollector,
  com.rcpquickstart.internal.bundletestcollector;x-internal:=true
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

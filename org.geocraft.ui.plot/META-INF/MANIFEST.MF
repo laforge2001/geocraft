@@ -34,5 +34,5 @@ Export-Package: org.geocraft.ui.plot,
  org.geocraft.ui.plot.settings,
  org.geocraft.ui.plot.util,
  org.geocraft.ui.plot.views
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: ConocoPhillips

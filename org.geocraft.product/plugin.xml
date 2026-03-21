@@ -36,10 +36,6 @@
                value="GeoCraft">
          </property>
          <property
-               name="preferenceCustomization"
-               value="plugin_customization.ini">
-         </property>
-         <property
                name="aboutImage"
                value="splash.bmp">
          </property>
@@ -62,6 +58,10 @@
          <property
                name="startupProgressRect"
                value="120,250,345,15">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
          </property>
       </product>
    </extension>
