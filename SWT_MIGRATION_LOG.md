@@ -99,7 +99,10 @@ This is likely because:
 - **Compilation result**: SUCCESS — SWT compilation errors resolved, PDE resolves the x86_64 fragment
 - **Runtime result**: Fragment resolved, but crashed with `UnsatisfiedLinkError` — stale arm64 jnilib cached at `~/.swt/lib/macosx/x86_64/` from previous aarch64 attempt. Deleted cache, retesting.
 - Also: `com.ardor3d` fails with `Missing host Bundle-NativeCode_0.0.0` (separate issue)
-- **Status**: PARTIAL — compilation fixed, runtime needs retest after cache clear
+- After cache clear, still got arm64 jnilib — the aarch64 fragment (attempt 6, no arch filter) was also resolving and providing arm64 native libs
+- Moved aarch64 fragment to backup, cleared `~/.swt/lib/macosx/x86_64/` again
+- **Result**: GeoCraft launches successfully on macOS Sequoia under Rosetta/x86_64 Java 11
+- **Status**: SUCCESS
 
 ## Current State of Target Platform Plugins (SWT-related)
 ```
