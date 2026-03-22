@@ -118,6 +118,27 @@ backup/org.eclipse.swt.cocoa.macosx.x86_64.source_3.5.1.v3555a.jar
 backup/org.eclipse.swt.cocoa.macosx.x86_64_3.127.0.jar
 ```
 
+### Attempt 8: Patch missing TableTree classes into SWT 3.122.0
+- SWT 3.122.0 removed deprecated `TableTree`, `TableTreeItem`, `TableTreeEditor` classes
+- JFace 3.5.1's `OpenStrategy.initializeHandler()` still references `TableTreeItem` → `ClassNotFoundException`
+- This broke all views: LogView, PropertiesView, RepositoryView, AlgorithmsView
+- Fix: extracted TableTree/TableTreeItem/TableTreeEditor source from `org.eclipse.swt.cocoa.macosx.source_3.5.1.v3555a.jar`
+- Compiled against SWT 3.122.0 with Java 11 (`javac -source 11 -target 11`)
+- Injected 8 class files (3 main + 5 inner/anonymous) into `org.eclipse.swt.cocoa.macosx.x86_64_3.122.0.jar`
+- Backup saved as `org.eclipse.swt.cocoa.macosx.x86_64_3.122.0.jar.bak`
+- **Status**: SUCCESS — all four views (LogView, PropertiesView, RepositoryView, AlgorithmsView) load correctly
+
+### Attempt 9: Fix Eclipse Help system for Java 11+
+- Help > Help Contents opened browser but showed `TransformerFactoryConfigurationError: Provider org.apache.xalan.processor.TransformerFactoryImpl not found`
+- Root cause: Java 11 removed the bundled Xalan XSLT processor; Eclipse 3.5.1 help system's `DocumentWriter` calls `TransformerFactory.newInstance()` which defaulted to Xalan
+- Fix part 1: Added `-Djavax.xml.transform.TransformerFactory=com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl` to use Java's built-in XSLTC
+- This caused `ClassCastException`: OSGi's `javax.xml` bundle loaded a separate copy of `TransformerFactory` from a different classloader than the JDK's
+- Fix part 2: Added `org.osgi.framework.bootdelegation=javax.xml.*,...` to force OSGi to delegate XML packages to the boot classloader
+- Both properties added to `org.geocraft.product/config.ini` for persistence (launch config is gitignored)
+- Also need to add both `-D` properties to VM arguments in Eclipse Run Configuration (Arguments tab)
+- Added `org.eclipse.help.appserver` bundle to launch config
+- **Status**: SUCCESS
+
 ## Key Constraints
 - SWT fragment must be compiled for Java 11 (class version ≤ 55)
 - Fragment-Host must accept `[3.0.0,4.0.0)` to attach to 3.5.1 host
