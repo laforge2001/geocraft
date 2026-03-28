@@ -1,4 +1,4 @@
-#geocraft
+# GeoCraft
 
 GeoCraft is lightweight framework for rapidly prototyping and deploying new geoscience algorithms.
 
