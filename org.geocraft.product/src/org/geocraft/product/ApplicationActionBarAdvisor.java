@@ -149,17 +149,19 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     editMenu.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
     // View
     viewMenu.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
-    // Perspective
+    // Perspective (only show GeoCraft perspectives, not Eclipse IDE ones)
     IPerspectiveDescriptor[] perspectives = PlatformUI.getWorkbench().getPerspectiveRegistry().getPerspectives();
     for (IPerspectiveDescriptor perspective : perspectives) {
-      perspectiveMenu.add(new PerspectiveAction(_window, perspective.getId(), perspective));
+      if (isGeoCraftPerspective(perspective.getId())) {
+        perspectiveMenu.add(new PerspectiveAction(_window, perspective.getId(), perspective));
+      }
     }
     perspectiveMenu.add(new Separator());
     perspectiveMenu.add(new ResetPerspectiveAction(_window));
-    // Window
+    // Window (only show GeoCraft views, not Eclipse IDE ones)
     IViewDescriptor[] views = PlatformUI.getWorkbench().getViewRegistry().getViews();
     for (IViewDescriptor view : views) {
-      if (view.isRestorable()) {
+      if (view.isRestorable() && isGeoCraftView(view.getId())) {
         windowMenu.add(new WindowAction(_window, view.getId(), view));
       }
     }
@@ -186,4 +188,18 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     // coolBar.add(new ToolBarContributionItem(toolbar, "main"));
   }
 
+  /**
+   * Returns true if the perspective ID belongs to GeoCraft rather than the Eclipse IDE.
+   */
+  private static boolean isGeoCraftPerspective(final String id) {
+    return id.contains("geocraft") || id.equals("GeoMath.perspective") || id.equals("Viewer.perspective");
+  }
+
+  /**
+   * Returns true if the view ID belongs to GeoCraft rather than the Eclipse IDE.
+   * Also allows the Eclipse Log view which is useful for GeoCraft users.
+   */
+  private static boolean isGeoCraftView(final String id) {
+    return id.contains("geocraft") || id.equals("org.eclipse.pde.runtime.LogView");
+  }
 }

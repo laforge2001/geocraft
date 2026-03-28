@@ -93,28 +93,27 @@ public class WelcomeView implements IIntroPart {
     quickPanel.setLayoutData(new GridData(GridData.FILL_BOTH));
 
     IPerspectiveDescriptor[] perspectives = PlatformUI.getWorkbench().getPerspectiveRegistry().getPerspectives();
-    int k = 0;
     for (IPerspectiveDescriptor perspective : perspectives) {
-      k++;
       final String perspectiveId = perspective.getId();
-      if (!perspectiveId.equals("Viewer.perspective")) {
-        Hyperlink link = _toolkit.createHyperlink(quickPanel, perspective.getLabel(), SWT.NONE);
-        link.addHyperlinkListener(new HyperlinkAdapter() {
-
-          @Override
-          public void linkActivated(final HyperlinkEvent e) {
-            final IWorkbench workbench = PlatformUI.getWorkbench();
-            try {
-              workbench.showPerspective(perspectiveId, workbench.getActiveWorkbenchWindow());
-              workbench.getIntroManager().closeIntro(WelcomeView.this);
-            } catch (WorkbenchException ex) {
-              MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
-                  "Perspective error", "Error opening perspective: " + ex.getMessage());
-            }
-          }
-        });
+      // Only show GeoCraft perspectives (skip Viewer and Eclipse IDE perspectives)
+      if (perspectiveId.equals("Viewer.perspective") || !isGeoCraftPerspective(perspectiveId)) {
+        continue;
       }
-      k++;
+      Hyperlink link = _toolkit.createHyperlink(quickPanel, perspective.getLabel(), SWT.NONE);
+      link.addHyperlinkListener(new HyperlinkAdapter() {
+
+        @Override
+        public void linkActivated(final HyperlinkEvent e) {
+          final IWorkbench workbench = PlatformUI.getWorkbench();
+          try {
+            workbench.showPerspective(perspectiveId, workbench.getActiveWorkbenchWindow());
+            workbench.getIntroManager().closeIntro(WelcomeView.this);
+          } catch (WorkbenchException ex) {
+            MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+                "Perspective error", "Error opening perspective: " + ex.getMessage());
+          }
+        }
+      });
     }
     section.setClient(quickPanel);
 
@@ -235,6 +234,13 @@ public class WelcomeView implements IIntroPart {
   public Object getAdapter(final Class adapter) {
     // TODO Auto-generated method stub
     return null;
+  }
+
+  /**
+   * Returns true if the perspective ID belongs to GeoCraft rather than the Eclipse IDE.
+   */
+  private static boolean isGeoCraftPerspective(final String id) {
+    return id.contains("geocraft") || id.equals("GeoMath.perspective") || id.equals("Viewer.perspective");
   }
 
   /**
