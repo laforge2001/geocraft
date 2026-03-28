@@ -38,7 +38,8 @@ public class StandaloneAlgorithmRegistry {
     // Get the algorithms registered via the standard extension point.
     IConfigurationElement[] configElements = registry.getConfigurationElementsFor("org.geocraft.algorithm");
     for (IConfigurationElement configElement : configElements) {
-      result.add(new StandaloneAlgorithmDescription(configElement));
+      StandaloneAlgorithmDescription desc = new StandaloneAlgorithmDescription(configElement);
+      result.add(desc);
     }
 
     // Get the algorithms registered via the programmatic provider extension point.
@@ -51,7 +52,6 @@ public class StandaloneAlgorithmRegistry {
           result.add(algorithmDesc);
         }
       } catch (CoreException e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       }
     }

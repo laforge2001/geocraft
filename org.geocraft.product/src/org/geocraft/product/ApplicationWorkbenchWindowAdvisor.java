@@ -68,6 +68,15 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
   @Override
   public void postWindowOpen() {
+    // Workaround: SWT 3.122.0 on macOS doesn't compute initial SashForm sizes
+    // correctly with Eclipse 3.5.1 workbench. Force a relayout by toggling the
+    // shell size, which triggers all sash containers to recompute their children.
+    IWorkbenchWindow window = getWindowConfigurer().getWindow();
+    org.eclipse.swt.widgets.Shell shell = window.getShell();
+    Point size = shell.getSize();
+    shell.setSize(size.x + 1, size.y + 1);
+    shell.setSize(size.x, size.y);
+
     //Note: This method is called each time a workbench window is opened, for example,
     //      when a session is restored. Only want to restore an active session when
     //      initially launch Geocraft.
