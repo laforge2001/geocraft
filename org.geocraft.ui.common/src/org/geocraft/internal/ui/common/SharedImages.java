@@ -92,11 +92,11 @@ public class SharedImages implements ISharedImages {
   private final Map<String, String> _keyToPath = new HashMap<String, String>();
 
   public Image getImage(final String key) {
-    ImageDescriptor desc = getImageDescriptor(key);
-    if (desc == null) {
-      return null;
-    }
-    return desc.createImage();
+    // Ensure the descriptor is registered in the ImageRegistry.
+    getImageDescriptor(key);
+    // Return the managed Image from the ImageRegistry (handles lifecycle).
+    ImageRegistry imageRegistry = ServiceComponent.getImageRegistry();
+    return imageRegistry.get(key);
   }
 
   public ImageDescriptor getImageDescriptor(final String key) {

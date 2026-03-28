@@ -81,12 +81,7 @@ public class AlgorithmsView extends ViewPart implements IMessageSubscriber {
     _filterText.setText(FILTER_TEXT);
 
     _viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
-    GridData viewerLayoutData = new GridData();
-    viewerLayoutData.grabExcessHorizontalSpace = true;
-    viewerLayoutData.grabExcessVerticalSpace = true;
-    viewerLayoutData.horizontalAlignment = SWT.FILL;
-    viewerLayoutData.verticalAlignment = SWT.FILL;
-    _viewer.getTree().setLayoutData(viewerLayoutData);
+    _viewer.getTree().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
     _filterText.addKeyListener(new KeyAdapter() {
 
       @Override
@@ -104,6 +99,9 @@ public class AlgorithmsView extends ViewPart implements IMessageSubscriber {
     _viewer.setLabelProvider(new ViewLabelProvider());
     _viewer.setSorter(new ViewerSorter());
     _viewer.setInput(getViewSite());
+    // Force refresh and expand top-level to work around JFace 3.5.1 / SWT 3.122.0 rendering gap
+    _viewer.refresh();
+    _viewer.expandToLevel(2);
     getSite().setSelectionProvider(_viewer);
     _viewer.addFilter(new ViewerFilter() {
 
