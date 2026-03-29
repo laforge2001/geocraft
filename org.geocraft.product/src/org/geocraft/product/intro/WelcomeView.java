@@ -93,28 +93,27 @@ public class WelcomeView implements IIntroPart {
     quickPanel.setLayoutData(new GridData(GridData.FILL_BOTH));
 
     IPerspectiveDescriptor[] perspectives = PlatformUI.getWorkbench().getPerspectiveRegistry().getPerspectives();
-    int k = 0;
     for (IPerspectiveDescriptor perspective : perspectives) {
-      k++;
       final String perspectiveId = perspective.getId();
-      if (!perspectiveId.equals("Viewer.perspective")) {
-        Hyperlink link = _toolkit.createHyperlink(quickPanel, perspective.getLabel(), SWT.NONE);
-        link.addHyperlinkListener(new HyperlinkAdapter() {
-
-          @Override
-          public void linkActivated(final HyperlinkEvent e) {
-            final IWorkbench workbench = PlatformUI.getWorkbench();
-            try {
-              workbench.showPerspective(perspectiveId, workbench.getActiveWorkbenchWindow());
-              workbench.getIntroManager().closeIntro(WelcomeView.this);
-            } catch (WorkbenchException ex) {
-              MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
-                  "Perspective error", "Error opening perspective: " + ex.getMessage());
-            }
-          }
-        });
+      // Skip the Viewer perspective (it's not meant to be opened directly)
+      if (perspectiveId.equals("Viewer.perspective")) {
+        continue;
       }
-      k++;
+      Hyperlink link = _toolkit.createHyperlink(quickPanel, perspective.getLabel(), SWT.NONE);
+      link.addHyperlinkListener(new HyperlinkAdapter() {
+
+        @Override
+        public void linkActivated(final HyperlinkEvent e) {
+          final IWorkbench workbench = PlatformUI.getWorkbench();
+          try {
+            workbench.showPerspective(perspectiveId, workbench.getActiveWorkbenchWindow());
+            workbench.getIntroManager().closeIntro(WelcomeView.this);
+          } catch (WorkbenchException ex) {
+            MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+                "Perspective error", "Error opening perspective: " + ex.getMessage());
+          }
+        }
+      });
     }
     section.setClient(quickPanel);
 
