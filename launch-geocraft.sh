@@ -116,11 +116,12 @@ ALL_BUNDLES="${TARGET_BUNDLES#,}${WORKSPACE_BUNDLES}"
 cat > "$CONFIG_DIR/config.ini" << CONFIGEOF
 osgi.bundles=$ALL_BUNDLES
 osgi.bundles.defaultStartLevel=4
+osgi.parentClassloader=app
 eclipse.product=org.geocraft.product.product
 osgi.splashPath=platform:/base/plugins/org.geocraft.product
 osgi.configuration.area=@user.home/geocraft3/global
 osgi.framework=file:$PLUGINS_DIR/org.eclipse.osgi_3.5.1.R35x_v20090827.jar
-org.osgi.framework.system.packages.extra=javax.xml.parsers,javax.xml.transform,javax.xml.transform.dom,javax.xml.transform.sax,javax.xml.transform.stream,org.w3c.dom,org.xml.sax,org.xml.sax.ext,org.xml.sax.helpers,javax.naming,javax.naming.directory,javax.naming.event,javax.naming.ldap,javax.naming.spi,javax.net,javax.net.ssl,javax.security.auth,javax.security.auth.callback,javax.security.auth.login,javax.security.auth.spi,javax.security.auth.x500,javax.security.cert,javax.crypto,javax.crypto.spec,javax.management,javax.management.openmbean,javax.management.remote,javax.sql,javax.transaction.xa,javax.imageio,javax.imageio.stream,javax.print,javax.print.attribute
+org.osgi.framework.system.packages.extra=javax.xml.parsers,javax.xml.transform,javax.xml.transform.dom,javax.xml.transform.sax,javax.xml.transform.stream,org.w3c.dom,org.xml.sax,org.xml.sax.ext,org.xml.sax.helpers,javax.naming,javax.naming.directory,javax.naming.event,javax.naming.ldap,javax.naming.spi,javax.net,javax.net.ssl,javax.security.auth,javax.security.auth.callback,javax.security.auth.login,javax.security.auth.spi,javax.security.auth.x500,javax.security.cert,javax.crypto,javax.crypto.spec,javax.management,javax.management.openmbean,javax.management.remote,java.sql,javax.sql,javax.transaction.xa,javax.imageio,javax.imageio.stream,javax.print,javax.print.attribute
 javax.xml.transform.TransformerFactory=com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl
 org.osgi.framework.bootdelegation=javax.xml.*,javax.xml.transform.*,javax.xml.parsers.*,org.xml.sax.*,org.w3c.dom.*,com.sun.org.apache.xalan.*,com.sun.org.apache.xerces.*,com.sun.org.apache.xml.*
 CONFIGEOF
@@ -196,7 +197,7 @@ exec arch -x86_64 "$JAVA" \
     -XstartOnFirstThread \
     -Dorg.eclipse.swt.internal.carbon.smallFonts \
     '-Dorg.osgi.framework.executionenvironment=OSGi/Minimum-1.0,OSGi/Minimum-1.1,JRE-1.1,J2SE-1.2,J2SE-1.3,J2SE-1.4,J2SE-1.5,JavaSE-1.6,JavaSE-1.7,JavaSE-1.8,JavaSE-9,JavaSE-10,JavaSE-11,CDC-1.0/Foundation-1.0,CDC-1.1/Foundation-1.1' \
-    -Dorg.osgi.framework.system.packages.extra=javax.xml.parsers,javax.xml.transform,javax.xml.transform.dom,javax.xml.transform.sax,javax.xml.transform.stream,org.w3c.dom,org.xml.sax,org.xml.sax.ext,org.xml.sax.helpers,javax.naming,javax.naming.directory,javax.naming.event,javax.naming.ldap,javax.naming.spi,javax.net,javax.net.ssl,javax.security.auth,javax.security.auth.callback,javax.security.auth.login,javax.security.auth.spi,javax.security.auth.x500,javax.security.cert,javax.crypto,javax.crypto.spec,javax.management,javax.management.openmbean,javax.management.remote,javax.sql,javax.transaction.xa,javax.imageio,javax.imageio.stream,javax.print,javax.print.attribute \
+    -Dorg.osgi.framework.system.packages.extra=javax.xml.parsers,javax.xml.transform,javax.xml.transform.dom,javax.xml.transform.sax,javax.xml.transform.stream,org.w3c.dom,org.xml.sax,org.xml.sax.ext,org.xml.sax.helpers,javax.naming,javax.naming.directory,javax.naming.event,javax.naming.ldap,javax.naming.spi,javax.net,javax.net.ssl,javax.security.auth,javax.security.auth.callback,javax.security.auth.login,javax.security.auth.spi,javax.security.auth.x500,javax.security.cert,javax.crypto,javax.crypto.spec,javax.management,javax.management.openmbean,javax.management.remote,java.sql,javax.sql,javax.transaction.xa,javax.imageio,javax.imageio.stream,javax.print,javax.print.attribute \
     -Djavax.xml.transform.TransformerFactory=com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl \
     -Dorg.osgi.framework.bootdelegation=javax.xml.*,javax.xml.transform.*,javax.xml.parsers.*,org.xml.sax.*,org.w3c.dom.*,com.sun.org.apache.xalan.*,com.sun.org.apache.xerces.*,com.sun.org.apache.xml.* \
     -jar "$LAUNCHER" \
