@@ -95,8 +95,8 @@ public class WelcomeView implements IIntroPart {
     IPerspectiveDescriptor[] perspectives = PlatformUI.getWorkbench().getPerspectiveRegistry().getPerspectives();
     for (IPerspectiveDescriptor perspective : perspectives) {
       final String perspectiveId = perspective.getId();
-      // Only show GeoCraft perspectives (skip Viewer and Eclipse IDE perspectives)
-      if (perspectiveId.equals("Viewer.perspective") || !isGeoCraftPerspective(perspectiveId)) {
+      // Skip the Viewer perspective (it's not meant to be opened directly)
+      if (perspectiveId.equals("Viewer.perspective")) {
         continue;
       }
       Hyperlink link = _toolkit.createHyperlink(quickPanel, perspective.getLabel(), SWT.NONE);
@@ -234,13 +234,6 @@ public class WelcomeView implements IIntroPart {
   public Object getAdapter(final Class adapter) {
     // TODO Auto-generated method stub
     return null;
-  }
-
-  /**
-   * Returns true if the perspective ID belongs to GeoCraft rather than the Eclipse IDE.
-   */
-  private static boolean isGeoCraftPerspective(final String id) {
-    return id.contains("geocraft") || id.equals("GeoMath.perspective") || id.equals("Viewer.perspective");
   }
 
   /**
