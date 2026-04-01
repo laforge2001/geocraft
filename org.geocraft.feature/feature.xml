@@ -2,7 +2,7 @@
 <feature
       id="org.geocraft.feature"
       label="GeoCraft Feature"
-      version="1.0.0"
+      version="1.0.0.qualifier"
       provider-name="ConocoPhillips">
 
    <description url="http://www.example.com/description">
@@ -19,7 +19,7 @@
 
    <requires>
       <import feature="org.eclipse.rcp" version="4.34.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.help" version="2.4.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.help" version="0.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -240,11 +240,5 @@
          version="0.0.0"
          unpack="false"/>
 
-   <plugin
-         id="org.apache.commons.jexl"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
 </feature>

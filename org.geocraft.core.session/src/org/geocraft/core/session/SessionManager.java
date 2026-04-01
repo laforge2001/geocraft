@@ -429,7 +429,8 @@ public class SessionManager {
     for (IWorkbenchWindow win : windows) {
       writeXML("<!-- Start of state for Eclipse window: " + getWorkbenchWindowID(win) + " -->");
       XMLMemento memento = XMLMemento.createWriteRoot("window");
-      ((WorkbenchWindow) win).saveState(memento);
+      // TODO: WorkbenchWindow.saveState() was removed in Eclipse 4.x.
+      // ((WorkbenchWindow) win).saveState(memento);
       _windowState = layoutStateToString(memento);
       writeXML(_windowState);
     }
@@ -1253,7 +1254,8 @@ public class SessionManager {
     BufferedReader reader = new BufferedReader(new StringReader(windowState));
     try {
       IMemento memento = XMLMemento.createReadRoot(reader);
-      ((WorkbenchWindow) workbenchWindow).restoreState(memento, desc);
+      // TODO: WorkbenchWindow.restoreState() was removed in Eclipse 4.x.
+      // ((WorkbenchWindow) workbenchWindow).restoreState(memento, desc);
       IWorkbenchPage[] pages = ((WorkbenchWindow) workbenchWindow).getPages();
       //restore all the editors (algorithms)
       for (IWorkbenchPage page : pages) {

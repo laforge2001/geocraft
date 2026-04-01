@@ -2,7 +2,7 @@
 <feature
       id="org.geocraft.abavo.feature"
       label="Feature Feature"
-      version="1.0.0">
+      version="1.0.0.qualifier">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
@@ -31,7 +31,6 @@
       <import plugin="org.geocraft.geomath.algorithm.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.geocraft.geomath.help" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.geocraft.ui.viewer" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.osgi.services"/>
       <import plugin="org.eclipse.ui.views" version="3.3.0" match="greaterOrEqual"/>
       <import plugin="org.geocraft.core"/>
    </requires>

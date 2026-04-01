@@ -190,7 +190,9 @@ public class Session implements XmlIO {
       Element windowNode = doc.createElement(WORKBENCH_WINDOW_TAG);
       workbenchNode.appendChild(windowNode);
       XMLMemento memento = new XMLMemento(doc, windowNode);
-      window.saveState(memento);
+      // TODO: WorkbenchWindow.saveState() was removed in Eclipse 4.x.
+      // Session save/restore needs redesign for Eclipse 4 compatibility.
+      // window.saveState(memento);
     }
   }
 
@@ -315,7 +317,9 @@ public class Session implements XmlIO {
       for (IWorkbenchPage page : window.getPages()) {
         page.closeAllPerspectives(true, true);
       }
-      window.restoreState(memento, activePerspective);
+      // TODO: WorkbenchWindow.restoreState() was removed in Eclipse 4.x.
+      // Session save/restore needs redesign for Eclipse 4 compatibility.
+      // window.restoreState(memento, activePerspective);
     }
   }
 

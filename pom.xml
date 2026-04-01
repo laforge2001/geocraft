@@ -40,11 +40,21 @@
       </plugin>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-compiler-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <configuration>
+          <compilerArgs>
+            <arg>-warn:-restriction</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
         <artifactId>target-platform-configuration</artifactId>
         <version>${tycho.version}</version>
         <configuration>
           <target>
-            <file>org.geocraft.target/Geocraft-e4.target</file>
+            <file>${maven.multiModuleProjectDirectory}/org.geocraft.target/org.geocraft.target.target</file>
           </target>
           <environments>
             <environment>
@@ -70,6 +80,7 @@
 
   <modules>
     <module>org.geocraft.target</module>
+    <module>org.geocraft.target/jtk.edu.mines.boole/plugins/jtk.edu.mines.boole_1.0.0.201001131316</module>
     <module>com.ardor3d</module>
     <module>com.rcpquickstart.bundletestcollector</module>
     <module>org.geocraft.core</module>

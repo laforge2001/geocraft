@@ -399,6 +399,10 @@ public abstract class Entity extends AbstractPropertiesProvider {
             return ValidationStatus.ok();
           }
 
+          public IStatus getJobGroupResult() {
+            return ValidationStatus.ok();
+          }
+
         });
       }
       return;

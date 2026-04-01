@@ -12,14 +12,13 @@ import java.net.ProxySelector;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.osgi.framework.internal.core.BundleURLConnection;
 import org.geocraft.core.service.ServiceProvider;
 import org.geocraft.core.service.logging.ILogger;
 
@@ -75,15 +74,11 @@ public class Utilities {
 
     URL entry = Platform.getBundle(bundleName).getEntry(".");
     if (entry != null) {
-      URLConnection connection;
       try {
-        connection = entry.openConnection();
-        if (connection instanceof BundleURLConnection) {
-          URL fileURL = ((BundleURLConnection) connection).getFileURL();
-          URI uri = new URI(fileURL.toString());
-          String path = new File(uri).getAbsolutePath();
-          return path.substring(0, path.length() - 1);
-        }
+        URL fileURL = FileLocator.toFileURL(entry);
+        URI uri = new URI(fileURL.toString());
+        String path = new File(uri).getAbsolutePath();
+        return path.substring(0, path.length() - 1);
       } catch (IOException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
