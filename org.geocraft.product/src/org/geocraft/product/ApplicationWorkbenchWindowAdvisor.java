@@ -23,7 +23,7 @@ import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
-import org.eclipse.ui.internal.util.PrefUtil;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.geocraft.core.common.preferences.PreferencesUtil;
 import org.geocraft.core.common.util.GeoCraftVersion;
 import org.geocraft.core.session.SessionManager;
@@ -52,7 +52,8 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
   @Override
   public void preWindowOpen() {
 
-    PrefUtil.getAPIPreferenceStore().setValue(IWorkbenchPreferenceConstants.SHOW_MEMORY_MONITOR, true);
+    IPreferenceStore prefStore = PlatformUI.getPreferenceStore();
+    prefStore.setValue(IWorkbenchPreferenceConstants.SHOW_MEMORY_MONITOR, true);
     IWorkbenchWindowConfigurer configurer = getWindowConfigurer();
     configurer.setInitialSize(new Point(1024, 768));
     configurer.setShowPerspectiveBar(true);
