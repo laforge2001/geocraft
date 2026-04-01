@@ -21,22 +21,22 @@ echo "Arch: $(uname -m)"
 echo ""
 
 # Build the product first if needed
-if [ ! -d "$WORKSPACE/org.geocraft.product/target/products" ]; then
+if [ ! -d "$WORKSPACE/org.geocraft.repository/target/products" ]; then
   echo "Product not built yet. Run: mvn clean verify"
   echo "Then re-run this script."
   exit 1
 fi
 
 # Find the built product
-PRODUCT_DIR=$(find "$WORKSPACE/org.geocraft.product/target/products/org.geocraft.product.product" -maxdepth 1 -type d 2>/dev/null | head -1)
+PRODUCT_DIR=$(find "$WORKSPACE/org.geocraft.repository/target/products/org.geocraft.product.product" -maxdepth 1 -type d 2>/dev/null | head -1)
 if [ -z "$PRODUCT_DIR" ]; then
   echo "Cannot find built product. Run: mvn clean verify"
   exit 1
 fi
 
 # On macOS, the product is inside a .app bundle
-if [ -d "$PRODUCT_DIR/macosx/cocoa/aarch64/GeoCraft.app" ]; then
-  APP_DIR="$PRODUCT_DIR/macosx/cocoa/aarch64/GeoCraft.app/Contents/Eclipse"
+if [ -d "$PRODUCT_DIR/macosx/cocoa/aarch64/Eclipse.app" ]; then
+  APP_DIR="$PRODUCT_DIR/macosx/cocoa/aarch64/Eclipse.app/Contents/Eclipse"
 elif [ -d "$PRODUCT_DIR/macosx/cocoa/aarch64" ]; then
   APP_DIR="$PRODUCT_DIR/macosx/cocoa/aarch64"
 else
