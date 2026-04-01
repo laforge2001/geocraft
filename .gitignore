@@ -4,3 +4,10 @@ bin/
 *~
 com.cop.*/
 .recommenders/
+
+# Eclipse 3.5.1 legacy target (replaced by P2 target definition)
+org.geocraft.target/EclipseRCP3.5.1/
+
+# Maven/Tycho build output
+target/
+*/target/
