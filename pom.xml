@@ -136,5 +136,8 @@
     <module>org.geocraft.geomath.feature</module>
     <module>org.geocraft.abavo.feature</module>
     <module>org.geocraft.ui.viewer.feature</module>
+
+    <!-- Product repository (must be last) -->
+    <module>org.geocraft.repository</module>
   </modules>
 </project>
