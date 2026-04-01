@@ -400,7 +400,7 @@ public abstract class Entity extends AbstractPropertiesProvider {
           }
 
           public IStatus getJobGroupResult() {
-            return ValidationStatus.ok();
+            return null;
           }
 
         });
