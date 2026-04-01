@@ -14,7 +14,6 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.XMLMemento;
-import org.eclipse.ui.internal.Workbench;
 import org.eclipse.ui.internal.WorkbenchWindow;
 import org.geocraft.core.common.xml.XmlIO;
 import org.geocraft.core.common.xml.XmlUtils;
@@ -184,6 +183,7 @@ public class Session implements XmlIO {
    * @param doc the document.
    * @param repositoryNode the repository node within the document.
    */
+  @SuppressWarnings("restriction")
   private static void saveWorkbenchState(final Document doc, final Element workbenchNode) throws Exception {
     for (IWorkbenchWindow iwindow : PlatformUI.getWorkbench().getWorkbenchWindows()) {
       WorkbenchWindow window = (WorkbenchWindow) iwindow;
@@ -283,10 +283,10 @@ public class Session implements XmlIO {
    * @param doc the document.
    * @param workbenchNode the workbench node within the document.
    */
+  @SuppressWarnings("restriction")
   public static void restoreWorkbenchState(final Document doc, final Element workbenchNode) throws Exception {
-    Workbench workbench = (Workbench) PlatformUI.getWorkbench();
-    IWorkbenchWindow[] windows = workbench.getWorkbenchWindows();
-    int numWindows = workbench.getWorkbenchWindowCount();
+    IWorkbenchWindow[] windows = PlatformUI.getWorkbench().getWorkbenchWindows();
+    int numWindows = windows.length;
     for (int i = numWindows - 1; i > 0; i--) {
       windows[i].close();
     }
@@ -309,7 +309,7 @@ public class Session implements XmlIO {
 
       WorkbenchWindow window = (WorkbenchWindow) PlatformUI.getWorkbench().getActiveWorkbenchWindow();
       if (i > 0) {
-        IAdaptable input = workbench.getDefaultPageInput();
+        IAdaptable input = null;
         window = (WorkbenchWindow) PlatformUI.getWorkbench().openWorkbenchWindow(activePerspectiveId, input);
       }
       for (IWorkbenchPage page : window.getPages()) {

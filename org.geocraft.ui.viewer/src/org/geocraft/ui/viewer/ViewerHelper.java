@@ -52,9 +52,8 @@ public class ViewerHelper {
 
   private static void initViewerPerspective() {
     IWorkbench workbench = PlatformUI.getWorkbench();
-    IAdaptable input = ((Workbench) workbench).getDefaultPageInput();
     try {
-      _plotWindow = workbench.openWorkbenchWindow("Viewer.perspective", input);
+      _plotWindow = workbench.openWorkbenchWindow("Viewer.perspective", null);
     } catch (WorkbenchException e) {
       ServiceProvider.getLoggingService().getLogger(ViewerHelper.class).warn("Cannot open viewer perspective", e);
     }

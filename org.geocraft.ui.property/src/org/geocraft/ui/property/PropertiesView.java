@@ -39,7 +39,6 @@ import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.views.ViewsPlugin;
 import org.eclipse.ui.part.DrillDownAdapter;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
@@ -193,7 +192,8 @@ public class PropertiesView extends ViewPart implements IMessageSubscriber {
         }
       }
     };
-    _showCategoriesAction.setImageDescriptor(ViewsPlugin.getViewImageDescriptor("elcl16/tree_mode.gif"));
+    _showCategoriesAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages()
+        .getImageDescriptor(org.eclipse.ui.ISharedImages.IMG_OBJ_ELEMENT));
     _showCategoriesAction.setToolTipText("Show Categories/List");
 
     _showTreeAction = new Action("Expand/Collapse") {
@@ -211,7 +211,8 @@ public class PropertiesView extends ViewPart implements IMessageSubscriber {
         }
       }
     };
-    _showTreeAction.setImageDescriptor(ViewsPlugin.getViewImageDescriptor("elcl16/filter_ps.gif"));
+    _showTreeAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages()
+        .getImageDescriptor(org.eclipse.ui.ISharedImages.IMG_ELCL_SYNCED));
     _showTreeAction.setToolTipText("Expand/Collapse");
 
     // add selection listener
