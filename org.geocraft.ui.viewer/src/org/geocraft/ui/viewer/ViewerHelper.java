@@ -6,12 +6,10 @@ package org.geocraft.ui.viewer;
 
 import java.util.Map;
 
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.WorkbenchException;
-import org.eclipse.ui.internal.Workbench;
 import org.geocraft.core.common.preferences.PreferencesUtil;
 import org.geocraft.core.service.ServiceProvider;
 import org.geocraft.ui.internal.viewer.ServiceComponent;

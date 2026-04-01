@@ -8,12 +8,12 @@ Bundle-Vendor: ConocoPhillips
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.geocraft.ui.form2;bundle-version="1.0.0",
- org.eclipse.ui.forms;bundle-version="3.3.101",
+ org.eclipse.ui.forms,
  org.geocraft.ui.common;bundle-version="1.0.0",
  org.geocraft.core.session;bundle-version="1.0.0",
  org.geocraft.core;bundle-version="1.0.0",
  org.geocraft.io.util;bundle-version="1.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy
 Export-Package: org.geocraft.algorithm,
  org.geocraft.algorithm.example,

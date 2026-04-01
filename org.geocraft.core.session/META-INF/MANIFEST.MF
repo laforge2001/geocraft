@@ -5,8 +5,8 @@ Bundle-SymbolicName: org.geocraft.core.session
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.geocraft.core.internal.session.Activator
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.runtime,
  org.eclipse.ui,
  org.eclipse.jface,

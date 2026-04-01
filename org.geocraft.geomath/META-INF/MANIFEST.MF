@@ -5,12 +5,12 @@ Bundle-SymbolicName: org.geocraft.geomath;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
- org.eclipse.help;bundle-version="3.3.100",
+ org.eclipse.help,
  org.geocraft.geomath.algorithm.ui;bundle-version="0.0.0",
  org.geocraft.algorithm;bundle-version="1.0.0",
  org.geocraft.ui.common;bundle-version="1.0.0",
  org.geocraft.core;bundle-version="1.0.0"
 Bundle-Vendor: ConocoPhillips
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.geocraft.internal.geomath;x-internal:=true,
  org.geocraft.internal.geomath.view;x-internal:=true

@@ -25,7 +25,6 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.WorkbenchPlugin;
 import org.geocraft.core.service.ServiceProvider;
 import org.geocraft.product.ApplicationWorkbenchAdvisor;
 import org.geocraft.product.workspace.ChooseWorkspaceData;
@@ -57,12 +56,12 @@ public class Application implements IApplication {
     Display display = PlatformUI.createDisplay();
     try {
 
-      // this is currently discouraged... do we have a way around it?
-      Shell shell = WorkbenchPlugin.getSplashShell(display);
-      if (shell != null) {
-        shell.setText(ChooseWorkspaceDialog.getWindowTitle());
-        shell.setImages(Window.getDefaultImages());
+      Shell shell = display.getActiveShell();
+      if (shell == null) {
+        shell = new Shell(display);
       }
+      shell.setText(ChooseWorkspaceDialog.getWindowTitle());
+      shell.setImages(Window.getDefaultImages());
 
       if (!checkInstanceLocation(shell)) {
         Platform.endSplash();

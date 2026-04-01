@@ -4,7 +4,7 @@ Bundle-Name: Texture Plug-in
 Bundle-SymbolicName: org.geocraft.geomath.algorithm.texture;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: ConocoPhillips
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.help,
  org.geocraft.core;bundle-version="1.0.0",
