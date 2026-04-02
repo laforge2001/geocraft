@@ -12,7 +12,7 @@
       <unit id="org.junit" version="0.0.0"/>
       <unit id="org.hamcrest.core" version="0.0.0"/>
     </location>
-    <location path="${project_loc}/jtk.edu.mines.boole/plugins/jtk.edu.mines.boole_1.0.0.201001131316" type="Directory"/>
+    <location path="${project_loc}/jtk.edu.mines.boole/plugins" type="Directory"/>
     <location includeDependencyDepth="none" includeDependencyScopes="compile" missingManifest="generate" type="Maven">
       <dependencies>
         <dependency>
