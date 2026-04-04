@@ -72,6 +72,8 @@ GeoCraft is built on top of the Eclipse Rich Client Platform.
       <plugin id="org.eclipse.equinox.app" autoStart="true" startLevel="4" />
       <plugin id="org.eclipse.osgi" autoStart="true" startLevel="-1" />
       <plugin id="org.geocraft.core" autoStart="true" startLevel="4" />
+      <plugin id="org.geocraft.algorithm" autoStart="true" startLevel="4" />
+      <plugin id="org.geocraft.ui.viewer" autoStart="true" startLevel="4" />
       <plugin id="org.geocraft.ui.io" autoStart="true" startLevel="4" />
    </configurations>
 

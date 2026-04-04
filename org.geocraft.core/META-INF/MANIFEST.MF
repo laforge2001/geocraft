@@ -63,4 +63,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.databinding,
  org.eclipse.help,
  org.apache.commons.beanutils;bundle-version="1.8.0"
+Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.geocraft.core.service.logging.log4j.LoggingActivator

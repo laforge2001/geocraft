@@ -426,10 +426,12 @@ public class PropertiesView extends ViewPart implements IMessageSubscriber {
   @Override
   public void createPartControl(Composite parent) {
     IMessageService messageService = ServiceProvider.getMessageService();
-    // register to receive notification a repository tree node was selected
-    messageService.subscribe(Topic.REPOSITORY_NODE_SELECTED, this);
-    // register to receive notification a property tree node was selected via double clicking on it
-    messageService.subscribe(Topic.PROPERTY_NODE_SELECTED, this);
+    if (messageService != null) {
+      // register to receive notification a repository tree node was selected
+      messageService.subscribe(Topic.REPOSITORY_NODE_SELECTED, this);
+      // register to receive notification a property tree node was selected via double clicking on it
+      messageService.subscribe(Topic.PROPERTY_NODE_SELECTED, this);
+    }
 
     GridLayout gridLayout = new GridLayout();
     gridLayout.marginWidth = 0;
@@ -502,7 +504,10 @@ public class PropertiesView extends ViewPart implements IMessageSubscriber {
         if (data instanceof TreeParent) {
           Object value = ((TreeParent) data).getValue();
           if (value instanceof AbstractPropertiesProvider) {
-            ServiceProvider.getMessageService().publish(Topic.PROPERTY_NODE_SELECTED, data);
+            IMessageService msgSvc = ServiceProvider.getMessageService();
+            if (msgSvc != null) {
+              msgSvc.publish(Topic.PROPERTY_NODE_SELECTED, data);
+            }
           }
         }
       }
