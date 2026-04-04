@@ -51,6 +51,7 @@ import org.geocraft.core.model.seismic.PostStack3d;
 import org.geocraft.core.model.seismic.PreStack3d;
 import org.geocraft.core.repository.IRepository;
 import org.geocraft.core.service.ServiceProvider;
+import org.geocraft.core.service.message.IMessageService;
 import org.geocraft.core.service.message.IMessageSubscriber;
 import org.geocraft.core.service.message.Topic;
 import org.geocraft.ui.common.image.ISharedImages;
@@ -101,7 +102,10 @@ public class RepositoryView extends CommonNavigator implements ISelectionChanged
     _root = new TreeRoot();
     Image image = PlatformUI.getWorkbench().getSharedImages().getImage(org.eclipse.ui.ISharedImages.IMG_DEF_VIEW);
     setTitleImage(image);
-    ServiceProvider.getMessageService().subscribe(Topic.REPOSITORY_OBJECT_SELECTED, this);
+    IMessageService messageService = ServiceProvider.getMessageService();
+    if (messageService != null) {
+      messageService.subscribe(Topic.REPOSITORY_OBJECT_SELECTED, this);
+    }
   }
 
   @Override
@@ -265,7 +269,10 @@ public class RepositoryView extends CommonNavigator implements ISelectionChanged
 
   public void selectionChanged(final SelectionChangedEvent event) {
     //Notify the PropertyView to display the properties of the selection
-    ServiceProvider.getMessageService().publish(Topic.REPOSITORY_NODE_SELECTED, event);
+    IMessageService msgSvc = ServiceProvider.getMessageService();
+    if (msgSvc != null) {
+      msgSvc.publish(Topic.REPOSITORY_NODE_SELECTED, event);
+    }
 
     List<Entity> selectedEntities = new ArrayList<Entity>();
     StructuredSelection sel = (StructuredSelection) event.getSelection();

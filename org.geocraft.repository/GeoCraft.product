@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="GeoCraft" uid="org.geocraft.product.product" id="org.geocraft.product.product" application="org.geocraft.application" type="features" includeLaunchers="true" autoIncludeRequirements="true" version="1.0.0">
+
+   <aboutInfo>
+      <image path="/org.geocraft.product/splash.bmp"/>
+      <text>
+         GeoCraft is a framework for efficiently prototyping and deploying 
+new geoscience applications. 
+
+GeoCraft is built on top of the Eclipse Rich Client Platform.
+      </text>
+   </aboutInfo>
+
+   <configIni use="default">
+      <macosx>/org.geocraft.product/config.ini</macosx>
+      <solaris>/org.geocraft.product/config.ini</solaris>
+      <win32>/org.geocraft.product/config.ini</win32>
+   </configIni>
+
+   <launcherArgs>
+      <programArgs>-console
+-consoleLog
+      </programArgs>
+      <vmArgs>-Xms256m
+-Xmx1200m
+--add-opens=java.base/java.net=ALL-UNNAMED
+--add-opens=java.base/java.lang=ALL-UNNAMED
+      </vmArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+      </vmArgsMac>
+   </launcherArgs>
+
+   <windowImages i16="/org.geocraft.product/icons/GC-mark-16.png" i32="/org.geocraft.product/icons/GC-mark-32.png"/>
+
+   <splash
+      location="org.geocraft.product"
+      startupProgressRect="120,250,345,15"
+      startupMessageRect="120,230,345,20"
+      startupForegroundColor="1E37FF" />
+   <launcher name="GeoCraft">
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <intro introId="org.geocraft.product.intro"/>
+
+   <vm>
+   </vm>
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="org.geocraft.feature" version="0.0.0"/>
+      <feature id="org.geocraft.geomath.feature" version="0.0.0"/>
+      <feature id="org.geocraft.abavo.feature" version="0.0.0"/>
+      <feature id="org.geocraft.ui.viewer.feature" version="0.0.0"/>
+      <feature id="org.eclipse.rcp" version="0.0.0"/>
+      <feature id="org.eclipse.help" version="0.0.0"/>
+      <feature id="org.eclipse.e4.rcp" version="0.0.0"/>
+   </features>
+
+   <configurations>
+      <plugin id="org.apache.felix.scr" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="4" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+      <plugin id="org.eclipse.equinox.app" autoStart="true" startLevel="4" />
+      <plugin id="org.eclipse.osgi" autoStart="true" startLevel="-1" />
+      <plugin id="org.geocraft.core" autoStart="true" startLevel="4" />
+      <plugin id="org.geocraft.algorithm" autoStart="true" startLevel="4" />
+      <plugin id="org.geocraft.ui.viewer" autoStart="true" startLevel="4" />
+      <plugin id="org.geocraft.ui.io" autoStart="true" startLevel="4" />
+   </configurations>
+
+</product>

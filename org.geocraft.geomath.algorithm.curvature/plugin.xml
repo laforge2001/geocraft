@@ -14,13 +14,7 @@
             primary="false">
       </toc>
    </extension>
-   <extension
-         point="org.eclipse.help.base.luceneSearchParticipants">
-      <binding
-            participantId="org.eclipse.help.base.xhtml">
-      </binding>
-   </extension>
-   <extension
+<extension
          point="org.eclipse.help.contentProducer">
       <binding
             producerId="org.eclipse.help.dynamic.binding1">

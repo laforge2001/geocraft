@@ -71,8 +71,7 @@ Export-Package: com.ardor3d.annotation,
  org.lwjgl.util.input,
  org.lwjgl.util.jinput,
  org.lwjgl.util.vector
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.eclipse.swt;bundle-version="3.5.1",
- org.eclipse.core.runtime;bundle-version="3.5.0",
- org.eclipse.core.databinding;bundle-version="1.2.0",
- org.eclipse.equinox.ds;bundle-version="1.1.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Require-Bundle: org.eclipse.swt,
+ org.eclipse.core.runtime,
+ org.eclipse.core.databinding

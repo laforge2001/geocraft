@@ -46,8 +46,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.XMLMemento;
-import org.eclipse.ui.internal.IWorkbenchConstants;
-import org.eclipse.ui.internal.Workbench;
 import org.eclipse.ui.internal.WorkbenchWindow;
 import org.geocraft.core.common.util.Utilities;
 import org.geocraft.core.model.Entity;
@@ -430,8 +428,9 @@ public class SessionManager {
     //APPEND ECLIPSE STATE FOR EACH OF ITS WINDOWS
     for (IWorkbenchWindow win : windows) {
       writeXML("<!-- Start of state for Eclipse window: " + getWorkbenchWindowID(win) + " -->");
-      XMLMemento memento = XMLMemento.createWriteRoot(IWorkbenchConstants.TAG_WINDOW);
-      ((WorkbenchWindow) win).saveState(memento);
+      XMLMemento memento = XMLMemento.createWriteRoot("window");
+      // TODO: WorkbenchWindow.saveState() was removed in Eclipse 4.x.
+      // ((WorkbenchWindow) win).saveState(memento);
       _windowState = layoutStateToString(memento);
       writeXML(_windowState);
     }
@@ -644,8 +643,7 @@ public class SessionManager {
       }
 
       //  prepare the active workbench window for restoration
-      Workbench workbench = (Workbench) PlatformUI.getWorkbench();
-      IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+      IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
       //clear the active algorithms registry
       ServiceProvider.getAlgorithmsService().removeAll();
 
@@ -669,7 +667,7 @@ public class SessionManager {
         ArrayList<Perspective> windowPerspectives = desc.getPerspectives(windowId);
         //there is at least 1 perspective
         perspectiveId = windowPerspectives.get(0).getPerspectiveID();
-        IAdaptable input = workbench.getDefaultPageInput();
+        IAdaptable input = null;
         try {
           workbenchWindow = PlatformUI.getWorkbench().openWorkbenchWindow(perspectiveId, input);
           //set the plot window (if any)
@@ -1256,7 +1254,8 @@ public class SessionManager {
     BufferedReader reader = new BufferedReader(new StringReader(windowState));
     try {
       IMemento memento = XMLMemento.createReadRoot(reader);
-      ((WorkbenchWindow) workbenchWindow).restoreState(memento, desc);
+      // TODO: WorkbenchWindow.restoreState() was removed in Eclipse 4.x.
+      // ((WorkbenchWindow) workbenchWindow).restoreState(memento, desc);
       IWorkbenchPage[] pages = ((WorkbenchWindow) workbenchWindow).getPages();
       //restore all the editors (algorithms)
       for (IWorkbenchPage page : pages) {

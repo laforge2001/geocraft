@@ -4,7 +4,7 @@ Bundle-Name: Util Plug-in
 Bundle-SymbolicName: org.geocraft.io.util
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: ConocoPhillips
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.geocraft.io.util;
   uses:="org.geocraft.core.model,
    org.geocraft.core.model.aoi,

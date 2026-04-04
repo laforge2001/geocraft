@@ -118,6 +118,27 @@ backup/org.eclipse.swt.cocoa.macosx.x86_64.source_3.5.1.v3555a.jar
 backup/org.eclipse.swt.cocoa.macosx.x86_64_3.127.0.jar
 ```
 
+## Eclipse 4 Migration (2026-04-01)
+
+### Full Platform Migration to Eclipse 2025-12 (4.34)
+
+Migrated the entire GeoCraft application from Eclipse 3.5.1 to Eclipse 2025-12 (4.34):
+
+- **Target platform**: Replaced checked-in EclipseRCP3.5.1/ binaries with declarative P2-based target definition (`Geocraft-e4.target`) pointing to Eclipse 2025-12 release train
+- **Build system**: Added Tycho 5.0.2 / Maven build (59 modules, all building successfully)
+- **JDK**: Upgraded from Java 11 (x86_64 under Rosetta) to JDK 21 Temurin (native aarch64)
+- **SWT**: Now using `org.eclipse.swt.cocoa.macosx.aarch64_3.132.0` from Eclipse 2025-12 — native Apple Silicon, no Rosetta needed
+- **Compatibility layer**: Using Eclipse 3.x compat APIs (ActionBarAdvisor, IPerspectiveFactory, actionSets, etc.) that ship with Eclipse 4.x
+- **Internal API fixes**: Removed 6 of 8 `org.eclipse.ui.internal` imports. Remaining 2 (`WorkbenchWindow` in Session.java and SessionManager.java) retained with `@SuppressWarnings("restriction")` for state serialization — stubbed out, needs redesign
+- **Third-party deps**: Apache Commons (beanutils 1.8.3, collections 3.2.2) from Eclipse Orbit P2; jtk.edu.mines.boole kept as local reactor module with aarch64 native support added
+- **Product**: Materialized for macOS aarch64, Linux x86_64, Windows x86_64 via `org.geocraft.repository`
+
+### Known Issues
+- `WorkbenchWindow.saveState()`/`restoreState()` were removed in Eclipse 4.x — session save/restore is stubbed out and needs redesign
+- `CoreSVG has logged an error` warning on macOS (cosmetic, Eclipse platform SVG rendering)
+
+### Status: SUCCESS — GeoCraft launches natively on Apple Silicon with Eclipse 4
+
 ### Attempt 8: Patch missing TableTree classes into SWT 3.122.0
 - SWT 3.122.0 removed deprecated `TableTree`, `TableTreeItem`, `TableTreeEditor` classes
 - JFace 3.5.1's `OpenStrategy.initializeHandler()` still references `TableTreeItem` → `ClassNotFoundException`

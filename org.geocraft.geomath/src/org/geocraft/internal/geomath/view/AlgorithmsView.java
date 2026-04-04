@@ -40,6 +40,7 @@ import org.geocraft.algorithm.IStandaloneAlgorithmDescription;
 import org.geocraft.algorithm.StandaloneAlgorithmEditorInput;
 import org.geocraft.algorithm.StandaloneAlgorithmRegistry;
 import org.geocraft.core.service.ServiceProvider;
+import org.geocraft.core.service.message.IMessageService;
 import org.geocraft.core.service.message.IMessageSubscriber;
 import org.geocraft.internal.geomath.PLUGIN;
 
@@ -142,7 +143,10 @@ public class AlgorithmsView extends ViewPart implements IMessageSubscriber {
     hookContextMenu();
     hookDoubleClickAction();
     contributeToActionBars();
-    ServiceProvider.getMessageService().subscribe(StandaloneAlgorithmRegistry.ALGORITHM_REGISTRY_UPDATED, this);
+    IMessageService messageService = ServiceProvider.getMessageService();
+    if (messageService != null) {
+      messageService.subscribe(StandaloneAlgorithmRegistry.ALGORITHM_REGISTRY_UPDATED, this);
+    }
   }
 
   private void hookContextMenu() {
@@ -236,7 +240,10 @@ public class AlgorithmsView extends ViewPart implements IMessageSubscriber {
 
   @Override
   public void dispose() {
-    ServiceProvider.getMessageService().unsubscribe(StandaloneAlgorithmRegistry.ALGORITHM_REGISTRY_UPDATED, this);
+    IMessageService messageService = ServiceProvider.getMessageService();
+    if (messageService != null) {
+      messageService.unsubscribe(StandaloneAlgorithmRegistry.ALGORITHM_REGISTRY_UPDATED, this);
+    }
     super.dispose();
   }
 }

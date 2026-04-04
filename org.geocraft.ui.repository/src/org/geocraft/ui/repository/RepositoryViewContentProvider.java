@@ -110,9 +110,11 @@ public class RepositoryViewContentProvider implements IStructuredContentProvider
     if (subscribeToRepositoryChanges) {
       // Register the content provider to subscribe only for repository change events.
       IMessageService messageService = ServiceProvider.getMessageService();
-      messageService.subscribe(Topic.REPOSITORY_OBJECTS_ADDED, this);
-      messageService.subscribe(Topic.REPOSITORY_OBJECTS_REMOVED, this);
-      messageService.subscribe(Topic.REPOSITORY_OBJECT_UPDATED, this);
+      if (messageService != null) {
+        messageService.subscribe(Topic.REPOSITORY_OBJECTS_ADDED, this);
+        messageService.subscribe(Topic.REPOSITORY_OBJECTS_REMOVED, this);
+        messageService.subscribe(Topic.REPOSITORY_OBJECT_UPDATED, this);
+      }
     }
   }
 
@@ -124,9 +126,11 @@ public class RepositoryViewContentProvider implements IStructuredContentProvider
   public void dispose() {
     // Unregister from receiving messages from the repository.
     IMessageService messageService = ServiceProvider.getMessageService();
-    messageService.unsubscribe(Topic.REPOSITORY_OBJECTS_ADDED, this);
-    messageService.unsubscribe(Topic.REPOSITORY_OBJECTS_REMOVED, this);
-    messageService.unsubscribe(Topic.REPOSITORY_OBJECT_UPDATED, this);
+    if (messageService != null) {
+      messageService.unsubscribe(Topic.REPOSITORY_OBJECTS_ADDED, this);
+      messageService.unsubscribe(Topic.REPOSITORY_OBJECTS_REMOVED, this);
+      messageService.unsubscribe(Topic.REPOSITORY_OBJECT_UPDATED, this);
+    }
   }
 
   public Object[] getElements(final Object parent) {
@@ -193,7 +197,10 @@ public class RepositoryViewContentProvider implements IStructuredContentProvider
     root.addChild(_geologicFeatureNode);
     root.addChild(_pointSetNode);
 
-    refreshContent(ServiceProvider.getRepository().getAll().values());
+    IRepository repository = ServiceProvider.getRepository();
+    if (repository != null) {
+      refreshContent(repository.getAll().values());
+    }
   }
 
   /**

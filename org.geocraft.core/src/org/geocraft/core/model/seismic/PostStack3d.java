@@ -373,6 +373,10 @@ public class PostStack3d extends SeismicDataset {
             return ValidationStatus.ok();
           }
 
+          public IStatus getJobGroupResult() {
+            return null;
+          }
+
         });
       }
       return;
