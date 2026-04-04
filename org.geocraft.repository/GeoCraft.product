@@ -40,6 +40,7 @@ GeoCraft is built on top of the Eclipse Rich Client Platform.
       startupMessageRect="120,230,345,20"
       startupForegroundColor="1E37FF" />
    <launcher name="GeoCraft">
+      <macosx icon="/org.geocraft.product/icons/GeoCraft.icns"/>
       <win useIco="false">
          <bmp/>
       </win>
