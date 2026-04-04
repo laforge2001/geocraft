@@ -40,6 +40,7 @@ GeoCraft is built on top of the Eclipse Rich Client Platform.
       startupMessageRect="120,230,345,20"
       startupForegroundColor="1E37FF" />
    <launcher name="GeoCraft">
+      <macosx/>
       <win useIco="false">
          <bmp/>
       </win>
@@ -58,8 +59,8 @@ GeoCraft is built on top of the Eclipse Rich Client Platform.
       <feature id="org.geocraft.geomath.feature" version="1.0.0"/>
       <feature id="org.geocraft.abavo.feature" version="1.0.0"/>
       <feature id="org.geocraft.ui.viewer.feature" version="1.0.0.qualifier"/>
-      <feature id="org.eclipse.rcp" version="0.0.0"/>
-      <feature id="org.eclipse.help" version="0.0.0"/>
+      <feature id="org.eclipse.rcp"/>
+      <feature id="org.eclipse.help"/>
    </features>
 
 
