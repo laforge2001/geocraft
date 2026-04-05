@@ -73,7 +73,7 @@ public class ServiceProvider {
    * <p>
    * This is called automatically by OSGI.
    */
-  public synchronized void unsetRepsitory() {
+  public synchronized void unsetRepsitory(final IRepository repository) {
     _repository = null;
   }
 
@@ -103,7 +103,7 @@ public class ServiceProvider {
    * <p>
    * This is called automatically by OSGI.
    */
-  public synchronized void unsetLoggingService() {
+  public synchronized void unsetLoggingService(final ILoggingService loggingService) {
     _loggingService = null;
   }
 
@@ -133,7 +133,7 @@ public class ServiceProvider {
    * <p>
    * This is called automatically by OSGI.
    */
-  public synchronized void unsetMessageService() {
+  public synchronized void unsetMessageService(final IMessageService messageService) {
     _messageService = null;
   }
 
@@ -163,7 +163,7 @@ public class ServiceProvider {
    * <p>
    * This is called automatically by OSGI.
    */
-  public synchronized void unsetAlgorithmsService() {
+  public synchronized void unsetAlgorithmsService(final IAlgorithmsService algorithmService) {
     _algorithmService = null;
   }
 
@@ -193,7 +193,7 @@ public class ServiceProvider {
    * <p>
    * This is called automatically by OSGI.
    */
-  public synchronized void unsetViewersService() {
+  public synchronized void unsetViewersService(final IViewersService viewerService) {
     _viewerService = null;
   }
 
@@ -223,7 +223,7 @@ public class ServiceProvider {
    * <p>
    * This is called automatically by OSGI.
    */
-  public synchronized void unsetDatastoreAccessorService() {
+  public synchronized void unsetDatastoreAccessorService(final IDatastoreAccessorService datastoreAccessorService) {
     _datastoreAccessorService = null;
   }
 
@@ -253,7 +253,7 @@ public class ServiceProvider {
    * <p>
    * This is called automatically by OSGI.
    */
-  public synchronized void unbindColorFormatService() {
+  public synchronized void unbindColorFormatService(final IColorFormatService colorFormatService) {
     _colorFormatService = null;
   }
 
@@ -283,7 +283,7 @@ public class ServiceProvider {
    * <p>
    * This is called automatically by OSGI.
    */
-  public synchronized void unbindColorMapService() {
+  public synchronized void unbindColorMapService(final IColorMapService colorMapService) {
     _colorMapService = null;
   }
 }
