@@ -28,7 +28,6 @@
       <import plugin="org.junit" version="3.8.2" match="greaterOrEqual"/>
       <import plugin="org.geocraft.ui.common" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.geocraft.math" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.rcpquickstart.bundletestcollector" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.geocraft.ui.ijython" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources"/>
@@ -51,14 +50,7 @@
          version="0.0.0"
          unpack="false"/>
 
-   <plugin
-         id="com.rcpquickstart.bundletestcollector"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
+<plugin
          id="org.junit"
          download-size="0"
          install-size="0"

@@ -6,7 +6,6 @@ Bundle-Version: 1.0.0.qualifier
 Fragment-Host: org.geocraft.core;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.junit;bundle-version="3.8.2"
-Import-Package: com.rcpquickstart.bundletestcollector
 Export-Package: org.geocraft.core;uses:="junit.framework",
  org.geocraft.core.color,
  org.geocraft.core.common.math;uses:="junit.framework",
