@@ -3,24 +3,16 @@ package org.geocraft.unittest.suite;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.rcpquickstart.bundletestcollector.BundleTestCollector;
+/**
+ * Master test suite for all GeoCraft UI tests.
+ * With Tycho, tests are discovered automatically by tycho-surefire-plugin.
+ * This suite exists for running tests from the Eclipse IDE.
+ */
+public class AllUiTests {
 
-public class AllUiTests extends BundleTestCollector {
-	
-	public static Test suite() {
-		BundleTestCollector testCollector = new BundleTestCollector();
-
-		TestSuite suite = new TestSuite("All Tests");
-
-		/*
-		 * assemble as many collections as you like based on bundle, package and
-		 * classname filters
-		 */
-		testCollector.collectTests(suite, "org.geocraft.", "org.geocraft.",
-				"*UiTst");
-
-		return suite;
-
-	}
+  public static Test suite() {
+    TestSuite suite = new TestSuite("All UI Tests");
+    return suite;
+  }
 
 }

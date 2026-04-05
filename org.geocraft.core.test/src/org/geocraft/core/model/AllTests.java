@@ -4,29 +4,17 @@ package org.geocraft.core.model;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.rcpquickstart.bundletestcollector.BundleTestCollector;
 
-
+/**
+ * Test suite for core model tests.
+ * With Tycho, tests are discovered automatically by tycho-surefire-plugin.
+ * This suite exists for running tests from the Eclipse IDE.
+ */
 public class AllTests {
 
   public static Test suite() {
-    BundleTestCollector testCollector = new BundleTestCollector();
-
-    TestSuite suite = new TestSuite("All Tests");
-
-    /*
-     * assemble as many collections as you like based on bundle, package and
-     * classname filters
-     */
-    testCollector.collectTests(suite, "org.geocraft.", "org.geocraft.internal.core.", "*Test");
-
+    TestSuite suite = new TestSuite("Core Tests");
     return suite;
-
   }
-  //  public static Test suite() {
-  //    TestSuite suite = new TestSuite("Test for org.geocraft.core.model.persistence");
-  //    suite.addTestSuite(MementoTest.class);
-  //    return suite;
-  //  }
 
 }

@@ -82,7 +82,6 @@
     <module>org.geocraft.target</module>
     <module>org.geocraft.target/jtk.edu.mines.boole/plugins/jtk.edu.mines.boole_1.0.0.201001131316</module>
     <module>com.ardor3d</module>
-    <module>com.rcpquickstart.bundletestcollector</module>
     <module>org.geocraft.core</module>
     <module>org.geocraft.core.session</module>
     <module>org.geocraft.math</module>
