@@ -75,6 +75,16 @@
           </environments>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-surefire-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <configuration>
+          <useUIHarness>false</useUIHarness>
+          <failIfNoTests>false</failIfNoTests>
+          <testFailureIgnore>true</testFailureIgnore>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
@@ -129,6 +139,21 @@
     <module>org.geocraft.ui.waveletviewer</module>
     <module>org.geocraft.gnuplot</module>
     <module>org.geocraft.unittest.suite</module>
+
+    <!-- Test fragment bundles -->
+    <module>org.geocraft.core.test</module>
+    <module>org.geocraft.math.test</module>
+    <module>org.geocraft.abavo.test</module>
+    <module>org.geocraft.io.asciigrid.test</module>
+    <module>org.geocraft.io.gocad.test</module>
+    <module>org.geocraft.io.jms.test</module>
+    <module>org.geocraft.io.las.test</module>
+    <module>org.geocraft.io.modspec.test</module>
+    <module>org.geocraft.io.util.test</module>
+    <module>org.geocraft.geomath.algorithm.calculator.test</module>
+    <module>org.geocraft.geomath.algorithm.horizon.test</module>
+    <module>org.geocraft.geomath.algorithm.velocity.test</module>
+
     <module>org.geocraft.product</module>
     <module>org.geocraft.abavo</module>
     <module>org.geocraft.abavo.product</module>
@@ -136,6 +161,11 @@
     <module>org.geocraft.geomath.feature</module>
     <module>org.geocraft.abavo.feature</module>
     <module>org.geocraft.ui.viewer.feature</module>
+
+    <!-- Test features -->
+    <module>org.geocraft.abavo.test.feature</module>
+    <module>org.geocraft.geomath.test.feature</module>
+    <module>org.geocraft.test.feature</module>
 
     <!-- Product repository (must be last) -->
     <module>org.geocraft.repository</module>
