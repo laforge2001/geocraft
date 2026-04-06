@@ -69,7 +69,7 @@ public class AsciiFileSelector extends DatastoreFileSelector implements AsciiFil
     AsciiHorizonMapperModel model = new AsciiHorizonMapperModel();
     String filePath = file.getAbsolutePath();
     model.setDirectory(FileUtil.getPathName(filePath));
-    model.setFileName(FileUtil.getShortName(filePath));
+    model.setFileName(FileUtil.getBaseName(filePath));
     model.setOrientation(GridOrientation.X_IS_COLUMN);
 
     // Restore the previously specified settings.
@@ -91,7 +91,7 @@ public class AsciiFileSelector extends DatastoreFileSelector implements AsciiFil
     AsciiHorizonMapperModel model = new AsciiHorizonMapperModel();
     String filePath = file.getAbsolutePath();
     model.setDirectory(FileUtil.getPathName(filePath));
-    model.setFileName(FileUtil.getShortName(filePath));
+    model.setFileName(FileUtil.getBaseName(filePath));
     model.setOrientation(GridOrientation.X_IS_COLUMN);
 
     // Override certain previously specified settings with current datastore settings.

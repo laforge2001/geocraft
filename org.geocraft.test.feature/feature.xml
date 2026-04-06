@@ -2,7 +2,7 @@
 <feature
       id="org.geocraft.test.feature"
       label="Feature Feature"
-      version="1.0.0">
+      version="1.0.0.qualifier">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
@@ -29,7 +29,6 @@
       <import plugin="org.geocraft.ui.common" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.geocraft.math" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.geocraft.ui.ijython" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.core.filesystem"/>
       <import plugin="org.geocraft.core"/>
