@@ -10,4 +10,16 @@
   </parent>
   <artifactId>org.geocraft.rendering.jogl.tests</artifactId>
   <packaging>eclipse-test-plugin</packaging>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-surefire-plugin</artifactId>
+        <configuration>
+          <useUIHarness>true</useUIHarness>
+          <argLine>-Djava.library.path=${user.home}/.m2/jogl-natives-2.6.0-macosx -Djogamp.gluegen.UseTempJarCache=false -XstartOnFirstThread</argLine>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
