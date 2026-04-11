@@ -8,6 +8,7 @@ Require-Bundle: org.geocraft.core.rendering;bundle-version="1.0.0",
  org.eclipse.swt
 Import-Package: org.joml,
  com.jogamp.opengl,
+ com.jogamp.opengl.fixedfunc,
  com.jogamp.opengl.glu,
  com.jogamp.opengl.swt,
  com.jogamp.opengl.util,

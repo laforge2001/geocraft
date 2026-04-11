@@ -5,6 +5,8 @@ import java.nio.ByteBuffer;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLContext;
+import com.jogamp.opengl.fixedfunc.GLLightingFunc;
+import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
 import org.geocraft.core.rendering.backend.RenderBackend;
 import org.geocraft.core.rendering.backend.RenderSurface;
 import org.geocraft.core.rendering.backend.TextureLoader;
@@ -15,17 +17,6 @@ import org.geocraft.core.rendering.scene.GroupNode;
 import org.joml.Matrix4f;
 
 public class JoglRenderBackend implements RenderBackend {
-    // OpenGL fixed-function constants. Referenced numerically because their
-    // JOGL declarations live in com.jogamp.opengl.fixedfunc, which is not
-    // re-exported as API by the jogl-all OSGi bundle.
-    private static final int GL_PROJECTION = 0x1701;
-    private static final int GL_MODELVIEW  = 0x1700;
-    private static final int GL_LIGHT0     = 0x4000;
-    private static final int GL_AMBIENT    = 0x1200;
-    private static final int GL_DIFFUSE    = 0x1201;
-    private static final int GL_SPECULAR   = 0x1202;
-    private static final int GL_POSITION   = 0x1203;
-
     private final JoglSceneWalker walker = new JoglSceneWalker();
     private final JoglTextureLoader textureLoader = new JoglTextureLoader();
     private RenderSurface currentSurface;
@@ -58,10 +49,10 @@ public class JoglRenderBackend implements RenderBackend {
             Matrix4f proj = camera.getProjectionMatrix();
             Matrix4f view = camera.getViewMatrix();
             float[] m = new float[16];
-            gl.glMatrixMode(GL_PROJECTION);
+            gl.glMatrixMode(GLMatrixFunc.GL_PROJECTION);
             proj.get(m);
             gl.glLoadMatrixf(m, 0);
-            gl.glMatrixMode(GL_MODELVIEW);
+            gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
             view.get(m);
             gl.glLoadMatrixf(m, 0);
 
@@ -76,23 +67,23 @@ public class JoglRenderBackend implements RenderBackend {
         if (lights == null || lights.length == 0) return;
         for (int i = 0; i < Math.min(lights.length, 8); i++) {
             Light l = lights[i];
-            int id = GL_LIGHT0 + i;
+            int id = GLLightingFunc.GL_LIGHT0 + i;
             if (!l.isEnabled()) { gl.glDisable(id); continue; }
             gl.glEnable(id);
             float[] amb = toArray(l.getAmbient());
             float[] dif = toArray(l.getDiffuse());
             float[] spc = toArray(l.getSpecular());
-            gl.glLightfv(id, GL_AMBIENT, amb, 0);
-            gl.glLightfv(id, GL_DIFFUSE, dif, 0);
-            gl.glLightfv(id, GL_SPECULAR, spc, 0);
+            gl.glLightfv(id, GLLightingFunc.GL_AMBIENT, amb, 0);
+            gl.glLightfv(id, GLLightingFunc.GL_DIFFUSE, dif, 0);
+            gl.glLightfv(id, GLLightingFunc.GL_SPECULAR, spc, 0);
             if (l.getType() == Light.Type.DIRECTIONAL) {
                 org.joml.Vector3f d = l.getDirection();
                 float[] pos = { -d.x, -d.y, -d.z, 0f };
-                gl.glLightfv(id, GL_POSITION, pos, 0);
+                gl.glLightfv(id, GLLightingFunc.GL_POSITION, pos, 0);
             } else {
                 org.joml.Vector3f p = l.getPosition();
                 float[] pos = { p.x, p.y, p.z, 1f };
-                gl.glLightfv(id, GL_POSITION, pos, 0);
+                gl.glLightfv(id, GLLightingFunc.GL_POSITION, pos, 0);
             }
         }
     }
