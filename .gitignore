@@ -8,3 +8,6 @@ com.cop.*/
 # Maven/Tycho build output
 target/
 */target/
+
+# Claude/Claw session files
+.claw/
