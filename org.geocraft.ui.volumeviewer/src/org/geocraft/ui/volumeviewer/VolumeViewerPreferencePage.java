@@ -29,8 +29,7 @@ import org.geocraft.internal.ui.volumeviewer.widget.FocusRods.ShowMode;
 import org.geocraft.ui.volumeviewer.renderer.pointset.PointStyle;
 import org.geocraft.ui.volumeviewer.renderer.util.SceneText;
 import org.geocraft.ui.volumeviewer.renderer.util.VolumeViewerHelper;
-
-import com.ardor3d.math.ColorRGBA;
+import org.joml.Vector4f;
 
 
 public class VolumeViewerPreferencePage extends FieldEditorOverlayPage implements IWorkbenchPreferencePage,
@@ -54,7 +53,7 @@ public class VolumeViewerPreferencePage extends FieldEditorOverlayPage implement
 
   public static final ProjectionMode DEFAULT_PROJECTION_MODE = ProjectionMode.PERSPECTIVE;
 
-  public static final RGB DEFAULT_SELECTION_COLOR = VolumeViewerHelper.colorRGBAToRGB(ColorRGBA.CYAN);
+  public static final RGB DEFAULT_SELECTION_COLOR = VolumeViewerHelper.colorRGBAToRGB(new Vector4f(0f, 1f, 1f, 1f));
 
   public static final boolean DEFAULT_SHOW_LABELS = true;
 

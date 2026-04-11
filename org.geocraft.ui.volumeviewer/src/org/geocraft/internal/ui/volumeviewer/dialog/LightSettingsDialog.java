@@ -18,8 +18,6 @@ import org.geocraft.ui.common.FormLayoutHelper;
 import org.geocraft.ui.volumeviewer.VolumeViewer;
 import org.geocraft.ui.volumeviewer.dialog.VolumeSimpleSettingsDialog;
 
-import com.ardor3d.math.MathUtils;
-
 
 /**
  * Settings dialog for the Sun light direction.
@@ -56,8 +54,8 @@ public class LightSettingsDialog extends VolumeSimpleSettingsDialog {
   public LightSettingsDialog(final VolumeViewer viewer) {
     super(viewer.getShell(), viewer, "Sun orientation");
     _viewImpl = viewer.getCanvasImplementor();
-    _azimuth = Math.round((float) (_viewImpl.getSunAzimuth() * MathUtils.RAD_TO_DEG));
-    _elevation = Math.round((float) (_viewImpl.getSunElevation() * (float) MathUtils.RAD_TO_DEG));
+    _azimuth = Math.round((float) (_viewImpl.getSunAzimuth() * (180.0 / Math.PI)));
+    _elevation = Math.round((float) (_viewImpl.getSunElevation() * (float) (180.0 / Math.PI)));
   }
 
   @Override
@@ -123,8 +121,8 @@ public class LightSettingsDialog extends VolumeSimpleSettingsDialog {
       @Override
       @SuppressWarnings("unused")
       public void widgetSelected(final SelectionEvent evt) {
-        _viewImpl.setSunAzimuth(_azimuthSlider.getSelection() * MathUtils.DEG_TO_RAD);
-        _viewImpl.setSunElevation(_elevationSlider.getSelection() * MathUtils.DEG_TO_RAD);
+        _viewImpl.setSunAzimuth(_azimuthSlider.getSelection() * (Math.PI / 180.0));
+        _viewImpl.setSunElevation(_elevationSlider.getSelection() * (Math.PI / 180.0));
         _azimuthText.setText(_azimuthSlider.getSelection() + "");
         _elevationText.setText(_elevationSlider.getSelection() + "");
       }
@@ -141,7 +139,7 @@ public class LightSettingsDialog extends VolumeSimpleSettingsDialog {
           final int value = Integer.parseInt(_azimuthText.getText());
           if (value >= 0 && value <= 360) {
             _azimuthSlider.setSelection(value);
-            _viewImpl.setSunAzimuth(value * MathUtils.DEG_TO_RAD);
+            _viewImpl.setSunAzimuth(value * (Math.PI / 180.0));
           } else {
             _azimuthText.setText(_azimuthSlider.getSelection() + "");
           }
@@ -159,7 +157,7 @@ public class LightSettingsDialog extends VolumeSimpleSettingsDialog {
           final int value = Integer.parseInt(_elevationText.getText());
           if (value >= 0 && value <= 90) {
             _elevationSlider.setSelection(value);
-            _viewImpl.setSunElevation(value * MathUtils.DEG_TO_RAD);
+            _viewImpl.setSunElevation(value * (Math.PI / 180.0));
           } else {
             _elevationText.setText(_elevationSlider.getSelection() + "");
           }

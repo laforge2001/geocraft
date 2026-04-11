@@ -4,9 +4,6 @@
 package org.geocraft.internal.ui.volumeviewer.canvas;
 
 
-import com.ardor3d.math.MathUtils;
-
-
 public enum Orientation {
 
   // XXX: Map View needs to be close to but not quite 90degrees elevation
@@ -21,8 +18,8 @@ public enum Orientation {
 
   private Orientation(final String name, final double azimuthDegrees, final double elevationDegrees) {
     _name = name;
-    _azimuth = azimuthDegrees * MathUtils.DEG_TO_RAD;
-    _elevation = elevationDegrees * MathUtils.DEG_TO_RAD;
+    _azimuth = Math.toRadians(azimuthDegrees);
+    _elevation = Math.toRadians(elevationDegrees);
   }
 
   @Override

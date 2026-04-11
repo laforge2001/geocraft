@@ -10,9 +10,8 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.graphics.RGB;
 import org.geocraft.core.common.preferences.PropertyStore;
+import org.geocraft.core.rendering.scene.SceneNode;
 import org.geocraft.ui.volumeviewer.renderer.util.SceneText;
-
-import com.ardor3d.scenegraph.Spatial;
 
 
 /**
@@ -47,9 +46,9 @@ public class VolumeViewerPropertyListener implements IPropertyChangeListener {
     if (propertyName.equals(VolumeViewerPreferencePage.SHOW_LABELS)
         || propertyName.equals(VolumeViewerPreferencePage.TEXT_LABELS_BASE_SIZE)
         || propertyName.equals(PropertyStore.USE_PROJECT_SETTINGS)) {
-      final Spatial[] nodes = _viewer.getNodes();
+      final SceneNode[] nodes = _viewer.getNodes();
       SceneText.setBaseFontScale(_store.getInt(VolumeViewerPreferencePage.TEXT_LABELS_BASE_SIZE) / 100f);
-      for (final Spatial node : nodes) {
+      for (final SceneNode node : nodes) {
         final VolumeViewer viewer = (VolumeViewer) _viewer;
         final VolumeViewRenderer renderer = viewer.getRendererForNode(node);
         renderer.setShowLabels(_store.getBoolean(VolumeViewerPreferencePage.SHOW_LABELS));

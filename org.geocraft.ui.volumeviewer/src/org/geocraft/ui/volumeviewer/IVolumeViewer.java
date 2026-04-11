@@ -1,5 +1,5 @@
 /*
- * Copyright (C) ConocoPhillips 2008 All Rights Reserved. 
+ * Copyright (C) ConocoPhillips 2008 All Rights Reserved.
  */
 package org.geocraft.ui.volumeviewer;
 
@@ -10,23 +10,18 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.geocraft.core.model.datatypes.Domain;
+import org.geocraft.core.rendering.backend.TextureHandle;
+import org.geocraft.core.rendering.scene.SceneNode;
 import org.geocraft.ui.volumeviewer.renderer.util.SceneText;
 import org.geocraft.ui.volumeviewer.renderer.util.SceneText.Alignment;
-
-import com.ardor3d.image.Texture;
-import com.ardor3d.math.Vector3;
-import com.ardor3d.scenegraph.Spatial;
+import org.joml.Vector3f;
 
 
 public interface IVolumeViewer extends IVolumeViewerConstants {
 
-  //VolumeCanvasRegistry getRegistry();
-
   void setMessageText(String string);
 
-  void showSettingsDialog(Spatial spatial);
-
-  //void doRendererAction(PickRecord pickRecord);
+  void showSettingsDialog(SceneNode spatial);
 
   void setPreferences(final String currentCenter, final String projectionMode, final RGB selColor);
 
@@ -34,13 +29,13 @@ public interface IVolumeViewer extends IVolumeViewerConstants {
 
   void setCurrentDomain(Domain currentDomain);
 
-  void addToScene(Spatial renderedS);
+  void addToScene(SceneNode renderedS);
 
   void makeDirty();
 
   void setSelectedRenderer(Object renderer);
 
-  void centerOnSpatial(Spatial... targets);
+  void centerOnSpatial(SceneNode... targets);
 
   void enqueueGLTask(Callable<?> exe);
 
@@ -48,24 +43,24 @@ public interface IVolumeViewer extends IVolumeViewerConstants {
 
   void addPropertyChangeListener(IPropertyChangeListener listener);
 
-  void showWireover(Spatial spatial);
+  void showWireover(SceneNode spatial);
 
-  void removeWireover(Spatial spatial);
+  void removeWireover(SceneNode spatial);
 
-  void cleanupTexture(Texture tex);
+  void cleanupTexture(TextureHandle tex);
 
   SceneText createSceneText(String name, String text, Alignment alignment);
 
-  Vector3 getPickLocation();
+  Vector3f getPickLocation();
 
-  void mapSpatial(Spatial spatial, Object renderer);
+  void mapSpatial(SceneNode spatial, Object renderer);
 
-  Spatial getSelectedSpatial();
+  SceneNode getSelectedSpatial();
 
-  void setSelectedSpatial(final Spatial selected, final Vector3 pickLoc);
+  void setSelectedSpatial(final SceneNode selected, final Vector3f pickLoc);
 
   IWorkbenchPartSite getSite();
 
-  Spatial[] getNodes();
+  SceneNode[] getNodes();
 
 }
