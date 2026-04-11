@@ -35,31 +35,6 @@
         </dependency>
       </dependencies>
     </location>
-    <location includeDependencyDepth="none" includeDependencyScopes="compile" missingManifest="generate" type="Maven">
-      <dependencies>
-        <dependency>
-          <groupId>org.jogamp.gluegen</groupId>
-          <artifactId>gluegen-rt</artifactId>
-          <version>2.6.0</version>
-          <type>jar</type>
-        </dependency>
-        <dependency>
-          <groupId>org.jogamp.jogl</groupId>
-          <artifactId>jogl-all</artifactId>
-          <version>2.6.0</version>
-          <type>jar</type>
-        </dependency>
-      </dependencies>
-      <instructions><![CDATA[
-Bundle-Name:            Bundle derived from maven artifact ${mvnGroupId}:${mvnArtifactId}:${mvnVersion}
-version:                ${version_cleanup;${mvnVersion}}
-Bundle-SymbolicName:    wrapped.${mvnGroupId}.${mvnArtifactId}
-Bundle-Version:         ${version}
-Import-Package:         !com.sun.*,!sun.*,!javafx.*,!com.jogamp.newt.javafx,!com.jogamp.nativewindow.javafx,*;resolution:=optional
-Export-Package:         *;version="${version}"
-DynamicImport-Package:  *
-]]></instructions>
-    </location>
   </locations>
   <environment>
     <os>macosx</os>

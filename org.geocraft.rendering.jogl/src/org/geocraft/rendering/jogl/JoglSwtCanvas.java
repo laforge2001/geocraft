@@ -9,6 +9,22 @@ import org.eclipse.swt.widgets.Composite;
 import org.geocraft.core.rendering.backend.RenderSurface;
 
 public class JoglSwtCanvas implements RenderSurface {
+    static {
+        // JOGL's native libraries (libnativewindow_awt) link against
+        // @rpath/libjawt.dylib from the JDK. When JOGL runs with
+        // jogamp.gluegen.UseTempJarCache=false, it won't preload JAWT
+        // itself, so the JNI method lookup fails later with
+        // UnsatisfiedLinkError on JAWT_GetAWT1. Forcing System.loadLibrary
+        // here pulls libjawt.dylib (and its JVM-side dependencies) into
+        // the process early so JOGL's subsequent native loads resolve.
+        try {
+            System.loadLibrary("jawt");
+        } catch (Throwable ignore) {
+            // If jawt isn't available at load time (e.g. headless), let
+            // JOGL surface its own error later.
+        }
+    }
+
     private final GLCanvas canvas;
 
     public JoglSwtCanvas(Composite parent) {
