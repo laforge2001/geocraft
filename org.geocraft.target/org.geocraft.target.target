@@ -33,6 +33,32 @@
           <version>1.10.5</version>
           <type>jar</type>
         </dependency>
+        <dependency>
+          <groupId>org.jogamp.gluegen</groupId>
+          <artifactId>gluegen-rt</artifactId>
+          <version>2.6.0</version>
+          <type>jar</type>
+        </dependency>
+        <dependency>
+          <groupId>org.jogamp.gluegen</groupId>
+          <artifactId>gluegen-rt</artifactId>
+          <version>2.6.0</version>
+          <type>jar</type>
+          <classifier>natives-macosx-universal</classifier>
+        </dependency>
+        <dependency>
+          <groupId>org.jogamp.jogl</groupId>
+          <artifactId>jogl-all</artifactId>
+          <version>2.6.0</version>
+          <type>jar</type>
+        </dependency>
+        <dependency>
+          <groupId>org.jogamp.jogl</groupId>
+          <artifactId>jogl-all</artifactId>
+          <version>2.6.0</version>
+          <type>jar</type>
+          <classifier>natives-macosx-universal</classifier>
+        </dependency>
       </dependencies>
     </location>
   </locations>
