@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: GeoCraft JOGL Rendering Backend
+Bundle-SymbolicName: org.geocraft.rendering.jogl
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Require-Bundle: org.geocraft.core.rendering;bundle-version="1.0.0",
+ org.eclipse.swt
+Import-Package: org.joml,
+ com.jogamp.opengl,
+ com.jogamp.opengl.glu,
+ com.jogamp.opengl.swt,
+ com.jogamp.opengl.util,
+ com.jogamp.opengl.util.awt,
+ com.jogamp.opengl.util.texture,
+ com.jogamp.opengl.util.texture.awt,
+ com.jogamp.common.nio
+Export-Package: org.geocraft.rendering.jogl
+Service-Component: OSGI-INF/JoglRenderBackend.xml

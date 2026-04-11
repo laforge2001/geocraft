@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: JOGL Rendering Backend Tests
+Bundle-SymbolicName: org.geocraft.rendering.jogl.tests
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: org.geocraft.rendering.jogl;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Require-Bundle: org.junit,
+ org.geocraft.core.rendering;bundle-version="1.0.0",
+ org.eclipse.swt
+Import-Package: org.joml,
+ com.jogamp.opengl,
+ com.jogamp.opengl.util

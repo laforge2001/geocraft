@@ -96,6 +96,8 @@
     <module>org.geocraft.core.session</module>
     <module>org.geocraft.core.rendering</module>
     <module>org.geocraft.core.rendering.tests</module>
+    <module>org.geocraft.rendering.jogl</module>
+    <module>org.geocraft.rendering.jogl.tests</module>
     <module>org.geocraft.math</module>
     <module>org.geocraft.algorithm</module>
     <module>org.geocraft.io.ascii</module>
