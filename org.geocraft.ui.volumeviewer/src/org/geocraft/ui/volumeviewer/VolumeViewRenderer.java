@@ -191,7 +191,7 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
 
     // Draw the plot shapes.
     clear();
-    addSceneNodes();
+    addSpatials();
 
     // Add this renderer to the viewer tree.
     addToLayerTree(autoUpdate);
@@ -213,7 +213,7 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
   public final void setVisible(final boolean flag) {
     final Domain[] domains = { Domain.TIME, Domain.DISTANCE };
     for (final Domain domain : domains) {
-      final SceneNode[] spatials = getSceneNodes(domain);
+      final SceneNode[] spatials = getSpatials(domain);
       if (spatials != null) {
         for (final SceneNode spatial : spatials) {
           if (flag) {
@@ -226,7 +226,7 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
     }
   }
 
-  public abstract SceneNode[] getSceneNodes(Domain domain);
+  public abstract SceneNode[] getSpatials(Domain domain);
 
   /**
    * Sets the objects being rendered.
@@ -249,7 +249,7 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
   /**
    * Adds the plot shapes that represent the rendered object.
    */
-  protected abstract void addSceneNodes();
+  protected abstract void addSpatials();
 
   /**
    * Gets the actions associated with the renderer.
@@ -511,8 +511,8 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
   public void clear() {
     final Domain[] domains = { Domain.TIME, Domain.DISTANCE };
     for (final Domain domain : domains) {
-      for (final SceneNode spatial : getSceneNodes(domain)) {
-        _viewer.unmapSceneNode(spatial);
+      for (final SceneNode spatial : getSpatials(domain)) {
+        _viewer.unmapSpatial(spatial);
         _viewer.removeFromScene(domain, spatial);
       }
     }

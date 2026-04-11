@@ -5,6 +5,7 @@ package org.geocraft.internal.ui.volumeviewer.canvas;
 
 
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.geocraft.core.rendering.backend.RenderBackend;
 import org.geocraft.rendering.jogl.JoglSwtCanvas;
 import org.geocraft.rendering.jogl.SwtInputAdapter;
@@ -39,7 +40,8 @@ public class ViewCanvasFactory {
     if (backend != null) {
       backend.initialize(canvas);
     }
-    final SwtInputAdapter inputAdapter = new SwtInputAdapter(canvas.getSwtCanvas());
+    final Control swtControl = (Control) (Object) canvas.getSwtCanvas();
+    final SwtInputAdapter inputAdapter = new SwtInputAdapter(swtControl);
 
     return new ViewCanvasImplementor(backend, canvas, inputAdapter, viewer);
   }

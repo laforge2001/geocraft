@@ -19,7 +19,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.geocraft.ui.model;bundle-version="1.0.0",
  org.geocraft.ui.form2;bundle-version="1.0.0",
  org.geocraft.ui.color;bundle-version="1.0.0"
-Import-Package: org.joml,
+Import-Package: com.jogamp.opengl.swt,
+ org.joml,
  org.osgi.framework
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: ConocoPhillips
