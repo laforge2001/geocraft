@@ -17,7 +17,10 @@
         <artifactId>tycho-surefire-plugin</artifactId>
         <configuration>
           <useUIHarness>true</useUIHarness>
-          <argLine>-Djava.library.path=${user.home}/.m2/jogl-natives-2.6.0-macosx -Djogamp.gluegen.UseTempJarCache=false -XstartOnFirstThread</argLine>
+          <argLine>-Djava.library.path=${user.home}/.m2/jogl-natives-2.6.0-macosx:${java.home}/lib -Djogamp.gluegen.UseTempJarCache=false -XstartOnFirstThread</argLine>
+          <environmentVariables>
+            <DYLD_LIBRARY_PATH>${user.home}/.m2/jogl-natives-2.6.0-macosx:${java.home}/lib</DYLD_LIBRARY_PATH>
+          </environmentVariables>
         </configuration>
       </plugin>
     </plugins>
