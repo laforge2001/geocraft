@@ -14,10 +14,13 @@ Require-Bundle: org.eclipse.core.runtime,
  org.geocraft.ui.repository;bundle-version="1.0.0",
  org.geocraft.ui.viewer;bundle-version="1.0.0",
  org.geocraft.ui.common;bundle-version="1.0.0",
- com.ardor3d;bundle-version="1.0.0",
+ org.geocraft.core.rendering;bundle-version="1.0.0",
+ org.geocraft.rendering.jogl;bundle-version="1.0.0",
  org.geocraft.ui.model;bundle-version="1.0.0",
  org.geocraft.ui.form2;bundle-version="1.0.0",
  org.geocraft.ui.color;bundle-version="1.0.0"
+Import-Package: org.joml,
+ org.osgi.framework
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: ConocoPhillips
 Export-Package: org.geocraft.internal.ui.volumeviewer;x-internal:=true,
