@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Core Rendering Tests
+Bundle-SymbolicName: org.geocraft.core.rendering.tests
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: org.geocraft.core.rendering;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Require-Bundle: org.junit
+Import-Package: org.joml
