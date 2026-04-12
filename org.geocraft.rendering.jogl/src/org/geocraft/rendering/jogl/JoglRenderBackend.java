@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLContext;
+import com.jogamp.opengl.GLDrawableFactory;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.fixedfunc.GLLightingFunc;
 import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
@@ -21,33 +22,28 @@ public class JoglRenderBackend implements RenderBackend {
     private final JoglSceneWalker walker = new JoglSceneWalker();
     private final JoglTextureLoader textureLoader = new JoglTextureLoader();
     private RenderSurface currentSurface;
-
-    public JoglRenderBackend() {
-        // Force JOGL native library loading at service activation so the
-        // OSGi classloader resolves the JOGL bundle's Bundle-NativeCode
-        // before any rendering code runs. If this fails, the error surfaces
-        // at launch rather than when the user opens the volume viewer.
-        try {
-            GLProfile.initSingleton();
-            System.out.println("[JoglRenderBackend] JOGL native libraries loaded successfully: "
-                    + "GL profile = " + GLProfile.getDefault());
-        } catch (Throwable t) {
-            System.err.println("[JoglRenderBackend] JOGL native library loading FAILED: "
-                    + t.getClass().getName() + ": " + t.getMessage());
-            t.printStackTrace();
-            throw new RuntimeException("JOGL native init failed", t);
-        }
-    }
+    private GLContext externalContext;
 
     @Override
     public void initialize(RenderSurface surface) {
         this.currentSurface = surface;
         surface.makeCurrent();
-        GL2 gl = GLContext.getCurrentGL().getGL2();
-        gl.glEnable(GL.GL_DEPTH_TEST);
-        gl.glDepthFunc(GL.GL_LEQUAL);
-        gl.glClearColor(0f, 0f, 0f, 1f);
-        surface.release();
+        try {
+            // Wrap the SWT-managed OpenGL context in a JOGL GLContext
+            // so we can use JOGL's GL2 API for rendering calls
+            externalContext = GLDrawableFactory.getDesktopFactory()
+                    .createExternalGLContext();
+            externalContext.makeCurrent();
+            GL2 gl = externalContext.getGL().getGL2();
+            gl.glEnable(GL.GL_DEPTH_TEST);
+            gl.glDepthFunc(GL.GL_LEQUAL);
+            gl.glClearColor(0f, 0f, 0f, 1f);
+            externalContext.release();
+            System.out.println("[JoglRenderBackend] Initialized with external GL context");
+        } catch (Exception e) {
+            System.err.println("[JoglRenderBackend] initialize failed: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -57,10 +53,11 @@ public class JoglRenderBackend implements RenderBackend {
 
     @Override
     public void renderPass(GroupNode root, Camera camera, Light[] lights, RenderMaterial overrideMaterial) {
-        if (currentSurface == null) throw new IllegalStateException("not initialized");
+        if (currentSurface == null || externalContext == null) return;
         currentSurface.makeCurrent();
         try {
-            GL2 gl = GLContext.getCurrentGL().getGL2();
+            externalContext.makeCurrent();
+            GL2 gl = externalContext.getGL().getGL2();
             gl.glViewport(0, 0, currentSurface.getWidth(), currentSurface.getHeight());
             gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
@@ -76,8 +73,10 @@ public class JoglRenderBackend implements RenderBackend {
 
             applyLights(gl, lights);
             walker.walk(gl, root, overrideMaterial);
-        } finally {
-            currentSurface.release();
+            externalContext.release();
+        } catch (Exception e) {
+            // GL error during render — log but don't crash
+            System.err.println("[JoglRenderBackend] render error: " + e.getMessage());
         }
     }
 

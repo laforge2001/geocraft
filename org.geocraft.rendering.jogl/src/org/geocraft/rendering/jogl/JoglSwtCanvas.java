@@ -3,33 +3,32 @@ package org.geocraft.rendering.jogl;
 import java.io.File;
 import java.net.URL;
 
-import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLContext;
-import com.jogamp.opengl.GLProfile;
-import com.jogamp.opengl.swt.GLCanvas;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.opengl.GLCanvas;
+import org.eclipse.swt.opengl.GLData;
 import org.eclipse.swt.widgets.Composite;
 import org.geocraft.core.rendering.backend.RenderSurface;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 
+/**
+ * RenderSurface backed by SWT's native GLCanvas (not JOGL's).
+ * SWT's GLCanvas creates an OpenGL context directly via Cocoa NSOpenGLView,
+ * avoiding the JOGL GLProfile initialization that deadlocks on macOS when
+ * called from the SWT event dispatch thread.
+ *
+ * JOGL's GL2 interface is obtained from the SWT-managed context via
+ * GLContext.getCurrent() after makeCurrent().
+ */
 public class JoglSwtCanvas implements RenderSurface {
     private static boolean nativesConfigured = false;
 
-    /**
-     * Ensure JOGL native libraries are findable before any GL calls.
-     * In a built product, Bundle-NativeCode handles this. In Eclipse PDE
-     * dev mode, we need to set java.library.path to point at the natives
-     * directory inside the org.geocraft.jogl.bundle workspace project.
-     */
     private static synchronized void ensureNativesConfigured() {
         if (nativesConfigured) return;
         nativesConfigured = true;
         try {
-            // Find the org.geocraft.jogl.bundle's location on disk.
-            // We can't use BundleContext (may not be available yet during class loading),
-            // so we use Platform.getBundle() which works at any time.
             Bundle joglBundle = org.eclipse.core.runtime.Platform.getBundle("org.geocraft.jogl.bundle");
             if (joglBundle != null) {
                 URL bundleUrl = FileLocator.resolve(joglBundle.getEntry("/"));
@@ -42,37 +41,21 @@ public class JoglSwtCanvas implements RenderSurface {
                         if (!existingPath.contains(nativePath)) {
                             System.setProperty("java.library.path",
                                 nativePath + File.pathSeparator + existingPath);
-                            // Force ClassLoader to re-read java.library.path
                             try {
                                 java.lang.reflect.Field fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");
                                 fieldSysPath.setAccessible(true);
                                 fieldSysPath.set(null, null);
                             } catch (Exception e) {
-                                // Not available on all JVMs — fall through
+                                // Not available on all JVMs
                             }
                             System.setProperty("jogamp.gluegen.UseTempJarCache", "false");
                             System.out.println("[JoglSwtCanvas] Set native library path: " + nativePath);
                         }
                     }
                 }
-            } else {
-                System.err.println("[JoglSwtCanvas] Could not find org.geocraft.jogl.bundle");
             }
         } catch (Exception e) {
             System.err.println("[JoglSwtCanvas] Could not configure native library path: " + e.getMessage());
-        }
-
-        // Pre-load jawt so libnativewindow_awt can find it via @rpath
-        try {
-            System.loadLibrary("jawt");
-        } catch (Throwable ignore) {
-        }
-
-        // Initialize JOGL profiles
-        try {
-            GLProfile.initSingleton();
-        } catch (Throwable t) {
-            System.err.println("[JoglSwtCanvas] GLProfile.initSingleton() failed: " + t.getMessage());
         }
     }
 
@@ -80,11 +63,11 @@ public class JoglSwtCanvas implements RenderSurface {
 
     public JoglSwtCanvas(Composite parent) {
         ensureNativesConfigured();
-        GLProfile profile = GLProfile.get(GLProfile.GL2);
-        GLCapabilities caps = new GLCapabilities(profile);
-        caps.setDoubleBuffered(true);
-        caps.setDepthBits(24);
-        this.canvas = new GLCanvas(parent, SWT.NONE, caps, null);
+        GLData data = new GLData();
+        data.doubleBuffer = true;
+        data.depthSize = 24;
+        this.canvas = new GLCanvas(parent, SWT.NONE, data);
+        System.out.println("[JoglSwtCanvas] SWT GLCanvas created successfully");
     }
 
     public GLCanvas getSwtCanvas() { return canvas; }
@@ -100,21 +83,15 @@ public class JoglSwtCanvas implements RenderSurface {
     @Override public void makeCurrent() {
         if (canvas.isDisposed()) return;
         try {
-            GLContext ctx = canvas.getContext();
-            if (ctx != null && !ctx.isCurrent()) ctx.makeCurrent();
+            canvas.setCurrent();
         } catch (Exception e) {
-            // Context not yet available — widget may not be realized
+            // Canvas not yet realized
         }
     }
 
     @Override public void release() {
-        if (canvas.isDisposed()) return;
-        try {
-            GLContext ctx = canvas.getContext();
-            if (ctx != null && ctx.isCurrent()) ctx.release();
-        } catch (Exception e) {
-            // ignore
-        }
+        // SWT GLCanvas doesn't have an explicit release — context is
+        // automatically released when another canvas calls setCurrent()
     }
 
     @Override public void swapBuffers() {
