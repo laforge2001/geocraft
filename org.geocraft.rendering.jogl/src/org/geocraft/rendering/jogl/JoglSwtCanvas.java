@@ -38,6 +38,11 @@ public class JoglSwtCanvas implements RenderSurface {
         if (nativesConfigured) return;
         nativesConfigured = true;
 
+        // Prevent JAWT/AWT deadlock on macOS: when -XstartOnFirstThread is
+        // active, JOGL's GLProfile.initSingleton() tries to initialize AWT
+        // which deadlocks the main thread. Headless mode skips AWT entirely.
+        System.setProperty("java.awt.headless", "true");
+
         // In Eclipse PDE dev mode, Bundle-NativeCode doesn't apply.
         // Find the jogl.bundle project on disk and set java.library.path.
         try {
