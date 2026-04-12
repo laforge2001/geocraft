@@ -27,14 +27,10 @@ public class JoglSwtCanvas implements RenderSurface {
         if (nativesConfigured) return;
         nativesConfigured = true;
         try {
-            // Find the org.geocraft.jogl.bundle's location on disk
-            Bundle joglBundle = null;
-            for (Bundle b : FrameworkUtil.getBundle(JoglSwtCanvas.class).getBundleContext().getBundles()) {
-                if ("org.geocraft.jogl.bundle".equals(b.getSymbolicName())) {
-                    joglBundle = b;
-                    break;
-                }
-            }
+            // Find the org.geocraft.jogl.bundle's location on disk.
+            // We can't use BundleContext (may not be available yet during class loading),
+            // so we use Platform.getBundle() which works at any time.
+            Bundle joglBundle = org.eclipse.core.runtime.Platform.getBundle("org.geocraft.jogl.bundle");
             if (joglBundle != null) {
                 URL bundleUrl = FileLocator.resolve(joglBundle.getEntry("/"));
                 if (bundleUrl != null) {
@@ -59,6 +55,8 @@ public class JoglSwtCanvas implements RenderSurface {
                         }
                     }
                 }
+            } else {
+                System.err.println("[JoglSwtCanvas] Could not find org.geocraft.jogl.bundle");
             }
         } catch (Exception e) {
             System.err.println("[JoglSwtCanvas] Could not configure native library path: " + e.getMessage());
