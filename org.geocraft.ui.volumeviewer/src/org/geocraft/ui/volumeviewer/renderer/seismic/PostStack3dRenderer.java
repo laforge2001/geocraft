@@ -96,6 +96,14 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
 
     _viewer.mapSpatial(_volumeNode, this);
     _viewer.addToScene(_volume.getZDomain(), _volumeNode);
+
+    // Debug: print bounding box extent
+    System.out.println("[PostStack3dRenderer] Added bounding box with " + points.length + " extent points");
+    for (int i = 0; i < Math.min(points.length, 8); i++) {
+      System.out.println("  point[" + i + "] = " + points[i]);
+    }
+    System.out.println("[PostStack3dRenderer] Calling centerOnSpatial...");
+    _viewer.centerOnSpatial(_volumeNode);
   }
 
   @Override

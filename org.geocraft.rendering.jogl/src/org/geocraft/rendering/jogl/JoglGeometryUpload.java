@@ -17,6 +17,10 @@ public class JoglGeometryUpload {
         FloatBuffer uv = mesh.getTexCoords();
         IntBuffer idx = mesh.getIndices();
         if (v == null) return;
+        v.rewind();
+        if (n != null) n.rewind();
+        if (uv != null) uv.rewind();
+        if (idx != null) idx.rewind();
 
         gl.glBegin(GL.GL_TRIANGLES);
         int triCount = idx != null ? mesh.getTriangleCount() : mesh.getVertexCount() / 3;
@@ -33,15 +37,18 @@ public class JoglGeometryUpload {
 
     public void drawLine(GL2 gl, LineGeometry line) {
         FloatBuffer v = line.getVertices();
-        if (v == null) return;
+        if (v == null || line.getVertexCount() == 0) return;
+        v.rewind();
         Vector4f c = line.getColor();
         gl.glLineWidth(line.getLineWidth());
         gl.glColor4f(c.x, c.y, c.z, c.w);
+        gl.glDisable(GL.GL_TEXTURE_2D);
         gl.glBegin(GL.GL_LINES);
         for (int i = 0; i < line.getVertexCount(); i++) {
-            gl.glVertex3f(v.get(i * 3), v.get(i * 3 + 1), v.get(i * 3 + 2));
+            gl.glVertex3f(v.get(), v.get(), v.get());
         }
         gl.glEnd();
+        v.rewind();
     }
 
     public void drawSphere(GL2 gl, SphereGeometry sphere) {
