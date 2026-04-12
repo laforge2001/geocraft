@@ -5,8 +5,6 @@ import java.nio.ByteBuffer;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLContext;
-import com.jogamp.opengl.GLDrawableFactory;
-import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.fixedfunc.GLLightingFunc;
 import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
 import org.geocraft.core.rendering.backend.RenderBackend;
@@ -18,33 +16,48 @@ import org.geocraft.core.rendering.material.RenderMaterial;
 import org.geocraft.core.rendering.scene.GroupNode;
 import org.joml.Matrix4f;
 
+/**
+ * JOGL implementation of RenderBackend. Uses GL2 fixed-function pipeline.
+ * With the NewtCanvasSWT approach, GL calls happen inside a GLEventListener
+ * callback where the GL context is already current — no need to manage
+ * makeCurrent/release ourselves.
+ */
 public class JoglRenderBackend implements RenderBackend {
     private final JoglSceneWalker walker = new JoglSceneWalker();
     private final JoglTextureLoader textureLoader = new JoglTextureLoader();
     private RenderSurface currentSurface;
-    private GLContext externalContext;
 
     @Override
     public void initialize(RenderSurface surface) {
         this.currentSurface = surface;
-        surface.makeCurrent();
-        try {
-            // Wrap the SWT-managed OpenGL context in a JOGL GLContext
-            // so we can use JOGL's GL2 API for rendering calls
-            externalContext = GLDrawableFactory.getDesktopFactory()
-                    .createExternalGLContext();
-            externalContext.makeCurrent();
-            GL2 gl = externalContext.getGL().getGL2();
-            gl.glEnable(GL.GL_DEPTH_TEST);
-            gl.glDepthFunc(GL.GL_LEQUAL);
-            gl.glClearColor(0f, 0f, 0f, 1f);
-            externalContext.release();
-            System.out.println("[JoglRenderBackend] Initialized with external GL context");
-        } catch (Exception e) {
-            System.err.println("[JoglRenderBackend] initialize failed: " + e.getMessage());
-            e.printStackTrace();
-        }
+        System.out.println("[JoglRenderBackend] Initialized");
     }
+
+    /**
+     * Render a scene pass using an already-current GL2 context.
+     * Called from ViewCanvasImplementor's GLEventListener.display() callback.
+     */
+    public void renderPass(GL2 gl, GroupNode root, Camera camera, Light[] lights, RenderMaterial overrideMaterial) {
+        int w = currentSurface != null ? currentSurface.getWidth() : 640;
+        int h = currentSurface != null ? currentSurface.getHeight() : 480;
+        gl.glViewport(0, 0, w, h);
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+
+        Matrix4f proj = camera.getProjectionMatrix();
+        Matrix4f view = camera.getViewMatrix();
+        float[] m = new float[16];
+        gl.glMatrixMode(GLMatrixFunc.GL_PROJECTION);
+        proj.get(m);
+        gl.glLoadMatrixf(m, 0);
+        gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
+        view.get(m);
+        gl.glLoadMatrixf(m, 0);
+
+        applyLights(gl, lights);
+        walker.walk(gl, root, overrideMaterial);
+    }
+
+    // --- RenderBackend interface methods (for non-NEWT usage) ---
 
     @Override
     public void renderPass(GroupNode root, Camera camera, Light[] lights) {
@@ -53,30 +66,15 @@ public class JoglRenderBackend implements RenderBackend {
 
     @Override
     public void renderPass(GroupNode root, Camera camera, Light[] lights, RenderMaterial overrideMaterial) {
-        if (currentSurface == null || externalContext == null) return;
+        if (currentSurface == null) return;
         currentSurface.makeCurrent();
         try {
-            externalContext.makeCurrent();
-            GL2 gl = externalContext.getGL().getGL2();
-            gl.glViewport(0, 0, currentSurface.getWidth(), currentSurface.getHeight());
-            gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-
-            Matrix4f proj = camera.getProjectionMatrix();
-            Matrix4f view = camera.getViewMatrix();
-            float[] m = new float[16];
-            gl.glMatrixMode(GLMatrixFunc.GL_PROJECTION);
-            proj.get(m);
-            gl.glLoadMatrixf(m, 0);
-            gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
-            view.get(m);
-            gl.glLoadMatrixf(m, 0);
-
-            applyLights(gl, lights);
-            walker.walk(gl, root, overrideMaterial);
-            externalContext.release();
+            GL2 gl = GLContext.getCurrentGL().getGL2();
+            renderPass(gl, root, camera, lights, overrideMaterial);
         } catch (Exception e) {
-            // GL error during render — log but don't crash
             System.err.println("[JoglRenderBackend] render error: " + e.getMessage());
+        } finally {
+            currentSurface.release();
         }
     }
 

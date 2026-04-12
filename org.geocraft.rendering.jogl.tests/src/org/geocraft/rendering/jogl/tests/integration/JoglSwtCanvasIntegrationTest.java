@@ -56,7 +56,7 @@ public class JoglSwtCanvasIntegrationTest {
                 shell.layout();
                 while (display.readAndDispatch()) { /* pump events */ }
 
-                assertFalse("canvas should not be disposed", canvas.getSwtCanvas().isDisposed());
+                assertFalse("canvas should not be disposed", canvas.getSwtControl().isDisposed());
                 assertTrue("canvas width should be > 0", canvas.getWidth() > 0);
                 assertTrue("canvas height should be > 0", canvas.getHeight() > 0);
 

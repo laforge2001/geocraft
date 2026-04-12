@@ -9,7 +9,11 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.eclipse.swt.opengl.GLCanvas;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.util.FPSAnimator;
 import org.eclipse.swt.widgets.Display;
 import org.geocraft.core.rendering.backend.RenderBackend;
 import org.geocraft.core.rendering.backend.TextureHandle;
@@ -23,6 +27,7 @@ import org.geocraft.core.rendering.scene.SceneNode;
 import org.geocraft.internal.ui.volumeviewer.input.VolumeMouseLook;
 import org.geocraft.internal.ui.volumeviewer.widget.FocusRods;
 import org.geocraft.internal.ui.volumeviewer.widget.FocusRods.ShowMode;
+import org.geocraft.rendering.jogl.JoglRenderBackend;
 import org.geocraft.rendering.jogl.JoglSwtCanvas;
 import org.geocraft.rendering.jogl.SwtInputAdapter;
 import org.geocraft.ui.volumeviewer.IVolumeViewer;
@@ -71,9 +76,7 @@ public class ViewCanvasImplementor {
   private boolean _usePerspective = true;
   private Vector4f _background = new Vector4f(0, 0, 0, 1);
   private VolumeMouseLook _mouseLook;
-  private boolean _initialized = false;
-  private boolean _renderLoopRunning = false;
-  private static final int RENDER_INTERVAL_MS = 33; // ~30 fps
+  private FPSAnimator _animator;
 
   public ViewCanvasImplementor(final RenderBackend backend, final JoglSwtCanvas canvas,
       final SwtInputAdapter inputAdapter, final IVolumeViewer view) {
@@ -101,51 +104,37 @@ public class ViewCanvasImplementor {
 
     _mouseLook = VolumeMouseLook.setupTriggers(_inputAdapter, this);
 
-    // Start a timer-driven render loop. We don't use PaintListener because
-    // SWT's internal Canvas.drawRect tries 2D painting after the listener
-    // returns, which crashes on macOS GL surfaces (NSGraphicsContext is null).
-    // Timer-driven rendering with SWT.NO_BACKGROUND avoids this entirely.
-    startRenderLoop();
-  }
-
-  /**
-   * Lazy-initialize the GL backend on first render, once the canvas is realized.
-   */
-  private boolean ensureInitialized() {
-    if (_initialized) return true;
-    if (_canvas == null) return false;
-    if (_canvas.getSwtCanvas().isDisposed()) return false;
-    if (_canvas.getWidth() <= 0 || _canvas.getHeight() <= 0) return false;
-    try {
-      _canvas.makeCurrent();
-      if (_backend != null) {
-        _backend.initialize(_canvas);
-      }
-      _initialized = true;
-      System.out.println("[ViewCanvasImplementor] GL initialized, canvas size: "
-          + _canvas.getWidth() + "x" + _canvas.getHeight());
-      return true;
-    } catch (final Exception e) {
-      System.err.println("[ViewCanvasImplementor] GL init failed, will retry: " + e.getMessage());
-      return false;
-    }
-  }
-
-  private void startRenderLoop() {
-    final GLCanvas swtCanvas = _canvas.getSwtCanvas();
-    final Display display = swtCanvas.getDisplay();
-    display.timerExec(RENDER_INTERVAL_MS, new Runnable() {
+    // Register a GLEventListener on the NEWT GLWindow for rendering.
+    // JOGL's FPSAnimator drives the render loop on its own thread,
+    // calling display() at ~30fps. The GL context is already current
+    // inside the callback — no makeCurrent/release needed.
+    canvas.getGLWindow().addGLEventListener(new GLEventListener() {
       @Override
-      public void run() {
-        if (swtCanvas.isDisposed()) return;
-        if (ensureInitialized()) {
-          render();
-        }
-        if (!swtCanvas.isDisposed()) {
-          display.timerExec(RENDER_INTERVAL_MS, this);
-        }
+      public void init(GLAutoDrawable drawable) {
+        GL2 gl = drawable.getGL().getGL2();
+        gl.glEnable(GL.GL_DEPTH_TEST);
+        gl.glDepthFunc(GL.GL_LEQUAL);
+        gl.glClearColor(_background.x, _background.y, _background.z, _background.w);
+        System.out.println("[ViewCanvasImplementor] GL init: "
+            + gl.glGetString(GL.GL_RENDERER));
       }
+
+      @Override
+      public void display(GLAutoDrawable drawable) {
+        render(drawable.getGL().getGL2());
+      }
+
+      @Override
+      public void reshape(GLAutoDrawable drawable, int x, int y, int w, int h) {
+        drawable.getGL().getGL2().glViewport(0, 0, w, h);
+      }
+
+      @Override
+      public void dispose(GLAutoDrawable drawable) { }
     });
+
+    _animator = new FPSAnimator(canvas.getGLWindow(), 30);
+    _animator.start();
   }
 
   public JoglSwtCanvas getCanvas() {
@@ -161,15 +150,8 @@ public class ViewCanvasImplementor {
   }
 
   public void makeDirty() {
-    if (_canvas == null) return;
-    final org.eclipse.swt.opengl.GLCanvas swtCanvas = _canvas.getSwtCanvas();
-    if (swtCanvas.isDisposed()) return;
-    // redraw() must be called from the SWT UI thread
-    swtCanvas.getDisplay().asyncExec(() -> {
-      if (!swtCanvas.isDisposed()) {
-        swtCanvas.redraw();
-      }
-    });
+    // With FPSAnimator, rendering is continuous — no explicit redraw needed.
+    // The next display() callback will pick up any changes.
   }
 
   public int getMaxTextureSize() {
@@ -354,16 +336,21 @@ public class ViewCanvasImplementor {
    * Render the scene using the Layer 1 backend.
    * TODO: wire this to a redraw event loop.
    */
-  public void render() {
-    if (_canvas == null) return;
-    if (_canvas.getSwtCanvas().isDisposed()) return;
-    _canvas.makeCurrent();
+  /**
+   * Render using a GL2 context that is already current (called from GLEventListener.display).
+   */
+  private void render(GL2 gl) {
     drainTaskQueue();
     _camera.setViewport(_canvas.getWidth(), _canvas.getHeight());
-    if (_backend != null) {
-      _backend.renderPass(_rootNode, _camera, _lights);
+    if (_backend instanceof JoglRenderBackend) {
+      ((JoglRenderBackend) _backend).renderPass(gl, _rootNode, _camera, _lights, null);
     }
-    _canvas.swapBuffers();
+  }
+
+  /** Legacy render for non-NEWT paths. */
+  public void render() {
+    // With NEWT+FPSAnimator, rendering is driven by the GLEventListener.
+    // This method is kept for API compatibility.
   }
 
   private void drainTaskQueue() {

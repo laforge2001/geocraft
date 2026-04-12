@@ -3,24 +3,33 @@ package org.geocraft.rendering.jogl;
 import java.io.File;
 import java.net.URL;
 
+import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GLContext;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.newt.opengl.GLWindow;
+import com.jogamp.newt.swt.NewtCanvasSWT;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.opengl.GLCanvas;
-import org.eclipse.swt.opengl.GLData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.geocraft.core.rendering.backend.RenderSurface;
 import org.osgi.framework.Bundle;
 
 /**
- * RenderSurface backed by SWT's native GLCanvas (not JOGL's).
- * SWT's GLCanvas creates an OpenGL context directly via Cocoa NSOpenGLView,
- * avoiding the JOGL GLProfile initialization that deadlocks on macOS when
- * called from the SWT event dispatch thread.
+ * RenderSurface backed by JOGL's NewtCanvasSWT — a NEWT GLWindow
+ * embedded inside an SWT Composite.
  *
- * JOGL's GL2 interface is obtained from the SWT-managed context via
- * GLContext.getCurrent() after makeCurrent().
+ * This avoids two broken paths on macOS aarch64:
+ * - SWT's org.eclipse.swt.opengl.GLCanvas crashes with
+ *   NSGraphicsContext null in Widget.drawRect
+ * - JOGL's com.jogamp.opengl.swt.GLCanvas has a DPIUtil API
+ *   mismatch with Eclipse 2025-12's SWT
+ *
+ * NewtCanvasSWT uses JOGL's own NEWT windowing (NSOpenGLView) and
+ * embeds it as a child of the SWT Composite, bypassing both issues.
  */
 public class JoglSwtCanvas implements RenderSurface {
     private static boolean nativesConfigured = false;
@@ -28,6 +37,9 @@ public class JoglSwtCanvas implements RenderSurface {
     private static synchronized void ensureNativesConfigured() {
         if (nativesConfigured) return;
         nativesConfigured = true;
+
+        // In Eclipse PDE dev mode, Bundle-NativeCode doesn't apply.
+        // Find the jogl.bundle project on disk and set java.library.path.
         try {
             Bundle joglBundle = org.eclipse.core.runtime.Platform.getBundle("org.geocraft.jogl.bundle");
             if (joglBundle != null) {
@@ -59,46 +71,58 @@ public class JoglSwtCanvas implements RenderSurface {
         }
     }
 
-    private final GLCanvas canvas;
+    private final GLWindow glWindow;
+    private final NewtCanvasSWT newtCanvas;
 
     public JoglSwtCanvas(Composite parent) {
         ensureNativesConfigured();
-        GLData data = new GLData();
-        data.doubleBuffer = true;
-        data.depthSize = 24;
-        this.canvas = new GLCanvas(parent, SWT.NO_BACKGROUND | SWT.NO_REDRAW_RESIZE, data);
-        System.out.println("[JoglSwtCanvas] SWT GLCanvas created successfully");
+        GLCapabilities caps = new GLCapabilities(GLProfile.get(GLProfile.GL2));
+        caps.setDoubleBuffered(true);
+        caps.setDepthBits(24);
+        glWindow = GLWindow.create(caps);
+        newtCanvas = NewtCanvasSWT.create(parent, SWT.NONE, glWindow);
+        System.out.println("[JoglSwtCanvas] NewtCanvasSWT created successfully");
     }
 
-    public GLCanvas getSwtCanvas() { return canvas; }
+    /** Get the NEWT GLWindow for adding GLEventListeners or direct GL access. */
+    public GLWindow getGLWindow() { return glWindow; }
+
+    /** Get the SWT control for layout/input purposes. */
+    public Control getSwtControl() { return newtCanvas; }
 
     @Override public int getWidth() {
-        return canvas.isDisposed() ? 0 : canvas.getSize().x;
+        return newtCanvas.isDisposed() ? 0 : newtCanvas.getSize().x;
     }
 
     @Override public int getHeight() {
-        return canvas.isDisposed() ? 0 : canvas.getSize().y;
+        return newtCanvas.isDisposed() ? 0 : newtCanvas.getSize().y;
     }
 
     @Override public void makeCurrent() {
-        if (canvas.isDisposed()) return;
-        try {
-            canvas.setCurrent();
-        } catch (Exception e) {
-            // Canvas not yet realized
-        }
+        glWindow.getContext().makeCurrent();
     }
 
     @Override public void release() {
-        // SWT GLCanvas doesn't have an explicit release — context is
-        // automatically released when another canvas calls setCurrent()
+        if (glWindow.getContext().isCurrent()) {
+            glWindow.getContext().release();
+        }
     }
 
     @Override public void swapBuffers() {
-        if (!canvas.isDisposed()) canvas.swapBuffers();
+        glWindow.swapBuffers();
+    }
+
+    /** Trigger a NEWT display cycle (calls GLEventListener.display). */
+    public void display() {
+        if (!newtCanvas.isDisposed()) {
+            glWindow.display();
+        }
     }
 
     @Override public void dispose() {
-        if (!canvas.isDisposed()) canvas.dispose();
+        glWindow.destroy();
+        if (!newtCanvas.isDisposed()) {
+            newtCanvas.dispose();
+        }
     }
 }
