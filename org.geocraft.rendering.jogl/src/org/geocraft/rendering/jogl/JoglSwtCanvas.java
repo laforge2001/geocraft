@@ -9,6 +9,7 @@ import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.util.FPSAnimator;
 import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.newt.swt.NewtCanvasSWT;
 import org.eclipse.core.runtime.FileLocator;
@@ -89,8 +90,38 @@ public class JoglSwtCanvas implements RenderSurface {
         System.out.println("[JoglSwtCanvas] NewtCanvasSWT created successfully");
     }
 
-    /** Get the NEWT GLWindow for adding GLEventListeners or direct GL access. */
-    public GLWindow getGLWindow() { return glWindow; }
+    /**
+     * Callback interface for rendering. Hides JOGL GL2 type behind
+     * the rendering.jogl package so consumers don't need JOGL imports.
+     */
+    public interface RenderCallback {
+        void onInit(GL2 gl, String rendererName);
+        void onDisplay(GL2 gl);
+        void onReshape(GL2 gl, int width, int height);
+    }
+
+    /**
+     * Set up a GLEventListener and start an FPSAnimator at the given rate.
+     * The callback methods receive an already-current GL2 context.
+     */
+    public void startAnimator(int fps, RenderCallback callback) {
+        glWindow.addGLEventListener(new GLEventListener() {
+            @Override public void init(GLAutoDrawable d) {
+                GL2 gl = d.getGL().getGL2();
+                String renderer = gl.glGetString(GL.GL_RENDERER);
+                callback.onInit(gl, renderer);
+            }
+            @Override public void display(GLAutoDrawable d) {
+                callback.onDisplay(d.getGL().getGL2());
+            }
+            @Override public void reshape(GLAutoDrawable d, int x, int y, int w, int h) {
+                callback.onReshape(d.getGL().getGL2(), w, h);
+            }
+            @Override public void dispose(GLAutoDrawable d) { }
+        });
+        FPSAnimator animator = new FPSAnimator(glWindow, fps);
+        animator.start();
+    }
 
     /** Get the SWT control for layout/input purposes. */
     public Control getSwtControl() { return newtCanvas; }

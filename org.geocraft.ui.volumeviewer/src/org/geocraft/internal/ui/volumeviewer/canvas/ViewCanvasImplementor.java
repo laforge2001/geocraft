@@ -11,10 +11,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GLAutoDrawable;
-import com.jogamp.opengl.GLEventListener;
-import com.jogamp.opengl.util.FPSAnimator;
-import org.eclipse.swt.widgets.Display;
 import org.geocraft.core.rendering.backend.RenderBackend;
 import org.geocraft.core.rendering.backend.TextureHandle;
 import org.geocraft.core.rendering.camera.Camera;
@@ -76,7 +72,6 @@ public class ViewCanvasImplementor {
   private boolean _usePerspective = true;
   private Vector4f _background = new Vector4f(0, 0, 0, 1);
   private VolumeMouseLook _mouseLook;
-  private FPSAnimator _animator;
 
   public ViewCanvasImplementor(final RenderBackend backend, final JoglSwtCanvas canvas,
       final SwtInputAdapter inputAdapter, final IVolumeViewer view) {
@@ -104,37 +99,28 @@ public class ViewCanvasImplementor {
 
     _mouseLook = VolumeMouseLook.setupTriggers(_inputAdapter, this);
 
-    // Register a GLEventListener on the NEWT GLWindow for rendering.
-    // JOGL's FPSAnimator drives the render loop on its own thread,
-    // calling display() at ~30fps. The GL context is already current
-    // inside the callback — no makeCurrent/release needed.
-    canvas.getGLWindow().addGLEventListener(new GLEventListener() {
+    // Start the JOGL render loop via the canvas's RenderCallback.
+    // The FPSAnimator drives rendering at 30fps on its own thread.
+    // GL2 context is already current inside the callbacks.
+    canvas.startAnimator(30, new JoglSwtCanvas.RenderCallback() {
       @Override
-      public void init(GLAutoDrawable drawable) {
-        GL2 gl = drawable.getGL().getGL2();
+      public void onInit(GL2 gl, String rendererName) {
         gl.glEnable(GL.GL_DEPTH_TEST);
         gl.glDepthFunc(GL.GL_LEQUAL);
         gl.glClearColor(_background.x, _background.y, _background.z, _background.w);
-        System.out.println("[ViewCanvasImplementor] GL init: "
-            + gl.glGetString(GL.GL_RENDERER));
+        System.out.println("[ViewCanvasImplementor] GL init: " + rendererName);
       }
 
       @Override
-      public void display(GLAutoDrawable drawable) {
-        render(drawable.getGL().getGL2());
+      public void onDisplay(GL2 gl) {
+        render(gl);
       }
 
       @Override
-      public void reshape(GLAutoDrawable drawable, int x, int y, int w, int h) {
-        drawable.getGL().getGL2().glViewport(0, 0, w, h);
+      public void onReshape(GL2 gl, int width, int height) {
+        gl.glViewport(0, 0, width, height);
       }
-
-      @Override
-      public void dispose(GLAutoDrawable drawable) { }
     });
-
-    _animator = new FPSAnimator(canvas.getGLWindow(), 30);
-    _animator.start();
   }
 
   public JoglSwtCanvas getCanvas() {
