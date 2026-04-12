@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.events.PaintListener;
+import org.eclipse.swt.opengl.GLCanvas;
 import org.eclipse.swt.widgets.Display;
 import org.geocraft.core.rendering.backend.RenderBackend;
 import org.geocraft.core.rendering.backend.TextureHandle;
@@ -100,49 +103,40 @@ public class ViewCanvasImplementor {
 
     _mouseLook = VolumeMouseLook.setupTriggers(_inputAdapter, this);
 
-    // Start the render loop — it will lazy-init the GL context on first tick
-    startRenderLoop();
+    // Use a PaintListener to handle GL rendering during SWT's paint cycle.
+    // This prevents the NSGraphicsContext null error on macOS — the GL canvas
+    // must have setCurrent() called during paint, or Cocoa tries to paint it
+    // as a regular 2D widget and crashes.
+    final GLCanvas swtCanvas = _canvas.getSwtCanvas();
+    swtCanvas.addPaintListener(new PaintListener() {
+      @Override
+      public void paintControl(PaintEvent e) {
+        if (swtCanvas.isDisposed()) return;
+        ensureInitialized();
+        render();
+      }
+    });
   }
 
   /**
    * Lazy-initialize the GL backend on first render, once the canvas is realized.
    */
-  private boolean ensureInitialized() {
-    if (_initialized) return true;
-    if (_backend == null || _canvas == null) return false;
-    if (_canvas.getSwtCanvas().isDisposed()) return false;
-    // The GLCanvas must be visible and have a nonzero size before the context exists
-    if (_canvas.getWidth() <= 0 || _canvas.getHeight() <= 0) return false;
+  private void ensureInitialized() {
+    if (_initialized) return;
+    if (_canvas == null) return;
+    if (_canvas.getSwtCanvas().isDisposed()) return;
+    if (_canvas.getWidth() <= 0 || _canvas.getHeight() <= 0) return;
     try {
-      _backend.initialize(_canvas);
+      _canvas.makeCurrent();
+      if (_backend != null) {
+        _backend.initialize(_canvas);
+      }
       _initialized = true;
-      return true;
+      System.out.println("[ViewCanvasImplementor] GL initialized, canvas size: "
+          + _canvas.getWidth() + "x" + _canvas.getHeight());
     } catch (final Exception e) {
       System.err.println("[ViewCanvasImplementor] GL init failed, will retry: " + e.getMessage());
-      return false;
     }
-  }
-
-  /**
-   * Start a timer-driven render loop on the SWT UI thread.
-   */
-  private void startRenderLoop() {
-    if (_renderLoopRunning) return;
-    _renderLoopRunning = true;
-    final Display display = _canvas.getSwtCanvas().getDisplay();
-    display.timerExec(RENDER_INTERVAL_MS, new Runnable() {
-      @Override
-      public void run() {
-        if (_canvas.getSwtCanvas().isDisposed()) {
-          _renderLoopRunning = false;
-          return;
-        }
-        if (ensureInitialized()) {
-          render();
-        }
-        display.timerExec(RENDER_INTERVAL_MS, this);
-      }
-    });
   }
 
   public JoglSwtCanvas getCanvas() {
@@ -158,7 +152,9 @@ public class ViewCanvasImplementor {
   }
 
   public void makeDirty() {
-    // TODO: mark canvas for redraw
+    if (_canvas != null && !_canvas.getSwtCanvas().isDisposed()) {
+      _canvas.getSwtCanvas().redraw();
+    }
   }
 
   public int getMaxTextureSize() {
@@ -344,14 +340,14 @@ public class ViewCanvasImplementor {
    * TODO: wire this to a redraw event loop.
    */
   public void render() {
-    if (_backend == null || _canvas == null) return;
+    if (_canvas == null) return;
     if (_canvas.getSwtCanvas().isDisposed()) return;
+    _canvas.makeCurrent();
     drainTaskQueue();
     _camera.setViewport(_canvas.getWidth(), _canvas.getHeight());
-    _backend.renderPass(_rootNode, _camera, _lights);
-    // TODO: wireover and widget passes once those features are ported
-    // _backend.renderPass(_wireoverRoot, _camera, _lights);
-    // _backend.renderPass(_widgetRoot, _camera, _lights);
+    if (_backend != null) {
+      _backend.renderPass(_rootNode, _camera, _lights);
+    }
     _canvas.swapBuffers();
   }
 
