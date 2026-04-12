@@ -6,7 +6,9 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.geocraft.core.rendering;bundle-version="1.0.0",
  org.geocraft.jogl.bundle;bundle-version="1.0.0",
- org.eclipse.swt
-Import-Package: org.joml
+ org.eclipse.swt,
+ org.eclipse.core.runtime
+Import-Package: org.joml,
+ org.osgi.framework
 Export-Package: org.geocraft.rendering.jogl
 Service-Component: OSGI-INF/JoglRenderBackend.xml

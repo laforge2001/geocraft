@@ -35,15 +35,19 @@ public class ViewCanvasFactory {
   public static ViewCanvasImplementor makeCanvas(final Composite canvasComposite,
       final IVolumeViewer viewer, final int depthBits) {
 
+    System.out.println("[ViewCanvasFactory] Looking up RenderBackend...");
     final RenderBackend backend = lookupRenderBackend();
+    System.out.println("[ViewCanvasFactory] Backend: " + (backend != null ? backend.getClass().getName() : "null"));
+    System.out.println("[ViewCanvasFactory] Creating JoglSwtCanvas...");
+    System.out.flush();
     final JoglSwtCanvas canvas = new JoglSwtCanvas(canvasComposite);
-    // Do NOT call backend.initialize(canvas) here — the GLCanvas context
-    // doesn't exist until the widget is realized (shown on screen).
-    // ViewCanvasImplementor handles lazy initialization on first render.
+    System.out.println("[ViewCanvasFactory] Canvas created, setting up input...");
     final Control swtControl = (Control) (Object) canvas.getSwtCanvas();
     final SwtInputAdapter inputAdapter = new SwtInputAdapter(swtControl);
-
-    return new ViewCanvasImplementor(backend, canvas, inputAdapter, viewer);
+    System.out.println("[ViewCanvasFactory] Creating ViewCanvasImplementor...");
+    final ViewCanvasImplementor impl = new ViewCanvasImplementor(backend, canvas, inputAdapter, viewer);
+    System.out.println("[ViewCanvasFactory] Done.");
+    return impl;
   }
 
   private static RenderBackend lookupRenderBackend() {
