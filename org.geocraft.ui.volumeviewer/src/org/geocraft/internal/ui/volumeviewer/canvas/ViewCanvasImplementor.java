@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.eclipse.swt.events.PaintEvent;
-import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.opengl.GLCanvas;
 import org.eclipse.swt.widgets.Display;
 import org.geocraft.core.rendering.backend.RenderBackend;
@@ -103,29 +101,21 @@ public class ViewCanvasImplementor {
 
     _mouseLook = VolumeMouseLook.setupTriggers(_inputAdapter, this);
 
-    // Use a PaintListener to handle GL rendering during SWT's paint cycle.
-    // This prevents the NSGraphicsContext null error on macOS — the GL canvas
-    // must have setCurrent() called during paint, or Cocoa tries to paint it
-    // as a regular 2D widget and crashes.
-    final GLCanvas swtCanvas = _canvas.getSwtCanvas();
-    swtCanvas.addPaintListener(new PaintListener() {
-      @Override
-      public void paintControl(PaintEvent e) {
-        if (swtCanvas.isDisposed()) return;
-        ensureInitialized();
-        render();
-      }
-    });
+    // Start a timer-driven render loop. We don't use PaintListener because
+    // SWT's internal Canvas.drawRect tries 2D painting after the listener
+    // returns, which crashes on macOS GL surfaces (NSGraphicsContext is null).
+    // Timer-driven rendering with SWT.NO_BACKGROUND avoids this entirely.
+    startRenderLoop();
   }
 
   /**
    * Lazy-initialize the GL backend on first render, once the canvas is realized.
    */
-  private void ensureInitialized() {
-    if (_initialized) return;
-    if (_canvas == null) return;
-    if (_canvas.getSwtCanvas().isDisposed()) return;
-    if (_canvas.getWidth() <= 0 || _canvas.getHeight() <= 0) return;
+  private boolean ensureInitialized() {
+    if (_initialized) return true;
+    if (_canvas == null) return false;
+    if (_canvas.getSwtCanvas().isDisposed()) return false;
+    if (_canvas.getWidth() <= 0 || _canvas.getHeight() <= 0) return false;
     try {
       _canvas.makeCurrent();
       if (_backend != null) {
@@ -134,9 +124,28 @@ public class ViewCanvasImplementor {
       _initialized = true;
       System.out.println("[ViewCanvasImplementor] GL initialized, canvas size: "
           + _canvas.getWidth() + "x" + _canvas.getHeight());
+      return true;
     } catch (final Exception e) {
       System.err.println("[ViewCanvasImplementor] GL init failed, will retry: " + e.getMessage());
+      return false;
     }
+  }
+
+  private void startRenderLoop() {
+    final GLCanvas swtCanvas = _canvas.getSwtCanvas();
+    final Display display = swtCanvas.getDisplay();
+    display.timerExec(RENDER_INTERVAL_MS, new Runnable() {
+      @Override
+      public void run() {
+        if (swtCanvas.isDisposed()) return;
+        if (ensureInitialized()) {
+          render();
+        }
+        if (!swtCanvas.isDisposed()) {
+          display.timerExec(RENDER_INTERVAL_MS, this);
+        }
+      }
+    });
   }
 
   public JoglSwtCanvas getCanvas() {

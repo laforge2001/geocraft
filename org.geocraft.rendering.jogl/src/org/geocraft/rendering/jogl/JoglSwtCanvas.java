@@ -66,7 +66,7 @@ public class JoglSwtCanvas implements RenderSurface {
         GLData data = new GLData();
         data.doubleBuffer = true;
         data.depthSize = 24;
-        this.canvas = new GLCanvas(parent, SWT.NONE, data);
+        this.canvas = new GLCanvas(parent, SWT.NO_BACKGROUND | SWT.NO_REDRAW_RESIZE, data);
         System.out.println("[JoglSwtCanvas] SWT GLCanvas created successfully");
     }
 
