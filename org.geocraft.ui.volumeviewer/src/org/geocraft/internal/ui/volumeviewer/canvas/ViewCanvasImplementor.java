@@ -152,9 +152,15 @@ public class ViewCanvasImplementor {
   }
 
   public void makeDirty() {
-    if (_canvas != null && !_canvas.getSwtCanvas().isDisposed()) {
-      _canvas.getSwtCanvas().redraw();
-    }
+    if (_canvas == null) return;
+    final org.eclipse.swt.opengl.GLCanvas swtCanvas = _canvas.getSwtCanvas();
+    if (swtCanvas.isDisposed()) return;
+    // redraw() must be called from the SWT UI thread
+    swtCanvas.getDisplay().asyncExec(() -> {
+      if (!swtCanvas.isDisposed()) {
+        swtCanvas.redraw();
+      }
+    });
   }
 
   public int getMaxTextureSize() {
