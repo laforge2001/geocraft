@@ -24,6 +24,7 @@ import org.geocraft.internal.ui.volumeviewer.input.VolumeMouseLook;
 import org.geocraft.internal.ui.volumeviewer.widget.FocusRods;
 import org.geocraft.internal.ui.volumeviewer.widget.FocusRods.ShowMode;
 import org.geocraft.rendering.jogl.JoglRenderBackend;
+import org.geocraft.rendering.jogl.JoglSceneWalker;
 import org.geocraft.rendering.jogl.JoglSwtCanvas;
 import org.geocraft.rendering.jogl.SwtInputAdapter;
 import org.geocraft.ui.volumeviewer.IVolumeViewer;
@@ -423,11 +424,40 @@ public class ViewCanvasImplementor {
   /**
    * Render using a GL2 context that is already current (called from GLEventListener.display).
    */
+  private static boolean _debugOnce = true;
+
   private void render(GL2 gl) {
     drainTaskQueue();
-    _camera.setViewport(_canvas.getWidth(), _canvas.getHeight());
+    int w = _canvas.getWidth();
+    int h = _canvas.getHeight();
+    if (w <= 0 || h <= 0) return;
+    _camera.setViewport(w, h);
+
+    if (_debugOnce) {
+      System.out.println("[render] rootNode children: " + _rootNode.getChildren().size());
+      System.out.println("[render] camera loc: " + _camera.getLocation()
+          + " focal: " + _viewFocalPoint + " dist: " + _cameraDistance);
+      System.out.println("[render] viewport: " + w + "x" + h);
+      System.out.println("[render] backend: " + _backend);
+      _debugOnce = false;
+    }
+
+    // Render the scene directly via a JoglRenderBackend, or manually if
+    // the backend OSGi service wasn't available (Eclipse PDE dev mode).
     if (_backend instanceof JoglRenderBackend) {
       ((JoglRenderBackend) _backend).renderPass(gl, _rootNode, _camera, _lights, null);
+    } else {
+      // Fallback: render directly without the backend service
+      gl.glViewport(0, 0, w, h);
+      gl.glClear(com.jogamp.opengl.GL.GL_COLOR_BUFFER_BIT | com.jogamp.opengl.GL.GL_DEPTH_BUFFER_BIT);
+      float[] m = new float[16];
+      gl.glMatrixMode(0x1701 /* GL_PROJECTION */);
+      _camera.getProjectionMatrix().get(m);
+      gl.glLoadMatrixf(m, 0);
+      gl.glMatrixMode(0x1700 /* GL_MODELVIEW */);
+      _camera.getViewMatrix().get(m);
+      gl.glLoadMatrixf(m, 0);
+      new JoglSceneWalker().walk(gl, _rootNode, null);
     }
   }
 

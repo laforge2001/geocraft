@@ -181,6 +181,7 @@ public class VolumeViewer extends AbstractDataViewer implements IVolumeViewer, I
     _timeDomainNode = new GroupNode(TIME_DOMAIN);
     _depthDomainNode = new GroupNode(DEPTH_DOMAIN);
     _viewCanvasImpl.addToScene(_timeDomainNode);
+    _viewCanvasImpl.addToScene(_depthDomainNode);
   }
 
   @Override
