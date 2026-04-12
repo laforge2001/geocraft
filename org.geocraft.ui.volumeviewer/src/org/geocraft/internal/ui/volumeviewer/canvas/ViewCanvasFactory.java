@@ -37,9 +37,9 @@ public class ViewCanvasFactory {
 
     final RenderBackend backend = lookupRenderBackend();
     final JoglSwtCanvas canvas = new JoglSwtCanvas(canvasComposite);
-    if (backend != null) {
-      backend.initialize(canvas);
-    }
+    // Do NOT call backend.initialize(canvas) here — the GLCanvas context
+    // doesn't exist until the widget is realized (shown on screen).
+    // ViewCanvasImplementor handles lazy initialization on first render.
     final Control swtControl = (Control) (Object) canvas.getSwtCanvas();
     final SwtInputAdapter inputAdapter = new SwtInputAdapter(swtControl);
 

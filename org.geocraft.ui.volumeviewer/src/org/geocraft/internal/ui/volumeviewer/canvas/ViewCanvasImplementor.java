@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.eclipse.swt.widgets.Display;
 import org.geocraft.core.rendering.backend.RenderBackend;
 import org.geocraft.core.rendering.backend.TextureHandle;
 import org.geocraft.core.rendering.camera.Camera;
@@ -69,6 +70,9 @@ public class ViewCanvasImplementor {
   private boolean _usePerspective = true;
   private Vector4f _background = new Vector4f(0, 0, 0, 1);
   private VolumeMouseLook _mouseLook;
+  private boolean _initialized = false;
+  private boolean _renderLoopRunning = false;
+  private static final int RENDER_INTERVAL_MS = 33; // ~30 fps
 
   public ViewCanvasImplementor(final RenderBackend backend, final JoglSwtCanvas canvas,
       final SwtInputAdapter inputAdapter, final IVolumeViewer view) {
@@ -86,10 +90,59 @@ public class ViewCanvasImplementor {
     _widgetRoot.addChild(_cursor);
     _widgetRoot.addChild(_pick);
 
+    // Default camera setup
+    _camera.setPerspective((float) Math.toRadians(45), 1f, 0.1f, 100000f);
+    _camera.setLocation(new Vector3f(0, 0, 1000));
+    _camera.lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 1, 0));
+
     setSunAzimuth(225.0 * (Math.PI / 180.0));
     setSunElevation(45.0 * (Math.PI / 180.0));
 
     _mouseLook = VolumeMouseLook.setupTriggers(_inputAdapter, this);
+
+    // Start the render loop — it will lazy-init the GL context on first tick
+    startRenderLoop();
+  }
+
+  /**
+   * Lazy-initialize the GL backend on first render, once the canvas is realized.
+   */
+  private boolean ensureInitialized() {
+    if (_initialized) return true;
+    if (_backend == null || _canvas == null) return false;
+    if (_canvas.getSwtCanvas().isDisposed()) return false;
+    // The GLCanvas must be visible and have a nonzero size before the context exists
+    if (_canvas.getWidth() <= 0 || _canvas.getHeight() <= 0) return false;
+    try {
+      _backend.initialize(_canvas);
+      _initialized = true;
+      return true;
+    } catch (final Exception e) {
+      System.err.println("[ViewCanvasImplementor] GL init failed, will retry: " + e.getMessage());
+      return false;
+    }
+  }
+
+  /**
+   * Start a timer-driven render loop on the SWT UI thread.
+   */
+  private void startRenderLoop() {
+    if (_renderLoopRunning) return;
+    _renderLoopRunning = true;
+    final Display display = _canvas.getSwtCanvas().getDisplay();
+    display.timerExec(RENDER_INTERVAL_MS, new Runnable() {
+      @Override
+      public void run() {
+        if (_canvas.getSwtCanvas().isDisposed()) {
+          _renderLoopRunning = false;
+          return;
+        }
+        if (ensureInitialized()) {
+          render();
+        }
+        display.timerExec(RENDER_INTERVAL_MS, this);
+      }
+    });
   }
 
   public JoglSwtCanvas getCanvas() {
@@ -292,11 +345,14 @@ public class ViewCanvasImplementor {
    */
   public void render() {
     if (_backend == null || _canvas == null) return;
+    if (_canvas.getSwtCanvas().isDisposed()) return;
     drainTaskQueue();
     _camera.setViewport(_canvas.getWidth(), _canvas.getHeight());
     _backend.renderPass(_rootNode, _camera, _lights);
-    _backend.renderPass(_wireoverRoot, _camera, _lights);
-    _backend.renderPass(_widgetRoot, _camera, _lights);
+    // TODO: wireover and widget passes once those features are ported
+    // _backend.renderPass(_wireoverRoot, _camera, _lights);
+    // _backend.renderPass(_widgetRoot, _camera, _lights);
+    _canvas.swapBuffers();
   }
 
   private void drainTaskQueue() {

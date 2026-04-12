@@ -46,13 +46,23 @@ public class JoglSwtCanvas implements RenderSurface {
     }
 
     @Override public void makeCurrent() {
-        GLContext ctx = canvas.getContext();
-        if (ctx != null && !ctx.isCurrent()) ctx.makeCurrent();
+        if (canvas.isDisposed()) return;
+        try {
+            GLContext ctx = canvas.getContext();
+            if (ctx != null && !ctx.isCurrent()) ctx.makeCurrent();
+        } catch (Exception e) {
+            // Context not yet available — widget may not be realized
+        }
     }
 
     @Override public void release() {
-        GLContext ctx = canvas.getContext();
-        if (ctx != null && ctx.isCurrent()) ctx.release();
+        if (canvas.isDisposed()) return;
+        try {
+            GLContext ctx = canvas.getContext();
+            if (ctx != null && ctx.isCurrent()) ctx.release();
+        } catch (Exception e) {
+            // ignore
+        }
     }
 
     @Override public void swapBuffers() {
