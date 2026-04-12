@@ -1,17 +1,24 @@
 package org.geocraft.ui.volumeviewer.renderer.seismic;
 
 
+import java.nio.FloatBuffer;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.geocraft.core.color.ColorMapEvent;
+import org.geocraft.core.model.datatypes.CoordinateSeries;
 import org.geocraft.core.model.datatypes.Domain;
+import org.geocraft.core.model.datatypes.Point3d;
 import org.geocraft.core.model.datatypes.SpatialExtent;
 import org.geocraft.core.model.seismic.PostStack3d;
 import org.geocraft.core.rendering.scene.GroupNode;
+import org.geocraft.core.rendering.scene.LineGeometry;
 import org.geocraft.core.rendering.scene.SceneNode;
 import org.geocraft.ui.viewer.ReadoutInfo;
 import org.geocraft.ui.volumeviewer.VolumeViewRenderer;
+import org.geocraft.ui.volumeviewer.renderer.util.VolumeViewerHelper;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 
 /**
@@ -41,7 +48,52 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
 
   @Override
   protected void addSpatials() {
+    final CoordinateSeries extent = _volume.getExtent();
+    final Point3d[] rawPoints = extent.getPointsDirect();
+    final Vector3f[] points = VolumeViewerHelper.points3dToVector3(rawPoints);
+    if (points == null || points.length == 0) {
+      return;
+    }
+
+    // Build 24 vertices defining 12 line segments (bounding box outline).
+    // points[0..3] are the bottom 4 corners, points[4..7] are the top 4 corners.
+    final int nr = points.length; // expected 8
+    final Vector3f[] vertex = new Vector3f[24];
+    int k = 0;
+    for (int i = 0; i < 4; i++) {
+      // Bottom edge
+      vertex[k] = points[i];
+      vertex[nr + k] = points[nr / 2 + i];
+      vertex[2 * nr + k] = points[i];
+      k++;
+      int pos = i + 1;
+      if (pos == nr / 2) {
+        pos = 0;
+      }
+      // Next bottom corner / next top corner / top of vertical
+      vertex[k] = points[pos];
+      vertex[nr + k] = points[nr / 2 + pos];
+      vertex[2 * nr + k] = points[nr / 2 + i];
+      k++;
+    }
+
+    // Pack vertices into a FloatBuffer
+    final FloatBuffer buf = FloatBuffer.allocate(24 * 3);
+    for (int i = 0; i < 24; i++) {
+      buf.put(vertex[i].x);
+      buf.put(vertex[i].y);
+      buf.put(vertex[i].z);
+    }
+    buf.flip();
+
+    final LineGeometry boundingBox = new LineGeometry(_volume.getDisplayName() + " bounding box");
+    boundingBox.setVertices(buf, 24);
+    boundingBox.setColor(new Vector4f(1, 1, 1, 1));
+    boundingBox.setLineWidth(1.5f);
+
     _volumeNode = new GroupNode(_volume.getDisplayName());
+    _volumeNode.addChild(boundingBox);
+
     _viewer.mapSpatial(_volumeNode, this);
     _viewer.addToScene(_volume.getZDomain(), _volumeNode);
   }
@@ -104,8 +156,8 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
 
   public synchronized boolean calculateRange(final boolean inlineVisible, final float currentInline,
       final boolean xlineVisible, final float currentXline, final boolean zVisible, final float currentZ) {
-    // TODO: port range calculation
-    return false;
+    // Bounding box is always present; signal that a redraw is needed.
+    return true;
   }
 
   public SpatialExtent getExtent() {

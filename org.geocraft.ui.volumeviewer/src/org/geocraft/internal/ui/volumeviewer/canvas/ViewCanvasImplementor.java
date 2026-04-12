@@ -64,6 +64,9 @@ public class ViewCanvasImplementor {
   private final FocusRods _pick;
 
   private final Vector3f _viewFocalPoint = new Vector3f();
+  private volatile float _cameraDistance = 5000f;
+  private volatile float _cameraAzimuth = (float) Math.toRadians(225);
+  private volatile float _cameraElevation = (float) Math.toRadians(30);
   private double _exaggeration = 1.0;
   private double _sunAzimuth;
   private double _sunElevation;
@@ -91,8 +94,7 @@ public class ViewCanvasImplementor {
 
     // Default camera setup
     _camera.setPerspective((float) Math.toRadians(45), 1f, 0.1f, 100000f);
-    _camera.setLocation(new Vector3f(0, 0, 1000));
-    _camera.lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 1, 0));
+    updateCameraFromSpherical();
 
     setSunAzimuth(225.0 * (Math.PI / 180.0));
     setSunElevation(45.0 * (Math.PI / 180.0));
@@ -249,7 +251,58 @@ public class ViewCanvasImplementor {
   }
 
   public void centerOnSpatial(final Orientation orientation, final SceneNode... targets) {
-    // TODO: compute bounding volume over targets and move camera
+    if (targets == null || targets.length == 0) {
+      return;
+    }
+    // Compute bounding box over all target scene graphs
+    final Vector3f min = new Vector3f(Float.MAX_VALUE, Float.MAX_VALUE, Float.MAX_VALUE);
+    final Vector3f max = new Vector3f(-Float.MAX_VALUE, -Float.MAX_VALUE, -Float.MAX_VALUE);
+    for (final SceneNode target : targets) {
+      collectBounds(target, min, max);
+    }
+    if (min.x > max.x) {
+      return; // no geometry found
+    }
+    // Set focal point to bounding box center
+    _viewFocalPoint.set(
+        (min.x + max.x) * 0.5f,
+        (min.y + max.y) * 0.5f,
+        (min.z + max.z) * 0.5f);
+    // Set distance to fit the bounding box (diagonal / 2 / tan(fov/2))
+    final float dx = max.x - min.x;
+    final float dy = max.y - min.y;
+    final float dz = max.z - min.z;
+    final float diagonal = (float) Math.sqrt(dx * dx + dy * dy + dz * dz);
+    _cameraDistance = diagonal * 1.2f; // 1.2x to give some margin
+    if (_cameraDistance < 1f) {
+      _cameraDistance = 1000f;
+    }
+    updateCameraFromSpherical();
+  }
+
+  /**
+   * Recursively collect vertex bounds from LineGeometry children.
+   */
+  private void collectBounds(final SceneNode node, final Vector3f min, final Vector3f max) {
+    if (node instanceof org.geocraft.core.rendering.scene.LineGeometry) {
+      final org.geocraft.core.rendering.scene.LineGeometry line =
+          (org.geocraft.core.rendering.scene.LineGeometry) node;
+      final java.nio.FloatBuffer verts = line.getVertices();
+      if (verts != null) {
+        verts.rewind();
+        for (int i = 0; i < line.getVertexCount(); i++) {
+          final float x = verts.get();
+          final float y = verts.get();
+          final float z = verts.get();
+          min.min(new Vector3f(x, y, z));
+          max.max(new Vector3f(x, y, z));
+        }
+        verts.rewind();
+      }
+    }
+    for (final SceneNode child : node.getChildren()) {
+      collectBounds(child, min, max);
+    }
   }
 
   public SceneText createSceneText(final String name, final String text, final SceneText.Alignment alignment) {
@@ -263,19 +316,39 @@ public class ViewCanvasImplementor {
   }
 
   public void rotateCamera(final float deltaAzimuth, final float deltaElevation) {
-    // TODO: port camera rotation
+    _cameraAzimuth += deltaAzimuth;
+    // Clamp elevation to avoid gimbal lock (stay within -89 to +89 degrees)
+    _cameraElevation = Math.max((float) Math.toRadians(-89),
+        Math.min((float) Math.toRadians(89), _cameraElevation + deltaElevation));
+    updateCameraFromSpherical();
   }
 
   public void panCamera(final float deltaX, final float deltaY) {
-    // TODO: port camera panning
+    // Compute camera right and up vectors relative to the view direction
+    final Vector3f eye = computeCameraPosition();
+    final Vector3f forward = new Vector3f(_viewFocalPoint).sub(eye).normalize();
+    final Vector3f worldUp = new Vector3f(0, 0, 1);
+    final Vector3f right = new Vector3f(forward).cross(worldUp).normalize();
+    final Vector3f up = new Vector3f(right).cross(forward).normalize();
+    // Scale pan by distance so it feels consistent
+    final float panScale = _cameraDistance * 0.001f;
+    final Vector3f offset = new Vector3f(right).mul(-deltaX * panScale)
+        .add(new Vector3f(up).mul(deltaY * panScale));
+    _viewFocalPoint.add(offset);
+    updateCameraFromSpherical();
   }
 
   public void zoomCamera(final float scalar) {
-    // TODO: port camera zoom
+    _cameraDistance *= (1f + scalar * 0.1f);
+    if (_cameraDistance < 1f) {
+      _cameraDistance = 1f;
+    }
+    updateCameraFromSpherical();
   }
 
   public void zoomCamera(final float scalar, final int mouseX, final int mouseY) {
-    // TODO: port camera zoom-to-point
+    // For now, same as basic zoom
+    zoomCamera(scalar);
   }
 
   public void doPick(final int screenX, final int screenY, final boolean rightClick, final Object extra) {
@@ -319,9 +392,34 @@ public class ViewCanvasImplementor {
   }
 
   /**
-   * Render the scene using the Layer 1 backend.
-   * TODO: wire this to a redraw event loop.
+   * Compute the camera position from spherical coordinates around the focal point.
+   * Azimuth is measured from Y-axis (north) clockwise when viewed from above.
+   * Elevation is measured from the horizontal plane.
+   * The "up" direction is Z-positive.
    */
+  private Vector3f computeCameraPosition() {
+    final float cosEl = (float) Math.cos(_cameraElevation);
+    final float sinEl = (float) Math.sin(_cameraElevation);
+    final float cosAz = (float) Math.cos(_cameraAzimuth);
+    final float sinAz = (float) Math.sin(_cameraAzimuth);
+    // Spherical to Cartesian (Z-up convention)
+    final float x = _viewFocalPoint.x + _cameraDistance * cosEl * sinAz;
+    final float y = _viewFocalPoint.y + _cameraDistance * cosEl * cosAz;
+    final float z = _viewFocalPoint.z + _cameraDistance * sinEl;
+    return new Vector3f(x, y, z);
+  }
+
+  /**
+   * Recompute camera location and orientation from the current spherical
+   * coordinate state (_cameraDistance, _cameraAzimuth, _cameraElevation)
+   * orbiting around _viewFocalPoint.
+   */
+  private void updateCameraFromSpherical() {
+    final Vector3f eye = computeCameraPosition();
+    _camera.setLocation(eye);
+    _camera.lookAt(new Vector3f(_viewFocalPoint), new Vector3f(0, 0, 1));
+  }
+
   /**
    * Render using a GL2 context that is already current (called from GLEventListener.display).
    */
