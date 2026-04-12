@@ -79,6 +79,8 @@ public class JoglSwtCanvas implements RenderSurface {
 
     private final GLWindow glWindow;
     private final NewtCanvasSWT newtCanvas;
+    private volatile int cachedWidth;
+    private volatile int cachedHeight;
 
     public JoglSwtCanvas(Composite parent) {
         ensureNativesConfigured();
@@ -115,6 +117,8 @@ public class JoglSwtCanvas implements RenderSurface {
                 callback.onDisplay(d.getGL().getGL2());
             }
             @Override public void reshape(GLAutoDrawable d, int x, int y, int w, int h) {
+                cachedWidth = w;
+                cachedHeight = h;
                 callback.onReshape(d.getGL().getGL2(), w, h);
             }
             @Override public void dispose(GLAutoDrawable d) { }
@@ -126,13 +130,8 @@ public class JoglSwtCanvas implements RenderSurface {
     /** Get the SWT control for layout/input purposes. */
     public Control getSwtControl() { return newtCanvas; }
 
-    @Override public int getWidth() {
-        return newtCanvas.isDisposed() ? 0 : newtCanvas.getSize().x;
-    }
-
-    @Override public int getHeight() {
-        return newtCanvas.isDisposed() ? 0 : newtCanvas.getSize().y;
-    }
+    @Override public int getWidth() { return cachedWidth; }
+    @Override public int getHeight() { return cachedHeight; }
 
     @Override public void makeCurrent() {
         glWindow.getContext().makeCurrent();
