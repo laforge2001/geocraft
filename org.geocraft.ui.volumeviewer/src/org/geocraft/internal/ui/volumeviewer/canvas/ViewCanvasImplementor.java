@@ -101,6 +101,9 @@ public class ViewCanvasImplementor {
     setSunElevation(45.0 * (Math.PI / 180.0));
 
     _mouseLook = VolumeMouseLook.setupTriggers(_inputAdapter, this);
+    // Also register on the NEWT window directly — NEWT captures its own
+    // input events and SWT listeners on the parent don't receive them.
+    canvas.addInputListener(_mouseLook);
 
     // Start the JOGL render loop via the canvas's RenderCallback.
     // The FPSAnimator drives rendering at 30fps on its own thread.

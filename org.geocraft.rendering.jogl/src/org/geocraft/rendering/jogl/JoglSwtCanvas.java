@@ -3,6 +3,13 @@ package org.geocraft.rendering.jogl;
 import java.io.File;
 import java.net.URL;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.jogamp.newt.event.KeyEvent;
+import com.jogamp.newt.event.KeyListener;
+import com.jogamp.newt.event.MouseEvent;
+import com.jogamp.newt.event.MouseListener;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
@@ -127,8 +134,81 @@ public class JoglSwtCanvas implements RenderSurface {
         animator.start();
     }
 
-    /** Get the SWT control for layout/input purposes. */
+    /** Get the SWT control for layout purposes. */
     public Control getSwtControl() { return newtCanvas; }
+
+    /**
+     * Register input listeners on the NEWT GLWindow. NEWT captures its own
+     * input events — SWT listeners on the parent composite won't receive them.
+     */
+    public void addInputListener(org.geocraft.core.rendering.input.InputListener listener) {
+        glWindow.addMouseListener(new MouseListener() {
+            @Override public void mouseClicked(MouseEvent e) { }
+            @Override public void mouseEntered(MouseEvent e) { }
+            @Override public void mouseExited(MouseEvent e) { }
+
+            @Override public void mousePressed(MouseEvent e) {
+                listener.onMouse(new org.geocraft.core.rendering.input.MouseInputEvent(
+                    org.geocraft.core.rendering.input.MouseInputEvent.Kind.PRESS,
+                    newtButton(e.getButton()), e.getX(), e.getY(), 0,
+                    e.isShiftDown(), e.isControlDown(), e.isAltDown()));
+            }
+
+            @Override public void mouseReleased(MouseEvent e) {
+                listener.onMouse(new org.geocraft.core.rendering.input.MouseInputEvent(
+                    org.geocraft.core.rendering.input.MouseInputEvent.Kind.RELEASE,
+                    newtButton(e.getButton()), e.getX(), e.getY(), 0,
+                    e.isShiftDown(), e.isControlDown(), e.isAltDown()));
+            }
+
+            @Override public void mouseMoved(MouseEvent e) {
+                listener.onMouse(new org.geocraft.core.rendering.input.MouseInputEvent(
+                    org.geocraft.core.rendering.input.MouseInputEvent.Kind.MOVE,
+                    org.geocraft.core.rendering.input.MouseInputEvent.Button.NONE,
+                    e.getX(), e.getY(), 0,
+                    e.isShiftDown(), e.isControlDown(), e.isAltDown()));
+            }
+
+            @Override public void mouseDragged(MouseEvent e) {
+                listener.onMouse(new org.geocraft.core.rendering.input.MouseInputEvent(
+                    org.geocraft.core.rendering.input.MouseInputEvent.Kind.DRAG,
+                    newtButton(e.getButton()), e.getX(), e.getY(), 0,
+                    e.isShiftDown(), e.isControlDown(), e.isAltDown()));
+            }
+
+            @Override public void mouseWheelMoved(MouseEvent e) {
+                listener.onMouse(new org.geocraft.core.rendering.input.MouseInputEvent(
+                    org.geocraft.core.rendering.input.MouseInputEvent.Kind.WHEEL,
+                    org.geocraft.core.rendering.input.MouseInputEvent.Button.NONE,
+                    e.getX(), e.getY(), (int) e.getRotation()[1],
+                    e.isShiftDown(), e.isControlDown(), e.isAltDown()));
+            }
+        });
+
+        glWindow.addKeyListener(new KeyListener() {
+            @Override public void keyPressed(KeyEvent e) {
+                listener.onKey(new org.geocraft.core.rendering.input.KeyInputEvent(
+                    org.geocraft.core.rendering.input.KeyInputEvent.Kind.PRESS,
+                    e.getKeyCode(), e.getKeyChar(),
+                    e.isShiftDown(), e.isControlDown(), e.isAltDown()));
+            }
+            @Override public void keyReleased(KeyEvent e) {
+                listener.onKey(new org.geocraft.core.rendering.input.KeyInputEvent(
+                    org.geocraft.core.rendering.input.KeyInputEvent.Kind.RELEASE,
+                    e.getKeyCode(), e.getKeyChar(),
+                    e.isShiftDown(), e.isControlDown(), e.isAltDown()));
+            }
+        });
+    }
+
+    private static org.geocraft.core.rendering.input.MouseInputEvent.Button newtButton(short b) {
+        switch (b) {
+            case MouseEvent.BUTTON1: return org.geocraft.core.rendering.input.MouseInputEvent.Button.LEFT;
+            case MouseEvent.BUTTON2: return org.geocraft.core.rendering.input.MouseInputEvent.Button.MIDDLE;
+            case MouseEvent.BUTTON3: return org.geocraft.core.rendering.input.MouseInputEvent.Button.RIGHT;
+            default: return org.geocraft.core.rendering.input.MouseInputEvent.Button.NONE;
+        }
+    }
 
     @Override public int getWidth() { return cachedWidth; }
     @Override public int getHeight() { return cachedHeight; }
