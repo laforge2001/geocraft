@@ -56,16 +56,26 @@ Launch the built product:
 
 ### 2b. Build and Launch from the Eclipse IDE
 
-1. **Set the target platform**:
-   - `File > Import > General > Existing Projects into Workspace` and select `org.geocraft.target`.
-   - Open `org.geocraft.target/org.geocraft.target.target`.
-   - Wait for it to resolve, then click **Set as Active Target Platform** (top right of the editor).
-2. **Import the remaining projects**:
-   - `File > Import > Maven > Existing Maven Projects`, select the cloned `geocraft` directory, and import all modules.
-3. **Build**: `Project > Build All` (or let autobuild run). Every bundle must compile cleanly before launch.
-4. **Run the product**:
+1. **Start Eclipse with a new workspace**:
+   - Launch Eclipse IDE for RCP and RAP Developers (2025-12).
+   - When prompted for a workspace, pick a **new, empty directory** (e.g. `~/eclipse-workspaces/geocraft`). Do **not** pick the cloned `geocraft/` directory itself — Eclipse workspace metadata should live outside the source tree.
+   - Close the Welcome tab once Eclipse opens.
+2. **Import all projects into the workspace**:
+   - `File > Import... > Maven > Existing Maven Projects`, click **Next**.
+   - Set **Root Directory** to the cloned `geocraft/` directory.
+   - Eclipse scans and lists every `pom.xml`. Leave all modules checked and click **Finish**.
+   - Wait for the initial Maven/M2E import and workspace build to finish (check the Progress view — this can take several minutes on first import).
+   - Expected result: all `org.geocraft.*` projects appear in the Package Explorer. At this point most projects will show compile errors because the target platform is not yet set — that is normal.
+3. **Configure the target platform**:
+   - In Package Explorer, expand `org.geocraft.target` and double-click `org.geocraft.target.target` to open the Target Editor.
+   - Click **Reload** (top right of the editor) and wait for all p2 locations to resolve. Resolution requires network access to `download.eclipse.org`.
+   - Once resolution completes with no errors, click **Set as Active Target Platform** (top right).
+   - Eclipse will trigger a workspace rebuild. Compile errors should clear. If they don't, run `Project > Clean... > Clean all projects`.
+4. **Create a run configuration and launch**:
    - Open `org.geocraft.product/GeoCraft.product`.
-   - Click **Launch an Eclipse application** (green play button) in the product editor overview page.
+   - On the product editor **Overview** tab, click **Synchronize** to align the product's plug-in list with the target platform, then click **Launch an Eclipse application**. This creates a run configuration named after the product and launches GeoCraft.
+   - For subsequent launches, use `Run > Run Configurations... > Eclipse Application > GeoCraft.product` (or the Run toolbar dropdown).
+   - To tune the launch (VM args, workspace location, included plug-ins), edit the run configuration under `Run > Run Configurations...`.
 
 ### Troubleshooting
 
