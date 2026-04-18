@@ -7,6 +7,7 @@ public class MeshGeometry extends SceneNode {
     private FloatBuffer vertices;    // xyz triples
     private FloatBuffer normals;     // xyz triples, optional
     private FloatBuffer texCoords;   // uv pairs, optional
+    private FloatBuffer colors;      // rgba quads, optional (per-vertex color)
     private IntBuffer indices;       // triangle indices, optional
     private int vertexCount;
     private int triangleCount;
@@ -24,6 +25,9 @@ public class MeshGeometry extends SceneNode {
 
     public FloatBuffer getTexCoords() { return texCoords; }
     public void setTexCoords(FloatBuffer t) { this.texCoords = t; }
+
+    public FloatBuffer getColors() { return colors; }
+    public void setColors(FloatBuffer c) { this.colors = c; }
 
     public IntBuffer getIndices() { return indices; }
     public void setIndices(IntBuffer i, int triangleCount) {

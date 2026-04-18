@@ -15,11 +15,13 @@ public class JoglGeometryUpload {
         FloatBuffer v = mesh.getVertices();
         FloatBuffer n = mesh.getNormals();
         FloatBuffer uv = mesh.getTexCoords();
+        FloatBuffer colors = mesh.getColors();
         IntBuffer idx = mesh.getIndices();
         if (v == null) return;
         v.rewind();
         if (n != null) n.rewind();
         if (uv != null) uv.rewind();
+        if (colors != null) colors.rewind();
         if (idx != null) idx.rewind();
 
         gl.glBegin(GL.GL_TRIANGLES);
@@ -28,6 +30,7 @@ public class JoglGeometryUpload {
             for (int k = 0; k < 3; k++) {
                 int i = idx != null ? idx.get(t * 3 + k) : (t * 3 + k);
                 if (n != null) gl.glNormal3f(n.get(i * 3), n.get(i * 3 + 1), n.get(i * 3 + 2));
+                if (colors != null) gl.glColor4f(colors.get(i * 4), colors.get(i * 4 + 1), colors.get(i * 4 + 2), colors.get(i * 4 + 3));
                 if (uv != null) gl.glTexCoord2f(uv.get(i * 2), uv.get(i * 2 + 1));
                 gl.glVertex3f(v.get(i * 3), v.get(i * 3 + 1), v.get(i * 3 + 2));
             }
