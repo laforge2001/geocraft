@@ -3,9 +3,6 @@ package org.geocraft.rendering.jogl;
 import java.io.File;
 import java.net.URL;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.jogamp.newt.event.KeyEvent;
 import com.jogamp.newt.event.KeyListener;
 import com.jogamp.newt.event.MouseEvent;
@@ -66,21 +63,14 @@ public class JoglSwtCanvas implements RenderSurface {
                         if (!existingPath.contains(nativePath)) {
                             System.setProperty("java.library.path",
                                 nativePath + File.pathSeparator + existingPath);
-                            try {
-                                java.lang.reflect.Field fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");
-                                fieldSysPath.setAccessible(true);
-                                fieldSysPath.set(null, null);
-                            } catch (Exception e) {
-                                // Not available on all JVMs
-                            }
                             System.setProperty("jogamp.gluegen.UseTempJarCache", "false");
-                            System.out.println("[JoglSwtCanvas] Set native library path: " + nativePath);
                         }
                     }
                 }
             }
         } catch (Exception e) {
-            System.err.println("[JoglSwtCanvas] Could not configure native library path: " + e.getMessage());
+            // Could not configure native library path; JOGL may still
+            // succeed if natives are on the default library path.
         }
     }
 
@@ -99,7 +89,6 @@ public class JoglSwtCanvas implements RenderSurface {
         // Start hidden — NEWT windows on macOS take over their parent's
         // drawing area. Show only when data is added via setContentVisible(true).
         newtCanvas.setVisible(false);
-        System.out.println("[JoglSwtCanvas] NewtCanvasSWT created successfully");
     }
 
     /** Show or hide the NEWT canvas. Hidden by default to prevent the

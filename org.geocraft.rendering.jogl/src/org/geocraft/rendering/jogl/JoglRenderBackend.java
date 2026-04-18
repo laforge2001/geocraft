@@ -25,12 +25,12 @@ import org.joml.Matrix4f;
 public class JoglRenderBackend implements RenderBackend {
     private final JoglSceneWalker walker = new JoglSceneWalker();
     private final JoglTextureLoader textureLoader = new JoglTextureLoader();
+    private final float[] _matrixBuf = new float[16];
     private RenderSurface currentSurface;
 
     @Override
     public void initialize(RenderSurface surface) {
         this.currentSurface = surface;
-        System.out.println("[JoglRenderBackend] Initialized");
     }
 
     /**
@@ -45,13 +45,12 @@ public class JoglRenderBackend implements RenderBackend {
 
         Matrix4f proj = camera.getProjectionMatrix();
         Matrix4f view = camera.getViewMatrix();
-        float[] m = new float[16];
         gl.glMatrixMode(GLMatrixFunc.GL_PROJECTION);
-        proj.get(m);
-        gl.glLoadMatrixf(m, 0);
+        proj.get(_matrixBuf);
+        gl.glLoadMatrixf(_matrixBuf, 0);
         gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
-        view.get(m);
-        gl.glLoadMatrixf(m, 0);
+        view.get(_matrixBuf);
+        gl.glLoadMatrixf(_matrixBuf, 0);
 
         applyLights(gl, lights);
         walker.walk(gl, root, overrideMaterial);
@@ -72,7 +71,7 @@ public class JoglRenderBackend implements RenderBackend {
             GL2 gl = GLContext.getCurrentGL().getGL2();
             renderPass(gl, root, camera, lights, overrideMaterial);
         } catch (Exception e) {
-            System.err.println("[JoglRenderBackend] render error: " + e.getMessage());
+            // swallow render errors; surface may be transiently unavailable
         } finally {
             currentSurface.release();
         }

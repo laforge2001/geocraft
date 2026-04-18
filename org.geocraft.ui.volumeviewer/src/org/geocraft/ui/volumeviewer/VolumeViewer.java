@@ -183,12 +183,6 @@ public class VolumeViewer extends AbstractDataViewer implements IVolumeViewer, I
     _viewCanvasImpl.addToScene(_depthDomainNode);
   }
 
-  private void ensureCanvasCreated() {
-    // No-op: canvas is created in initializeCanvas(). This method remains
-    // for API compatibility; a future improvement could defer GL creation
-    // properly by refactoring the constructor to not call _viewCanvasImpl.
-  }
-
   @Override
   protected void initializeToolBars() {
     final SharedToolBar sharedToolbar = getSharedToolBar();
@@ -264,10 +258,7 @@ public class VolumeViewer extends AbstractDataViewer implements IVolumeViewer, I
 
   @Override
   public void addObjects(final boolean block, final Object... objects) {
-    ensureCanvasCreated();
-    if (_viewCanvasImpl != null && _viewCanvasImpl.getCanvas() != null) {
-      _viewCanvasImpl.getCanvas().setContentVisible(true);
-    }
+    _viewCanvasImpl.getCanvas().setContentVisible(true);
     final Shell shell = getShell();
     final BackgroundTask task = new BackgroundTask() {
 

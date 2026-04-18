@@ -3,7 +3,6 @@ package org.geocraft.ui.volumeviewer.renderer.seismic;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.util.concurrent.Callable;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
@@ -215,13 +214,13 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
           _model.getXlineSliceVisible(), _model.getXlineSlice(), _model.getZSliceVisible(), _model.getZSlice());
       if (!result) {
         if (_model.getInlineSliceVisible()) {
-          addInline(_model.getInlineSlice(), true);
+          addInline(_model.getInlineSlice());
         }
         if (_model.getXlineSliceVisible()) {
-          addXline(_model.getXlineSlice(), true);
+          addXline(_model.getXlineSlice());
         }
         if (_model.getZSliceVisible()) {
-          addSlice(_model.getZSlice(), true);
+          addSlice(_model.getZSlice());
         }
       }
     }
@@ -300,13 +299,13 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
 
       // Now rebuild the slice geometry
       if (inlineVisible && _inlineSliceData != null) {
-        addInline(currentInline, true);
+        addInline(currentInline);
       }
       if (xlineVisible && _xlineSliceData != null) {
-        addXline(currentXline, true);
+        addXline(currentXline);
       }
       if (zVisible && _zSliceData != null) {
-        addSlice(currentZ, true);
+        addSlice(currentZ);
       }
       return true;
     }
@@ -317,7 +316,7 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
    * Add an inline slice as a colored grid mesh.
    * The inline slice is a vertical plane along the xline direction.
    */
-  public void addInline(final float value, final boolean drawTexture) {
+  public void addInline(final float value) {
     if (_inlineSliceData == null) {
       return;
     }
@@ -353,7 +352,7 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
    * Add an xline slice as a colored grid mesh.
    * The xline slice is a vertical plane along the inline direction.
    */
-  public void addXline(final float value, final boolean drawTexture) {
+  public void addXline(final float value) {
     if (_xlineSliceData == null) {
       return;
     }
@@ -388,7 +387,7 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
   /**
    * Add a z (horizontal) slice as a colored grid mesh.
    */
-  public void addSlice(final float value, final boolean drawTexture) {
+  public void addSlice(final float value) {
     if (_zSliceData == null) {
       return;
     }
