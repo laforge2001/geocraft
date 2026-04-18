@@ -24,6 +24,7 @@ import org.geocraft.ui.plot.defs.AxisPlacement;
 import org.geocraft.ui.plot.defs.AxisScale;
 import org.geocraft.ui.plot.defs.Orientation;
 import org.geocraft.ui.plot.layout.CanvasLayoutModel;
+import org.geocraft.ui.plot.util.PlotResources;
 
 
 public class DefaultAxisRangeRenderer implements IAxisRangeRenderer {
@@ -110,7 +111,7 @@ public class DefaultAxisRangeRenderer implements IAxisRangeRenderer {
     double stepOrigin = 0;
     double diff = end - start;
     Font textFont = textProperties.getFont();
-    Color textColor = new Color(gc.getDevice(), textProperties.getColor());
+    Color textColor = PlotResources.getColor(textProperties.getColor());
     FontMetrics metrics;
     int x0 = rectangle.x;
     int y0 = rectangle.y;
@@ -159,7 +160,6 @@ public class DefaultAxisRangeRenderer implements IAxisRangeRenderer {
     gc.setTextAntialias(SWT.ON);
     gc.setFont(textFont);
     gc.setForeground(textColor);
-    textColor.dispose();
     metrics = gc.getFontMetrics();
     int canvasWidth = _canvas.getSize().x;
     int canvasHeight = _canvas.getSize().y;

@@ -21,6 +21,7 @@ import org.geocraft.ui.plot.model.IModelSpace;
 import org.geocraft.ui.plot.object.IPlotPoint;
 import org.geocraft.ui.plot.object.IPlotPolygon;
 import org.geocraft.ui.plot.object.IPlotShape;
+import org.geocraft.ui.plot.util.PlotResources;
 
 
 /**
@@ -115,7 +116,7 @@ public class PolygonRenderer extends PointRenderer implements IShapeRenderer {
     // Draw the polygon outline based on the line properties.
     LineProperties lineProps = polygon.getLineProperties();
     LineStyle lineStyle = lineProps.getStyle();
-    Color lineColor = new Color(gc.getDevice(), lineProps.getColor());
+    Color lineColor = PlotResources.getColor(lineProps.getColor());
     if (!lineStyle.equals(LineStyle.NONE)) {
       gc.setForeground(lineColor);
       gc.setLineWidth(polygon.getLineWidth());
@@ -136,7 +137,7 @@ public class PolygonRenderer extends PointRenderer implements IShapeRenderer {
       FillProperties fillProps = polygon.getFillProperties();
       FillStyle fillStyle = fillProps.getStyle();
       BufferedImage fillImage = fillProps.getImage();
-      Color fillColor = new Color(gc.getDevice(), fillProps.getRGB());
+      Color fillColor = PlotResources.getColor(fillProps.getRGB());
       if (fillStyle.equals(FillStyle.SOLID) || fillStyle.equals(FillStyle.TEXTURE) && fillImage == null) {
         gc.setBackground(fillColor);
         gc.fillPolygon(pointArray);
@@ -149,7 +150,6 @@ public class PolygonRenderer extends PointRenderer implements IShapeRenderer {
         //        graphics.fill(polygonShape);
         //        graphics.setPaint(null);
       }
-      fillColor.dispose();
     }
     gc.drawPolygon(pointArray);
 
@@ -163,7 +163,5 @@ public class PolygonRenderer extends PointRenderer implements IShapeRenderer {
 
     // Null out the allocated arrays.
     pointArray = null;
-
-    lineColor.dispose();
   }
 }

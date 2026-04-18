@@ -26,6 +26,7 @@ import org.geocraft.ui.plot.defs.AxisPlacement;
 import org.geocraft.ui.plot.model.IModelSpace;
 import org.geocraft.ui.plot.model.IModelSpaceCanvas;
 import org.geocraft.ui.plot.model.ModelSpaceBounds;
+import org.geocraft.ui.plot.util.PlotResources;
 import org.geocraft.ui.sectionviewer.ISectionViewer;
 
 
@@ -108,7 +109,7 @@ public class TraceAxisRangeRenderer implements IAxisRangeRenderer {
     double stepOrigin = 0;
     double diff = end - start;
     Font textFont = textProperties.getFont();
-    Color textColor = new Color(gc.getDevice(), textProperties.getColor());
+    Color textColor = PlotResources.getColor(textProperties.getColor());
     FontMetrics metrics;
     int x0 = rectangle.x;
     int y0 = rectangle.y;
@@ -144,7 +145,6 @@ public class TraceAxisRangeRenderer implements IAxisRangeRenderer {
     gc.setTextAntialias(SWT.ON);
     gc.setFont(textFont);
     gc.setForeground(textColor);
-    textColor.dispose();
     metrics = gc.getFontMetrics();
     int canvasWidth = _canvas.getSize().x;
     int canvasHeight = _canvas.getSize().y;

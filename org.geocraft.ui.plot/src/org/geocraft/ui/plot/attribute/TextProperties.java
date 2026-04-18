@@ -4,11 +4,11 @@
 package org.geocraft.ui.plot.attribute;
 
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.RGB;
 import org.geocraft.core.common.model.AbstractBean;
 import org.geocraft.ui.plot.defs.TextAnchor;
+import org.geocraft.ui.plot.util.PlotResources;
 
 
 public class TextProperties extends AbstractBean {
@@ -23,7 +23,7 @@ public class TextProperties extends AbstractBean {
   private TextAnchor _textAnchor;
 
   public TextProperties() {
-    _textFont = new Font(null, "SansSerif", 8, SWT.NORMAL);
+    _textFont = PlotResources.getDefaultPlotFont();
     _textColor = new RGB(0, 0, 0);
     _textAnchor = TextAnchor.CENTER;
   }
@@ -58,13 +58,10 @@ public class TextProperties extends AbstractBean {
     if (font != null && _textFont != null && font.equals(_textFont)) {
       return;
     }
-    Font textFontNew = new Font(null, font.getFontData());
+    Font textFontNew = font == null ? null : PlotResources.getFont(font.getFontData());
     Font textFontOld = _textFont;
     _textFont = textFontNew;
     firePropertyChange("textFont", textFontOld, textFontNew);
-    if (textFontOld != null) {
-      textFontOld.dispose();
-    }
   }
 
   public void setColor(final RGB color) {
@@ -76,6 +73,7 @@ public class TextProperties extends AbstractBean {
   }
 
   public void dispose() {
-    _textFont.dispose();
+    // Fonts are owned by PlotResources and live for the session.
+    _textFont = null;
   }
 }

@@ -22,6 +22,7 @@ import org.geocraft.ui.plot.IPlot;
 import org.geocraft.ui.plot.axis.IAxis;
 import org.geocraft.ui.plot.defs.AxisPlacement;
 import org.geocraft.ui.plot.layout.CanvasLayoutModel;
+import org.geocraft.ui.plot.util.PlotResources;
 
 
 /**
@@ -59,9 +60,7 @@ public class AxisRangeCanvas extends PlotCanvas implements IAxisRangeCanvas {
     _renderer = new DefaultAxisRangeRenderer(this, plot, axis, placement, layoutModel);
     _axis = axis;
     _placement = placement;
-    Font font = new Font(null, "SansSerif", 8, SWT.NORMAL);
-    _textProperties.setFont(font);
-    font.dispose();
+    _textProperties.setFont(PlotResources.getDefaultPlotFont());
 
     GridData constraints = new GridData();
     constraints.horizontalSpan = 1;

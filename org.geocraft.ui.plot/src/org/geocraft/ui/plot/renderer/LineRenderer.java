@@ -18,6 +18,7 @@ import org.geocraft.ui.plot.model.IModelSpace;
 import org.geocraft.ui.plot.object.IPlotLine;
 import org.geocraft.ui.plot.object.IPlotPoint;
 import org.geocraft.ui.plot.object.IPlotShape;
+import org.geocraft.ui.plot.util.PlotResources;
 
 
 /**
@@ -98,7 +99,7 @@ public class LineRenderer extends PointRenderer implements IShapeRenderer {
     LineProperties lineProps = line.getLineProperties();
     LineStyle lineStyle = lineProps.getStyle();
     if (lineStyle != LineStyle.NONE) {
-      Color lineColor = new Color(gc.getDevice(), lineProps.getColor());
+      Color lineColor = PlotResources.getColor(lineProps.getColor());
       gc.setForeground(lineColor);
       gc.setLineWidth(lineProps.getWidth());
       gc.setLineJoin(SWT.JOIN_ROUND);
@@ -111,7 +112,6 @@ public class LineRenderer extends PointRenderer implements IShapeRenderer {
         gc.setLineDash(dashes);
       }
       gc.drawLine(ixLine[0], iyLine[0], ixLine[1], iyLine[1]);
-      lineColor.dispose();
     }
 
     // Null out the allocated arrays.

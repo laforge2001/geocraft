@@ -15,6 +15,7 @@ import org.geocraft.ui.plot.defs.AxisScale;
 import org.geocraft.ui.plot.defs.LineStyle;
 import org.geocraft.ui.plot.defs.Orientation;
 import org.geocraft.ui.plot.model.ICoordinateTransform;
+import org.geocraft.ui.plot.util.PlotResources;
 
 
 /**
@@ -61,7 +62,7 @@ public class VerticalGridLinesRenderer implements IGridLinesRenderer {
     // Update the GC with the line properties.
     int lineWidth = lineProps.getWidth();
     LineStyle lineStyle = lineProps.getStyle();
-    Color lineColor = new Color(gc.getDevice(), lineProps.getColor());
+    Color lineColor = PlotResources.getColor(lineProps.getColor());
     gc.setForeground(lineColor);
     if (lineStyle.equals(LineStyle.SOLID)) {
       gc.setLineWidth(lineWidth);
@@ -76,7 +77,6 @@ public class VerticalGridLinesRenderer implements IGridLinesRenderer {
     } else {
       drawStartAndEndOnly = true;
     }
-    lineColor.dispose();
 
     if (!drawStartAndEndOnly) {
       AxisScale scale = axis.getScale();

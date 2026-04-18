@@ -28,10 +28,8 @@ public class PlotImageGraphics {
    * @param height the height.
    */
   public PlotImageGraphics(final Composite composite, final int width, final int height) {
-    // Allocate a new image.
     _image = new Image(composite.getDisplay(), width, height);
     if (_image != null) {
-      // Allocate a new GC.
       _graphics = new GC(_image);
     }
   }

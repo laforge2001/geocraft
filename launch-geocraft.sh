@@ -70,6 +70,7 @@ exec "$JAVA" \
     -Xmx1200m \
     -XstartOnFirstThread \
     -Dorg.eclipse.swt.internal.carbon.smallFonts \
+    -Dswt.autoScale=100 \
     -Djava.library.path="$JOGL_NATIVES:$JAVA_HOME/lib" \
     -Djogamp.gluegen.UseTempJarCache=false \
     -Djogamp.debug.JNILibLoader=true \

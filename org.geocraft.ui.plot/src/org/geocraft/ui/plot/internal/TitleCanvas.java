@@ -24,6 +24,7 @@ import org.geocraft.ui.plot.defs.Alignment;
 import org.geocraft.ui.plot.label.ILabel;
 import org.geocraft.ui.plot.label.TitleMouseAdapter;
 import org.geocraft.ui.plot.layout.CanvasLayoutModel;
+import org.geocraft.ui.plot.util.PlotResources;
 
 
 /**
@@ -128,9 +129,8 @@ public class TitleCanvas extends PlotCanvas implements ITitleCanvas {
     Alignment alignment = label.getAlignment();
 
     graphics.setFont(textFont);
-    Color textColor = new Color(graphics.getDevice(), _textProperties.getColor());
+    Color textColor = PlotResources.getColor(_textProperties.getColor());
     graphics.setForeground(textColor);
-    textColor.dispose();
 
     FontMetrics metrics = graphics.getFontMetrics();
 
