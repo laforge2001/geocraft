@@ -398,6 +398,12 @@ public abstract class SeismicDatasetRenderer extends SectionViewRenderer impleme
    * An internal method to remove all traces from the renderer.
    */
   protected void removeAllTraces() {
+    // Dispose each trace to release the SWT Font held by its TextProperties.
+    for (IPlotTrace plotTrace : _traces) {
+      if (plotTrace instanceof org.geocraft.ui.plot.object.PlotShape) {
+        ((org.geocraft.ui.plot.object.PlotShape) plotTrace).dispose();
+      }
+    }
     _traces.clear();
     _traceValues = null;
   }
