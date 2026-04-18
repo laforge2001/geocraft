@@ -212,3 +212,42 @@ RibbonFactory.generateRibbon.
 **Status**: Architecture complete. Builds clean on native aarch64 JVM with zero
 Ardor3D/LWJGL 2 dependencies. Volume viewer requires geometry-rendering code
 fill-in before functional parity with the (broken) Ardor3D implementation.
+
+---
+
+## Session 2026-04-18: Re-enable Section Viewer
+
+### Symptom 1: blank section until mouse-wheel zoom
+User loaded a seismic section. Plot area stayed blank. Any mouse-wheel zoom made the image appear.
+
+### Root cause
+macOS Cocoa SWT defers GC draws to a backing `Image` — the pixel data
+isn't realized until something reads it. `ModelSpaceCanvas.paintControlCustom`
+draws shapes into `_bufferStaticGraphics` (GC over `_bufferStaticImage`),
+then copies `_bufferSelectedGraphics.drawImage(_bufferStaticImage, 0, 0)`.
+On macOS, that read sees blank pixels because the draws haven't flushed.
+The mouse wheel triggered an `UpdateLevel.RESIZE` paint which calls
+`updateBuffers()` — new Image + new GC + immediate render → visible.
+
+### Fix (commit 9aedee9)
+`ModelSpaceCanvas.paintControlCustom`: call `_bufferStaticImage.getImageData()`
+and `_bufferSelectedImage.getImageData()` between the write phase and the
+read phase to force pixel materialization. ~3.5 MB per-paint pixel copy —
+acceptable.
+
+### Symptom 2: hundreds of `SWT Resource was not properly disposed` errors
+Every trace reload allocated a Font via `TextProperties` default ctor
+(`PlotShape(ShapeType, String)` → `new TextProperties()` → `new Font(...)`),
+and `SeismicDatasetRenderer.removeAllTraces()` only cleared the list
+without disposing.
+
+### Fix (commit 9aedee9)
+`removeAllTraces` now calls `((PlotShape) plotTrace).dispose()` on each
+entry before clearing.
+
+### Symptom 3: red toolbar + yellow plot-area backgrounds in all data viewers
+Dead debug code in `AbstractDataViewer.createPartControl`.
+
+### Fix (commit 120757a)
+Removed `_toolBarContainer.setBackground(new Color(null, 255, 0, 0))` and
+the matching yellow on the parent.
