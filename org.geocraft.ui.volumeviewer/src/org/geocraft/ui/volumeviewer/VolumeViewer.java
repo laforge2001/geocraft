@@ -138,20 +138,8 @@ public class VolumeViewer extends AbstractDataViewer implements IVolumeViewer, I
     _messageText.setLayoutData(layoutData);
     _messageText.setForeground(new Color(null, 0, 0, 200));
 
-    // start a thread that will issue a repaint request every 1 second
-    new Thread(new Runnable() {
-      @Override
-      public void run() {
-        while (!VolumeViewer.this.isDisposed()) {
-          try {
-            Thread.sleep(1000);
-          } catch (final InterruptedException e) {
-            e.printStackTrace();
-          }
-          VolumeViewer.this.makeDirty();
-        }
-      }
-    }, "3D Viewer repaint thread").start();
+    // Rendering is driven by FPSAnimator inside JoglSwtCanvas at 30fps;
+    // no external repaint thread is needed.
 
     final String currentCenter = _store.getString(VolumeViewerPreferencePage.CURRENT_CENTER);
     final String projectionMode = _store.getString(VolumeViewerPreferencePage.PROJECTION_MODE);

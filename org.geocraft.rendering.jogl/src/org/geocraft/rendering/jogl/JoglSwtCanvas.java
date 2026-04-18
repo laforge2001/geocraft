@@ -78,6 +78,7 @@ public class JoglSwtCanvas implements RenderSurface {
     private final NewtCanvasSWT newtCanvas;
     private volatile int cachedWidth;
     private volatile int cachedHeight;
+    private FPSAnimator animator;
 
     public JoglSwtCanvas(Composite parent) {
         ensureNativesConfigured();
@@ -130,7 +131,7 @@ public class JoglSwtCanvas implements RenderSurface {
             }
             @Override public void dispose(GLAutoDrawable d) { }
         });
-        FPSAnimator animator = new FPSAnimator(glWindow, fps);
+        animator = new FPSAnimator(glWindow, fps);
         animator.start();
     }
 
@@ -235,6 +236,11 @@ public class JoglSwtCanvas implements RenderSurface {
     }
 
     @Override public void dispose() {
+        // Stop the animator first so its render thread doesn't try to call
+        // display() on a destroyed GLWindow.
+        if (animator != null && animator.isAnimating()) {
+            animator.stop();
+        }
         glWindow.destroy();
         if (!newtCanvas.isDisposed()) {
             newtCanvas.dispose();

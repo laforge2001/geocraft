@@ -48,7 +48,12 @@ public class JoglGeometryUpload {
         gl.glDisable(GL.GL_TEXTURE_2D);
         gl.glBegin(GL.GL_LINES);
         for (int i = 0; i < line.getVertexCount(); i++) {
-            gl.glVertex3f(v.get(), v.get(), v.get());
+            // Pull into locals: Java doesn't guarantee argument evaluation
+            // order relative to side effects on the FloatBuffer position.
+            float x = v.get();
+            float y = v.get();
+            float z = v.get();
+            gl.glVertex3f(x, y, z);
         }
         gl.glEnd();
         v.rewind();
