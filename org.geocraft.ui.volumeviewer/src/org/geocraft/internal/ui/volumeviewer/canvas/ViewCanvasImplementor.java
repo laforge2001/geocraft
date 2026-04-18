@@ -20,6 +20,8 @@ import org.geocraft.core.rendering.pick.PickResult;
 import org.geocraft.core.rendering.pick.Ray;
 import org.geocraft.core.rendering.scene.GroupNode;
 import org.geocraft.core.rendering.scene.SceneNode;
+import org.geocraft.core.service.ServiceProvider;
+import org.geocraft.core.service.logging.ILogger;
 import org.geocraft.internal.ui.volumeviewer.input.VolumeMouseLook;
 import org.geocraft.internal.ui.volumeviewer.widget.FocusRods;
 import org.geocraft.internal.ui.volumeviewer.widget.FocusRods.ShowMode;
@@ -44,10 +46,14 @@ import org.joml.Vector4f;
  */
 public class ViewCanvasImplementor {
 
+  private static final ILogger LOGGER = ServiceProvider.getLoggingService().getLogger(ViewCanvasImplementor.class);
+
   private final RenderBackend _backend;
   private final JoglSwtCanvas _canvas;
   private final SwtInputAdapter _inputAdapter;
   private final IVolumeViewer _view;
+  private boolean _missingBackendWarned;
+  private boolean _renderErrorLogged;
 
   private final GroupNode _rootNode = new GroupNode("root");
   private final GroupNode _wireoverRoot = new GroupNode("wireover");
@@ -434,9 +440,22 @@ public class ViewCanvasImplementor {
 
     // Render the scene via the JoglRenderBackend. If no backend is available
     // (e.g. OSGi service not registered in PDE dev mode), the canvas will
-    // remain black — no fallback path.
+    // remain black — no fallback path. Warn once per canvas so the failure
+    // mode is not silent (issue #35).
     if (_backend instanceof JoglRenderBackend) {
-      ((JoglRenderBackend) _backend).renderPass(gl, _rootNode, _camera, _lights, null);
+      try {
+        ((JoglRenderBackend) _backend).renderPass(gl, _rootNode, _camera, _lights, null);
+      } catch (final Throwable t) {
+        if (!_renderErrorLogged) {
+          _renderErrorLogged = true;
+          LOGGER.error("3D viewer render pass threw: " + t.getMessage(), t);
+        }
+      }
+    } else if (!_missingBackendWarned) {
+      _missingBackendWarned = true;
+      LOGGER.warn("3D viewer has no JoglRenderBackend (got "
+          + (_backend == null ? "null" : _backend.getClass().getName())
+          + ") — canvas will render black.");
     }
   }
 

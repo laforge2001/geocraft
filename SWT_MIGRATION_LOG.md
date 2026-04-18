@@ -320,3 +320,141 @@ hands back an NSBitmapImageRep with a pixel stride the CoreGraphics
 bitmap in Java with a known 24-bit RGB layout; SWT wraps it in an
 NSBitmapImageRep whose buffer stride matches CG's expectation, so the
 first `fillRectangle` inside `clearGraphics` no longer crashes.
+
+## Symptom 4 — 3D viewer black, then Section Viewer also black (issue #35, 2026-04-18)
+
+### Reproduction
+1. Launch GeoCraft on macOS Apple Silicon (Eclipse 2025-12 PDE or `launch-geocraft.sh`) after the #33 SIGSEGV fix.
+2. Generate test data, open Section Viewer — renders correctly.
+3. Open 3D Viewer on the same dataset — canvas is entirely black.
+4. Switch back to the Section Viewer — plot area now also black; further paints do not update it.
+
+### Investigation
+- `ViewCanvasImplementor.render()` silently skipped rendering if `_backend`
+  wasn't a `JoglRenderBackend`. `ViewCanvasFactory.lookupRenderBackend()`
+  returned `null` without logging when the OSGi service was missing. The
+  legacy `JoglRenderBackend.renderPass(GroupNode, ...)` path swallowed
+  every exception. The failure mode — "canvas draws nothing" — had no
+  runtime signal anywhere.
+- `JoglSwtCanvas` constructs a NEWT `GLWindow` inside a `NewtCanvasSWT`
+  with `newtCanvas.setVisible(false)`. `ViewCanvasImplementor`'s constructor
+  then called `canvas.startAnimator(30, ...)` immediately, so the
+  `FPSAnimator` began calling `display()` against a hidden NSOpenGLView
+  before the canvas was ever shown.
+- Under `-XstartOnFirstThread` SWT owns the AppKit main thread, but the
+  FPSAnimator's dedicated render thread holds the CGLContext continuously.
+  When the user switches to a sibling part (Section Viewer), SWT's
+  `ModelSpaceCanvas.paintControlCustom()` GC blits fire but the IOSurface
+  backing the NSView never updates — the plot stays black.
+- The viewer was never telling the FPSAnimator to pause when hidden or
+  disposed, and never destroying the NEWT `GLWindow` on close, so the
+  cascade persisted until the JVM exited.
+
+### Fix
+Scoped changes in `org.geocraft.ui.volumeviewer` and `org.geocraft.rendering.jogl`:
+
+- `ViewCanvasFactory.lookupRenderBackend()` now logs a `WARN` on every
+  null path (missing `BundleContext`, missing `ServiceReference`, catch
+  block). A second `WARN` in `ViewCanvasFactory.makeCanvas()` names the
+  failure mode ("3D viewer canvas will render black"). Silent failure
+  is gone.
+- `ViewCanvasImplementor.render()` wraps the `JoglRenderBackend.renderPass`
+  call in a try/catch that logs once per canvas, and emits a one-shot
+  `WARN` if `_backend` isn't a `JoglRenderBackend`.
+- `JoglRenderBackend.renderPass(GroupNode, ...)` now logs the first
+  swallowed exception via `java.util.logging.Logger` instead of silently
+  continuing.
+- `JoglSwtCanvas.startAnimator()` registers the `GLEventListener` and
+  constructs the `FPSAnimator` but defers `animator.start()` until the
+  first `setContentVisible(true)` call. `setContentVisible()` drives
+  the full lifecycle (start → pause on hide → resume on show).
+  `pauseAnimator()` / `resumeAnimator()` are exposed for part-lifecycle
+  hooks. `dispose()` unconditionally stops the animator, nulls the
+  reference, and destroys the `GLWindow`.
+- `VolumeViewer` registers an `IPartListener2` against its
+  `IWorkbenchPartSite`'s page. `partHidden` pauses the render loop and
+  schedules a recursive `redraw()+update()` over every SWT `Control` in
+  every open `Shell`, forcing Cocoa to re-acquire each NSView's
+  IOSurface. `partVisible` resumes the animator. `dispose()` removes
+  the listener, calls `canvas.dispose()` before `super.dispose()` (so
+  the render thread ends before the parent Composite is torn down), and
+  triggers one more sibling-redraw pass for good measure.
+
+### What we did not change
+- Did not migrate from NEWT+`NewtCanvasSWT` to `com.jogamp.opengl.swt.GLCanvas`.
+  The JOGL SWT GLCanvas still has a DPIUtil API mismatch with Eclipse
+  2025-12's SWT (documented in `SWT_MIGRATION_LOG.md` Symptom 3), so
+  NEWT remains the only working path on macOS aarch64.
+- Did not touch the stubbed `Grid3dRenderer` / `FaultRenderer` /
+  `WellRenderer` renderers. `PostStack3dRenderer` is functional and
+  exercises the whole pipeline; the Ardor3D → JOGL port of the others
+  is tracked separately (see `project_jogl_migration_status` memory).
+
+### Post-fix diagnostic + real root cause
+
+After the first round of changes above, the 3D viewer was still rendering
+black. The new log in `.metadata/.log` was decisive:
+
+```
+!ENTRY org.geocraft.ui.volumeviewer 2 0 2026-04-18 17:16:10.210
+!MESSAGE RenderBackend service reference not found in OSGi registry.
+!ENTRY org.geocraft.ui.volumeviewer 2 0 2026-04-18 17:16:10.210
+!MESSAGE No RenderBackend OSGi service registered — 3D viewer canvas will render black. ...
+!ENTRY org.geocraft.ui.volumeviewer 2 0 2026-04-18 17:16:10.920
+!MESSAGE 3D viewer has no JoglRenderBackend (got null) — canvas will render black.
+```
+
+The backend service literally wasn't in the OSGi registry. Comparing the
+`org.geocraft.rendering.jogl` MANIFEST to other DS-providing bundles in
+the project (`org.geocraft.core`, `org.geocraft.algorithm`,
+`org.geocraft.ui.viewer`) showed the missing line:
+
+```
+Bundle-ActivationPolicy: lazy
+```
+
+Without lazy activation, `rendering.jogl` sat in `RESOLVED` state in PDE
+dev launches. The `immediate="true"` flag on the DS component only fires
+once the owning bundle has transitioned to `STARTING`/`ACTIVE`, so the
+service was never published. `selected_workspace_bundles` in
+`GeoCraft.launch` uses `@default:default` (no auto-start), so the bundle
+only ever started if something forced it — and nothing did.
+
+### Second fix
+
+- `org.geocraft.rendering.jogl/META-INF/MANIFEST.MF`: added
+  `Bundle-ActivationPolicy: lazy`. Now the first class load out of any
+  exported package transitions the bundle to `STARTING`, the DS runtime
+  activates the `JoglRenderBackend` component, and the service is
+  registered.
+- `ViewCanvasFactory.makeCanvas()`: construct the `JoglSwtCanvas` *before*
+  calling `lookupRenderBackend()`. `JoglSwtCanvas` is the first class
+  load from `org.geocraft.rendering.jogl`, so this ordering guarantees
+  that lazy activation has already fired by the time the service lookup
+  runs. Without the reorder, the OSGi lookup would race the bundle
+  transition and return `null`.
+
+### Performance fix
+
+After the DS activation fix above, the 3D viewer rendered correctly but
+was unusably slow on any realistic seismic volume. The `JoglGeometryUpload`
+port from Ardor3D used immediate-mode `glBegin`/`glEnd` with per-vertex
+`glVertex3f`/`glNormal3f`/`glColor4f`/`glTexCoord2f` — roughly 12 JNI
+boundary crossings per triangle, then multiplied by 30 fps.
+
+- `JoglGeometryUpload.drawMesh` / `drawLine` now use client-side vertex
+  arrays (`glEnableClientState` + `glVertexPointer`/`glNormalPointer`/…
+  + `glDrawElements`/`glDrawArrays`). One JNI trip per mesh.
+- JOGL's vertex-array API requires *direct* NIO buffers. Renderers in
+  the project build geometry with `FloatBuffer.allocate(...)` (heap
+  buffers), which made `glVertexPointer` throw
+  `"Argument 'ptr' is not a direct buffer"`. Defense in depth:
+  - `JoglGeometryUpload` keeps identity-keyed `IdentityHashMap` caches
+    that transparently copy any heap buffer into a direct buffer on
+    first use. Cheap — meshes are static, so the copy happens once.
+  - `PostStack3dRenderer.buildSliceGrid` and the bounding-box packer
+    now allocate their buffers via
+    `ByteBuffer.allocateDirect(n * 4).order(nativeOrder()).asFloatBuffer()`
+    from the start, so no copy is needed on the hot path.
+- `JoglGeometryUpload.drawSphere` now caches its `GLU` + `GLUquadric`
+  instead of allocating + disposing per frame.
