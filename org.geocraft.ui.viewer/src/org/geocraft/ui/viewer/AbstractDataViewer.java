@@ -21,7 +21,6 @@ import org.eclipse.swt.dnd.DropTargetAdapter;
 import org.eclipse.swt.dnd.DropTargetEvent;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -160,9 +159,6 @@ public abstract class AbstractDataViewer extends Composite implements IViewer, I
 
     // Create the layer model.
     _layerModel = createLayeredModel(_layerViewer);
-
-    _toolBarContainer.setBackground(new Color(null, 255, 0, 0));
-    _toolBarContainer.getParent().setBackground(new Color(null, 255, 255, 0));
 
     // Initialize the canvas (grid lines, colors, etc).
     initializeCanvas(canvasComposite);
