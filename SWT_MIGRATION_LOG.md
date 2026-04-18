@@ -212,3 +212,54 @@ RibbonFactory.generateRibbon.
 **Status**: Architecture complete. Builds clean on native aarch64 JVM with zero
 Ardor3D/LWJGL 2 dependencies. Volume viewer requires geometry-rendering code
 fill-in before functional parity with the (broken) Ardor3D implementation.
+
+---
+
+## Session 2026-04-18: Re-enable Section Viewer
+
+### Symptom 1: blank section until mouse-wheel zoom
+User loaded a seismic section. Plot area stayed blank. Any mouse-wheel zoom made the image appear.
+
+### Root cause
+macOS Cocoa SWT defers GC draws to a backing `Image` — the pixel data
+isn't realized until something reads it. `ModelSpaceCanvas.paintControlCustom`
+draws shapes into `_bufferStaticGraphics` (GC over `_bufferStaticImage`),
+then copies `_bufferSelectedGraphics.drawImage(_bufferStaticImage, 0, 0)`.
+On macOS, that read sees blank pixels because the draws haven't flushed.
+The mouse wheel triggered an `UpdateLevel.RESIZE` paint which calls
+`updateBuffers()` — new Image + new GC + immediate render → visible.
+
+### Fix (commits 9aedee9, 5b14ae9)
+`ModelSpaceCanvas.paintControlCustom`: call `_bufferStaticImage.getImageData()`
+and `_bufferSelectedImage.getImageData()` between the write phase and the
+read phase to force pixel materialization. The static-buffer call is gated
+inside the `RESIZE || REDRAW` branch so pure REFRESH paints skip it (the
+buffer isn't rewritten there, so no draws to flush). ~MB-scale pixel copy
+per REDRAW/RESIZE + per paint for the selected buffer — acceptable.
+
+### Symptom 2: hundreds of `SWT Resource was not properly disposed` errors
+Every trace reload allocated a Font via `TextProperties` default ctor
+(`PlotShape(ShapeType, String)` → `new TextProperties()` → `new Font(...)`),
+and `SeismicDatasetRenderer.removeAllTraces()` only cleared the list
+without disposing.
+
+### Fix (commits 9aedee9, 5b14ae9)
+`removeAllTraces` now calls `plotTrace.dispose()` on each entry before
+clearing (`dispose()` is already on `IPlotObject`/`IPlotShape`, so no
+instanceof/cast is needed).
+
+### Symptom 3: red toolbar + yellow plot-area backgrounds in all data viewers
+Dead debug code in `AbstractDataViewer.createPartControl`.
+
+### Fix (commit 120757a)
+Removed `_toolBarContainer.setBackground(new Color(null, 255, 0, 0))` and
+the matching yellow on the parent.
+
+### Project rule: use JFaceResources registries for Color/Font
+The Font leak above highlighted a broader pattern. Going forward, code
+that needs an SWT `Color` or `Font` must get it from the JFace registries
+(`JFaceResources.getColorRegistry()` / `getFontRegistry()`) rather than
+calling `new Color(...)` / `new Font(...)`. System colors via
+`Display.getSystemColor(SWT.COLOR_*)` are also safe (SWT owns and must
+not be disposed). Direct `new Color` / `new Font` with no clear dispose
+owner is a leak the SWT tracker will report on every session.
