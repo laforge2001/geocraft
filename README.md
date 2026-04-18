@@ -56,29 +56,32 @@ Launch the built product:
 
 ### 2b. Build and Launch from the Eclipse IDE
 
+> **Use a fresh install of "Eclipse IDE for RCP and RAP Developers, 2025-12".** Reusing a previous Eclipse install that has the deprecated `org.sonatype.tycho.m2e` connector will cause hundreds of "Conflicting lifecycle mapping metadata" errors — see Troubleshooting.
+
 1. **Start Eclipse with a new workspace**:
    - Launch Eclipse IDE for RCP and RAP Developers (2025-12).
-   - When prompted for a workspace, pick a **new, empty directory** (e.g. `~/eclipse-workspaces/geocraft`). Do **not** pick the cloned `geocraft/` directory itself — Eclipse workspace metadata should live outside the source tree.
-   - Close the Welcome tab once Eclipse opens.
+   - When prompted for a workspace, pick a **new, empty directory** (e.g. `~/eclipse-workspaces/geocraft`). Do **not** pick the cloned `geocraft/` directory itself.
 2. **Import all projects into the workspace**:
    - `File > Import... > Maven > Existing Maven Projects`, click **Next**.
-   - Set **Root Directory** to the cloned `geocraft/` directory.
-   - Eclipse scans and lists every `pom.xml`. Leave all modules checked and click **Finish**.
-   - Wait for the initial Maven/M2E import and workspace build to finish (check the Progress view — this can take several minutes on first import).
-   - Expected result: all `org.geocraft.*` projects appear in the Package Explorer. At this point most projects will show compile errors because the target platform is not yet set — that is normal.
+   - Set **Root Directory** to the cloned `geocraft/` directory, leave all modules checked, click **Finish**.
+   - Wait for the initial Maven/M2E import to finish. Compile errors are expected until the target platform is set in step 3.
 3. **Configure the target platform**:
-   - In Package Explorer, expand `org.geocraft.target` and double-click `org.geocraft.target.target` to open the Target Editor.
-   - Click **Reload** (top right of the editor) and wait for all p2 locations to resolve. Resolution requires network access to `download.eclipse.org`.
-   - Once resolution completes with no errors, click **Set as Active Target Platform** (top right).
-   - Eclipse will trigger a workspace rebuild. Compile errors should clear. If they don't, run `Project > Clean... > Clean all projects`.
-4. **Create a run configuration and launch**:
-   - Open `org.geocraft.product/GeoCraft.product`.
-   - On the product editor **Overview** tab, click **Synchronize** to align the product's plug-in list with the target platform, then click **Launch an Eclipse application**. This creates a run configuration named after the product and launches GeoCraft.
-   - For subsequent launches, use `Run > Run Configurations... > Eclipse Application > GeoCraft.product` (or the Run toolbar dropdown).
-   - To tune the launch (VM args, workspace location, included plug-ins), edit the run configuration under `Run > Run Configurations...`.
+   - Double-click `org.geocraft.target/org.geocraft.target.target` to open the Target Editor.
+   - Click **Reload** (top right) and wait for all p2 locations to resolve (requires `download.eclipse.org` access).
+   - Click **Set as Active Target Platform** (top right).
+   - Eclipse rebuilds the workspace and the errors clear. If they don't, run `Project > Clean... > Clean all projects`.
+4. **Launch GeoCraft**:
+   - In Package Explorer, right-click `org.geocraft.product/GeoCraft.launch` > **Run As > GeoCraft**.
+   - Or: `Run > Run Configurations... > Eclipse Application > GeoCraft` > **Run**.
+   - The committed launch config (`GeoCraft.launch`) is feature-based and matches `GeoCraft.product`, so every algorithm and viewer bundle is loaded without manual plug-in selection.
 
 ### Troubleshooting
 
 - **Target platform fails to resolve**: ensure network access to `download.eclipse.org` (the p2 repositories listed in `pom.xml`).
 - **Tycho build fails on test bundles**: `testFailureIgnore` is set, but compilation errors still fail the build. Check the failing module's `pom.xml` and MANIFEST.MF.
 - **Launch fails with bundle resolution errors**: see `SWT_MIGRATION_LOG.md` for known issues and workarounds.
+- **Eclipse IDE — `Conflicting lifecycle mapping metadata ... org.sonatype.tycho.m2e` and hundreds of `does not have an expanded version` errors**: the deprecated `org.sonatype.tycho.m2e` connector conflicts with the modern `org.eclipse.m2e.pde.connector` bundled in Eclipse 2025-12 for RCP and RAP Developers. Uninstall the old one:
+  1. `Help > About Eclipse > Installation Details > Installed Software`.
+  2. Select **Tycho Project Configurators** (`org.sonatype.tycho.m2e`), click **Uninstall**, restart Eclipse.
+  3. Select all projects in Package Explorer, right-click > **Maven > Update Project...** (Alt+F5), click **OK**.
+- **Eclipse IDE — "An API baseline has not been set for the current workspace"**: non-blocking warning from PDE API Tools. Suppress via `Window > Preferences > Plug-in Development > API Errors/Warnings > General` tab, set **Missing API baseline** to **Ignore**.
