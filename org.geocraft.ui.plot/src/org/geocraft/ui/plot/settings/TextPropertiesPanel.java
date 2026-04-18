@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.FontDialog;
 import org.eclipse.swt.widgets.Label;
 import org.geocraft.ui.plot.attribute.TextProperties;
 import org.geocraft.ui.plot.defs.TextAnchor;
+import org.geocraft.ui.plot.util.PlotResources;
 
 
 public class TextPropertiesPanel extends Composite {
@@ -43,7 +44,7 @@ public class TextPropertiesPanel extends Composite {
   public TextPropertiesPanel(final Composite parent, final int style, final TextProperties properties, final boolean anchor) {
     super(parent, style);
     _properties = properties;
-    _currentFont = new Font(null, _properties.getFont().getFontData());
+    _currentFont = PlotResources.getFont(_properties.getFont().getFontData());
     _showAnchor = anchor;
     setLayout(new GridLayout(2, false));
     createPanel();
@@ -62,10 +63,8 @@ public class TextPropertiesPanel extends Composite {
         FontDialog dialog = new FontDialog(getShell());
         dialog.setFontList(_currentFont.getFontData());
         dialog.open();
-        Font newFont = new Font(null, dialog.getFontList());
-        Font oldFont = _currentFont;
+        Font newFont = PlotResources.getFont(dialog.getFontList());
         _currentFont = newFont;
-        oldFont.dispose();
         fontLabel.setText("Font  " + StringConverter.asString(_currentFont.getFontData()));
         pack();
       }
@@ -86,7 +85,7 @@ public class TextPropertiesPanel extends Composite {
   }
 
   public TextProperties getProperties() {
-    return new TextProperties(new Font(null, _currentFont.getFontData()), _color.getColorValue(),
+    return new TextProperties(PlotResources.getFont(_currentFont.getFontData()), _color.getColorValue(),
         (TextAnchor) ((StructuredSelection) _anchor.getSelection()).getFirstElement());
   }
 }

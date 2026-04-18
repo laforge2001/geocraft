@@ -21,6 +21,7 @@ import org.geocraft.ui.plot.ICanvas;
 import org.geocraft.ui.plot.IPlot;
 import org.geocraft.ui.plot.attribute.TextProperties;
 import org.geocraft.ui.plot.listener.ICanvasListener;
+import org.geocraft.ui.plot.util.PlotResources;
 
 
 /**
@@ -59,7 +60,7 @@ public abstract class PlotCanvas extends Canvas implements ICanvas, PaintListene
     _textProperties = new TextProperties();
     Font font = _textProperties.getFont();
     FontData fontData = font.getFontData()[0];
-    _textProperties.setFont(new Font(null, fontData.getName(), fontData.getHeight(), fontStyle));
+    _textProperties.setFont(PlotResources.getFont(fontData.getName(), fontData.getHeight(), fontStyle));
     _isSized = false;
     _redraw = true;
     _listeners = Collections.synchronizedList(new ArrayList<ICanvasListener>());

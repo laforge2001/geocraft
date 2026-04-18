@@ -17,6 +17,7 @@ import org.geocraft.ui.plot.model.IModelSpace;
 import org.geocraft.ui.plot.object.IPlotPoint;
 import org.geocraft.ui.plot.object.IPlotPolyline;
 import org.geocraft.ui.plot.object.IPlotShape;
+import org.geocraft.ui.plot.util.PlotResources;
 
 
 /**
@@ -108,7 +109,7 @@ public class PolylineRenderer extends PointRenderer implements IShapeRenderer {
     // Draw the polyline based on the line properties.
     LineStyle lineStyle = polyline.getLineStyle();
     if (!lineStyle.equals(LineStyle.NONE)) {
-      Color lineColor = new Color(gc.getDevice(), polyline.getLineColor());
+      Color lineColor = PlotResources.getColor(polyline.getLineColor());
       gc.setForeground(lineColor);
       gc.setLineWidth(polyline.getLineWidth());
       gc.setLineJoin(SWT.JOIN_ROUND);
@@ -121,7 +122,6 @@ public class PolylineRenderer extends PointRenderer implements IShapeRenderer {
         gc.setLineDash(dashes);
       }
       gc.drawPolyline(pointArray);
-      lineColor.dispose();
     }
 
     // Null out the allocated arrays.

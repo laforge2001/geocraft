@@ -76,6 +76,9 @@ public class BackgroundImageRenderer implements IBackgroundRenderer {
     Image imageOld = _image;
     if (image != null) {
       _image = new Image(image.getDevice(), image.getImageData());
+      // macOS Cocoa defers pixel realization until ImageData is read; force it
+      // now so the copy is valid the first time native drawImage() touches it.
+      _image.getImageData();
     } else {
       _image = null;
     }
@@ -86,6 +89,9 @@ public class BackgroundImageRenderer implements IBackgroundRenderer {
 
   public void dispose() {
     // Dispose of the internal image resource.
-    _image.dispose();
+    if (_image != null && !_image.isDisposed()) {
+      _image.dispose();
+    }
+    _image = null;
   }
 }

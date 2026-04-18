@@ -28,7 +28,7 @@ GeoCraft is built on top of the Eclipse Rich Client Platform.
 --add-opens=java.base/java.net=ALL-UNNAMED
 --add-opens=java.base/java.lang=ALL-UNNAMED
       </vmArgs>
-      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts -Dswt.autoScale=100
       </vmArgsMac>
    </launcherArgs>
 

@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
@@ -290,8 +289,11 @@ public class PlotLayer implements IPlotLayer {
   }
 
   protected Image createImage() {
-    Image image = PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_ELEMENT);
-    return new Image(image.getDevice(), image, SWT.IMAGE_COPY);
+    // The workbench-shared image is owned by Eclipse; do not copy or dispose it.
+    // The previous copy path leaked an Image per layer (no dispose in dispose())
+    // and crashed macOS when the copy was touched before the GC backing store
+    // had been realized.
+    return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_ELEMENT);
   }
 
   public void refresh() {

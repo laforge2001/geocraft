@@ -29,6 +29,7 @@ import org.geocraft.ui.plot.defs.AxisPlacement;
 import org.geocraft.ui.plot.defs.Orientation;
 import org.geocraft.ui.plot.label.ILabel;
 import org.geocraft.ui.plot.layout.CanvasLayoutModel;
+import org.geocraft.ui.plot.util.PlotResources;
 
 
 public class AxisLabelCanvas extends PlotCanvas implements IAxisLabelCanvas, ControlListener {
@@ -217,10 +218,9 @@ public class AxisLabelCanvas extends PlotCanvas implements IAxisLabelCanvas, Con
     Alignment alignment = label.getAlignment();
     alignment = Alignment.CENTER;
 
-    Color textColor = new Color(graphics.getDevice(), _textProperties.getColor());
+    Color textColor = PlotResources.getColor(_textProperties.getColor());
     graphics.setFont(textFont);
     graphics.setForeground(textColor);
-    textColor.dispose();
 
     FontMetrics metrics = graphics.getFontMetrics();
 

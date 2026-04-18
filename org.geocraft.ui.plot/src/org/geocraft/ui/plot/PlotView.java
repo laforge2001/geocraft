@@ -35,6 +35,7 @@ import org.geocraft.ui.plot.listener.IPlotListener;
 import org.geocraft.ui.plot.model.IModelSpace;
 import org.geocraft.ui.plot.model.IModelSpaceCanvas;
 import org.geocraft.ui.plot.model.ModelSpaceBounds;
+import org.geocraft.ui.plot.util.PlotResources;
 import org.geocraft.ui.viewer.IRenderer;
 import org.geocraft.ui.viewer.RendererSpecification;
 import org.geocraft.ui.viewer.layer.ILayeredModel;
@@ -150,8 +151,8 @@ public abstract class PlotView extends Composite implements IPlotViewer {
     // Create the layer model.
     _layerModel = initializeLayeredModel(_layerViewer);
 
-    _toolBarContainer.setBackground(new Color(null, 255, 0, 0));
-    _toolBarContainer.getParent().setBackground(new Color(null, 255, 255, 0));
+    _toolBarContainer.setBackground(PlotResources.getColor(new RGB(255, 0, 0)));
+    _toolBarContainer.getParent().setBackground(PlotResources.getColor(new RGB(255, 255, 0)));
 
     _plot.getModelSpaceCanvas().removeCursorListener(_plot);
     _plot.getModelSpaceCanvas().addCursorListener(this);

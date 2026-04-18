@@ -51,6 +51,7 @@ import org.geocraft.ui.plot.listener.ICursorListener;
 import org.geocraft.ui.plot.model.IModelSpace;
 import org.geocraft.ui.plot.model.IModelSpaceCanvas;
 import org.geocraft.ui.plot.object.PlotLine;
+import org.geocraft.ui.plot.util.PlotResources;
 import org.geocraft.ui.plot.util.PlotUtil;
 
 
@@ -432,9 +433,7 @@ public class PlotComposite extends Composite implements ICursorListener {
       _modelScroll.setLayoutData(constraints);
       _modelSpaceCanvas = new ModelSpaceCanvas(_modelScroll, _plot);
       _modelScroll.setContent(_modelSpaceCanvas.getComposite());
-      Color bkgColor = new Color(getDisplay(), PlotUtil.RGB_LIGHT_GRAY);
-      _modelScroll.setBackground(bkgColor);
-      bkgColor.dispose();
+      _modelScroll.setBackground(PlotResources.getColor(PlotUtil.RGB_LIGHT_GRAY));
     } else {
       _modelSpaceCanvas = new ModelSpaceCanvas(this, _plot);
       _modelSpaceCanvas.getComposite().setLayoutData(constraints);

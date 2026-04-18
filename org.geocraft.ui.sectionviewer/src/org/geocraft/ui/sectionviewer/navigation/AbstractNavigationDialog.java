@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.FormDialog;
 import org.eclipse.ui.forms.IManagedForm;
 import org.geocraft.ui.common.GridLayoutHelper;
+import org.geocraft.ui.plot.util.PlotResources;
 
 
 public abstract class AbstractNavigationDialog extends FormDialog {
@@ -174,7 +175,7 @@ public abstract class AbstractNavigationDialog extends FormDialog {
     Label label = new Label(group, SWT.NONE);
     label.setText(text);
     Font currentFont = label.getFont();
-    label.setFont(new Font(group.getDisplay(), currentFont.getFontData()[0].getName(), 10, SWT.ITALIC));
+    label.setFont(PlotResources.getFont(currentFont.getFontData()[0].getName(), 10, SWT.ITALIC));
     label.setLayoutData(GridLayoutHelper.createLayoutData(true, false, SWT.FILL, SWT.FILL, 5, 1));
     return label;
   }

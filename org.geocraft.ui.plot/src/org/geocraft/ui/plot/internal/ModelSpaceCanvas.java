@@ -63,6 +63,7 @@ import org.geocraft.ui.plot.renderer.IBackgroundRenderer;
 import org.geocraft.ui.plot.renderer.IGridLinesRenderer;
 import org.geocraft.ui.plot.renderer.ModelSpaceRenderer;
 import org.geocraft.ui.plot.renderer.VerticalGridLinesRenderer;
+import org.geocraft.ui.plot.util.PlotResources;
 import org.geocraft.ui.plot.util.PlotUtil;
 
 
@@ -474,59 +475,22 @@ public class ModelSpaceCanvas extends Canvas implements IModelSpaceCanvas, ICanv
    * @param g the graphics in which to paint.
    */
   protected void paintControlCustom(final PaintEvent event, final UpdateLevel updateLevel) {
-    Point size = getSize();
-    ////Image bufferImage = new Image(event.display, size.x, size.y);
-    ///Image bufferImage = ResourceFactory.createImage(event.display, size.x, size.y);
-
-    // Allocate the GC.
-    ////GC gc = new GC(bufferImage);
     GC gc = event.gc;
-    ///GC gc = ResourceFactory.createGC(bufferImage);
 
-    // Turn on anti-aliasing.
     gc.setAntialias(SWT.OFF);
     gc.setTextAntialias(SWT.OFF);
 
-    // Clear out the select graphics buffer.
+    // Clear the select graphics buffer.
     clearGraphics(_bufferSelectedGraphics);
 
-    // Create a basic stroke.
-    //BasicStroke basicStroke = new BasicStroke();
-    //gc.setStroke(basicStroke);
-
-    // If resizing or redrawing, need to redraw the static graphics buffer.
     if (updateLevel.equals(UpdateLevel.RESIZE) || updateLevel.equals(UpdateLevel.REDRAW)) {
-      // Clear the static graphics buffer.
       clearGraphics(_bufferStaticGraphics);
-
-      // Draw the backgrid image, if one exists, into the static graphics buffer.
-      if (_bufferBackgroundImage != null) {
-        //_bufferStaticGraphics.drawImage(_bufferBackgroundImage, 0, 0);
-      }
-      //gc.setStroke(basicStroke);
-
-      // Draw the background objects into the static graphics buffer.
       renderModelSpace(_bufferStaticGraphics, RenderLevel.BACKGROUND);
-      //gc.setStroke(basicStroke);
-
-      // Draw the image-under-grid objects into the static graphics buffer.
       renderModelSpace(_bufferStaticGraphics, RenderLevel.IMAGE_UNDER_GRID);
-      //gc.setStroke(basicStroke);
-
-      // Draw the grid objects into the static graphics buffer.
       renderModelSpace(_bufferStaticGraphics, RenderLevel.GRID);
-      //gc.setStroke(basicStroke);
-
-      // Draw the image-over-grid objects into the static graphics buffer.
       renderModelSpace(_bufferStaticGraphics, RenderLevel.IMAGE_OVER_GRID);
-      //gc.setStroke(basicStroke);
-
-      // Draw the static group into the static graphics buffer.
       renderModelSpace(_bufferStaticGraphics, RenderLevel.STANDARD);
-      // On macOS Cocoa, GC draws to a backing Image are deferred and not
-      // visible to subsequent drawImage() reads until pixel data is realized.
-      // Only needed after the static buffer was actually written to; on
-      // REFRESH paints the buffer is unchanged so skip the ~MB-scale copy.
+      // Force pixel realization on macOS before the next drawImage read.
       _bufferStaticImage.getImageData();
     }
 
@@ -534,17 +498,7 @@ public class ModelSpaceCanvas extends Canvas implements IModelSpaceCanvas, ICanv
     renderModelSpace(_bufferSelectedGraphics, RenderLevel.SELECTED);
     _bufferSelectedImage.getImageData();
     gc.drawImage(_bufferSelectedImage, 0, 0);
-    //gc.setStroke(basicStroke);
 
-    ///event.gc.drawImage(bufferImage, 0, 0);
-    ///bufferImage.dispose();
-    ///ResourceFactory.disposeImage(bufferImage);
-
-    // Dispose of the GC.
-    ///gc.dispose();
-    ///ResourceFactory.disposeGC(gc);
-
-    // Everything has been redraw, so the update level can be set to refresh.
     _updateLevel = UpdateLevel.REFRESH;
   }
 
@@ -661,7 +615,6 @@ public class ModelSpaceCanvas extends Canvas implements IModelSpaceCanvas, ICanv
       height = 2;
     }
 
-    // Update the static image graphics.
     PlotImageGraphics oldImageGraphics = _bufferStatic;
     _bufferStatic = new PlotImageGraphics(this, width, height);
     _bufferStaticImage = _bufferStatic.getImage();
@@ -670,18 +623,12 @@ public class ModelSpaceCanvas extends Canvas implements IModelSpaceCanvas, ICanv
       oldImageGraphics.dispose();
     }
 
-    // Update the selected image graphics.
     oldImageGraphics = _bufferSelected;
     _bufferSelected = new PlotImageGraphics(this, width, height);
     _bufferSelectedImage = _bufferSelected.getImage();
     _bufferSelectedGraphics = _bufferSelected.getGraphics();
     if (oldImageGraphics != null) {
       oldImageGraphics.dispose();
-    }
-
-    if (_bufferBackground != null) {
-      _bufferBackgroundImage = _bufferBackground.getImage();
-      _bufferBackgroundGraphics = _bufferBackground.getGraphics();
     }
   }
 
@@ -1010,11 +957,7 @@ public class ModelSpaceCanvas extends Canvas implements IModelSpaceCanvas, ICanv
 
   public void setBackgroundColor(final RGB color) {
     _backgroundRenderer.setColor(color);
-    Color colorOld = super.getBackground();
-    super.setBackground(new Color(null, color));
-    if (colorOld != null && !colorOld.isDisposed()) {
-      colorOld.dispose();
-    }
+    super.setBackground(PlotResources.getColor(color));
   }
 
   /**

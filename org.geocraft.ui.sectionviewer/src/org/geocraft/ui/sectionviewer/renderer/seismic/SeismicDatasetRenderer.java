@@ -426,6 +426,9 @@ public abstract class SeismicDatasetRenderer extends SectionViewRenderer impleme
     ImageData imageData = new ImageData(pw, ph, depth, palette, 1, _imageColors);
     imageData.alpha = _imageAlpha;
     Image image = new Image(_canvas.getComposite().getDisplay(), imageData);
+    // macOS Cocoa defers pixel realization to a subsequent read; force it now
+    // so the native drawImage() path does not touch un-materialized backing.
+    image.getImageData();
 
     _rebuildPixels = false;
 

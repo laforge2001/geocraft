@@ -67,7 +67,7 @@ public class PlotUtil {
    * @return the color.
    */
   public static Color createColor(final Display display, final RGB rgb) {
-    return new Color(display, rgb);
+    return PlotResources.getColor(rgb);
   }
 
   /**

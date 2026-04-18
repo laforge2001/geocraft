@@ -263,3 +263,60 @@ calling `new Color(...)` / `new Font(...)`. System colors via
 `Display.getSystemColor(SWT.COLOR_*)` are also safe (SWT owns and must
 not be disposed). Direct `new Color` / `new Font` with no clear dispose
 owner is a leak the SWT tracker will report on every session.
+
+## Issue #33: section-viewer JVM crash on macOS (SWT resource leaks)
+
+### Symptoms
+Opening a Section Viewer on Apple Silicon flooded the log with
+`java.lang.Error: SWT Resource was not properly disposed` from
+`Font.<init>`, `Color.<init>`, and `Image.<init>` sites in plot code,
+then crashed the JVM with `SIGSEGV` inside `_platform_memset_pattern16`
+(Cocoa native memory primitive). Every leaked native handle widened the
+surface where unrealized/disposed SWT backing store could be touched.
+
+### Root cause
+`org.geocraft.ui.plot` and `org.geocraft.ui.sectionviewer` allocated raw
+`new Color(device, rgb)` per paint and `new Font(null, ...)` per canvas/
+shape ctor, with inconsistent `dispose()` ownership. Nothing matched the
+"use JFaceResources" rule from Symptom 2. `PlotLayer.createImage` also
+took `SWT.IMAGE_COPY` of a workbench shared image without ever disposing
+the copy — one leaked Image per layer.
+
+### Fix
+New shared cache `org.geocraft.ui.plot.util.PlotResources`:
+- `getColor(RGB)` and `getFont(FontData|String,int,int)` return process-
+  wide handles keyed on the descriptor. Callers never dispose.
+- Cache is cleared on `Display.disposeExec`.
+
+Converted every raw `new Color` / `new Font` in the plot hot path to
+`PlotResources.getColor` / `getFont`, removed the matching manual
+`.dispose()` calls, and stopped copying shared images in
+`PlotLayer.createImage` (return the workbench handle directly; the
+`_imageIsDisposable=false` flag was already in place). Added
+`image.getImageData()` materialization after `new Image(...)` in
+`SeismicDatasetRenderer.colorPixels` and `BackgroundImageRenderer.setImage`
+for macOS backing-store realization, matching the existing pattern in
+`ModelSpaceCanvas.paintControlCustom`.
+
+Touched bundles: `org.geocraft.ui.plot` (attributes, internal canvases,
+renderers, layer, util, settings, PlotView, PlotComposite) and
+`org.geocraft.ui.sectionviewer` (`TraceAxisRangeRenderer`,
+`SeismicDatasetRenderer`, `AbstractNavigationDialog`).
+
+### Image buffer allocation (follow-up)
+First attempt rewrote `ModelSpaceCanvas.paintControlCustom` to draw directly
+to `event.gc`, bypassing the in-memory Image double-buffer that crashed.
+That stopped the SIGBUS but left the section viewer / volume viewer fully
+black because the aarch64 cocoa 3.122.0 SWT fragment's flush path didn't
+paint content written straight to `event.gc`.
+
+Restored the buffer-based paint path and instead changed
+`PlotImageGraphics` to allocate the buffer via
+`new Image(device, new ImageData(w, h, 24, PaletteData(0xFF0000,0x00FF00,
+0x0000FF)))` rather than `new Image(device, w, h)`. The two-arg constructor
+hands back an NSBitmapImageRep with a pixel stride the CoreGraphics
+`rgba32_mark` fast path treats as unaligned (SIGBUS BUS_ADRALN in
+`_platform_memset_pattern16`). The `ImageData` constructor builds the
+bitmap in Java with a known 24-bit RGB layout; SWT wraps it in an
+NSBitmapImageRep whose buffer stride matches CG's expectation, so the
+first `fillRectangle` inside `clearGraphics` no longer crashes.

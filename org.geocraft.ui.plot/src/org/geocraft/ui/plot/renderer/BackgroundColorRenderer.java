@@ -9,6 +9,7 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
+import org.geocraft.ui.plot.util.PlotResources;
 
 
 /**
@@ -34,12 +35,7 @@ public class BackgroundColorRenderer implements IBackgroundRenderer {
   }
 
   public void setColor(final RGB color) {
-    // Create an internal copy of the color and dispose of the old one.
-    Color colorOld = _color;
-    _color = new Color(null, color);
-    if (colorOld != null) {
-      colorOld.dispose();
-    }
+    _color = PlotResources.getColor(color);
   }
 
   public RGB getColor() {
@@ -58,7 +54,7 @@ public class BackgroundColorRenderer implements IBackgroundRenderer {
   }
 
   public void dispose() {
-    // Dispose of the internal color resource.
-    _color.dispose();
+    // Color is owned by PlotResources and outlives this renderer.
+    _color = null;
   }
 }

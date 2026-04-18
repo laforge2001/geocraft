@@ -19,6 +19,7 @@ import org.geocraft.ui.plot.defs.TextAnchor;
 import org.geocraft.ui.plot.model.ICoordinateTransform;
 import org.geocraft.ui.plot.object.IPlotPoint;
 import org.geocraft.ui.plot.object.IPlotShape;
+import org.geocraft.ui.plot.util.PlotResources;
 
 
 /**
@@ -112,7 +113,7 @@ public class PointRenderer {
 
     // If font is null, set a default.
     if (textFont == null) {
-      textFont = new Font(null, "SansSerif", 8, SWT.NORMAL);
+      textFont = PlotResources.getDefaultPlotFont();
     }
     gc.setFont(textFont);
 
@@ -128,13 +129,12 @@ public class PointRenderer {
     }
 
     // Set the background and foreground colors.
-    Color pointColor = new Color(gc.getDevice(), pointRGB);
+    Color pointColor = PlotResources.getColor(pointRGB);
     gc.setBackground(pointColor);
     gc.setForeground(pointColor);
     gc.setLineStyle(SWT.LINE_SOLID);
     gc.setLineWidth(0);
     gc.setAdvanced(false);
-    pointColor.dispose();
 
     if (pointImage != null) {
       gc.drawImage(pointImage, px - 8, py - 8);
@@ -274,12 +274,11 @@ public class PointRenderer {
     gc.drawRectangle(px, py, textWidth, textHeight);
 
     // Set the text properties.
-    Color textColor = new Color(gc.getDevice(), shape.getTextColor());
+    Color textColor = PlotResources.getColor(shape.getTextColor());
     gc.setForeground(textColor);
 
     // Draw the text string.
     gc.setAlpha(255);
     gc.drawString(text, px + dpx, py + dpy);
-    textColor.dispose();
   }
 }
