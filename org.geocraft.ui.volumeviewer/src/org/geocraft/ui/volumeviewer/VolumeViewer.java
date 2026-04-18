@@ -169,19 +169,34 @@ public class VolumeViewer extends AbstractDataViewer implements IVolumeViewer, I
     // TODO: Implement this.
   }
 
+  private Composite _canvasComposite;
+  private boolean _canvasInitialized = false;
+
   @Override
   protected void initializeCanvas(final Composite canvasComposite) {
     _model = new VolumeViewerModel();
-
     _store = VolumeViewerPreferencePage.PREFERENCE_STORE;
     _nodeToRenderer = new HashMap<SceneNode, VolumeViewRenderer>();
+    // Defer GL canvas creation until data is actually added.
+    // This prevents the NEWT window from taking over the workbench
+    // when Eclipse restores a saved layout with an empty volume view.
+    _canvasComposite = canvasComposite;
+  }
 
+  /**
+   * Create the GL canvas on first use (when data is added to the viewer).
+   * Called lazily from addObjects().
+   */
+  private synchronized void ensureCanvasCreated() {
+    if (_canvasInitialized || _canvasComposite == null) return;
+    _canvasInitialized = true;
     final int depthBits = _store.getInt(VolumeViewerPreferencePage.DEPTH_BITS);
-    _viewCanvasImpl = ViewCanvasFactory.makeCanvas(canvasComposite, this, depthBits);
+    _viewCanvasImpl = ViewCanvasFactory.makeCanvas(_canvasComposite, this, depthBits);
     _timeDomainNode = new GroupNode(TIME_DOMAIN);
     _depthDomainNode = new GroupNode(DEPTH_DOMAIN);
     _viewCanvasImpl.addToScene(_timeDomainNode);
     _viewCanvasImpl.addToScene(_depthDomainNode);
+    _canvasComposite.layout(true);
   }
 
   @Override
@@ -259,6 +274,7 @@ public class VolumeViewer extends AbstractDataViewer implements IVolumeViewer, I
 
   @Override
   public void addObjects(final boolean block, final Object... objects) {
+    ensureCanvasCreated();
     final Shell shell = getShell();
     final BackgroundTask task = new BackgroundTask() {
 
