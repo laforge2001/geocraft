@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: GeoCraft Core Rendering
+Bundle-SymbolicName: org.geocraft.core.rendering
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Import-Package: org.joml
+Export-Package: org.geocraft.core.rendering.scene,
+ org.geocraft.core.rendering.material,
+ org.geocraft.core.rendering.camera,
+ org.geocraft.core.rendering.pick,
+ org.geocraft.core.rendering.backend,
+ org.geocraft.core.rendering.bounds,
+ org.geocraft.core.rendering.input

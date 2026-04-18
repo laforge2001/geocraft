@@ -3,106 +3,49 @@ package org.geocraft.ui.volumeviewer.renderer.seismic;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
-import org.geocraft.core.color.ColorBar;
 import org.geocraft.core.color.ColorMapEvent;
-import org.geocraft.core.common.util.Labels;
+import org.geocraft.core.model.datatypes.CoordinateSeries;
 import org.geocraft.core.model.datatypes.Domain;
 import org.geocraft.core.model.datatypes.Point3d;
 import org.geocraft.core.model.datatypes.SpatialExtent;
 import org.geocraft.core.model.datatypes.TraceData;
-import org.geocraft.core.model.datatypes.Unit;
 import org.geocraft.core.model.seismic.PostStack3d;
-import org.geocraft.core.model.seismic.SeismicSurvey3d;
 import org.geocraft.core.model.seismic.PostStack3d.SliceBufferOrder;
 import org.geocraft.core.model.seismic.PostStack3d.StorageOrder;
-import org.geocraft.ui.common.util.algorithm.AlgorithmUtil;
-import org.geocraft.ui.model.ModelUI;
-import org.geocraft.ui.viewer.IViewer;
+import org.geocraft.core.rendering.scene.GroupNode;
+import org.geocraft.core.rendering.scene.LineGeometry;
+import org.geocraft.core.rendering.scene.MeshGeometry;
+import org.geocraft.core.rendering.scene.SceneNode;
 import org.geocraft.ui.viewer.ReadoutInfo;
 import org.geocraft.ui.volumeviewer.VolumeViewRenderer;
-import org.geocraft.ui.volumeviewer.renderer.grid.SmoothingMethod;
-import org.geocraft.ui.volumeviewer.renderer.util.SceneText;
 import org.geocraft.ui.volumeviewer.renderer.util.VolumeViewerHelper;
-import org.geocraft.ui.volumeviewer.renderer.util.SceneText.Alignment;
-
-import com.ardor3d.bounding.BoundingBox;
-import com.ardor3d.bounding.OrientedBoundingBox;
-import com.ardor3d.image.Image;
-import com.ardor3d.image.Texture;
-import com.ardor3d.image.Texture.ApplyMode;
-import com.ardor3d.image.Texture.CombinerFunctionAlpha;
-import com.ardor3d.image.Texture.CombinerFunctionRGB;
-import com.ardor3d.image.Texture.CombinerOperandAlpha;
-import com.ardor3d.image.Texture.CombinerOperandRGB;
-import com.ardor3d.image.Texture.CombinerSource;
-import com.ardor3d.image.util.AWTTextureUtil;
-import com.ardor3d.math.ColorRGBA;
-import com.ardor3d.math.Plane;
-import com.ardor3d.math.Vector3;
-import com.ardor3d.renderer.IndexMode;
-import com.ardor3d.renderer.queue.RenderBucketType;
-import com.ardor3d.renderer.state.BlendState;
-import com.ardor3d.renderer.state.TextureState;
-import com.ardor3d.renderer.state.BlendState.DestinationFunction;
-import com.ardor3d.renderer.state.BlendState.SourceFunction;
-import com.ardor3d.renderer.state.BlendState.TestFunction;
-import com.ardor3d.renderer.state.RenderState.StateType;
-import com.ardor3d.scenegraph.Line;
-import com.ardor3d.scenegraph.Mesh;
-import com.ardor3d.scenegraph.Node;
-import com.ardor3d.scenegraph.Spatial;
-import com.ardor3d.scenegraph.TexCoords;
-import com.ardor3d.scenegraph.Spatial.LightCombineMode;
-import com.ardor3d.util.geom.BufferUtils;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 
 /**
  * Renders a <code>PostStack3d</code> entity in the 3D viewer.
+ * Displays inline, xline, and z-slice cuts through the seismic volume
+ * as colored grid meshes with per-vertex amplitude coloring.
  */
 public class PostStack3dRenderer extends VolumeViewRenderer {
 
-  /** The stacked 3D volume to render. */
   private PostStack3d _volume;
-
-  /** The node used as a parent for the slice spatials. */
-  private Node _volumeNode;
-
-  private Line _boundingBox;
-
-  /** The spatial used to render an inline slice. */
-  private Mesh _inlineSliceQuad;
-
-  /** The spatial used to render an xline slice. */
-  private Mesh _xlineSliceQuad;
-
-  /** The spatial used to render a z slice. */
-  private Mesh _zSliceQuad;
-
-  /** The plane given by the inline slice. */
-  private final Plane _inlineSlicePlane = new Plane();
-
-  /** The plane given by the xline slice. */
-  private final Plane _xlineSlicePlane = new Plane();
-
-  /** The plane given by the z slice. */
-  private final Plane _zSlicePlane = new Plane();
-
-  /** The model of rendering properties. */
   private final PostStack3dRendererModel _model;
 
-  /** The label lines. */
-  private final List<Line> _labels = new ArrayList<Line>();
+  private GroupNode _volumeNode;
 
-  /** The label text objects. */
-  private final List<SceneText> _labelsText = new ArrayList<SceneText>();
+  /** The mesh used to render an inline slice. */
+  private MeshGeometry _inlineSliceMesh;
 
-  private Vector3 _extent;
+  /** The mesh used to render an xline slice. */
+  private MeshGeometry _xlineSliceMesh;
+
+  /** The mesh used to render a z slice. */
+  private MeshGeometry _zSliceMesh;
 
   /** The trace data for the current inline slice. */
   private TraceData _inlineSliceData;
@@ -113,14 +56,14 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
   /** The trace data for the current z slice. */
   private float[] _zSliceData;
 
-  /** The current xline slice data range. */
-  protected float[] _xlineRange = AlgorithmUtil.DEFAULT_RANGE;
-
   /** The current inline slice data range. */
-  protected float[] _inlineRange = AlgorithmUtil.DEFAULT_RANGE;
+  private float[] _inlineRange = { Float.MAX_VALUE, -Float.MAX_VALUE };
 
-  /** The current z slice slice data range. */
-  protected float[] _zRange = AlgorithmUtil.DEFAULT_RANGE;
+  /** The current xline slice data range. */
+  private float[] _xlineRange = { Float.MAX_VALUE, -Float.MAX_VALUE };
+
+  /** The current z slice data range. */
+  private float[] _zRange = { Float.MAX_VALUE, -Float.MAX_VALUE };
 
   /** The last inline slice colored. */
   private float _inlineSliceLastColored = Float.MAX_VALUE;
@@ -134,29 +77,31 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
   public PostStack3dRenderer() {
     super("");
     _model = new PostStack3dRendererModel();
-    setSmoothing(SmoothingMethod.INTERPOLATION);
   }
 
   @Override
   protected void addPopupMenuActions() {
     final Shell shell = new Shell(_shell);
-    final PostStack3dRendererDialog dialog = new PostStack3dRendererDialog(shell, _volume.getDisplayName(), this,
-        _volume);
+    final PostStack3dRendererDialog dialog = new PostStack3dRendererDialog(shell, _volume.getDisplayName(), this, _volume);
     addSettingsPopupMenuAction(dialog, SWT.DEFAULT, SWT.DEFAULT);
   }
 
   @Override
   protected void addSpatials() {
-    final Vector3[] points = VolumeViewerHelper.points3dToVector3(_volume.getExtent().getPointsDirect());
+    final CoordinateSeries extent = _volume.getExtent();
+    final Point3d[] rawPoints = extent.getPointsDirect();
+    final Vector3f[] points = VolumeViewerHelper.points3dToVector3(rawPoints);
     if (points == null || points.length == 0) {
       return;
     }
 
-    // outline coords are defined in real world points, 
-    final Vector3[] vertex = new Vector3[24]; // 24 is the number of vertices that define the outline
-    final int nr = points.length;
+    // Build 24 vertices defining 12 line segments (bounding box outline).
+    // points[0..3] are the bottom 4 corners, points[4..7] are the top 4 corners.
+    final int nr = points.length; // expected 8
+    final Vector3f[] vertex = new Vector3f[24];
     int k = 0;
     for (int i = 0; i < 4; i++) {
+      // Bottom edge
       vertex[k] = points[i];
       vertex[nr + k] = points[nr / 2 + i];
       vertex[2 * nr + k] = points[i];
@@ -165,266 +110,39 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
       if (pos == nr / 2) {
         pos = 0;
       }
+      // Next bottom corner / next top corner / top of vertical
       vertex[k] = points[pos];
       vertex[nr + k] = points[nr / 2 + pos];
       vertex[2 * nr + k] = points[nr / 2 + i];
       k++;
     }
-    _volumeNode = new Node(_volume.getDisplayName());
-    _boundingBox = new Line(_volume.getDisplayName() + " bounding box", vertex, null, null, null);
-    setLineSettings(_boundingBox, true);
 
-    // update the geometric state of our top level node so the bounds are correct. ( do it before attaching to root so scale is definitely 1:1)
-    _volumeNode.updateGeometricState(0, true);
-    _extent = ((OrientedBoundingBox) _boundingBox.getWorldBound()).getExtent().clone();
-    addLabels();
-    _volumeNode.updateGeometricState(0, true);
+    // Pack vertices into a FloatBuffer
+    final FloatBuffer buf = FloatBuffer.allocate(24 * 3);
+    for (int i = 0; i < 24; i++) {
+      buf.put(vertex[i].x);
+      buf.put(vertex[i].y);
+      buf.put(vertex[i].z);
+    }
+    buf.flip();
+
+    final LineGeometry boundingBox = new LineGeometry(_volume.getDisplayName() + " bounding box");
+    boundingBox.setVertices(buf, 24);
+    boundingBox.setColor(new Vector4f(1, 1, 1, 1));
+    boundingBox.setLineWidth(1.5f);
+
+    _volumeNode = new GroupNode(_volume.getDisplayName());
+    _volumeNode.addChild(boundingBox);
 
     _viewer.mapSpatial(_volumeNode, this);
     _viewer.addToScene(_volume.getZDomain(), _volumeNode);
 
-    // Go ahead an turn on the default slices.
-    final boolean result = calculateRange(_model.getInlineSliceVisible(), _model.getInlineSlice(), _model
-        .getXlineSliceVisible(), _model.getXlineSlice(), _model.getZSliceVisible(), _model.getZSlice(), 0);
+    // Turn on the default slices.
+    final boolean result = calculateRange(_model.getInlineSliceVisible(), _model.getInlineSlice(),
+        _model.getXlineSliceVisible(), _model.getXlineSlice(), _model.getZSliceVisible(), _model.getZSlice());
     if (result) {
       _viewer.makeDirty();
     }
-  }
-
-  /**
-   * Add the labels to the scene.
-   */
-  private void addLabels() {
-    for (final Line line : _labels) {
-      line.removeFromParent();
-    }
-    _labels.clear();
-    for (final SceneText text : _labelsText) {
-      text.removeFromParent();
-    }
-    _labelsText.clear();
-    if (getShowLabels()) {
-      final long length = Math.min(Math.round(_extent.getX() / 10), Math
-          .round((_extent.getX() + _extent.getY() + _extent.getZ()) / 100));
-      addInlineLabels(length / (float) _viewer.getExaggeration());
-      addXlineLabels(length / (float) _viewer.getExaggeration());
-      addZLabels(length);
-    }
-    _volumeNode.updateRenderState();
-    _viewer.makeDirty();
-  }
-
-  /**
-   * Add the inline labels.
-   * 
-   * @param length the label line length.
-   */
-  private void addInlineLabels(final float length) {
-    final float inlineStart = _volume.getInlineStart();
-    final float inlineEnd = _volume.getInlineEnd();
-    final float xlineStart = _volume.getXlineStart();
-    final float zEnd = _volume.getZEnd();
-    final float[] xlines = new float[] { xlineStart, xlineStart };
-    final List<Double> labels = Labels.getLabels(inlineStart, inlineEnd, 10);
-    final Vector3[] vertex = new Vector3[2];
-    for (final double label : labels) {
-      final SeismicSurvey3d survey = _volume.getSurvey();
-      final Point3d[] points = survey.transformInlineXlineToXY(new float[] { (float) label, (float) label }, xlines)
-          .getPointsDirect();
-      vertex[0] = VolumeViewerHelper.point3dToVector3(points[0]).addLocal(0, 0, zEnd);
-      vertex[1] = VolumeViewerHelper.point3dToVector3(points[1]).addLocal(0, 0, zEnd + length);
-      final Line line = new Line(_volume.getDisplayName() + " Inline label " + label, vertex, null, null, null);
-      setLineSettings(line, false);
-      _labels.add(line);
-      final SceneText text = getTextLabel(vertex[1], _volume.getDisplayName() + " Inline label text " + label, label,
-          Alignment.NORTH);
-      text.setDefaultColor(new ColorRGBA(1, 1, 0, 1));
-      _labelsText.add(text);
-      _volumeNode.attachChild(text);
-    }
-  }
-
-  /**
-   * Add the xline labels.
-   * 
-   * @param length the label line length.
-   */
-  private void addXlineLabels(final float length) {
-    final float inlineStart = _volume.getInlineStart();
-    final float xlineStart = _volume.getXlineStart();
-    final float xlineEnd = _volume.getXlineEnd();
-    final float zEnd = _volume.getZEnd();
-    final float[] inlines = new float[] { inlineStart, inlineStart };
-    final List<Double> labels = Labels.getLabels(xlineStart, xlineEnd, 10);
-    final Vector3[] vertex = new Vector3[2];
-    for (final double label : labels) {
-      final SeismicSurvey3d survey = _volume.getSurvey();
-      final Point3d[] points = survey.transformInlineXlineToXY(inlines, new float[] { (float) label, (float) label })
-          .getPointsDirect();
-      vertex[0] = VolumeViewerHelper.point3dToVector3(points[0]).addLocal(0, 0, zEnd);
-      vertex[1] = VolumeViewerHelper.point3dToVector3(points[1]).addLocal(0, 0, zEnd + length);
-      final Line line = new Line(_volume.getDisplayName() + " Xline label " + label, vertex, null, null, null);
-      setLineSettings(line, false);
-      _labels.add(line);
-      final SceneText text = getTextLabel(vertex[1], _volume.getDisplayName() + " Xline label text " + label, label,
-          Alignment.NORTH);
-      text.setDefaultColor(new ColorRGBA(1, 1, 0, 1));
-      _labelsText.add(text);
-      _volumeNode.attachChild(text);
-    }
-  }
-
-  /**
-   * Add the z labels.
-   * 
-   * @param length the label line length
-   */
-  private void addZLabels(final long length) {
-    final float inlineStart = _volume.getInlineStart();
-    final float xlineStart = _volume.getXlineStart();
-    final float[] xlines = new float[] { xlineStart, xlineStart };
-    final float[] inlines = new float[] { inlineStart, inlineStart };
-    final List<Double> labels = Labels.getLabels(_volume.getZStart(), _volume.getZEnd(), 15);
-    final Vector3[] vertex = new Vector3[2];
-    for (final double label : labels) {
-      final SeismicSurvey3d survey = _volume.getSurvey();
-      final Point3d[] points = survey.transformInlineXlineToXY(inlines, xlines).getPointsDirect();
-      vertex[0] = VolumeViewerHelper.point3dToVector3(points[0]).addLocal(0, 0, (float) label);
-      vertex[1] = VolumeViewerHelper.point3dToVector3(points[1]).addLocal(-length, -length, (float) label);
-      final Line line = new Line(_volume.getDisplayName() + " Z label " + label, vertex, null, null, null);
-      setLineSettings(line, false);
-      _labels.add(line);
-      final SceneText text = getTextLabel(vertex[1], _volume.getDisplayName() + " Z label text " + label, label,
-          Alignment.WEST);
-      text.setDefaultColor(new ColorRGBA(1, 1, 0, 1));
-      _labelsText.add(text);
-      _volumeNode.attachChild(text);
-    }
-  }
-
-  /**
-   * Set the visual settings of the specified line.
-   * 
-   * @param line the line.
-   * @param bounding if the line should have a bounding volume.
-   */
-  private void setLineSettings(final Line line, final boolean bounding) {
-    line.getMeshData().setIndexMode(IndexMode.Lines);
-    line.setRenderBucketType(RenderBucketType.Opaque);
-    line.setLightCombineMode(LightCombineMode.Off); // no need to light the wire frame boxes
-    line.setLineWidth(1.5f);
-    line.setAntialiased(true);
-    line.setSolidColor(ColorRGBA.WHITE);
-    line.setDefaultColor(ColorRGBA.WHITE);
-    if (bounding) {
-      line.setModelBound(new OrientedBoundingBox());
-      line.updateModelBound();
-    } else {
-      line.setModelBound(null);
-    }
-    _volumeNode.attachChild(line);
-
-    // Setup line to blend for anti-aliasing.
-    final BlendState alphaState = new BlendState();
-    alphaState.setEnabled(true);
-    alphaState.setBlendEnabled(true);
-    alphaState.setSourceFunction(SourceFunction.SourceAlpha);
-    alphaState.setDestinationFunction(DestinationFunction.OneMinusSourceAlpha);
-    line.setRenderState(alphaState);
-  }
-
-  /**
-   * Build and return a scene text for a label.
-   * 
-   * @param loc the text location.
-   * @param name the spatial name.
-   * @param label the text to be rendered.
-   * @param alignment the text alignment.
-   * @return the scene text spatial.
-   */
-  protected SceneText getTextLabel(final Vector3 loc, final String name, final double label,
-      final SceneText.Alignment alignment) {
-    String text = (float) label + "";
-    final int value = (int) label;
-    if (value == label) {
-      text = value + "";
-    }
-    final SceneText sceneText = _viewer.createSceneText(name, text, alignment);
-    sceneText.setTranslation(loc);
-    sceneText.setDefaultColor(ColorRGBA.WHITE);
-    return sceneText;
-  }
-
-  @Override
-  protected void addToLayerTree(final boolean autoUpdate) {
-    addToLayerTree(IViewer.SEISMIC_FOLDER, autoUpdate);
-  }
-
-  @Override
-  public void clearOutline() {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public ReadoutInfo[] getReadoutData(final Vector3 pickLoc) {
-    final List<ReadoutInfo> result = new ArrayList<ReadoutInfo>();
-    //result.add(super.getReadoutData()[0]);
-
-    final List<String> keys = new ArrayList<String>();
-    final List<String> vals = new ArrayList<String>();
-
-    final float[] inlineXline = _volume.getSurvey().transformXYToInlineXline(pickLoc.getX(), pickLoc.getY(), true);
-    final float z = Math.round(pickLoc.getZ() / _volume.getZDelta()) * _volume.getZDelta();
-
-    keys.add("IL");
-    keys.add("XL");
-    keys.add("Z");
-
-    vals.add(inlineXline[0] + "");
-    vals.add(inlineXline[1] + "");
-    vals.add(z + "");
-
-    result.add(new ReadoutInfo("Nearest slices", keys, vals));
-
-    // TODO: replace getXline() with getSamples() when available
-    //      float[] samples = _volume.getSamples(new float[] { inlineXline[0] }, new float[] { inlineXline[1] }, new float[] { z });
-    //final float[] samples = _volume.getXline(inlineXline[1], inlineXline[0], inlineXline[0], z, z).getData();
-
-    //for (ISeismic3dOverlayRenderer renderer : _renderers) {
-    //  result.add(renderer.getReadoutData(this, inlineXline[0], inlineXline[1], z, getCurrentOffset()));
-    //}
-
-    return result.toArray(new ReadoutInfo[result.size()]);
-  }
-
-  @Override
-  public Spatial[] getSpatials(final Domain domain) {
-    if (domain == _volume.getZDomain()) {
-      return new Spatial[] { _volumeNode };
-    }
-    return new Spatial[0];
-  }
-
-  @Override
-  public void redraw() {
-    updateRendererModel(_model);
-  }
-
-  @Override
-  public boolean renderOutline() {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  protected void setNameAndImage() {
-    setName(_volume);
-    setImage(ModelUI.getSharedImages().getImage(_volume));
-  }
-
-  public Object[] getRenderedObjects() {
-    return new Object[] { _volume };
   }
 
   @Override
@@ -438,10 +156,51 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
     final int inlineSliceIndex = _volume.getNumInlines() / 2;
     final int xlineSliceIndex = _volume.getNumXlines() / 2;
     final int zSliceIndex = _volume.getNumSamplesPerTrace() / 2;
-    _model.setDataUnit(_volume.getDataUnit());
     _model.setInlineSlice(_volume.getInlineStart() + inlineSliceIndex * _volume.getInlineDelta());
     _model.setXlineSlice(_volume.getXlineStart() + xlineSliceIndex * _volume.getXlineDelta());
     _model.setZSlice(_volume.getZStart() + zSliceIndex * _volume.getZDelta());
+  }
+
+  @Override
+  protected void setNameAndImage() {
+    setName(_volume);
+  }
+
+  @Override
+  protected void addToLayerTree(final boolean autoUpdate) {
+    addToLayerTree("Seismic", autoUpdate);
+  }
+
+  @Override
+  public void clearOutline() {
+    // not used
+  }
+
+  @Override
+  public ReadoutInfo[] getReadoutData(final Vector3f pickLoc) {
+    return new ReadoutInfo[0];
+  }
+
+  @Override
+  public SceneNode[] getSpatials(final Domain domain) {
+    if (_volumeNode != null && domain == _volume.getZDomain()) {
+      return new SceneNode[] { _volumeNode };
+    }
+    return new SceneNode[0];
+  }
+
+  public void redraw() {
+    updateRendererModel(_model);
+  }
+
+  @Override
+  public boolean renderOutline() {
+    return false;
+  }
+
+  @Override
+  public Object[] getRenderedObjects() {
+    return new Object[] { _volume };
   }
 
   public PostStack3dRendererModel getSettingsModel() {
@@ -450,48 +209,29 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
 
   @Override
   public void refresh() {
-    // call in opengl thread.
-    final Callable<Void> exe = new Callable<Void>() {
-
-      public Void call() throws Exception {
-        synchronized (_model) {
-          final boolean result = calculateRange(_model.getInlineSliceVisible(), _model.getInlineSlice(), _model
-              .getXlineSliceVisible(), _model.getXlineSlice(), _model.getZSliceVisible(), _model.getZSlice(), 0);
-          if (!result) {
-            if (_model.getInlineSliceVisible()) {
-              addInline(_model.getInlineSlice(), true);
-            }
-            if (_model.getXlineSliceVisible()) {
-              addXline(_model.getXlineSlice(), true);
-            }
-            if (_model.getZSliceVisible()) {
-              addSlice(_model.getZSlice(), true);
-            }
-          }
-          addLabels();
+    synchronized (_model) {
+      final boolean result = calculateRange(_model.getInlineSliceVisible(), _model.getInlineSlice(),
+          _model.getXlineSliceVisible(), _model.getXlineSlice(), _model.getZSliceVisible(), _model.getZSlice());
+      if (!result) {
+        if (_model.getInlineSliceVisible()) {
+          addInline(_model.getInlineSlice());
         }
-        return null;
+        if (_model.getXlineSliceVisible()) {
+          addXline(_model.getXlineSlice());
+        }
+        if (_model.getZSliceVisible()) {
+          addSlice(_model.getZSlice());
+        }
       }
-    };
-    _viewer.enqueueGLTask(exe);
+    }
+    _viewer.makeDirty();
   }
 
   /**
-   * Calculate the slices color range.
-   * 
-   * @param inlineVisible if the inline is visible
-   * @param currentInline the current inline
-   * @param xlineVisible if the xline is visible
-   * @param currentXline the current xline
-   * @param zVisible if the z slice is visible
-   * @param currentZ the current z slice
-   * @param offset not used here
-   * @return the slices repaint status
+   * Calculate the slices color range, read trace data, and rebuild geometry.
    */
   public synchronized boolean calculateRange(final boolean inlineVisible, final float currentInline,
-      final boolean xlineVisible, final float currentXline, final boolean zVisible, final float currentZ,
-      final float offset) {
-    final boolean lockRange = false;//getColorPanel().isLockRange();
+      final boolean xlineVisible, final float currentXline, final boolean zVisible, final float currentZ) {
     boolean update = false;
 
     final StorageOrder order = _volume.getPreferredOrder();
@@ -499,70 +239,303 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
       if (inlineVisible && currentInline != _inlineSliceLastColored) {
         _inlineSliceLastColored = currentInline;
         update = true;
-        _inlineSliceData = _volume.getInline(currentInline, _volume.getXlineStart(), _volume.getXlineEnd(), _volume
-            .getZStart(), _volume.getZEnd());
-        if (!lockRange) {
-          final float[] traceValues = _inlineSliceData.getData();
-          _inlineRange = AlgorithmUtil.getTraceRange(traceValues);
-        }
+        _inlineSliceData = _volume.getInline(currentInline, _volume.getXlineStart(), _volume.getXlineEnd(),
+            _volume.getZStart(), _volume.getZEnd());
+        _inlineRange = getRange(_inlineSliceData.getData());
       }
-
       if (xlineVisible && currentXline != _xlineSliceLastColored) {
         _xlineSliceLastColored = currentXline;
         update = true;
-        _xlineSliceData = _volume.getXline(currentXline, _volume.getInlineStart(), _volume.getInlineEnd(), _volume
-            .getZStart(), _volume.getZEnd());
-        if (!lockRange) {
-          final float[] traceValues = _xlineSliceData.getData();
-          _xlineRange = AlgorithmUtil.getTraceRange(traceValues);
-        }
+        _xlineSliceData = _volume.getXline(currentXline, _volume.getInlineStart(), _volume.getInlineEnd(),
+            _volume.getZStart(), _volume.getZEnd());
+        _xlineRange = getRange(_xlineSliceData.getData());
       }
-    } else if (order == StorageOrder.XLINE_INLINE_Z) {
+    } else {
+      // XLINE_INLINE_Z order: read xline first for efficiency
       if (xlineVisible && currentXline != _xlineSliceLastColored) {
         _xlineSliceLastColored = currentXline;
         update = true;
-        _xlineSliceData = _volume.getXline(currentXline, _volume.getInlineStart(), _volume.getInlineEnd(), _volume
-            .getZStart(), _volume.getZEnd());
-        if (!lockRange) {
-          final float[] traceValues = _xlineSliceData.getData();
-          _xlineRange = AlgorithmUtil.getTraceRange(traceValues);
-        }
+        _xlineSliceData = _volume.getXline(currentXline, _volume.getInlineStart(), _volume.getInlineEnd(),
+            _volume.getZStart(), _volume.getZEnd());
+        _xlineRange = getRange(_xlineSliceData.getData());
       }
-
       if (inlineVisible && currentInline != _inlineSliceLastColored) {
         _inlineSliceLastColored = currentInline;
         update = true;
-        _inlineSliceData = _volume.getInline(currentInline, _volume.getXlineStart(), _volume.getXlineEnd(), _volume
-            .getZStart(), _volume.getZEnd());
-        if (!lockRange) {
-          final float[] traceValues = _inlineSliceData.getData();
-          _inlineRange = AlgorithmUtil.getTraceRange(traceValues);
-        }
+        _inlineSliceData = _volume.getInline(currentInline, _volume.getXlineStart(), _volume.getXlineEnd(),
+            _volume.getZStart(), _volume.getZEnd());
+        _inlineRange = getRange(_inlineSliceData.getData());
       }
     }
 
     if (zVisible && currentZ != _zSliceLastColored) {
       _zSliceLastColored = currentZ;
       update = true;
-      _zSliceData = _volume.getSlice(_volume.getInlineStart(), _volume.getInlineEnd(), _volume.getXlineStart(), _volume
-          .getXlineEnd(), currentZ, SliceBufferOrder.INLINE_XLINE, Float.NaN);
-      if (!lockRange) {
-        _zRange = AlgorithmUtil.getTraceRange(_zSliceData);
-      }
+      _zSliceData = _volume.getSlice(_volume.getInlineStart(), _volume.getInlineEnd(),
+          _volume.getXlineStart(), _volume.getXlineEnd(), currentZ, SliceBufferOrder.INLINE_XLINE, Float.NaN);
+      _zRange = getRange(_zSliceData);
     }
 
     if (update) {
-      //      for (final ISeismic3dOverlayRenderer renderer : _renderers) {
-      //        renderer.calculateRange(this, xlineVisible, currentXline, inlineVisible, currentInline, zVisible, currentZ,
-      //            getCurrentOffset());
-      //      }
-      return setCurrentRange();
+      // Compute combined data range across all visible slices
+      float min = Float.MAX_VALUE;
+      float max = -Float.MAX_VALUE;
+      if (inlineVisible && _inlineRange[0] < Float.MAX_VALUE) {
+        min = Math.min(min, _inlineRange[0]);
+        max = Math.max(max, _inlineRange[1]);
+      }
+      if (xlineVisible && _xlineRange[0] < Float.MAX_VALUE) {
+        min = Math.min(min, _xlineRange[0]);
+        max = Math.max(max, _xlineRange[1]);
+      }
+      if (zVisible && _zRange[0] < Float.MAX_VALUE) {
+        min = Math.min(min, _zRange[0]);
+        max = Math.max(max, _zRange[1]);
+      }
+      // For seismic amplitude, use symmetric range
+      final float maxAbs = Math.max(Math.abs(min), Math.abs(max));
+      min = -maxAbs;
+      max = maxAbs;
+
+      // Now rebuild the slice geometry
+      if (inlineVisible && _inlineSliceData != null) {
+        addInline(currentInline);
+      }
+      if (xlineVisible && _xlineSliceData != null) {
+        addXline(currentXline);
+      }
+      if (zVisible && _zSliceData != null) {
+        addSlice(currentZ);
+      }
+      return true;
     }
     return false;
   }
 
+  /**
+   * Add an inline slice as a colored grid mesh.
+   * The inline slice is a vertical plane along the xline direction.
+   */
+  public void addInline(final float value) {
+    if (_inlineSliceData == null) {
+      return;
+    }
+    final float[] inlines = { value, value };
+    final float[] xlines = { _volume.getXlineStart(), _volume.getXlineEnd() };
+    final Point3d[] planeTop = _volume.getSurvey().transformInlineXlineToXY(inlines, xlines).getPointsDirect();
+    final float zStart = _volume.getZStart();
+    final float zEnd = _volume.getZEnd();
+    final Vector3f v1 = VolumeViewerHelper.point3dToVector3(planeTop[0]).add(0, 0, zStart);
+    final Vector3f v2 = VolumeViewerHelper.point3dToVector3(planeTop[1]).add(0, 0, zStart);
+    final Vector3f v3 = VolumeViewerHelper.point3dToVector3(planeTop[1]).add(0, 0, zEnd);
+    final Vector3f v4 = VolumeViewerHelper.point3dToVector3(planeTop[0]).add(0, 0, zEnd);
+
+    final int cols = _inlineSliceData.getNumTraces();
+    final int rows = _inlineSliceData.getNumSamples();
+    final float[] data = _inlineSliceData.getData();
+
+    // Remove old mesh
+    if (_inlineSliceMesh != null) {
+      _volumeNode.removeChild(_inlineSliceMesh);
+    }
+
+    _inlineSliceMesh = buildSliceGrid(_volume.getDisplayName() + " inline",
+        new Vector3f[] { v1, v2, v3, v4 }, cols, rows, data, _inlineRange[0], _inlineRange[1]);
+    _volumeNode.addChild(_inlineSliceMesh);
+
+    _model.setInlineSlice(value);
+    _model.setInlineSliceVisible(true);
+    _viewer.makeDirty();
+  }
+
+  /**
+   * Add an xline slice as a colored grid mesh.
+   * The xline slice is a vertical plane along the inline direction.
+   */
+  public void addXline(final float value) {
+    if (_xlineSliceData == null) {
+      return;
+    }
+    final float[] inlines = { _volume.getInlineStart(), _volume.getInlineEnd() };
+    final float[] xlines = { value, value };
+    final Point3d[] planeTop = _volume.getSurvey().transformInlineXlineToXY(inlines, xlines).getPointsDirect();
+    final float zStart = _volume.getZStart();
+    final float zEnd = _volume.getZEnd();
+    final Vector3f v1 = VolumeViewerHelper.point3dToVector3(planeTop[0]).add(0, 0, zStart);
+    final Vector3f v2 = VolumeViewerHelper.point3dToVector3(planeTop[1]).add(0, 0, zStart);
+    final Vector3f v3 = VolumeViewerHelper.point3dToVector3(planeTop[1]).add(0, 0, zEnd);
+    final Vector3f v4 = VolumeViewerHelper.point3dToVector3(planeTop[0]).add(0, 0, zEnd);
+
+    final int cols = _xlineSliceData.getNumTraces();
+    final int rows = _xlineSliceData.getNumSamples();
+    final float[] data = _xlineSliceData.getData();
+
+    // Remove old mesh
+    if (_xlineSliceMesh != null) {
+      _volumeNode.removeChild(_xlineSliceMesh);
+    }
+
+    _xlineSliceMesh = buildSliceGrid(_volume.getDisplayName() + " xline",
+        new Vector3f[] { v1, v2, v3, v4 }, cols, rows, data, _xlineRange[0], _xlineRange[1]);
+    _volumeNode.addChild(_xlineSliceMesh);
+
+    _model.setXlineSlice(value);
+    _model.setXlineSliceVisible(true);
+    _viewer.makeDirty();
+  }
+
+  /**
+   * Add a z (horizontal) slice as a colored grid mesh.
+   */
+  public void addSlice(final float value) {
+    if (_zSliceData == null) {
+      return;
+    }
+    final float inlineStart = _volume.getInlineStart();
+    final float inlineEnd = _volume.getInlineEnd();
+    final float xlineStart = _volume.getXlineStart();
+    final float xlineEnd = _volume.getXlineEnd();
+    // Get the 4 corners of the horizontal slice plane
+    final float[] inlines = { inlineEnd, inlineStart, inlineStart, inlineEnd };
+    final float[] xlinesArr = { xlineStart, xlineEnd, xlineStart, xlineEnd };
+    final Point3d[] planePoints = _volume.getSurvey().transformInlineXlineToXY(inlines, xlinesArr).getPointsDirect();
+    // Build corners: v1=(ILend,XLstart), v2=(ILstart,XLend), v3=(ILstart,XLstart), v4=(ILend,XLend)
+    // Data order is INLINE_XLINE: inline varies slowest
+    // We need: top-left=ILstart/XLstart, top-right=ILstart/XLend, bottom-right=ILend/XLend, bottom-left=ILend/XLstart
+    final Vector3f v1 = VolumeViewerHelper.point3dToVector3(planePoints[2]).add(0, 0, value); // ILstart,XLstart
+    final Vector3f v2 = VolumeViewerHelper.point3dToVector3(planePoints[1]).add(0, 0, value); // ILstart,XLend
+    final Vector3f v3 = VolumeViewerHelper.point3dToVector3(planePoints[3]).add(0, 0, value); // ILend,XLend
+    final Vector3f v4 = VolumeViewerHelper.point3dToVector3(planePoints[0]).add(0, 0, value); // ILend,XLstart
+
+    final int cols = _volume.getNumXlines();
+    final int rows = _volume.getNumInlines();
+
+    // Remove old mesh
+    if (_zSliceMesh != null) {
+      _volumeNode.removeChild(_zSliceMesh);
+    }
+
+    _zSliceMesh = buildSliceGrid(_volume.getDisplayName() + " z-slice",
+        new Vector3f[] { v1, v2, v3, v4 }, cols, rows, _zSliceData, _zRange[0], _zRange[1]);
+    _volumeNode.addChild(_zSliceMesh);
+
+    _model.setZSlice(value);
+    _model.setZSliceVisible(true);
+    _viewer.makeDirty();
+  }
+
+  /**
+   * Build a grid mesh for a slice with per-vertex amplitude coloring.
+   *
+   * @param name      mesh name
+   * @param corners   4 corner vertices: [0]=top-left, [1]=top-right, [2]=bottom-right, [3]=bottom-left
+   * @param cols      number of columns in the grid
+   * @param rows      number of rows in the grid
+   * @param data      seismic amplitude values (rows * cols)
+   * @param dataMin   minimum amplitude for color mapping
+   * @param dataMax   maximum amplitude for color mapping
+   * @return the mesh geometry
+   */
+  private MeshGeometry buildSliceGrid(String name, Vector3f[] corners, int cols, int rows,
+      float[] data, float dataMin, float dataMax) {
+    final int numVerts = cols * rows;
+    final FloatBuffer verts = FloatBuffer.allocate(numVerts * 3);
+    final FloatBuffer colors = FloatBuffer.allocate(numVerts * 4);
+
+    for (int r = 0; r < rows; r++) {
+      final float v = rows > 1 ? (float) r / (rows - 1) : 0;
+      for (int c = 0; c < cols; c++) {
+        final float u = cols > 1 ? (float) c / (cols - 1) : 0;
+        // Bilinear interpolation of corners
+        final Vector3f p = bilinearInterp(corners[0], corners[1], corners[2], corners[3], u, v);
+        verts.put(p.x).put(p.y).put(p.z);
+        // Color from data
+        final int dataIdx = r * cols + c;
+        final float val = (dataIdx < data.length) ? data[dataIdx] : 0;
+        final Vector4f color = amplitudeToColor(val, dataMin, dataMax);
+        colors.put(color.x).put(color.y).put(color.z).put(color.w);
+      }
+    }
+    verts.flip();
+    colors.flip();
+
+    // Build triangle indices
+    final int numTris = (cols - 1) * (rows - 1) * 2;
+    final IntBuffer indices = IntBuffer.allocate(numTris * 3);
+    for (int r = 0; r < rows - 1; r++) {
+      for (int c = 0; c < cols - 1; c++) {
+        final int i = r * cols + c;
+        indices.put(i).put(i + 1).put(i + cols);
+        indices.put(i + 1).put(i + cols + 1).put(i + cols);
+      }
+    }
+    indices.flip();
+
+    final MeshGeometry mesh = new MeshGeometry(name);
+    mesh.setVertices(verts, numVerts);
+    mesh.setColors(colors);
+    mesh.setIndices(indices, numTris);
+    return mesh;
+  }
+
+  /**
+   * Bilinear interpolation between 4 corner points.
+   * topLeft(0,0), topRight(1,0), bottomRight(1,1), bottomLeft(0,1)
+   */
+  private Vector3f bilinearInterp(Vector3f topLeft, Vector3f topRight, Vector3f bottomRight, Vector3f bottomLeft,
+      float u, float v) {
+    // top edge: lerp topLeft -> topRight
+    final float topX = topLeft.x + (topRight.x - topLeft.x) * u;
+    final float topY = topLeft.y + (topRight.y - topLeft.y) * u;
+    final float topZ = topLeft.z + (topRight.z - topLeft.z) * u;
+    // bottom edge: lerp bottomLeft -> bottomRight
+    final float botX = bottomLeft.x + (bottomRight.x - bottomLeft.x) * u;
+    final float botY = bottomLeft.y + (bottomRight.y - bottomLeft.y) * u;
+    final float botZ = bottomLeft.z + (bottomRight.z - bottomLeft.z) * u;
+    // vertical: lerp top -> bottom
+    return new Vector3f(
+        topX + (botX - topX) * v,
+        topY + (botY - topY) * v,
+        topZ + (botZ - topZ) * v);
+  }
+
+  /**
+   * Map a seismic amplitude to a blue-white-red color.
+   */
+  private Vector4f amplitudeToColor(float value, float min, float max) {
+    if (max == min) {
+      return new Vector4f(1, 1, 1, 1);
+    }
+    float t = (value - min) / (max - min);
+    t = Math.max(0, Math.min(1, t));
+    if (t < 0.5f) {
+      final float s = t * 2; // 0 to 1
+      return new Vector4f(s, s, 1, 1); // blue to white
+    } else {
+      final float s = (t - 0.5f) * 2; // 0 to 1
+      return new Vector4f(1, 1 - s, 1 - s, 1); // white to red
+    }
+  }
+
+  /**
+   * Compute the min/max range of the given data array, ignoring NaN and null values.
+   */
+  private float[] getRange(float[] data) {
+    if (data == null) {
+      return new float[] { Float.MAX_VALUE, -Float.MAX_VALUE };
+    }
+    float min = Float.MAX_VALUE;
+    float max = -Float.MAX_VALUE;
+    for (final float value : data) {
+      if (!Float.isNaN(value) && value != PostStack3d.NULL_VALUE) {
+        min = Math.min(min, value);
+        max = Math.max(max, value);
+      }
+    }
+    return new float[] { min, max };
+  }
+
   public SpatialExtent getExtent() {
-    // TODO Auto-generated method stub
     return null;
   }
 
@@ -572,328 +545,8 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
   }
 
   public void colorsChanged(final ColorMapEvent event) {
-    final ColorBar colorBarOld = _model.getColorBar();
-    if (event.getColorMapModel().getNumColors() != colorBarOld.getNumColors()) {
-      final ColorBar colorBar = new ColorBar(event.getColorMapModel(), colorBarOld.getStartValue(), colorBarOld
-          .getEndValue(), colorBarOld.getStepValue());
-      colorBar.setReversedRange(colorBarOld.isReversedRange());
-      _model.setColorBar(colorBar);
-      colorBarOld.dispose();
-      return;
-    }
-    _model.getColorBar().setColors(event.getColorMapModel().getColors());
-
-    final boolean drawTexture = true;
-
-    final boolean reversePolarity = _model.getReversePolarity();
-    final int transparency = _model.getTransparency();
-
-    if (_inlineSliceQuad != null) {
-      if (drawTexture) {
-        final Texture texture = AWTTextureUtil.loadTexture(SeismicDatasetHelper.createTexture(_inlineSliceData
-            .getData(), _model.getColorBar(), _inlineSliceData.getNumTraces(), _inlineSliceData.getNumSamples(),
-            _inlineSliceData.getTraces(), _viewer.getMaximumTextureSize(), reversePolarity, transparency),
-            getMinificationFilter(), Image.Format.GuessNoCompression, false);
-        texture.setMagnificationFilter(getMagnificationFilter());
-        texture.setAnisotropicFilterPercent(getAnisoLevel());
-        setPrimaryTexture(_inlineSliceQuad, texture);
-      }
-      _inlineSliceQuad.updateRenderState();
-    }
-
-    if (_xlineSliceQuad != null) {
-      if (drawTexture) {
-        final Texture texture = AWTTextureUtil.loadTexture(SeismicDatasetHelper.createTexture(
-            _xlineSliceData.getData(), _model.getColorBar(), _xlineSliceData.getNumTraces(), _xlineSliceData
-                .getNumSamples(), _xlineSliceData.getTraces(), _viewer.getMaximumTextureSize(), reversePolarity,
-            transparency), getMinificationFilter(), Image.Format.GuessNoCompression, false);
-        texture.setMagnificationFilter(getMagnificationFilter());
-        texture.setAnisotropicFilterPercent(getAnisoLevel());
-        setPrimaryTexture(_xlineSliceQuad, texture);
-      }
-      _xlineSliceQuad.updateRenderState();
-    }
-
-    if (_zSliceQuad != null) {
-      if (drawTexture) {
-        final Texture texture = AWTTextureUtil.loadTexture(SeismicDatasetHelper.createTexture(_zSliceData, _model
-            .getColorBar(), _volume.getNumInlines(), _volume.getNumXlines(), null, _viewer.getMaximumTextureSize(),
-            reversePolarity, transparency), getMinificationFilter(), Image.Format.GuessNoCompression, false);
-        texture.setMagnificationFilter(getMagnificationFilter());
-        texture.setAnisotropicFilterPercent(getAnisoLevel());
-        setPrimaryTexture(_zSliceQuad, texture);
-      }
-      _zSliceQuad.updateRenderState();
-    }
-
-    _viewer.makeDirty();
-  }
-
-  public void addXline(final float value, final boolean drawTexture) {
-    final float[] inlines = { _volume.getInlineStart(), _volume.getInlineEnd() };
-    final float[] xlines = { value, value };
-    final Point3d[] planeTop = _volume.getSurvey().transformInlineXlineToXY(inlines, xlines).getPointsDirect();
-    final float zStart = _volume.getZStart();
-    final float zEnd = _volume.getZEnd();
-    final Vector3 v1 = VolumeViewerHelper.point3dToVector3(planeTop[0]).addLocal(0, 0, zStart);
-    final Vector3 v2 = VolumeViewerHelper.point3dToVector3(planeTop[1]).addLocal(0, 0, zStart);
-    final Vector3 v3 = VolumeViewerHelper.point3dToVector3(planeTop[1]).addLocal(0, 0, zEnd);
-    final Vector3 v4 = VolumeViewerHelper.point3dToVector3(planeTop[0]).addLocal(0, 0, zEnd);
-    final FloatBuffer verts = BufferUtils.createFloatBuffer(v1, v2, v3, v4);
-    _xlineSlicePlane.setPlanePoints(v1, v2, v3);
-    final TexCoords uvs = new TexCoords(BufferUtils.createFloatBuffer(0, 0, 0, 1, 1, 1, 1, 0));
-    final IntBuffer indices = BufferUtils.createIntBuffer(new int[] { 0, 1, 2, 0, 2, 3 });
-    remove(_xlineSliceQuad);
-    _xlineSliceQuad = new Mesh(_volume.getDisplayName() + " xline");
-    _xlineSliceQuad.reconstruct(verts, null, null, uvs, indices);
-    buildTextureQuad(_xlineSliceQuad);
-
-    //System.out.println("********** draw xline " + value + "  " + drawTexture);
-
-    final boolean reversePolarity = _model.getReversePolarity();
-    final int transparency = _model.getTransparency();
-    if (drawTexture) {
-      _model.setXlineSlice(value);
-      _model.setXlineSliceVisible(true);
-      final Texture texture = AWTTextureUtil.loadTexture(SeismicDatasetHelper.createTexture(_xlineSliceData.getData(),
-          _model.getColorBar(), _xlineSliceData.getNumTraces(), _xlineSliceData.getNumSamples(), _xlineSliceData
-              .getTraces(), _viewer.getMaximumTextureSize(), reversePolarity, transparency), getMinificationFilter(),
-          Image.Format.GuessNoCompression, false);
-      texture.setMagnificationFilter(getMagnificationFilter());
-      texture.setAnisotropicFilterPercent(getAnisoLevel());
-      setPrimaryTexture(_xlineSliceQuad, texture);
-      //addSecondaryTextures(_xlineQuad, PostStack3dSlice.XLINE, value);
-    }
-    _volumeNode.attachChild(_xlineSliceQuad);
-    //_viewer.addToScene(_xlineQuad);
-    _xlineSliceQuad.updateRenderState();
-    _viewer.makeDirty();
-  }
-
-  public void addInline(final float value, final boolean drawTexture) {
-    final float[] inlines = { value, value };
-    final float[] xlines = { _volume.getXlineStart(), _volume.getXlineEnd() };
-    final Point3d[] planeTop = _volume.getSurvey().transformInlineXlineToXY(inlines, xlines).getPointsDirect();
-    final float zStart = _volume.getZStart();
-    final float zEnd = _volume.getZEnd();
-    final Vector3 v1 = VolumeViewerHelper.point3dToVector3(planeTop[0]).addLocal(0, 0, zStart);
-    final Vector3 v2 = VolumeViewerHelper.point3dToVector3(planeTop[1]).addLocal(0, 0, zStart);
-    final Vector3 v3 = VolumeViewerHelper.point3dToVector3(planeTop[1]).addLocal(0, 0, zEnd);
-    final Vector3 v4 = VolumeViewerHelper.point3dToVector3(planeTop[0]).addLocal(0, 0, zEnd);
-    final FloatBuffer verts = BufferUtils.createFloatBuffer(v1, v2, v3, v4);
-    _inlineSlicePlane.setPlanePoints(v1, v2, v3);
-    final TexCoords uvs = new TexCoords(BufferUtils.createFloatBuffer(0, 0, 0, 1, 1, 1, 1, 0));
-    final IntBuffer indices = BufferUtils.createIntBuffer(new int[] { 0, 1, 2, 0, 2, 3 });
-    remove(_inlineSliceQuad);
-    _inlineSliceQuad = new Mesh(_volume.getDisplayName() + " inline");
-    _inlineSliceQuad.reconstruct(verts, null, null, uvs, indices);
-    buildTextureQuad(_inlineSliceQuad);
-
-    //System.out.println("********** draw inline " + value + "  " + drawTexture);
-
-    final boolean reversePolarity = _model.getReversePolarity();
-    final int transparency = _model.getTransparency();
-    if (drawTexture) {
-      _model.setInlineSlice(value);
-      _model.setInlineSliceVisible(true);
-      final Texture texture = AWTTextureUtil.loadTexture(SeismicDatasetHelper.createTexture(_inlineSliceData.getData(),
-          _model.getColorBar(), _inlineSliceData.getNumTraces(), _inlineSliceData.getNumSamples(), _inlineSliceData
-              .getTraces(), _viewer.getMaximumTextureSize(), reversePolarity, transparency), getMinificationFilter(),
-          Image.Format.GuessNoCompression, false);
-      texture.setMagnificationFilter(getMagnificationFilter());
-      texture.setAnisotropicFilterPercent(getAnisoLevel());
-
-      setPrimaryTexture(_inlineSliceQuad, texture);
-      //addSecondaryTextures(_inlineQuad, PostStack3dSlice.INLINE, value);
-    }
-    _volumeNode.attachChild(_inlineSliceQuad);
-    //_viewer.addToScene(_inlineQuad);
-    _inlineSliceQuad.updateRenderState();
-
-    _viewer.makeDirty();
-  }
-
-  public void addSlice(final float value, final boolean drawTexture) {
-    final float inlineStart = _volume.getInlineStart();
-    final float inlineEnd = _volume.getInlineEnd();
-    final float xlineStart = _volume.getXlineStart();
-    final float xlineEnd = _volume.getXlineEnd();
-    final float[] inlines = { inlineEnd, inlineStart, inlineStart, inlineEnd };
-    final float[] xlines = { xlineStart, xlineEnd, xlineStart, xlineEnd };
-    final Point3d[] planeTop = _volume.getSurvey().transformInlineXlineToXY(inlines, xlines).getPointsDirect();
-    // compute all the 4 points as the volume could be rotated
-    final Vector3 v1 = VolumeViewerHelper.point3dToVector3(planeTop[0]).addLocal(0, 0, value);
-    final Vector3 v2 = VolumeViewerHelper.point3dToVector3(planeTop[1]).addLocal(0, 0, value);
-    final Vector3 v3 = VolumeViewerHelper.point3dToVector3(planeTop[2]).addLocal(0, 0, value);
-    final Vector3 v4 = VolumeViewerHelper.point3dToVector3(planeTop[3]).addLocal(0, 0, value);
-    final FloatBuffer verts = BufferUtils.createFloatBuffer(v1, v3, v2, v4);
-    _zSlicePlane.setPlanePoints(v1, v3, v2);
-    final TexCoords uvs = new TexCoords(BufferUtils.createFloatBuffer(0, 1, 0, 0, 1, 0, 1, 1));
-    final IntBuffer indices = BufferUtils.createIntBuffer(new int[] { 0, 1, 2, 0, 2, 3 });
-    remove(_zSliceQuad);
-    _zSliceQuad = new Mesh(_volume.getDisplayName() + " slice");
-    _zSliceQuad.reconstruct(verts, null, null, uvs, indices);
-    buildTextureQuad(_zSliceQuad);
-
-    //System.out.println("********** draw z " + value + "  " + drawTexture);
-
-    final boolean reversePolarity = _model.getReversePolarity();
-    final int transparency = _model.getTransparency();
-    if (drawTexture) {
-      _model.setZSlice(value);
-      _model.setZSliceVisible(true);
-      final Texture texture = AWTTextureUtil.loadTexture(SeismicDatasetHelper.createTexture(_zSliceData, _model
-          .getColorBar(), _volume.getNumInlines(), _volume.getNumXlines(), null, _viewer.getMaximumTextureSize(),
-          reversePolarity, transparency), getMinificationFilter(), Image.Format.GuessNoCompression, false);
-      texture.setMagnificationFilter(getMagnificationFilter());
-      texture.setAnisotropicFilterPercent(getAnisoLevel());
-
-      setPrimaryTexture(_zSliceQuad, texture);
-      //addSecondaryTextures(_zQuad, PostStack3dSlice.ZSLICE, value);
-    }
-    _volumeNode.attachChild(_zSliceQuad);
-    //_viewer.addToScene(_zQuad);
-    _zSliceQuad.updateRenderState();
-
-    _viewer.makeDirty();
-  }
-
-  private void buildTextureQuad(final Mesh quad) {
-    quad.setRenderBucketType(RenderBucketType.Transparent);
-    final BlendState alphaState = new BlendState();
-    alphaState.setEnabled(true);
-    alphaState.setBlendEnabled(false);
-    alphaState.setTestEnabled(true);
-    alphaState.setTestFunction(TestFunction.GreaterThan);
-    alphaState.setReference(0);
-    //    alphaState.setSourceFunction(SourceFunction.SourceAlpha);
-    //    alphaState.setDestinationFunction(DestinationFunction.OneMinusSourceAlpha);
-    quad.setRenderState(alphaState);
-    quad.setLightCombineMode(LightCombineMode.Off);
-    quad.getMeshData().copyTextureCoordinates(0, 1, 1);
-    quad.setModelBound(new BoundingBox());
-    quad.updateModelBound();
-    final TextureState textureS = new TextureState();
-    quad.setRenderState(textureS);
-  }
-
-  public synchronized void setPrimaryTexture(final Mesh sectionMesh, final Texture primaryTexture) {
-    if (sectionMesh != null && primaryTexture != null) {
-      final TextureState textureState = (TextureState) sectionMesh.getLocalRenderState(StateType.Texture);
-      textureState.setTexture(primaryTexture, 0);
-    }
-  }
-
-  //  private void addSecondaryTextures(final Mesh quad, final PostStack3dSlice slice, final float value) {
-  //    for (final ISeismic3dOverlayRenderer renderer : _renderers) {
-  //      try {
-  //        renderer.render(this, quad, slice, value, getCurrentOffset());
-  //      } catch (final Exception ex) {
-  //        LOGGER.warn("Could not render secondary texture for " + renderer.getTitle(), ex);
-  //      }
-  //    }
-  //  }
-
-  public void setSecondaryTexture(final Mesh crossSection, final Texture secondaryTexture, final float blendAmount) {
-    final TextureState textureS = (TextureState) crossSection.getLocalRenderState(StateType.Texture);
-    textureS.setTexture(secondaryTexture, 1);
-    secondaryTexture.setApply(ApplyMode.Combine);
-
-    // RGB Combine
-    secondaryTexture.setCombineFuncRGB(CombinerFunctionRGB.Interpolate);
-    secondaryTexture.setCombineOp0RGB(CombinerOperandRGB.SourceColor);
-    secondaryTexture.setCombineSrc0RGB(CombinerSource.Previous);
-    secondaryTexture.setCombineOp1RGB(CombinerOperandRGB.SourceColor);
-    secondaryTexture.setCombineSrc1RGB(CombinerSource.CurrentTexture);
-    secondaryTexture.setCombineOp2RGB(CombinerOperandRGB.SourceColor);
-    secondaryTexture.setCombineSrc2RGB(CombinerSource.Constant);
-    secondaryTexture.setBlendColor(new ColorRGBA(1 - blendAmount, 1 - blendAmount, 1 - blendAmount, 1));
-
-    // Alpha
-    secondaryTexture.setCombineFuncAlpha(CombinerFunctionAlpha.Replace);
-    secondaryTexture.setCombineOp0Alpha(CombinerOperandAlpha.SourceAlpha);
-    secondaryTexture.setCombineSrc0Alpha(CombinerSource.Previous);
-  }
-
-  /**
-   * Cleanup the texture and other resources hold by a slice.
-   * @param sliceQuad the slice quad
-   */
-  private void remove(final Mesh sliceQuad) {
-    System.out.println("removing sliceQuad: " + sliceQuad);
-    if (sliceQuad != null) {
-      _volumeNode.detachChild(sliceQuad);
-
-      // Remove any old textures being used.
-      final TextureState ts = (TextureState) sliceQuad.getLocalRenderState(StateType.Texture);
-      int k = 0;
-      while (ts != null && ts.getTexture(k) != null) {
-        final Texture t = ts.getTexture(k);
-        if (t.getTextureId() > 0) {
-          _viewer.cleanupTexture(t);
-        }
-        k++;
-      }
-    }
-    //    for (ISeismic3dOverlayRenderer renderer : _renderers) {
-    //      renderer.clear(this, null);
-    //    }
-    _viewer.makeDirty();
-  }
-
-  public void dispose() {
-    //_registry.removePropertyChangeListener(_listener);
-    _model.getColorBar().dispose();
-    _labels.clear();
-    _labelsText.clear();
-    _inlineSliceData = null;
-    _xlineSliceData = null;
-    _zSliceData = null;
-  }
-
-  /**
-   * Set the current color range.
-   * @return the slices repaint status
-   */
-  protected boolean setCurrentRange() {
-    boolean absoluteMax = false;
-    final Unit dataUnit = _volume.getDataUnit();
-    if (dataUnit == Unit.SEISMIC_AMPLITUDE) {
-      absoluteMax = true;
-    }
-    float min = AlgorithmUtil.DEFAULT_RANGE[0];
-    float max = AlgorithmUtil.DEFAULT_RANGE[1];
-    final NormalizationMethod normalization = _model.getNormalizationMethod();
-    switch (normalization) {
-      case BY_MAXIMUM:
-        min = Math.min(_xlineRange[0], _inlineRange[0]);
-        min = Math.min(min, _zRange[0]);
-        max = Math.max(_xlineRange[1], _inlineRange[1]);
-        max = Math.max(max, _zRange[1]);
-        if (absoluteMax) {
-          final float maxAbs = Math.max(Math.abs(min), Math.abs(max));
-          min = -maxAbs;
-          max = maxAbs;
-        }
-        break;
-      case BY_LIMITS:
-        min = (float) _model.getColorBar().getStartValue();
-        max = (float) _model.getColorBar().getEndValue();
-        break;
-      case BY_AVERAGE:
-        break;
-      case BY_TRACE_AVERAGE:
-        break;
-      case BY_TRACE_MAXIMUM:
-        break;
-    }
-    if (min != AlgorithmUtil.DEFAULT_RANGE[0] && max != AlgorithmUtil.DEFAULT_RANGE[1]) {
-      _model.getColorBar().setRange(min, max, (max - min) / 10);
-      refresh();
-      return true;
-    }
-    _model.getColorBar().setRange(0, 0, 1);
-    return false;
+    // Refresh slices when colors change
+    refresh();
   }
 
   public void setInlineSlice(final boolean inlineSliceVisible, final float inlineSlice) {
@@ -902,8 +555,10 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
     if (inlineSliceVisible) {
       refresh();
     } else {
-      if (_inlineSliceQuad != null) {
-        _volumeNode.detachChild(_inlineSliceQuad);
+      if (_inlineSliceMesh != null) {
+        _volumeNode.removeChild(_inlineSliceMesh);
+        _inlineSliceMesh = null;
+        _viewer.makeDirty();
       }
     }
   }
@@ -914,8 +569,10 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
     if (xlineSliceVisible) {
       refresh();
     } else {
-      if (_xlineSliceQuad != null) {
-        _volumeNode.detachChild(_xlineSliceQuad);
+      if (_xlineSliceMesh != null) {
+        _volumeNode.removeChild(_xlineSliceMesh);
+        _xlineSliceMesh = null;
+        _viewer.makeDirty();
       }
     }
   }
@@ -926,30 +583,64 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
     if (zSliceVisible) {
       refresh();
     } else {
-      if (_zSliceQuad != null) {
-        _volumeNode.detachChild(_zSliceQuad);
+      if (_zSliceMesh != null) {
+        _volumeNode.removeChild(_zSliceMesh);
+        _zSliceMesh = null;
+        _viewer.makeDirty();
       }
     }
   }
 
-  public void setSlices(final boolean inlineSliceVisible, final float inlineSlice, final boolean xlineSliceVisible,
-      final float xlineSlice, final boolean zSliceVisible, final float zSlice) {
+  public void setSlices(final boolean inlineSliceVisible, final float inlineSlice,
+      final boolean xlineSliceVisible, final float xlineSlice, final boolean zSliceVisible, final float zSlice) {
     _model.setInlineSliceVisible(inlineSliceVisible);
     _model.setInlineSlice(inlineSlice);
     _model.setXlineSliceVisible(xlineSliceVisible);
     _model.setXlineSlice(xlineSlice);
     _model.setZSliceVisible(zSliceVisible);
     _model.setZSlice(zSlice);
+    // Reset last-colored markers so calculateRange re-reads data
+    _inlineSliceLastColored = Float.MAX_VALUE;
+    _xlineSliceLastColored = Float.MAX_VALUE;
+    _zSliceLastColored = Float.MAX_VALUE;
     refresh();
   }
 
   public double[] getDataMinimumAndMaximum() {
-    double min = AlgorithmUtil.DEFAULT_RANGE[0];
-    double max = AlgorithmUtil.DEFAULT_RANGE[1];
-    min = Math.min(_xlineRange[0], _inlineRange[0]);
-    min = Math.min(min, _zRange[0]);
-    max = Math.max(_xlineRange[1], _inlineRange[1]);
-    max = Math.max(max, _zRange[1]);
+    float min = Float.MAX_VALUE;
+    float max = -Float.MAX_VALUE;
+    if (_inlineRange[0] < Float.MAX_VALUE) {
+      min = Math.min(min, _inlineRange[0]);
+      max = Math.max(max, _inlineRange[1]);
+    }
+    if (_xlineRange[0] < Float.MAX_VALUE) {
+      min = Math.min(min, _xlineRange[0]);
+      max = Math.max(max, _xlineRange[1]);
+    }
+    if (_zRange[0] < Float.MAX_VALUE) {
+      min = Math.min(min, _zRange[0]);
+      max = Math.max(max, _zRange[1]);
+    }
+    if (min == Float.MAX_VALUE) {
+      return new double[] { 0, 1 };
+    }
     return new double[] { min, max };
+  }
+
+  public void dispose() {
+    if (_volumeNode != null) {
+      if (_inlineSliceMesh != null) {
+        _volumeNode.removeChild(_inlineSliceMesh);
+        _inlineSliceMesh = null;
+      }
+      if (_xlineSliceMesh != null) {
+        _volumeNode.removeChild(_xlineSliceMesh);
+        _xlineSliceMesh = null;
+      }
+      if (_zSliceMesh != null) {
+        _volumeNode.removeChild(_zSliceMesh);
+        _zSliceMesh = null;
+      }
+    }
   }
 }

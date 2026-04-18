@@ -51,11 +51,29 @@ if [ -z "$LAUNCHER" ]; then
   exit 1
 fi
 
+# JOGL native library path: the wrapped OSGi JOGL bundles don't include
+# native libraries on their bundle classpath, so we load them via
+# java.library.path with JOGL's temp-jar-cache disabled.
+JOGL_NATIVES="$HOME/.m2/jogl-natives-2.6.0-macosx"
+if [ ! -d "$JOGL_NATIVES" ]; then
+  echo "JOGL natives not found at $JOGL_NATIVES"
+  echo "Extract them with:"
+  echo "  mkdir -p $JOGL_NATIVES && cd $JOGL_NATIVES && \\"
+  echo "    unzip -oj ~/.m2/repository/org/jogamp/gluegen/gluegen-rt/2.6.0/gluegen-rt-2.6.0-natives-macosx-universal.jar 'natives/macosx-universal/*.dylib' && \\"
+  echo "    unzip -oj ~/.m2/repository/org/jogamp/jogl/jogl-all/2.6.0/jogl-all-2.6.0-natives-macosx-universal.jar 'natives/macosx-universal/*.dylib' && \\"
+  echo "    ln -sf \"\$JAVA_HOME/lib/libjawt.dylib\" libjawt.dylib"
+  exit 1
+fi
+
 exec "$JAVA" \
     -Xms256m \
     -Xmx1200m \
     -XstartOnFirstThread \
     -Dorg.eclipse.swt.internal.carbon.smallFonts \
+    -Djava.library.path="$JOGL_NATIVES:$JAVA_HOME/lib" \
+    -Djogamp.gluegen.UseTempJarCache=false \
+    -Djogamp.debug.JNILibLoader=true \
+    -Djogamp.debug.NativeLibrary=true \
     --add-opens=java.base/java.net=ALL-UNNAMED \
     --add-opens=java.base/java.lang=ALL-UNNAMED \
     -jar "$LAUNCHER" \

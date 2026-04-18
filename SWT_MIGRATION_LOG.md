@@ -165,3 +165,50 @@ Migrated the entire GeoCraft application from Eclipse 3.5.1 to Eclipse 2025-12 (
 - Fragment-Host must accept `[3.0.0,4.0.0)` to attach to 3.5.1 host
 - Platform filter must match whatever arch the Eclipse IDE reports
 - Old SWT 3.5.1 x86_64 native code doesn't work on modern macOS
+
+## 2026-04-11: JOGL Migration — Replacing Ardor3D for Native Apple Silicon
+**Problem**: `com.ardor3d` bundle used LWJGL 2 which had no aarch64 macOS natives.
+Volume viewer could only run under Rosetta 2 with an x86_64 JVM. LWJGL 2 is
+unmaintained and Ardor3D is effectively abandoned.
+
+**Solution**: Two-layer rendering abstraction with JOGL backend.
+- `org.geocraft.core.rendering` — Layer 1 API (scene graph, materials, camera,
+  picking, bounds, backend interfaces). Uses JOML 1.10.5 for all math. Pure
+  interface bundle with no rendering engine dependency.
+- `org.geocraft.rendering.jogl` — JOGL 2.6.0 implementation of Layer 1.
+  Registers as OSGi DS service providing `RenderBackend`. Includes
+  `JoglSwtCanvas`, `SwtInputAdapter`, `JoglTextureLoader`, `JoglRenderBackend`,
+  `JoglMaterialApplier`, `JoglSceneWalker`, `JoglGeometryUpload`.
+- `org.geocraft.ui.volumeviewer` refactored: removed all `com.ardor3d` imports,
+  consumes `RenderBackend` via OSGi service lookup. 22 source files refactored.
+- `com.ardor3d` bundle deleted.
+
+**Target platform changes** (`org.geocraft.target.target`):
+- JOML 1.10.5, GlueGen 2.6.0, JOGL 2.6.0 added via Maven locations.
+- JOGL wrap uses explicit bnd instructions (`Export-Package: *`, `DynamicImport-Package: *`) because default bnd wrap only exports a subset of packages.
+
+**Test infrastructure**:
+- 18 unit tests in `org.geocraft.core.rendering.tests` covering math, camera,
+  scene graph, materials, bounds, picking. Pass cleanly.
+- Level 2 visual regression tests (offscreen GL) deferred — JOGL native loading
+  inside Tycho surefire OSGi on Apple Silicon macOS is brittle
+  (`libnativewindow_awt.dylib` has `@rpath/libjawt.dylib` and macOS SIP strips
+  `DYLD_LIBRARY_PATH` from subprocess environments). Real rendering validation
+  happens in the production GeoCraft launcher in Phase 6.
+- `JoglSwtCanvasIntegrationTest` is gated behind
+  `-Dgeocraft.jogl.integration=true` so it doesn't fail automated builds.
+
+**Stubs remaining (Phase 6 work)**:
+Volume viewer compiles and loads without Ardor3D, but many renderer bodies are
+stubbed with `TODO: port from Ardor3D` comments. No geometry renders yet. Files
+needing completion: ViewCanvasImplementor (camera controls, render loop wiring),
+PostStack3dRenderer, Grid3dRenderer, FaultRenderer, WellRenderer, WellPickRenderer,
+PointSetRenderer, SelectionRenderer, FocusRods, SceneText (billboarding),
+RibbonFactory.generateRibbon.
+
+**Git tags**: `jogl-phase-1-complete` through `jogl-phase-5-complete`,
+`jogl-phase-7-complete` (phase 6 manual validation pending).
+
+**Status**: Architecture complete. Builds clean on native aarch64 JVM with zero
+Ardor3D/LWJGL 2 dependencies. Volume viewer requires geometry-rendering code
+fill-in before functional parity with the (broken) Ardor3D implementation.

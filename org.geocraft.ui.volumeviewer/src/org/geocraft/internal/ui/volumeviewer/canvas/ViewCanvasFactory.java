@@ -1,102 +1,46 @@
 /*
- * Copyright (C) ConocoPhillips 2008 All Rights Reserved. 
+ * Copyright (C) ConocoPhillips 2008 All Rights Reserved.
  */
 package org.geocraft.internal.ui.volumeviewer.canvas;
 
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ControlAdapter;
-import org.eclipse.swt.events.ControlEvent;
-import org.eclipse.swt.opengl.GLData;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
+import org.geocraft.core.rendering.backend.RenderBackend;
+import org.geocraft.rendering.jogl.JoglSwtCanvas;
+import org.geocraft.rendering.jogl.SwtInputAdapter;
 import org.geocraft.ui.volumeviewer.IVolumeViewer;
-
-import com.ardor3d.framework.FrameWork;
-import com.ardor3d.framework.swt.SwtCanvas;
-import com.ardor3d.input.PhysicalLayer;
-import com.ardor3d.input.SwtFocusWrapper;
-import com.ardor3d.input.logical.LogicalLayer;
-import com.ardor3d.input.swt.SwtKeyboardWrapper;
-import com.ardor3d.input.swt.SwtMouseWrapper;
-import com.ardor3d.util.Timer;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceReference;
 
 
-/**
- * Simple generator class for jME canvases.
- * @author Joshua Slack
- */
 public class ViewCanvasFactory {
 
-  /**
-   * @param canvasComposite
-   * @param view 
-   * @return
-   */
-  public static ViewCanvasImplementor makeCanvas(final Composite canvasComposite, final IVolumeViewer viewer,
-      final int depthBits) {
+  public static ViewCanvasImplementor makeCanvas(final Composite canvasComposite,
+      final IVolumeViewer viewer, final int depthBits) {
 
-    final FrameWork frameWork = new FrameWork(new Timer());
+    final RenderBackend backend = lookupRenderBackend();
 
-    final GLData data = new GLData();
-    data.depthSize = depthBits;
-    data.doubleBuffer = true;
+    final JoglSwtCanvas canvas = new JoglSwtCanvas(canvasComposite);
 
-    final SwtMouseWrapper mouseWrapper = new SwtMouseWrapper();
-    final SwtKeyboardWrapper keyboardWrapper = new SwtKeyboardWrapper();
-    final SwtFocusWrapper focusWrapper = new SwtFocusWrapper();
+    if (backend != null) {
+      backend.initialize(canvas);
+    }
 
-    final PhysicalLayer<SwtCanvas> physicalLayer = new PhysicalLayer<SwtCanvas>(keyboardWrapper, mouseWrapper,
-        focusWrapper);
-
-    LogicalLayer logicLayer = new LogicalLayer();
-
-    final SwtCanvas swtCanvas = new SwtCanvas(canvasComposite, SWT.NONE, data);
-    final ViewCanvasImplementor impl = new ViewCanvasImplementor(swtCanvas, viewer, logicLayer);
-    swtCanvas.setCanvasRenderer(impl);
-
-    logicLayer.registerInput(swtCanvas, physicalLayer);
-    physicalLayer.listenTo(swtCanvas);
-
-    frameWork.registerCanvas(swtCanvas);
-    frameWork.registerUpdater(impl);
-
-    // Add resize listener
-    swtCanvas.addControlListener(new ControlAdapter() {
-
-      @Override
-      public void controlResized(@SuppressWarnings("unused") final ControlEvent e) {
-        impl.resizeCanvas(swtCanvas.getSize().x, swtCanvas.getSize().y);
-      }
-    });
-
-    frameWork.init();
-
-    Display.getCurrent().asyncExec(new Runnable() {
-
-      private long lastRender;
-
-      private final double syncNS = 1000000000.0 / 60;
-
-      @Override
-      public void run() {
-        frameWork.updateFrame();
-
-        // sync to 60 fps max.
-        if (!swtCanvas.isDisposed()) {
-          long sinceLast = System.nanoTime() - lastRender;
-          if (sinceLast < syncNS) {
-            try {
-              Thread.sleep(Math.round((syncNS - sinceLast) / 1000000L));
-            } catch (InterruptedException e) {
-              // ignore
-            }
-          }
-          lastRender = System.nanoTime();
-          Display.getCurrent().asyncExec(this);
-        }
-      }
-    });
+    final SwtInputAdapter inputAdapter = new SwtInputAdapter(canvas.getSwtControl());
+    final ViewCanvasImplementor impl = new ViewCanvasImplementor(backend, canvas, inputAdapter, viewer);
     return impl;
+  }
+
+  private static RenderBackend lookupRenderBackend() {
+    try {
+      final BundleContext ctx = FrameworkUtil.getBundle(ViewCanvasFactory.class).getBundleContext();
+      if (ctx == null) return null;
+      final ServiceReference<RenderBackend> ref = ctx.getServiceReference(RenderBackend.class);
+      if (ref == null) return null;
+      return ctx.getService(ref);
+    } catch (final Exception e) {
+      return null;
+    }
   }
 }

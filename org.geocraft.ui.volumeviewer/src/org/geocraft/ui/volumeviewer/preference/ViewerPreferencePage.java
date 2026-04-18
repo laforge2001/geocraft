@@ -24,8 +24,7 @@ import org.geocraft.core.common.preferences.PropertyStoreFactory;
 import org.geocraft.internal.ui.volumeviewer.widget.FocusRods.ShowMode;
 import org.geocraft.ui.volumeviewer.renderer.util.SceneText;
 import org.geocraft.ui.volumeviewer.renderer.util.VolumeViewerHelper;
-
-import com.ardor3d.math.ColorRGBA;
+import org.joml.Vector4f;
 
 
 /**
@@ -178,8 +177,8 @@ public class ViewerPreferencePage extends AbstractViewerPreferencePage {
     _store.setDefault(SHOW_LABELS_KEY, true);
     _store.setDefault(LABELS_TEXT_BASE_SIZE, Math.round(SceneText.getBaseFontScale() * 100));
 
-    PreferenceConverter.setDefault(_store, SELECTION_COLOR_KEY, VolumeViewerHelper.colorRGBAToRGB(ColorRGBA.CYAN
-        .asMutable()));
+    PreferenceConverter.setDefault(_store, SELECTION_COLOR_KEY,
+        VolumeViewerHelper.colorRGBAToRGB(new Vector4f(0f, 1f, 1f, 1f)));
   }
 
   /* (non-Javadoc)

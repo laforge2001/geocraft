@@ -1,11 +1,11 @@
 /*
- * Copyright (C) ConocoPhillips 2008 All Rights Reserved. 
+ * Copyright (C) ConocoPhillips 2008 All Rights Reserved.
  */
 package org.geocraft.internal.ui.volumeviewer.canvas;
 
 
-import com.ardor3d.math.Vector3;
-import com.ardor3d.scenegraph.Spatial;
+import org.geocraft.core.rendering.scene.SceneNode;
+import org.joml.Vector3f;
 
 
 public class PickRecord {
@@ -14,28 +14,28 @@ public class PickRecord {
     Triangle, Bounding
   }
 
-  private final Spatial _spatial;
+  private final SceneNode _spatial;
 
   private final double _distance;
 
-  private final Vector3 _location;
+  private final Vector3f _location;
 
   private final Type _type;
 
   /**
-   * 
+   *
    * @param spatial
    * @param distance
    * @param location
    */
-  public PickRecord(final Spatial spatial, final double distance, final Vector3 location, final Type type) {
+  public PickRecord(final SceneNode spatial, final double distance, final Vector3f location, final Type type) {
     _spatial = spatial;
     _distance = distance;
     _location = location;
     _type = type;
   }
 
-  public Spatial getSpatial() {
+  public SceneNode getSpatial() {
     return _spatial;
   }
 
@@ -43,7 +43,7 @@ public class PickRecord {
     return _distance;
   }
 
-  public Vector3 getLocation() {
+  public Vector3f getLocation() {
     return _location;
   }
 

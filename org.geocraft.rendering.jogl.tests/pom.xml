@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.geocraft</groupId>
+    <artifactId>org.geocraft.parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>org.geocraft.rendering.jogl.tests</artifactId>
+  <packaging>eclipse-test-plugin</packaging>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-surefire-plugin</artifactId>
+        <configuration>
+          <useUIHarness>true</useUIHarness>
+          <argLine>-Djava.library.path=${user.home}/.m2/jogl-natives-2.6.0-macosx:${java.home}/lib -Djogamp.gluegen.UseTempJarCache=false -XstartOnFirstThread</argLine>
+          <environmentVariables>
+            <DYLD_LIBRARY_PATH>${user.home}/.m2/jogl-natives-2.6.0-macosx:${java.home}/lib</DYLD_LIBRARY_PATH>
+          </environmentVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

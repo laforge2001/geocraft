@@ -1,10 +1,10 @@
 /*
- * Copyright (C) ConocoPhillips 2008 All Rights Reserved. 
+ * Copyright (C) ConocoPhillips 2008 All Rights Reserved.
  */
 package org.geocraft.ui.volumeviewer.renderer;
 
 
-import com.ardor3d.math.ColorRGBA;
+import org.joml.Vector4f;
 
 
 /**
@@ -12,8 +12,8 @@ import com.ardor3d.math.ColorRGBA;
  */
 public interface IColorProvider {
 
-  ColorRGBA getColor();
+  Vector4f getColor();
 
-  void setColor(ColorRGBA color);
+  void setColor(Vector4f color);
 
 }

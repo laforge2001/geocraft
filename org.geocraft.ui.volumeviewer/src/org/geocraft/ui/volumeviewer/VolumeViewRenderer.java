@@ -35,12 +35,10 @@ import org.geocraft.ui.viewer.IRenderer;
 import org.geocraft.ui.viewer.ReadoutInfo;
 import org.geocraft.ui.viewer.layer.IViewLayer;
 import org.geocraft.ui.viewer.layer.LayerPropertySource;
+import org.geocraft.core.rendering.backend.FilterMode;
+import org.geocraft.core.rendering.scene.SceneNode;
 import org.geocraft.ui.volumeviewer.renderer.grid.SmoothingMethod;
-
-import com.ardor3d.image.Texture.MagnificationFilter;
-import com.ardor3d.image.Texture.MinificationFilter;
-import com.ardor3d.math.Vector3;
-import com.ardor3d.scenegraph.Spatial;
+import org.joml.Vector3f;
 
 
 /**
@@ -83,10 +81,10 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
   private SmoothingMethod _smoothing;
 
   /** The magnification filter used for rendering textures. */
-  private MagnificationFilter _magFilter = MagnificationFilter.NearestNeighbor;
+  private FilterMode _magFilter = FilterMode.NEAREST;
 
   /** The minification filter used for rendering textures. */
-  private MinificationFilter _minFilter = MinificationFilter.NearestNeighborLinearMipMap;
+  private FilterMode _minFilter = FilterMode.NEAREST;
 
   /** The aniso level used for rendering textures. */
   private float _aniso = 0.0f;
@@ -215,9 +213,9 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
   public final void setVisible(final boolean flag) {
     final Domain[] domains = { Domain.TIME, Domain.DISTANCE };
     for (final Domain domain : domains) {
-      final Spatial[] spatials = getSpatials(domain);
+      final SceneNode[] spatials = getSpatials(domain);
       if (spatials != null) {
-        for (final Spatial spatial : spatials) {
+        for (final SceneNode spatial : spatials) {
           if (flag) {
             _viewer.addToScene(domain, spatial);
           } else {
@@ -228,7 +226,7 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
     }
   }
 
-  public abstract Spatial[] getSpatials(Domain domain);
+  public abstract SceneNode[] getSpatials(Domain domain);
 
   /**
    * Sets the objects being rendered.
@@ -421,7 +419,7 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
    * Return the magnification filter used for rendering textures.
    * @return the magnification filter used for rendering textures
    */
-  public final synchronized MagnificationFilter getMagnificationFilter() {
+  public final synchronized FilterMode getMagnificationFilter() {
     return _magFilter;
   }
 
@@ -429,7 +427,7 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
    * Return the minification filter used for rendering textures.
    * @return the minification filter used for rendering textures
    */
-  public final synchronized MinificationFilter getMinificationFilter() {
+  public final synchronized FilterMode getMinificationFilter() {
     return _minFilter;
   }
 
@@ -455,12 +453,12 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
    */
   public final synchronized void setSmoothing(final SmoothingMethod smoothing) {
     _smoothing = smoothing;
-    _magFilter = MagnificationFilter.NearestNeighbor;
-    _minFilter = MinificationFilter.NearestNeighborLinearMipMap;
+    _magFilter = FilterMode.NEAREST;
+    _minFilter = FilterMode.NEAREST;
     _aniso = 0.0f;
     if (_smoothing != null && _smoothing == SmoothingMethod.INTERPOLATION) {
-      _magFilter = MagnificationFilter.Bilinear;
-      _minFilter = MinificationFilter.Trilinear;
+      _magFilter = FilterMode.BILINEAR;
+      _minFilter = FilterMode.TRILINEAR;
       _aniso = 1.0f;
     }
   }
@@ -482,9 +480,9 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
    * @return a short message
    */
   public String getShortMessage() {
-    final Vector3 pickLoc = _viewer.getPickLocation();
+    final Vector3f pickLoc = _viewer.getPickLocation();
     if (pickLoc != null) {
-      return "x=" + pickLoc.getX() + ", y=" + pickLoc.getY() + ", z=" + pickLoc.getZ();
+      return "x=" + pickLoc.x + ", y=" + pickLoc.y + ", z=" + pickLoc.z;
     }
     return "";
   }
@@ -495,7 +493,7 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
    * @param pickLoc the pick location.
    * @return an array of readout info.
    */
-  public abstract ReadoutInfo[] getReadoutData(Vector3 pickLoc);
+  public abstract ReadoutInfo[] getReadoutData(Vector3f pickLoc);
 
   public final ReadoutInfo getReadoutInfo(final double x, final double y) {
     // This does not apply for the 3D viewer, so it is implemented as final.
@@ -513,7 +511,7 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
   public void clear() {
     final Domain[] domains = { Domain.TIME, Domain.DISTANCE };
     for (final Domain domain : domains) {
-      for (final Spatial spatial : getSpatials(domain)) {
+      for (final SceneNode spatial : getSpatials(domain)) {
         _viewer.unmapSpatial(spatial);
         _viewer.removeFromScene(domain, spatial);
       }
@@ -580,7 +578,7 @@ public abstract class VolumeViewRenderer implements IPropertiesProviderContainer
    * @param pickLoc
    * @param selected
    */
-  public void triggerClickAction(final Vector3 pickLoc, final Spatial selected) {
+  public void triggerClickAction(final Vector3f pickLoc, final SceneNode selected) {
     // Does nothing by default. Renderers may override this method.
   }
 

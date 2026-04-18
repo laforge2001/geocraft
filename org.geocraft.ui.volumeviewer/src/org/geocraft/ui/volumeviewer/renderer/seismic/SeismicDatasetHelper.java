@@ -17,8 +17,7 @@ import org.geocraft.core.common.math.MathUtil;
 import org.geocraft.core.model.datatypes.Trace;
 import org.geocraft.core.model.seismic.PostStack2dLine;
 import org.geocraft.ui.volumeviewer.renderer.util.VolumeViewerHelper;
-
-import com.ardor3d.math.ColorRGBA;
+import org.joml.Vector4f;
 
 
 public class SeismicDatasetHelper {
@@ -30,7 +29,15 @@ public class SeismicDatasetHelper {
   public static final int NUMBER_OF_COLORS = 64;
 
   /** Transparent color for the traces that don't need to be rendered. */
-  private static final int TRANSPARENT_COLOR = new ColorRGBA(1, 1, 1, 0).asIntARGB();
+  private static final int TRANSPARENT_COLOR = 0x00FFFFFF;
+
+  private static int colorToARGB(final Vector4f color) {
+    final int a = (int) (color.w * 255) & 0xFF;
+    final int r = (int) (color.x * 255) & 0xFF;
+    final int g = (int) (color.y * 255) & 0xFF;
+    final int b = (int) (color.z * 255) & 0xFF;
+    return (a << 24) | (r << 16) | (g << 8) | b;
+  }
 
   /**
    * Create a texture image based on the provided traces float data.
@@ -95,10 +102,8 @@ public class SeismicDatasetHelper {
       final float scalar = reversePolarity ? -1 : 1;
       if ((traces == null || !traces[row].isMissing()) && !Float.isNaN(data[i])) {
         final Color color = VolumeViewerHelper.swtColorToColor(colorBar.getColor(data[i] * scalar, true));
-        final ColorRGBA colorRGBA = VolumeViewerHelper.colorToColorRGBA(color, alpha);
-        image.setRGB(column, row, colorRGBA.asIntARGB());
-        //final int rgb = color.getRGB();
-        //image.setRGB(column, row, rgb);
+        final Vector4f colorRGBA = VolumeViewerHelper.colorToColorRGBA(color, alpha);
+        image.setRGB(column, row, colorToARGB(colorRGBA));
       } else {
         image.setRGB(column, row, TRANSPARENT_COLOR);
       }

@@ -1,0 +1,144 @@
+package org.geocraft.rendering.jogl;
+
+import java.awt.image.BufferedImage;
+import java.nio.ByteBuffer;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLContext;
+import com.jogamp.opengl.fixedfunc.GLLightingFunc;
+import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
+import org.geocraft.core.rendering.backend.RenderBackend;
+import org.geocraft.core.rendering.backend.RenderSurface;
+import org.geocraft.core.rendering.backend.TextureLoader;
+import org.geocraft.core.rendering.camera.Camera;
+import org.geocraft.core.rendering.camera.Light;
+import org.geocraft.core.rendering.material.RenderMaterial;
+import org.geocraft.core.rendering.scene.GroupNode;
+import org.joml.Matrix4f;
+
+/**
+ * JOGL implementation of RenderBackend. Uses GL2 fixed-function pipeline.
+ * With the NewtCanvasSWT approach, GL calls happen inside a GLEventListener
+ * callback where the GL context is already current — no need to manage
+ * makeCurrent/release ourselves.
+ */
+public class JoglRenderBackend implements RenderBackend {
+    private final JoglSceneWalker walker = new JoglSceneWalker();
+    private final JoglTextureLoader textureLoader = new JoglTextureLoader();
+    private final float[] _matrixBuf = new float[16];
+    private RenderSurface currentSurface;
+
+    @Override
+    public void initialize(RenderSurface surface) {
+        this.currentSurface = surface;
+    }
+
+    /**
+     * Render a scene pass using an already-current GL2 context.
+     * Called from ViewCanvasImplementor's GLEventListener.display() callback.
+     */
+    public void renderPass(GL2 gl, GroupNode root, Camera camera, Light[] lights, RenderMaterial overrideMaterial) {
+        int w = currentSurface != null ? currentSurface.getWidth() : 640;
+        int h = currentSurface != null ? currentSurface.getHeight() : 480;
+        gl.glViewport(0, 0, w, h);
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+
+        Matrix4f proj = camera.getProjectionMatrix();
+        Matrix4f view = camera.getViewMatrix();
+        gl.glMatrixMode(GLMatrixFunc.GL_PROJECTION);
+        proj.get(_matrixBuf);
+        gl.glLoadMatrixf(_matrixBuf, 0);
+        gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
+        view.get(_matrixBuf);
+        gl.glLoadMatrixf(_matrixBuf, 0);
+
+        applyLights(gl, lights);
+        walker.walk(gl, root, overrideMaterial);
+    }
+
+    // --- RenderBackend interface methods (for non-NEWT usage) ---
+
+    @Override
+    public void renderPass(GroupNode root, Camera camera, Light[] lights) {
+        renderPass(root, camera, lights, null);
+    }
+
+    @Override
+    public void renderPass(GroupNode root, Camera camera, Light[] lights, RenderMaterial overrideMaterial) {
+        if (currentSurface == null) return;
+        currentSurface.makeCurrent();
+        try {
+            GL2 gl = GLContext.getCurrentGL().getGL2();
+            renderPass(gl, root, camera, lights, overrideMaterial);
+        } catch (Exception e) {
+            // swallow render errors; surface may be transiently unavailable
+        } finally {
+            currentSurface.release();
+        }
+    }
+
+    private void applyLights(GL2 gl, Light[] lights) {
+        if (lights == null || lights.length == 0) return;
+        for (int i = 0; i < Math.min(lights.length, 8); i++) {
+            Light l = lights[i];
+            int id = GLLightingFunc.GL_LIGHT0 + i;
+            if (!l.isEnabled()) { gl.glDisable(id); continue; }
+            gl.glEnable(id);
+            float[] amb = toArray(l.getAmbient());
+            float[] dif = toArray(l.getDiffuse());
+            float[] spc = toArray(l.getSpecular());
+            gl.glLightfv(id, GLLightingFunc.GL_AMBIENT, amb, 0);
+            gl.glLightfv(id, GLLightingFunc.GL_DIFFUSE, dif, 0);
+            gl.glLightfv(id, GLLightingFunc.GL_SPECULAR, spc, 0);
+            if (l.getType() == Light.Type.DIRECTIONAL) {
+                org.joml.Vector3f d = l.getDirection();
+                float[] pos = { -d.x, -d.y, -d.z, 0f };
+                gl.glLightfv(id, GLLightingFunc.GL_POSITION, pos, 0);
+            } else {
+                org.joml.Vector3f p = l.getPosition();
+                float[] pos = { p.x, p.y, p.z, 1f };
+                gl.glLightfv(id, GLLightingFunc.GL_POSITION, pos, 0);
+            }
+        }
+    }
+
+    private float[] toArray(org.joml.Vector4f v) { return new float[] { v.x, v.y, v.z, v.w }; }
+
+    @Override
+    public RenderSurface createOffscreenSurface(int width, int height) {
+        return new JoglOffscreenSurface(width, height);
+    }
+
+    @Override
+    public BufferedImage readPixels(RenderSurface surface) {
+        surface.makeCurrent();
+        try {
+            GL2 gl = GLContext.getCurrentGL().getGL2();
+            int w = surface.getWidth();
+            int h = surface.getHeight();
+            ByteBuffer buf = ByteBuffer.allocateDirect(w * h * 4);
+            gl.glReadBuffer(GL.GL_BACK);
+            gl.glReadPixels(0, 0, w, h, GL.GL_RGBA, GL.GL_UNSIGNED_BYTE, buf);
+            BufferedImage img = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+            for (int y = 0; y < h; y++) {
+                for (int x = 0; x < w; x++) {
+                    int i = ((h - 1 - y) * w + x) * 4;
+                    int r = buf.get(i)     & 0xFF;
+                    int g = buf.get(i + 1) & 0xFF;
+                    int b = buf.get(i + 2) & 0xFF;
+                    int a = buf.get(i + 3) & 0xFF;
+                    img.setRGB(x, y, (a << 24) | (r << 16) | (g << 8) | b);
+                }
+            }
+            return img;
+        } finally {
+            surface.release();
+        }
+    }
+
+    @Override
+    public TextureLoader getTextureLoader() { return textureLoader; }
+
+    @Override
+    public void dispose() { /* no global state */ }
+}

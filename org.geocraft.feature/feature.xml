@@ -136,10 +136,18 @@
          unpack="false"/>
 
    <plugin
-         id="com.ardor3d"
+         id="org.geocraft.core.rendering"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.geocraft.rendering.jogl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="org.geocraft.ui.multiplot"
