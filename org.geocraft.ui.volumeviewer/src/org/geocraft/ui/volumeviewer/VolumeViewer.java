@@ -22,9 +22,13 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IPartListener2;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.PlatformUI;
 import org.geocraft.core.common.progress.BackgroundTask;
@@ -122,6 +126,12 @@ public class VolumeViewer extends AbstractDataViewer implements IVolumeViewer, I
   /** The number of opened 3d viewers. */
   private static int _openedViewers;
 
+  /** Part-lifecycle listener that pauses the JOGL render loop when the
+   *  3D viewer workbench part is hidden, and resumes it when revealed.
+   *  Prevents the FPSAnimator from holding the macOS CGLContext while
+   *  the user has switched to a sibling view (issue #35). */
+  private IPartListener2 _partListener;
+
   public VolumeViewer(final Composite parent, final IWorkbenchPartSite site) {
     super(parent, false, false, true);
     _site = site;
@@ -149,7 +159,80 @@ public class VolumeViewer extends AbstractDataViewer implements IVolumeViewer, I
     _viewerPropertyListener = new VolumeViewerPropertyListener(this, _store);
     _store.addPropertyChangeListener(_viewerPropertyListener);
 
+    registerPartLifecycleListener();
+
     _openedViewers++;
+  }
+
+  /**
+   * Register a workbench part listener so the JOGL render loop is paused
+   * when the 3D viewer tab is hidden and resumed when revealed. On macOS
+   * under -XstartOnFirstThread, a continuously-running FPSAnimator on a
+   * hidden tab keeps hold of the CGLContext and starves SWT's main-thread
+   * paint for sibling views (observed in issue #35 as the Section Viewer
+   * going black after the 3D Viewer was opened).
+   */
+  private void registerPartLifecycleListener() {
+    if (_site == null || _site.getPage() == null) return;
+    _partListener = new IPartListener2() {
+      @Override public void partActivated(final IWorkbenchPartReference ref) { /* no-op */ }
+      @Override public void partBroughtToTop(final IWorkbenchPartReference ref) { /* no-op */ }
+      @Override public void partClosed(final IWorkbenchPartReference ref) { /* no-op */ }
+      @Override public void partDeactivated(final IWorkbenchPartReference ref) { /* no-op */ }
+      @Override public void partOpened(final IWorkbenchPartReference ref) { /* no-op */ }
+      @Override public void partInputChanged(final IWorkbenchPartReference ref) { /* no-op */ }
+      @Override public void partHidden(final IWorkbenchPartReference ref) {
+        if (isOurPart(ref) && _viewCanvasImpl != null && _viewCanvasImpl.getCanvas() != null) {
+          _viewCanvasImpl.getCanvas().pauseAnimator();
+          redrawSiblingPlotCanvases();
+        }
+      }
+      @Override public void partVisible(final IWorkbenchPartReference ref) {
+        if (isOurPart(ref) && _viewCanvasImpl != null && _viewCanvasImpl.getCanvas() != null) {
+          _viewCanvasImpl.getCanvas().resumeAnimator();
+        }
+      }
+    };
+    _site.getPage().addPartListener(_partListener);
+  }
+
+  private boolean isOurPart(final IWorkbenchPartReference ref) {
+    if (ref == null || _site == null) return false;
+    final IWorkbenchPart part = ref.getPart(false);
+    return part != null && part == _site.getPart();
+  }
+
+  /**
+   * Force a full redraw of every SWT Control in every shell except the 3D
+   * viewer itself. Cocoa NSView backing stores can become stale after a
+   * JOGL NEWT surface has held the GL context; walking the shell tree and
+   * calling redraw()+update() re-requests the IOSurface for each native
+   * control. Narrowly scoped to #35 — cheap, synchronous, only fires on
+   * part hide / dispose.
+   */
+  private void redrawSiblingPlotCanvases() {
+    final Display display = Display.getDefault();
+    if (display == null || display.isDisposed()) return;
+    display.asyncExec(new Runnable() {
+      @Override public void run() {
+        for (final Shell shell : display.getShells()) {
+          if (!shell.isDisposed()) {
+            redrawRecursive(shell);
+          }
+        }
+      }
+    });
+  }
+
+  private void redrawRecursive(final Control control) {
+    if (control == null || control.isDisposed() || control == VolumeViewer.this) return;
+    control.redraw();
+    control.update();
+    if (control instanceof Composite) {
+      for (final Control child : ((Composite) control).getChildren()) {
+        redrawRecursive(child);
+      }
+    }
   }
 
   @Override
@@ -196,9 +279,23 @@ public class VolumeViewer extends AbstractDataViewer implements IVolumeViewer, I
 
   @Override
   public void dispose() {
+    if (_partListener != null && _site != null && _site.getPage() != null) {
+      _site.getPage().removePartListener(_partListener);
+      _partListener = null;
+    }
+    if (_viewCanvasImpl != null && _viewCanvasImpl.getCanvas() != null) {
+      // Stop the render loop AND destroy the NEWT GLWindow before SWT
+      // disposal tears down the parent composite, so the animator thread
+      // can't call display() on a destroyed GLWindow and the CGLContext
+      // is released promptly (issue #35).
+      _viewCanvasImpl.getCanvas().dispose();
+    }
     super.dispose();
     _store.removePropertyChangeListener(_viewerPropertyListener);
     _openedViewers--;
+    // Force sibling views to repaint — their NSView backing stores may be
+    // stale after the 3D viewer's CGLContext is torn down (issue #35).
+    redrawSiblingPlotCanvases();
   }
 
   @Override

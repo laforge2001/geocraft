@@ -14,3 +14,4 @@ Import-Package: org.joml,
  com.jogamp.newt.swt
 Export-Package: org.geocraft.rendering.jogl
 Service-Component: OSGI-INF/JoglRenderBackend.xml
+Bundle-ActivationPolicy: lazy

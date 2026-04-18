@@ -1,6 +1,8 @@
 package org.geocraft.ui.volumeviewer.renderer.seismic;
 
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
@@ -117,8 +119,10 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
       k++;
     }
 
-    // Pack vertices into a FloatBuffer
-    final FloatBuffer buf = FloatBuffer.allocate(24 * 3);
+    // Pack vertices into a direct FloatBuffer — JOGL vertex-array draws
+    // require native-memory buffers.
+    final FloatBuffer buf = ByteBuffer.allocateDirect(24 * 3 * Float.BYTES)
+        .order(ByteOrder.nativeOrder()).asFloatBuffer();
     for (int i = 0; i < 24; i++) {
       buf.put(vertex[i].x);
       buf.put(vertex[i].y);
@@ -439,8 +443,11 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
   private MeshGeometry buildSliceGrid(String name, Vector3f[] corners, int cols, int rows,
       float[] data, float dataMin, float dataMax) {
     final int numVerts = cols * rows;
-    final FloatBuffer verts = FloatBuffer.allocate(numVerts * 3);
-    final FloatBuffer colors = FloatBuffer.allocate(numVerts * 4);
+    // Direct buffers — JOGL client-side vertex arrays require native memory.
+    final FloatBuffer verts = ByteBuffer.allocateDirect(numVerts * 3 * Float.BYTES)
+        .order(ByteOrder.nativeOrder()).asFloatBuffer();
+    final FloatBuffer colors = ByteBuffer.allocateDirect(numVerts * 4 * Float.BYTES)
+        .order(ByteOrder.nativeOrder()).asFloatBuffer();
 
     for (int r = 0; r < rows; r++) {
       final float v = rows > 1 ? (float) r / (rows - 1) : 0;
@@ -459,9 +466,10 @@ public class PostStack3dRenderer extends VolumeViewRenderer {
     verts.flip();
     colors.flip();
 
-    // Build triangle indices
+    // Build triangle indices — direct IntBuffer for JOGL glDrawElements.
     final int numTris = (cols - 1) * (rows - 1) * 2;
-    final IntBuffer indices = IntBuffer.allocate(numTris * 3);
+    final IntBuffer indices = ByteBuffer.allocateDirect(numTris * 3 * Integer.BYTES)
+        .order(ByteOrder.nativeOrder()).asIntBuffer();
     for (int r = 0; r < rows - 1; r++) {
       for (int c = 0; c < cols - 1; c++) {
         final int i = r * cols + c;

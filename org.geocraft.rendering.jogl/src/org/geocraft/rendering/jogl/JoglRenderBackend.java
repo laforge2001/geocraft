@@ -2,6 +2,8 @@ package org.geocraft.rendering.jogl;
 
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLContext;
@@ -23,10 +25,13 @@ import org.joml.Matrix4f;
  * makeCurrent/release ourselves.
  */
 public class JoglRenderBackend implements RenderBackend {
+    private static final Logger LOG = Logger.getLogger(JoglRenderBackend.class.getName());
+
     private final JoglSceneWalker walker = new JoglSceneWalker();
     private final JoglTextureLoader textureLoader = new JoglTextureLoader();
     private final float[] _matrixBuf = new float[16];
     private RenderSurface currentSurface;
+    private boolean nonNewtErrorLogged;
 
     @Override
     public void initialize(RenderSurface surface) {
@@ -71,7 +76,13 @@ public class JoglRenderBackend implements RenderBackend {
             GL2 gl = GLContext.getCurrentGL().getGL2();
             renderPass(gl, root, camera, lights, overrideMaterial);
         } catch (Exception e) {
-            // swallow render errors; surface may be transiently unavailable
+            // Log once — transient surface unavailability shouldn't spam, but
+            // silent swallowing masked the root cause of the 3D-black regression
+            // reported in issue #35.
+            if (!nonNewtErrorLogged) {
+                nonNewtErrorLogged = true;
+                LOG.log(Level.WARNING, "JoglRenderBackend render pass failed (non-NEWT path): " + e.getMessage(), e);
+            }
         } finally {
             currentSurface.release();
         }

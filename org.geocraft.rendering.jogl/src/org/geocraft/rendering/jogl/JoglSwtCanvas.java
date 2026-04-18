@@ -79,6 +79,8 @@ public class JoglSwtCanvas implements RenderSurface {
     private volatile int cachedWidth;
     private volatile int cachedHeight;
     private FPSAnimator animator;
+    private boolean animatorPendingStart;
+    private boolean contentVisible;
 
     public JoglSwtCanvas(Composite parent) {
         ensureNativesConfigured();
@@ -92,11 +94,48 @@ public class JoglSwtCanvas implements RenderSurface {
         newtCanvas.setVisible(false);
     }
 
-    /** Show or hide the NEWT canvas. Hidden by default to prevent the
-     *  GL window from taking over the workbench on startup. */
+    /**
+     * Show or hide the NEWT canvas. Hidden by default to prevent the
+     * GL window from taking over the workbench on startup.
+     *
+     * Also drives the FPSAnimator lifecycle: starting it only once the
+     * NSOpenGLView is visible avoids the Apple Silicon failure mode
+     * where the animator renders into a hidden surface and the CGLContext
+     * escapes AppKit's pipeline (seen as black 3D canvas and subsequent
+     * black Section Viewer plot under -XstartOnFirstThread).
+     */
     public void setContentVisible(boolean visible) {
-        if (!newtCanvas.isDisposed()) {
-            newtCanvas.setVisible(visible);
+        if (newtCanvas.isDisposed()) return;
+        newtCanvas.setVisible(visible);
+        contentVisible = visible;
+        if (animator == null) return;
+        if (visible) {
+            if (animatorPendingStart) {
+                animator.start();
+                animatorPendingStart = false;
+            } else if (animator.isPaused()) {
+                animator.resume();
+            }
+        } else if (animator.isAnimating() && !animator.isPaused()) {
+            animator.pause();
+        }
+    }
+
+    /** Pause the render loop — used when the containing workbench part is hidden. */
+    public void pauseAnimator() {
+        if (animator != null && animator.isAnimating() && !animator.isPaused()) {
+            animator.pause();
+        }
+    }
+
+    /** Resume the render loop — used when the containing workbench part is revealed. */
+    public void resumeAnimator() {
+        if (animator == null) return;
+        if (animatorPendingStart && contentVisible) {
+            animator.start();
+            animatorPendingStart = false;
+        } else if (animator.isPaused()) {
+            animator.resume();
         }
     }
 
@@ -111,7 +150,14 @@ public class JoglSwtCanvas implements RenderSurface {
     }
 
     /**
-     * Set up a GLEventListener and start an FPSAnimator at the given rate.
+     * Register a GLEventListener and prepare an FPSAnimator at the given rate.
+     * The animator is NOT started immediately — it starts on the first
+     * {@link #setContentVisible(boolean) setContentVisible(true)} call, once
+     * the NSOpenGLView backing the canvas is actually visible. This avoids
+     * JOGL rendering into an unmapped surface under -XstartOnFirstThread on
+     * macOS, which was observed to corrupt the shared AppKit GL context and
+     * cascade a black Section Viewer plot (issue #35).
+     *
      * The callback methods receive an already-current GL2 context.
      */
     public void startAnimator(int fps, RenderCallback callback) {
@@ -132,7 +178,11 @@ public class JoglSwtCanvas implements RenderSurface {
             @Override public void dispose(GLAutoDrawable d) { }
         });
         animator = new FPSAnimator(glWindow, fps);
-        animator.start();
+        animatorPendingStart = true;
+        if (contentVisible) {
+            animator.start();
+            animatorPendingStart = false;
+        }
     }
 
     /** Get the SWT control for layout purposes. */
@@ -237,9 +287,18 @@ public class JoglSwtCanvas implements RenderSurface {
 
     @Override public void dispose() {
         // Stop the animator first so its render thread doesn't try to call
-        // display() on a destroyed GLWindow.
-        if (animator != null && animator.isAnimating()) {
-            animator.stop();
+        // display() on a destroyed GLWindow. Also unconditionally stop so a
+        // paused animator doesn't leak a dormant render thread after close,
+        // which on macOS can keep the CGLContext pinned and starve SWT's
+        // main-thread paint loop (issue #35).
+        if (animator != null) {
+            try {
+                animator.stop();
+            } catch (Throwable t) {
+                // Animator may already be torn down — ignore.
+            }
+            animator = null;
+            animatorPendingStart = false;
         }
         glWindow.destroy();
         if (!newtCanvas.isDisposed()) {
