@@ -523,22 +523,16 @@ public class ModelSpaceCanvas extends Canvas implements IModelSpaceCanvas, ICanv
 
       // Draw the static group into the static graphics buffer.
       renderModelSpace(_bufferStaticGraphics, RenderLevel.STANDARD);
-      //gc.setStroke(basicStroke);
+      // On macOS Cocoa, GC draws to a backing Image are deferred and not
+      // visible to subsequent drawImage() reads until pixel data is realized.
+      // Only needed after the static buffer was actually written to; on
+      // REFRESH paints the buffer is unchanged so skip the ~MB-scale copy.
+      _bufferStaticImage.getImageData();
     }
-    // Force pixel materialization on macOS: deferred GC draws to an Image
-    // are not visible to subsequent drawImage() reads until the pixel data
-    // is realized. getImageData() triggers that realization.
-    _bufferStaticImage.getImageData();
 
-    // Draw the static buffer image into the selected graphics buffer.
     _bufferSelectedGraphics.drawImage(_bufferStaticImage, 0, 0);
-
-    // Draw the selected objects into the selected graphics buffer.
     renderModelSpace(_bufferSelectedGraphics, RenderLevel.SELECTED);
-
     _bufferSelectedImage.getImageData();
-
-    // Draw the selected buffer image into the current graphics.
     gc.drawImage(_bufferSelectedImage, 0, 0);
     //gc.setStroke(basicStroke);
 
