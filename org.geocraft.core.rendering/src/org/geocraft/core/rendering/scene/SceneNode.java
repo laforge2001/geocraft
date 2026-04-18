@@ -1,8 +1,8 @@
 package org.geocraft.core.rendering.scene;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import org.geocraft.core.rendering.material.RenderMaterial;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
@@ -11,7 +11,9 @@ import org.joml.Vector3f;
 public abstract class SceneNode {
     private final String name;
     private SceneNode parent;
-    private final List<SceneNode> children = new ArrayList<>();
+    // CopyOnWriteArrayList allows safe iteration on the GL render thread
+    // while the SWT UI thread modifies the scene graph (addChild/removeChild).
+    private final List<SceneNode> children = new CopyOnWriteArrayList<>();
     private final Vector3f translation = new Vector3f();
     private final Quaternionf rotation = new Quaternionf();
     private final Vector3f scale = new Vector3f(1, 1, 1);
