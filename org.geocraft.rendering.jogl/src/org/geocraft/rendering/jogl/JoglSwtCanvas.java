@@ -96,7 +96,18 @@ public class JoglSwtCanvas implements RenderSurface {
         caps.setDepthBits(24);
         glWindow = GLWindow.create(caps);
         newtCanvas = NewtCanvasSWT.create(parent, SWT.NONE, glWindow);
+        // Start hidden — NEWT windows on macOS take over their parent's
+        // drawing area. Show only when data is added via setContentVisible(true).
+        newtCanvas.setVisible(false);
         System.out.println("[JoglSwtCanvas] NewtCanvasSWT created successfully");
+    }
+
+    /** Show or hide the NEWT canvas. Hidden by default to prevent the
+     *  GL window from taking over the workbench on startup. */
+    public void setContentVisible(boolean visible) {
+        if (!newtCanvas.isDisposed()) {
+            newtCanvas.setVisible(visible);
+        }
     }
 
     /**
